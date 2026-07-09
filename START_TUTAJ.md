@@ -1,6 +1,6 @@
 # START TUTAJ — stan projektu i wejście do nowej sesji
 
-Aktualizacja: 2026-07-10. KOD ZAMROŻONY po H1b. Etap: REPO PUBLICZNE.
+Aktualizacja: 2026-07-10. KOD ZAMROŻONY po H1b. REPO PUBLICZNE: https://github.com/develforever/m-a-r-s (tag v0.3-freeze). Etap repo ZAKOŃCZONY.
 DECYZJE 2026-07-10: (1) treść rozcięta na DWA papery (A: CL; B: routing
 ceiling); (2) submisje (arXiv/TMLR/konferencje) WSTRZYMANE do osobnej
 decyzji Roberta — etap bieżący to WYŁĄCZNIE repo publiczne.
