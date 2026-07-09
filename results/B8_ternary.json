@@ -1,0 +1,33 @@
+{
+  "experiment": "B8_ternary_quantization",
+  "device": "cuda",
+  "datasets": {
+    "MNIST": {
+      "acc_full": 0.9798,
+      "acc_ternary_pods": 0.9663,
+      "acc_ternary_all": 0.7945,
+      "drop_pods_pp": 1.35,
+      "drop_all_pp": 18.53,
+      "pod_sparsity": 0.411,
+      "compression_ratio": 16.0,
+      "throughput_full": 996546,
+      "throughput_ternary": 1076192,
+      "speedup": 1.08,
+      "best_threshold": 0.5
+    },
+    "Fashion-MNIST": {
+      "acc_full": 0.8885,
+      "acc_ternary_pods": 0.868,
+      "acc_ternary_all": 0.7849,
+      "drop_pods_pp": 2.05,
+      "drop_all_pp": 10.36,
+      "pod_sparsity": 0.4001,
+      "compression_ratio": 16.0,
+      "throughput_full": 999094,
+      "throughput_ternary": 1058326,
+      "speedup": 1.06,
+      "best_threshold": 0.6
+    }
+  },
+  "elapsed_s": 57.4
+}

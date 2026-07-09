@@ -1,0 +1,407 @@
+{
+  "experiment": "E1_error_anatomy",
+  "device": "cuda",
+  "n_seeds": 1,
+  "epochs": 8,
+  "channels": [
+    32,
+    64
+  ],
+  "datasets": {
+    "Fashion-MNIST": {
+      "per_seed": [
+        {
+          "routing_acc": 0.9079,
+          "system_acc": 0.9188,
+          "oracle_acc": 0.9793,
+          "decomp": {
+            "A_ok": 8998,
+            "B_pod_miss": 81,
+            "C_recovery": 190,
+            "D_loss": 731,
+            "n": 10000
+          },
+          "recoverable_n": 607,
+          "recoverable_by_class": {
+            "T-shirt": 29,
+            "Trouser": 20,
+            "Pullover": 9,
+            "Dress": 89,
+            "Coat": 131,
+            "Sandal": 16,
+            "Shirt": 265,
+            "Sneaker": 26,
+            "Bag": 14,
+            "AnkleBoot": 8
+          },
+          "top_confusion_pairs": [
+            {
+              "pair": "T-shirt<->Shirt",
+              "count": 179
+            },
+            {
+              "pair": "Pullover<->Coat",
+              "count": 178
+            },
+            {
+              "pair": "Pullover<->Shirt",
+              "count": 145
+            },
+            {
+              "pair": "Coat<->Shirt",
+              "count": 89
+            },
+            {
+              "pair": "Dress<->Coat",
+              "count": 47
+            },
+            {
+              "pair": "Sneaker<->AnkleBoot",
+              "count": 45
+            },
+            {
+              "pair": "T-shirt<->Pullover",
+              "count": 45
+            },
+            {
+              "pair": "Dress<->Shirt",
+              "count": 44
+            },
+            {
+              "pair": "T-shirt<->Dress",
+              "count": 35
+            },
+            {
+              "pair": "Pullover<->Dress",
+              "count": 28
+            }
+          ],
+          "top4_pairs_share_of_router_errors": 0.642,
+          "conf_bins": [
+            {
+              "quartile": "Q1",
+              "conf_range": [
+                0.169,
+                0.854
+              ],
+              "sys_err_pct": 26.72,
+              "recoverable_pct": 19.24
+            },
+            {
+              "quartile": "Q2",
+              "conf_range": [
+                0.854,
+                0.912
+              ],
+              "sys_err_pct": 4.6,
+              "recoverable_pct": 4.04
+            },
+            {
+              "quartile": "Q3",
+              "conf_range": [
+                0.912,
+                0.929
+              ],
+              "sys_err_pct": 0.96,
+              "recoverable_pct": 0.8
+            },
+            {
+              "quartile": "Q4",
+              "conf_range": [
+                0.929,
+                0.948
+              ],
+              "sys_err_pct": 0.2,
+              "recoverable_pct": 0.2
+            }
+          ],
+          "recoverable_in_lowest_conf_quartile": 0.792
+        }
+      ],
+      "agg": {
+        "system_acc": {
+          "mean": 0.9188,
+          "std": 0.0,
+          "min": 0.9188,
+          "max": 0.9188
+        },
+        "oracle_acc": {
+          "mean": 0.9793,
+          "std": 0.0,
+          "min": 0.9793,
+          "max": 0.9793
+        },
+        "recoverable_n": {
+          "mean": 607.0,
+          "std": 0.0,
+          "min": 607,
+          "max": 607
+        },
+        "top4_share": {
+          "mean": 0.642,
+          "std": 0.0,
+          "min": 0.642,
+          "max": 0.642
+        },
+        "recoverable_in_q1_conf": {
+          "mean": 0.792,
+          "std": 0.0,
+          "min": 0.792,
+          "max": 0.792
+        },
+        "confusion_pairs_summed": [
+          {
+            "pair": "T-shirt<->Shirt",
+            "count": 179
+          },
+          {
+            "pair": "Pullover<->Coat",
+            "count": 178
+          },
+          {
+            "pair": "Pullover<->Shirt",
+            "count": 145
+          },
+          {
+            "pair": "Coat<->Shirt",
+            "count": 89
+          },
+          {
+            "pair": "Dress<->Coat",
+            "count": 47
+          },
+          {
+            "pair": "Sneaker<->AnkleBoot",
+            "count": 45
+          },
+          {
+            "pair": "T-shirt<->Pullover",
+            "count": 45
+          },
+          {
+            "pair": "Dress<->Shirt",
+            "count": 44
+          },
+          {
+            "pair": "T-shirt<->Dress",
+            "count": 35
+          },
+          {
+            "pair": "Pullover<->Dress",
+            "count": 28
+          }
+        ],
+        "recoverable_by_class_summed": {
+          "Shirt": 265,
+          "Coat": 131,
+          "Dress": 89,
+          "T-shirt": 29,
+          "Sneaker": 26,
+          "Trouser": 20,
+          "Sandal": 16,
+          "Bag": 14,
+          "Pullover": 9,
+          "AnkleBoot": 8
+        }
+      }
+    },
+    "MNIST": {
+      "per_seed": [
+        {
+          "routing_acc": 0.9915,
+          "system_acc": 0.9915,
+          "oracle_acc": 1.0,
+          "decomp": {
+            "A_ok": 9915,
+            "B_pod_miss": 0,
+            "C_recovery": 0,
+            "D_loss": 85,
+            "n": 10000
+          },
+          "recoverable_n": 85,
+          "recoverable_by_class": {
+            "0": 1,
+            "1": 2,
+            "2": 11,
+            "3": 3,
+            "4": 8,
+            "5": 11,
+            "6": 15,
+            "7": 10,
+            "8": 9,
+            "9": 15
+          },
+          "top_confusion_pairs": [
+            {
+              "pair": "4<->9",
+              "count": 11
+            },
+            {
+              "pair": "2<->7",
+              "count": 10
+            },
+            {
+              "pair": "3<->5",
+              "count": 8
+            },
+            {
+              "pair": "0<->6",
+              "count": 7
+            },
+            {
+              "pair": "5<->9",
+              "count": 5
+            },
+            {
+              "pair": "1<->2",
+              "count": 4
+            },
+            {
+              "pair": "1<->7",
+              "count": 4
+            },
+            {
+              "pair": "5<->6",
+              "count": 3
+            },
+            {
+              "pair": "8<->9",
+              "count": 3
+            },
+            {
+              "pair": "6<->8",
+              "count": 3
+            }
+          ],
+          "top4_pairs_share_of_router_errors": 0.424,
+          "conf_bins": [
+            {
+              "quartile": "Q1",
+              "conf_range": [
+                0.113,
+                0.928
+              ],
+              "sys_err_pct": 3.28,
+              "recoverable_pct": 3.28
+            },
+            {
+              "quartile": "Q2",
+              "conf_range": [
+                0.928,
+                0.934
+              ],
+              "sys_err_pct": 0.04,
+              "recoverable_pct": 0.04
+            },
+            {
+              "quartile": "Q3",
+              "conf_range": [
+                0.934,
+                0.938
+              ],
+              "sys_err_pct": 0.04,
+              "recoverable_pct": 0.04
+            },
+            {
+              "quartile": "Q4",
+              "conf_range": [
+                0.938,
+                0.951
+              ],
+              "sys_err_pct": 0.04,
+              "recoverable_pct": 0.04
+            }
+          ],
+          "recoverable_in_lowest_conf_quartile": 0.965
+        }
+      ],
+      "agg": {
+        "system_acc": {
+          "mean": 0.9915,
+          "std": 0.0,
+          "min": 0.9915,
+          "max": 0.9915
+        },
+        "oracle_acc": {
+          "mean": 1.0,
+          "std": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "recoverable_n": {
+          "mean": 85.0,
+          "std": 0.0,
+          "min": 85,
+          "max": 85
+        },
+        "top4_share": {
+          "mean": 0.424,
+          "std": 0.0,
+          "min": 0.424,
+          "max": 0.424
+        },
+        "recoverable_in_q1_conf": {
+          "mean": 0.965,
+          "std": 0.0,
+          "min": 0.965,
+          "max": 0.965
+        },
+        "confusion_pairs_summed": [
+          {
+            "pair": "4<->9",
+            "count": 11
+          },
+          {
+            "pair": "2<->7",
+            "count": 10
+          },
+          {
+            "pair": "3<->5",
+            "count": 8
+          },
+          {
+            "pair": "0<->6",
+            "count": 7
+          },
+          {
+            "pair": "5<->9",
+            "count": 5
+          },
+          {
+            "pair": "1<->2",
+            "count": 4
+          },
+          {
+            "pair": "1<->7",
+            "count": 4
+          },
+          {
+            "pair": "5<->6",
+            "count": 3
+          },
+          {
+            "pair": "8<->9",
+            "count": 3
+          },
+          {
+            "pair": "6<->8",
+            "count": 3
+          }
+        ],
+        "recoverable_by_class_summed": {
+          "6": 15,
+          "9": 15,
+          "2": 11,
+          "5": 11,
+          "7": 10,
+          "8": 9,
+          "4": 8,
+          "3": 3,
+          "1": 2,
+          "0": 1
+        }
+      }
+    }
+  },
+  "elapsed_s": 124.5
+}

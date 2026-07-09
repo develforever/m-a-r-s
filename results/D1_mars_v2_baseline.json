@@ -1,0 +1,88 @@
+{
+  "MNIST": {
+    "config": {
+      "backbone_hidden": 384,
+      "emb": 32,
+      "pod_hidden": 24,
+      "epochs": 30
+    },
+    "v1_separate": {
+      "params": 408948,
+      "routing_acc": 0.9839,
+      "system_acc": 0.9839,
+      "oracle_acc": 1.0,
+      "mac": {
+        "router": 217728,
+        "pod": 19056,
+        "total_top1": 236784
+      }
+    },
+    "v2_d1a_phased": {
+      "params": 408980,
+      "routing_acc": 0.9833,
+      "system_acc": 0.9833,
+      "oracle_acc": 1.0,
+      "mac": {
+        "backbone": 301056,
+        "routing": 12608,
+        "pod": 9456,
+        "total_top1": 323120
+      }
+    },
+    "v2_d1b_end2end": {
+      "params": 408980,
+      "routing_acc": 0.9822,
+      "system_acc": 0.9822,
+      "oracle_acc": 1.0,
+      "mac": {
+        "backbone": 301056,
+        "routing": 12608,
+        "pod": 9456,
+        "total_top1": 323120
+      }
+    }
+  },
+  "Fashion-MNIST": {
+    "config": {
+      "backbone_hidden": 384,
+      "emb": 32,
+      "pod_hidden": 24,
+      "epochs": 30
+    },
+    "v1_separate": {
+      "params": 408948,
+      "routing_acc": 0.8842,
+      "system_acc": 0.8881,
+      "oracle_acc": 0.9869,
+      "mac": {
+        "router": 217728,
+        "pod": 19056,
+        "total_top1": 236784
+      }
+    },
+    "v2_d1a_phased": {
+      "params": 408980,
+      "routing_acc": 0.8901,
+      "system_acc": 0.8961,
+      "oracle_acc": 0.9586,
+      "mac": {
+        "backbone": 301056,
+        "routing": 12608,
+        "pod": 9456,
+        "total_top1": 323120
+      }
+    },
+    "v2_d1b_end2end": {
+      "params": 408980,
+      "routing_acc": 0.8922,
+      "system_acc": 0.8911,
+      "oracle_acc": 0.9423,
+      "mac": {
+        "backbone": 301056,
+        "routing": 12608,
+        "pod": 9456,
+        "total_top1": 323120
+      }
+    }
+  }
+}

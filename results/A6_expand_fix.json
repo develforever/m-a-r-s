@@ -1,0 +1,61 @@
+{
+  "device": "cuda",
+  "n_seeds": 3,
+  "scenarios": [
+    {
+      "ewc_lambda": 0,
+      "A_before": 0.9907,
+      "A_after": 0.0001,
+      "B": 0.9703,
+      "all": 0.4717,
+      "retencja_pct": 0.0,
+      "routing_A": 0.0,
+      "routing_B": 0.9716
+    },
+    {
+      "ewc_lambda": 10,
+      "A_before": 0.9907,
+      "A_after": 0.0086,
+      "B": 0.9728,
+      "all": 0.4773,
+      "retencja_pct": 0.9,
+      "routing_A": 0.0075,
+      "routing_B": 0.9746
+    },
+    {
+      "ewc_lambda": 100,
+      "A_before": 0.9907,
+      "A_after": 0.0463,
+      "B": 0.9602,
+      "all": 0.4906,
+      "retencja_pct": 4.7,
+      "routing_A": 0.0461,
+      "routing_B": 0.9584
+    },
+    {
+      "ewc_lambda": 1000,
+      "A_before": 0.9907,
+      "A_after": 0.1291,
+      "B": 0.9414,
+      "all": 0.524,
+      "retencja_pct": 13.0,
+      "routing_A": 0.1289,
+      "routing_B": 0.9273
+    },
+    {
+      "ewc_lambda": 10000,
+      "A_before": 0.9907,
+      "A_after": 0.2759,
+      "B": 0.9183,
+      "all": 0.5882,
+      "retencja_pct": 27.8,
+      "routing_A": 0.276,
+      "routing_B": 0.8506
+    }
+  ],
+  "replay_reference": {
+    "retencja_pct": 98.4,
+    "B": 0.953,
+    "all": 0.964
+  }
+}

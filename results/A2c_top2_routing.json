@@ -1,0 +1,29 @@
+{
+  "device": "cuda",
+  "strategies": [
+    {
+      "name": "top-1 (1 pod)",
+      "accuracy": 0.9672,
+      "pod_mac": 19056,
+      "total_mac": 44816
+    },
+    {
+      "name": "top-2 confidence",
+      "accuracy": 0.9483,
+      "pod_mac": 38112,
+      "total_mac": 63872
+    },
+    {
+      "name": "top-2 agregacja",
+      "accuracy": 0.9473,
+      "pod_mac": 38112,
+      "total_mac": 63872
+    },
+    {
+      "name": "ORACLE (sufit)",
+      "accuracy": 0.9904,
+      "pod_mac": 19056,
+      "total_mac": 44816
+    }
+  ]
+}

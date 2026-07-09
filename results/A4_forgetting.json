@@ -1,0 +1,44 @@
+{
+  "device": "cuda",
+  "task_A": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "task_B": [
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "n_seeds": 3,
+  "scenarios": [
+    {
+      "name": "Monolith (baseline)",
+      "A_before": 0.9941,
+      "A_after": 0.0,
+      "B": 0.9857,
+      "all": 0.4791,
+      "retencja_pct": 0.0
+    },
+    {
+      "name": "M.A.R.S. replay (router A+B)",
+      "A_before": 0.9907,
+      "A_after": 0.9744,
+      "B": 0.9528,
+      "all": 0.9639,
+      "retencja_pct": 98.4
+    },
+    {
+      "name": "M.A.R.S. expand (bez starych danych)",
+      "A_before": 0.9907,
+      "A_after": 0.9408,
+      "B": 0.6316,
+      "all": 0.7905,
+      "retencja_pct": 95.0
+    }
+  ]
+}

@@ -1,0 +1,303 @@
+{
+  "experiment": "E4_energy",
+  "n_seeds_acc": 1,
+  "epochs": 8,
+  "e_seconds": 8,
+  "e_repeats": 2,
+  "ternary_tfs": [
+    0.5,
+    0.7
+  ],
+  "datasets": {
+    "Fashion-MNIST": {
+      "p_limit_w": 75.0,
+      "systems": {
+        "mono_mlp": {
+          "mac": 234752,
+          "energy_runs": [
+            {
+              "duration_s": 8.03,
+              "n_samples": 17410000,
+              "throughput_sps": 2169256,
+              "util_pct": 100.0,
+              "s_per_10k": 0.0046,
+              "j_per_10k_upper": 0.35
+            },
+            {
+              "duration_s": 8.02,
+              "n_samples": 17410000,
+              "throughput_sps": 2170146,
+              "util_pct": 100.0,
+              "s_per_10k": 0.0046,
+              "j_per_10k_upper": 0.35
+            }
+          ],
+          "s_per_10k": {
+            "mean": 0.0046,
+            "std": 0.0,
+            "min": 0.0046,
+            "max": 0.0046
+          },
+          "j_per_10k_upper": {
+            "mean": 0.35,
+            "std": 0.0,
+            "min": 0.35,
+            "max": 0.35
+          },
+          "util_pct": {
+            "mean": 100.0,
+            "std": 0.0,
+            "min": 100.0,
+            "max": 100.0
+          },
+          "throughput_sps": {
+            "mean": 2169701.0,
+            "std": 629.325,
+            "min": 2169256,
+            "max": 2170146
+          }
+        },
+        "mono_s2": {
+          "mac": 383872,
+          "energy_runs": [
+            {
+              "duration_s": 8.16,
+              "n_samples": 1570000,
+              "throughput_sps": 192437,
+              "util_pct": 100.0,
+              "s_per_10k": 0.052,
+              "j_per_10k_upper": 3.9
+            },
+            {
+              "duration_s": 8.2,
+              "n_samples": 1570000,
+              "throughput_sps": 191497,
+              "util_pct": 100.0,
+              "s_per_10k": 0.0522,
+              "j_per_10k_upper": 3.92
+            }
+          ],
+          "s_per_10k": {
+            "mean": 0.0521,
+            "std": 0.0001,
+            "min": 0.052,
+            "max": 0.0522
+          },
+          "j_per_10k_upper": {
+            "mean": 3.91,
+            "std": 0.0141,
+            "min": 3.9,
+            "max": 3.92
+          },
+          "util_pct": {
+            "mean": 100.0,
+            "std": 0.0,
+            "min": 100.0,
+            "max": 100.0
+          },
+          "throughput_sps": {
+            "mean": 191967.0,
+            "std": 664.6804,
+            "min": 191497,
+            "max": 192437
+          }
+        },
+        "mars_s2": {
+          "mac": 390320,
+          "energy_runs": [
+            {
+              "duration_s": 8.08,
+              "n_samples": 1350000,
+              "throughput_sps": 166986,
+              "util_pct": 99.0,
+              "s_per_10k": 0.0599,
+              "j_per_10k_upper": 4.49
+            },
+            {
+              "duration_s": 8.1,
+              "n_samples": 1340000,
+              "throughput_sps": 165532,
+              "util_pct": 99.0,
+              "s_per_10k": 0.0604,
+              "j_per_10k_upper": 4.53
+            }
+          ],
+          "s_per_10k": {
+            "mean": 0.0602,
+            "std": 0.0004,
+            "min": 0.0599,
+            "max": 0.0604
+          },
+          "j_per_10k_upper": {
+            "mean": 4.51,
+            "std": 0.0283,
+            "min": 4.49,
+            "max": 4.53
+          },
+          "util_pct": {
+            "mean": 99.0,
+            "std": 0.0,
+            "min": 99.0,
+            "max": 99.0
+          },
+          "throughput_sps": {
+            "mean": 166259.0,
+            "std": 1028.1333,
+            "min": 165532,
+            "max": 166986
+          }
+        },
+        "mars_s2_t0.5": {
+          "mac": 390320,
+          "energy_runs": [
+            {
+              "duration_s": 8.1,
+              "n_samples": 1350000,
+              "throughput_sps": 166769,
+              "util_pct": 99.0,
+              "s_per_10k": 0.06,
+              "j_per_10k_upper": 4.5
+            },
+            {
+              "duration_s": 8.09,
+              "n_samples": 1350000,
+              "throughput_sps": 166782,
+              "util_pct": 99.0,
+              "s_per_10k": 0.06,
+              "j_per_10k_upper": 4.5
+            }
+          ],
+          "s_per_10k": {
+            "mean": 0.06,
+            "std": 0.0,
+            "min": 0.06,
+            "max": 0.06
+          },
+          "j_per_10k_upper": {
+            "mean": 4.5,
+            "std": 0.0,
+            "min": 4.5,
+            "max": 4.5
+          },
+          "util_pct": {
+            "mean": 99.0,
+            "std": 0.0,
+            "min": 99.0,
+            "max": 99.0
+          },
+          "throughput_sps": {
+            "mean": 166775.5,
+            "std": 9.1924,
+            "min": 166769,
+            "max": 166782
+          }
+        },
+        "mars_full": {
+          "mac": 4247600,
+          "energy_runs": [
+            {
+              "duration_s": 8.28,
+              "n_samples": 440000,
+              "throughput_sps": 53142,
+              "util_pct": 100.0,
+              "s_per_10k": 0.1882,
+              "j_per_10k_upper": 14.11
+            },
+            {
+              "duration_s": 8.28,
+              "n_samples": 440000,
+              "throughput_sps": 53143,
+              "util_pct": 100.0,
+              "s_per_10k": 0.1882,
+              "j_per_10k_upper": 14.11
+            }
+          ],
+          "s_per_10k": {
+            "mean": 0.1882,
+            "std": 0.0,
+            "min": 0.1882,
+            "max": 0.1882
+          },
+          "j_per_10k_upper": {
+            "mean": 14.11,
+            "std": 0.0,
+            "min": 14.11,
+            "max": 14.11
+          },
+          "util_pct": {
+            "mean": 100.0,
+            "std": 0.0,
+            "min": 100.0,
+            "max": 100.0
+          },
+          "throughput_sps": {
+            "mean": 53142.5,
+            "std": 0.7071,
+            "min": 53142,
+            "max": 53143
+          }
+        }
+      },
+      "accuracy": {
+        "mono_mlp": {
+          "mean": 0.8841,
+          "std": 0.0,
+          "min": 0.8841,
+          "max": 0.8841
+        },
+        "mono_s2": {
+          "mean": 0.8992,
+          "std": 0.0,
+          "min": 0.8992,
+          "max": 0.8992
+        },
+        "mars_s2": {
+          "mean": 0.8992,
+          "std": 0.0,
+          "min": 0.8992,
+          "max": 0.8992
+        },
+        "mars_s2_t0.5": {
+          "mean": 0.8977,
+          "std": 0.0,
+          "min": 0.8977,
+          "max": 0.8977
+        },
+        "mars_full_seed0": 0.9174
+      },
+      "ternary": {
+        "0.5": {
+          "acc": {
+            "mean": 0.8977,
+            "std": 0.0,
+            "min": 0.8977,
+            "max": 0.8977
+          },
+          "sparsity": {
+            "mean": 0.5284,
+            "std": 0.0,
+            "min": 0.5284,
+            "max": 0.5284
+          }
+        },
+        "0.7": {
+          "acc": {
+            "mean": 0.8966,
+            "std": 0.0,
+            "min": 0.8966,
+            "max": 0.8966
+          },
+          "sparsity": {
+            "mean": 0.5677,
+            "std": 0.0,
+            "min": 0.5677,
+            "max": 0.5677
+          }
+        }
+      },
+      "best_tf": 0.5,
+      "verdicts": {}
+    }
+  },
+  "elapsed_s": 170.0
+}

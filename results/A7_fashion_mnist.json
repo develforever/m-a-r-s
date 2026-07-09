@@ -1,0 +1,32 @@
+{
+  "device": "cuda",
+  "accuracy": {
+    "monolit": {
+      "acc": 0.8772,
+      "mac": 234752
+    },
+    "mars": {
+      "acc": 0.877,
+      "mac": 44816,
+      "mac_saving_pct": 80.9,
+      "routing_acc": 0.8769
+    },
+    "oracle": 0.9837
+  },
+  "forgetting": [
+    {
+      "name": "Monolith",
+      "A_before": 0.9029,
+      "A_after": 0.0,
+      "B": 0.962,
+      "retencja_pct": 0.0
+    },
+    {
+      "name": "M.A.R.S. replay",
+      "A_before": 0.8983,
+      "A_after": 0.8561,
+      "B": 0.8931,
+      "retencja_pct": 95.3
+    }
+  ]
+}

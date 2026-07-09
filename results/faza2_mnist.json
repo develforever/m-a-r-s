@@ -1,0 +1,59 @@
+{
+  "experiment": "M.A.R.S. Faza 2 — MNIST Validation",
+  "timestamp": "2026-06-15T21:51:21.128935",
+  "device": "cuda",
+  "pytorch_version": "2.5.1+cu121",
+  "test1_accuracy": {
+    "baseline_acc": 0.9725,
+    "mars_acc": 0.9611,
+    "routing_acc": 0.403,
+    "delta_pp": -1.14
+  },
+  "test2_mac": {
+    "som_router_mac": 50304,
+    "neural_router_mac": 101632,
+    "pod_mac": 50816,
+    "baseline_mac": 234752,
+    "mars_routed_mac": 101120,
+    "mars_dense_mac": 558464,
+    "savings_vs_baseline_pct": 56.9,
+    "savings_som_vs_neural_pct": 50.5
+  },
+  "test3_throughput": {
+    "mars": {
+      "time_per_batch_us": 2295.6,
+      "samples_per_sec": 1784311,
+      "batch_size": 4096,
+      "n_runs": 100
+    },
+    "baseline": {
+      "time_per_batch_us": 1353.0,
+      "samples_per_sec": 3027413,
+      "batch_size": 4096,
+      "n_runs": 100
+    },
+    "router_only": {
+      "time_per_batch_us": 550.9,
+      "samples_per_sec": 7435220,
+      "batch_size": 4096,
+      "n_runs": 100
+    },
+    "speedup_vs_baseline": 0.59,
+    "device": "cuda"
+  },
+  "test4_forgetting": {
+    "baseline": {
+      "acc_a_after_a": 0.9895,
+      "acc_a_after_b": 0.0,
+      "acc_b_after_b": 0.9792,
+      "retention": 0.0
+    },
+    "mars": {
+      "acc_a_after_a": 0.9858,
+      "acc_a_after_b": 0.2532,
+      "acc_b_after_b": 0.927,
+      "retention": 0.2568
+    },
+    "delta_retention_pp": 25.7
+  }
+}

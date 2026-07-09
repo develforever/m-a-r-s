@@ -1,0 +1,45 @@
+{
+  "stage": "etap1",
+  "timestamp": "2026-06-15T17:09:47",
+  "baseline": {
+    "name": "baseline_mlp_xor_backprop",
+    "mac_operations": 560096,
+    "accuracy": 1.0,
+    "wall_time_s": 0.17814589999943564,
+    "cpu_time_s": 0.1875,
+    "psutil_available": true,
+    "note": "cpu_time to PROXY energii, nie dzule. Realny pomiar wymaga RAPL/watomierza.",
+    "task": "XOR",
+    "architecture": "2-4-1 MLP, tanh+sigmoid",
+    "learning": "full backpropagation",
+    "epochs": 5000,
+    "learning_rate": 0.5,
+    "timestamp": "2026-06-15T17:00:43"
+  },
+  "forward_forward": {
+    "name": "capsule_ff_xor_local",
+    "mac_operations": 10268160,
+    "accuracy": 1.0,
+    "wall_time_s": 0.8718552000000273,
+    "cpu_time_s": 0.875,
+    "psutil_available": true,
+    "note": "cpu_time to PROXY energii, nie dzule. Realny pomiar wymaga RAPL/watomierza.",
+    "task": "XOR",
+    "learning": "Forward-Forward (local)",
+    "epochs": 2000,
+    "learning_rate": 0.05
+  },
+  "contrastive_hebbian": {
+    "name": "capsule_chl_xor_local",
+    "mac_operations": 5680384,
+    "accuracy": 1.0,
+    "wall_time_s": 0.41144509999958245,
+    "cpu_time_s": 0.40625,
+    "psutil_available": true,
+    "note": "cpu_time to PROXY energii, nie dzule. Realny pomiar wymaga RAPL/watomierza.",
+    "task": "XOR",
+    "learning": "Contrastive Hebbian (local)",
+    "epochs": 3000,
+    "learning_rate": 0.1
+  }
+}

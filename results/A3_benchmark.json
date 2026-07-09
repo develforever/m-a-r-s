@@ -1,0 +1,26 @@
+{
+  "device": "cuda",
+  "systems": [
+    {
+      "name": "Baseline monolit",
+      "accuracy": 0.9773,
+      "total_mac": 234752,
+      "throughput_sps": 3184888,
+      "mac_saving_pct": 0.0
+    },
+    {
+      "name": "Redundantny (h=64)",
+      "accuracy": 0.9742,
+      "total_mac": 63568,
+      "throughput_sps": 1989472,
+      "mac_saving_pct": 72.9
+    },
+    {
+      "name": "Specjaliści (h=24)",
+      "accuracy": 0.9606,
+      "total_mac": 44816,
+      "throughput_sps": 1971213,
+      "mac_saving_pct": 80.9
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "stage": "etap4b",
+  "timestamp": "2026-06-15T20:03:04",
+  "description": "Tekstury GPU z topologią Kohonena — naprawiona wersja Etapu 4",
+  "test_naive": {
+    "method": "naive_sparse",
+    "mse": 0.852747
+  },
+  "test_kohonen": {
+    "method": "kohonen_som",
+    "grid_size": 16,
+    "train_time_s": 0.092,
+    "quantization_error": 0.299013,
+    "topology_ratio": 3.705,
+    "topology_ok": true,
+    "mse_bilinear_interpolation": 0.026911,
+    "mse_random_control": 3.124449,
+    "improvement_vs_random_pct": 99.14,
+    "cosine_drift": 0.022168,
+    "interpolation_ok": true
+  },
+  "test_dense": {
+    "method": "dense_embeddings",
+    "mse_interpolation": 0.0,
+    "query_time_1000_ms": 17.19,
+    "note": "Interpolacja idealna (lerp=lerp), ale brak hw acceleration"
+  },
+  "test_sleep_kohonen": {
+    "test": "sleep_blur_kohonen",
+    "distance_before": 0.568962,
+    "distance_after": 0.568971,
+    "consolidation_pct": -0.0,
+    "blur_makes_sense": false
+  },
+  "verdict": {
+    "verdict": "CZĘŚCIOWO POZYTYWNY",
+    "improvement_naive_to_kohonen_pct": 96.84,
+    "explanation": "Kohonen poprawia interpolację (97%), ale topologia/blur nieidealny."
+  }
+}

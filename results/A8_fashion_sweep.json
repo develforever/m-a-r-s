@@ -1,0 +1,242 @@
+{
+  "dataset": "Fashion-MNIST",
+  "device": "cuda",
+  "oracle_acc": 0.9853,
+  "baseline_acc": 0.877,
+  "best_config": {
+    "enc_hidden": 256,
+    "emb": 32,
+    "epochs": 30,
+    "lr": 0.003
+  },
+  "best_system_acc": 0.8919,
+  "phase1": [
+    {
+      "enc_hidden": 32,
+      "emb": 8,
+      "epochs": 15,
+      "lr": 0.003,
+      "routing_acc": 0.8709,
+      "system_acc": 0.8713,
+      "router_mac": 25424
+    },
+    {
+      "enc_hidden": 32,
+      "emb": 16,
+      "epochs": 15,
+      "lr": 0.003,
+      "routing_acc": 0.8712,
+      "system_acc": 0.8724,
+      "router_mac": 25760
+    },
+    {
+      "enc_hidden": 32,
+      "emb": 32,
+      "epochs": 15,
+      "lr": 0.003,
+      "routing_acc": 0.8761,
+      "system_acc": 0.8759,
+      "router_mac": 26432
+    },
+    {
+      "enc_hidden": 32,
+      "emb": 64,
+      "epochs": 15,
+      "lr": 0.003,
+      "routing_acc": 0.8711,
+      "system_acc": 0.8707,
+      "router_mac": 27776
+    },
+    {
+      "enc_hidden": 64,
+      "emb": 8,
+      "epochs": 15,
+      "lr": 0.003,
+      "routing_acc": 0.8811,
+      "system_acc": 0.8818,
+      "router_mac": 50768
+    },
+    {
+      "enc_hidden": 64,
+      "emb": 16,
+      "epochs": 15,
+      "lr": 0.003,
+      "routing_acc": 0.875,
+      "system_acc": 0.8756,
+      "router_mac": 51360
+    },
+    {
+      "enc_hidden": 64,
+      "emb": 32,
+      "epochs": 15,
+      "lr": 0.003,
+      "routing_acc": 0.875,
+      "system_acc": 0.8754,
+      "router_mac": 52544
+    },
+    {
+      "enc_hidden": 64,
+      "emb": 64,
+      "epochs": 15,
+      "lr": 0.003,
+      "routing_acc": 0.8815,
+      "system_acc": 0.8811,
+      "router_mac": 54912
+    },
+    {
+      "enc_hidden": 128,
+      "emb": 8,
+      "epochs": 15,
+      "lr": 0.003,
+      "routing_acc": 0.8848,
+      "system_acc": 0.8847,
+      "router_mac": 101456
+    },
+    {
+      "enc_hidden": 128,
+      "emb": 16,
+      "epochs": 15,
+      "lr": 0.003,
+      "routing_acc": 0.8879,
+      "system_acc": 0.888,
+      "router_mac": 102560
+    },
+    {
+      "enc_hidden": 128,
+      "emb": 32,
+      "epochs": 15,
+      "lr": 0.003,
+      "routing_acc": 0.8871,
+      "system_acc": 0.8866,
+      "router_mac": 104768
+    },
+    {
+      "enc_hidden": 128,
+      "emb": 64,
+      "epochs": 15,
+      "lr": 0.003,
+      "routing_acc": 0.884,
+      "system_acc": 0.8843,
+      "router_mac": 109184
+    },
+    {
+      "enc_hidden": 256,
+      "emb": 8,
+      "epochs": 15,
+      "lr": 0.003,
+      "routing_acc": 0.8873,
+      "system_acc": 0.8868,
+      "router_mac": 202832
+    },
+    {
+      "enc_hidden": 256,
+      "emb": 16,
+      "epochs": 15,
+      "lr": 0.003,
+      "routing_acc": 0.886,
+      "system_acc": 0.8864,
+      "router_mac": 204960
+    },
+    {
+      "enc_hidden": 256,
+      "emb": 32,
+      "epochs": 15,
+      "lr": 0.003,
+      "routing_acc": 0.8913,
+      "system_acc": 0.8906,
+      "router_mac": 209216
+    },
+    {
+      "enc_hidden": 256,
+      "emb": 64,
+      "epochs": 15,
+      "lr": 0.003,
+      "routing_acc": 0.8889,
+      "system_acc": 0.8883,
+      "router_mac": 217728
+    }
+  ],
+  "phase2": [
+    {
+      "enc_hidden": 256,
+      "emb": 32,
+      "epochs": 15,
+      "lr": 0.001,
+      "routing_acc": 0.8884,
+      "system_acc": 0.8882,
+      "router_mac": 209216
+    },
+    {
+      "enc_hidden": 256,
+      "emb": 32,
+      "epochs": 15,
+      "lr": 0.003,
+      "routing_acc": 0.8902,
+      "system_acc": 0.8895,
+      "router_mac": 209216
+    },
+    {
+      "enc_hidden": 256,
+      "emb": 32,
+      "epochs": 15,
+      "lr": 0.01,
+      "routing_acc": 0.8857,
+      "system_acc": 0.8856,
+      "router_mac": 209216
+    },
+    {
+      "enc_hidden": 256,
+      "emb": 32,
+      "epochs": 30,
+      "lr": 0.001,
+      "routing_acc": 0.8912,
+      "system_acc": 0.8917,
+      "router_mac": 209216
+    },
+    {
+      "enc_hidden": 256,
+      "emb": 32,
+      "epochs": 30,
+      "lr": 0.003,
+      "routing_acc": 0.8921,
+      "system_acc": 0.8919,
+      "router_mac": 209216
+    },
+    {
+      "enc_hidden": 256,
+      "emb": 32,
+      "epochs": 30,
+      "lr": 0.01,
+      "routing_acc": 0.8904,
+      "system_acc": 0.8904,
+      "router_mac": 209216
+    },
+    {
+      "enc_hidden": 256,
+      "emb": 32,
+      "epochs": 50,
+      "lr": 0.001,
+      "routing_acc": 0.8881,
+      "system_acc": 0.89,
+      "router_mac": 209216
+    },
+    {
+      "enc_hidden": 256,
+      "emb": 32,
+      "epochs": 50,
+      "lr": 0.003,
+      "routing_acc": 0.886,
+      "system_acc": 0.8867,
+      "router_mac": 209216
+    },
+    {
+      "enc_hidden": 256,
+      "emb": 32,
+      "epochs": 50,
+      "lr": 0.01,
+      "routing_acc": 0.8887,
+      "system_acc": 0.8892,
+      "router_mac": 209216
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "device": "cuda",
+  "batch": 2048,
+  "matrix": [
+    {
+      "hidden": 512,
+      "n_pods": 8,
+      "baseline_sps": 724937,
+      "v2_grouped_sps": 830688,
+      "v3_loopless_sps": 906988,
+      "v2_vs_base": 1.15,
+      "v3_vs_base": 1.25
+    },
+    {
+      "hidden": 512,
+      "n_pods": 32,
+      "baseline_sps": 765392,
+      "v2_grouped_sps": 319913,
+      "v3_loopless_sps": 650305,
+      "v2_vs_base": 0.42,
+      "v3_vs_base": 0.85
+    },
+    {
+      "hidden": 512,
+      "n_pods": 64,
+      "baseline_sps": 776826,
+      "v2_grouped_sps": 168487,
+      "v3_loopless_sps": 558310,
+      "v2_vs_base": 0.22,
+      "v3_vs_base": 0.72
+    },
+    {
+      "hidden": 2048,
+      "n_pods": 8,
+      "baseline_sps": 134265,
+      "v2_grouped_sps": 344808,
+      "v3_loopless_sps": 297225,
+      "v2_vs_base": 2.57,
+      "v3_vs_base": 2.21
+    },
+    {
+      "hidden": 2048,
+      "n_pods": 32,
+      "baseline_sps": 134134,
+      "v2_grouped_sps": 203778,
+      "v3_loopless_sps": 226763,
+      "v2_vs_base": 1.52,
+      "v3_vs_base": 1.69
+    },
+    {
+      "hidden": 2048,
+      "n_pods": 64,
+      "baseline_sps": 134157,
+      "v2_grouped_sps": 133443,
+      "v3_loopless_sps": 194355,
+      "v2_vs_base": 0.99,
+      "v3_vs_base": 1.45
+    },
+    {
+      "hidden": 4096,
+      "n_pods": 8,
+      "baseline_sps": 96886,
+      "v2_grouped_sps": 189046,
+      "v3_loopless_sps": 160799,
+      "v2_vs_base": 1.95,
+      "v3_vs_base": 1.66
+    },
+    {
+      "hidden": 4096,
+      "n_pods": 32,
+      "baseline_sps": 96847,
+      "v2_grouped_sps": 117134,
+      "v3_loopless_sps": 120678,
+      "v2_vs_base": 1.21,
+      "v3_vs_base": 1.25
+    },
+    {
+      "hidden": 4096,
+      "n_pods": 64,
+      "baseline_sps": 96860,
+      "v2_grouped_sps": 83890,
+      "v3_loopless_sps": 104527,
+      "v2_vs_base": 0.87,
+      "v3_vs_base": 1.08
+    }
+  ],
+  "best_regime": {
+    "hidden": 2048,
+    "n_pods": 8,
+    "strategy": "V2 grouped",
+    "speedup": 2.57
+  }
+}

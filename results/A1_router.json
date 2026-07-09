@@ -1,0 +1,36 @@
+{
+  "device": "cuda",
+  "baseline_texture_router_acc": 0.44,
+  "routers": [
+    {
+      "name": "MLPRouter (bottleneck=4)",
+      "routing_acc": 0.857,
+      "mac": 12648,
+      "passes_85": true
+    },
+    {
+      "name": "MLPRouter (bottleneck=8)",
+      "routing_acc": 0.9592,
+      "mac": 25424,
+      "passes_85": true
+    },
+    {
+      "name": "ProtoRouter (emb=8)",
+      "routing_acc": 0.939,
+      "mac": 12752,
+      "passes_85": true
+    },
+    {
+      "name": "ProtoRouter (emb=16)",
+      "routing_acc": 0.9652,
+      "mac": 25760,
+      "passes_85": true
+    }
+  ],
+  "best": {
+    "name": "ProtoRouter (emb=16)",
+    "routing_acc": 0.9652,
+    "mac": 25760,
+    "passes_85": true
+  }
+}

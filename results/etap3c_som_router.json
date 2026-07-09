@@ -1,0 +1,129 @@
+{
+  "stage": "etap3c",
+  "timestamp": "2026-06-15T20:14:54",
+  "description": "SOM-Router: Kohonen jako Engine Core (integracja Etap 3 + 4B)",
+  "test_accuracy": {
+    "N": 5,
+    "neural_acc": 0.95,
+    "som_acc": 0.925,
+    "topology_quality": 0.7857,
+    "delta_acc_pp": -2.5
+  },
+  "test_mac": {
+    "N": 5,
+    "grid_size": 8,
+    "mac_neural_router": 56,
+    "mac_som_router_cpu": 256,
+    "mac_som_router_gpu": 0,
+    "mac_pod": 24,
+    "mac_dense": 120,
+    "mac_neural_total": 80,
+    "mac_som_cpu_total": 280,
+    "mac_som_gpu_total": 24,
+    "saving_neural_pct": 33.33,
+    "saving_som_cpu_pct": -133.33,
+    "saving_som_gpu_pct": 80.0
+  },
+  "test_soft_routing": {
+    "N": 5,
+    "hard_acc": 0.875,
+    "soft_acc": 0.9,
+    "mean_confidence": 0.9348,
+    "high_conf_acc": 0.9211,
+    "uncertain_pct": 5.0
+  },
+  "test_sleep_v2": {
+    "N": 5,
+    "acc_before_sleep": 0.875,
+    "acc_after_5_cycles": 0.875,
+    "pruned_total": 63,
+    "accuracy_curve": [
+      0.875,
+      0.85,
+      0.85,
+      0.9,
+      0.9,
+      0.875
+    ],
+    "sleep_preserves_accuracy": true
+  },
+  "test_online_adaptation": {
+    "N_original": 5,
+    "acc_before_adaptation": 0.985,
+    "adaptation_curve": [
+      {
+        "epochs": 50,
+        "acc_old_regions": 0.98,
+        "acc_new_region": 1.0
+      },
+      {
+        "epochs": 100,
+        "acc_old_regions": 0.98,
+        "acc_new_region": 1.0
+      },
+      {
+        "epochs": 200,
+        "acc_old_regions": 0.985,
+        "acc_new_region": 1.0
+      },
+      {
+        "epochs": 500,
+        "acc_old_regions": 0.97,
+        "acc_new_region": 1.0
+      }
+    ]
+  },
+  "test_scaling": [
+    {
+      "N": 3,
+      "grid": 6,
+      "neural_acc": 1.0,
+      "som_acc": 1.0,
+      "topology": 0.8,
+      "mac_neural_router": 40,
+      "mac_som_cpu": 144,
+      "mac_som_gpu": 0
+    },
+    {
+      "N": 5,
+      "grid": 6,
+      "neural_acc": 0.95,
+      "som_acc": 0.9,
+      "topology": 0.6667,
+      "mac_neural_router": 56,
+      "mac_som_cpu": 144,
+      "mac_som_gpu": 0
+    },
+    {
+      "N": 10,
+      "grid": 9,
+      "neural_acc": 0.675,
+      "som_acc": 0.675,
+      "topology": 0.5903,
+      "mac_neural_router": 96,
+      "mac_som_cpu": 324,
+      "mac_som_gpu": 0
+    },
+    {
+      "N": 20,
+      "grid": 13,
+      "neural_acc": 0.425,
+      "som_acc": 0.375,
+      "topology": 0.4006,
+      "mac_neural_router": 176,
+      "mac_som_cpu": 676,
+      "mac_som_gpu": 0
+    },
+    {
+      "N": 50,
+      "grid": 21,
+      "neural_acc": 0.15,
+      "som_acc": 0.14,
+      "topology": 0.1893,
+      "mac_neural_router": 416,
+      "mac_som_cpu": 1764,
+      "mac_som_gpu": 0
+    }
+  ],
+  "verdict": "WARUNKOWY"
+}

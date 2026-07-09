@@ -1,0 +1,45 @@
+{
+  "stage": "etap3",
+  "timestamp": "2026-06-15T17:33:56",
+  "router_accuracy": 1.0,
+  "acc_routed": 0.9833333333333333,
+  "acc_dense": 0.6611111111111111,
+  "mac_scaling": [
+    {
+      "N": 2,
+      "dense": 48,
+      "routed": 56,
+      "saving_pct": -16.666666666666675
+    },
+    {
+      "N": 3,
+      "dense": 72,
+      "routed": 64,
+      "saving_pct": 11.111111111111116
+    },
+    {
+      "N": 5,
+      "dense": 120,
+      "routed": 80,
+      "saving_pct": 33.333333333333336
+    },
+    {
+      "N": 10,
+      "dense": 240,
+      "routed": 120,
+      "saving_pct": 50.0
+    },
+    {
+      "N": 20,
+      "dense": 480,
+      "routed": 200,
+      "saving_pct": 58.33333333333333
+    },
+    {
+      "N": 50,
+      "dense": 1200,
+      "routed": 440,
+      "saving_pct": 63.33333333333333
+    }
+  ]
+}

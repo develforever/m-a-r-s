@@ -1,0 +1,99 @@
+{
+  "experiment": "B4_deeper_pods_fashion",
+  "dataset": "Fashion-MNIST",
+  "device": "cuda",
+  "routing_acc": 0.8932,
+  "configs": [
+    {
+      "config": "1L h=24",
+      "type": "1L",
+      "h1": 24,
+      "h2": null,
+      "oracle_acc": 0.9847,
+      "system_acc": 0.8934,
+      "pod_mac": 19056
+    },
+    {
+      "config": "1L h=32",
+      "type": "1L",
+      "h1": 32,
+      "h2": null,
+      "oracle_acc": 0.9835,
+      "system_acc": 0.8936,
+      "pod_mac": 25408
+    },
+    {
+      "config": "1L h=48",
+      "type": "1L",
+      "h1": 48,
+      "h2": null,
+      "oracle_acc": 0.9851,
+      "system_acc": 0.8935,
+      "pod_mac": 38112
+    },
+    {
+      "config": "1L h=64",
+      "type": "1L",
+      "h1": 64,
+      "h2": null,
+      "oracle_acc": 0.9821,
+      "system_acc": 0.8942,
+      "pod_mac": 50816
+    },
+    {
+      "config": "1L h=128",
+      "type": "1L",
+      "h1": 128,
+      "h2": null,
+      "oracle_acc": 0.9814,
+      "system_acc": 0.8936,
+      "pod_mac": 101632
+    },
+    {
+      "config": "2L 32→16",
+      "type": "2L",
+      "h1": 32,
+      "h2": 16,
+      "oracle_acc": 0.9836,
+      "system_acc": 0.8928,
+      "pod_mac": 25760
+    },
+    {
+      "config": "2L 48→24",
+      "type": "2L",
+      "h1": 48,
+      "h2": 24,
+      "oracle_acc": 0.9827,
+      "system_acc": 0.8936,
+      "pod_mac": 39024
+    },
+    {
+      "config": "2L 64→32",
+      "type": "2L",
+      "h1": 64,
+      "h2": 32,
+      "oracle_acc": 0.9838,
+      "system_acc": 0.8926,
+      "pod_mac": 52544
+    },
+    {
+      "config": "2L 128→64",
+      "type": "2L",
+      "h1": 128,
+      "h2": 64,
+      "oracle_acc": 0.9824,
+      "system_acc": 0.894,
+      "pod_mac": 109184
+    }
+  ],
+  "best": {
+    "config": "1L h=64",
+    "type": "1L",
+    "h1": 64,
+    "h2": null,
+    "oracle_acc": 0.9821,
+    "system_acc": 0.8942,
+    "pod_mac": 50816
+  },
+  "elapsed_s": 70.8
+}

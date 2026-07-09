@@ -1,0 +1,132 @@
+{
+  "device": "cuda",
+  "n_seeds": 5,
+  "datasets": [
+    {
+      "dataset": "MNIST",
+      "config": {
+        "enc_hidden": 256,
+        "emb": 64,
+        "epochs": 50,
+        "lr": 0.001
+      },
+      "n_seeds": 5,
+      "per_seed": [
+        {
+          "seed": 0,
+          "routing_acc": 0.9831,
+          "system_acc": 0.9785,
+          "oracle_acc": 0.9899
+        },
+        {
+          "seed": 1,
+          "routing_acc": 0.9842,
+          "system_acc": 0.9804,
+          "oracle_acc": 0.9907
+        },
+        {
+          "seed": 2,
+          "routing_acc": 0.9842,
+          "system_acc": 0.9793,
+          "oracle_acc": 0.9892
+        },
+        {
+          "seed": 3,
+          "routing_acc": 0.9808,
+          "system_acc": 0.977,
+          "oracle_acc": 0.9894
+        },
+        {
+          "seed": 4,
+          "routing_acc": 0.9828,
+          "system_acc": 0.9788,
+          "oracle_acc": 0.99
+        }
+      ],
+      "stats": {
+        "routing_acc": {
+          "mean": 0.983,
+          "std": 0.0014,
+          "min": 0.9808,
+          "max": 0.9842
+        },
+        "system_acc": {
+          "mean": 0.9788,
+          "std": 0.0012,
+          "min": 0.977,
+          "max": 0.9804
+        },
+        "oracle_acc": {
+          "mean": 0.9898,
+          "std": 0.0006,
+          "min": 0.9892,
+          "max": 0.9907
+        },
+        "gap_to_oracle_pp": 1.1
+      }
+    },
+    {
+      "dataset": "Fashion-MNIST",
+      "config": {
+        "enc_hidden": 256,
+        "emb": 32,
+        "epochs": 30,
+        "lr": 0.003
+      },
+      "n_seeds": 5,
+      "per_seed": [
+        {
+          "seed": 0,
+          "routing_acc": 0.8863,
+          "system_acc": 0.888,
+          "oracle_acc": 0.984
+        },
+        {
+          "seed": 1,
+          "routing_acc": 0.8944,
+          "system_acc": 0.8932,
+          "oracle_acc": 0.9826
+        },
+        {
+          "seed": 2,
+          "routing_acc": 0.891,
+          "system_acc": 0.8919,
+          "oracle_acc": 0.9841
+        },
+        {
+          "seed": 3,
+          "routing_acc": 0.8892,
+          "system_acc": 0.89,
+          "oracle_acc": 0.9829
+        },
+        {
+          "seed": 4,
+          "routing_acc": 0.8879,
+          "system_acc": 0.8886,
+          "oracle_acc": 0.9835
+        }
+      ],
+      "stats": {
+        "routing_acc": {
+          "mean": 0.8898,
+          "std": 0.0031,
+          "min": 0.8863,
+          "max": 0.8944
+        },
+        "system_acc": {
+          "mean": 0.8903,
+          "std": 0.0022,
+          "min": 0.888,
+          "max": 0.8932
+        },
+        "oracle_acc": {
+          "mean": 0.9834,
+          "std": 0.0007,
+          "min": 0.9826,
+          "max": 0.9841
+        },
+        "gap_to_oracle_pp": 9.31
+      }
+    }
+  ]
+}

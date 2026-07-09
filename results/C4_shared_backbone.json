@@ -1,0 +1,106 @@
+{
+  "MNIST": [
+    {
+      "config": "shared 256->16->10",
+      "backbone_hidden": 256,
+      "pod_hidden": 16,
+      "emb": 32,
+      "routing_acc": 0.9825,
+      "system_acc": 0.9825,
+      "oracle_acc": 1.0,
+      "mac": 213472
+    },
+    {
+      "config": "shared 256->24->10",
+      "backbone_hidden": 256,
+      "pod_hidden": 24,
+      "emb": 32,
+      "routing_acc": 0.9825,
+      "system_acc": 0.9825,
+      "oracle_acc": 1.0,
+      "mac": 215600
+    },
+    {
+      "config": "shared 256->32->10",
+      "backbone_hidden": 256,
+      "pod_hidden": 32,
+      "emb": 32,
+      "routing_acc": 0.9825,
+      "system_acc": 0.9825,
+      "oracle_acc": 1.0,
+      "mac": 217728
+    },
+    {
+      "config": "shared 128->24->10",
+      "backbone_hidden": 128,
+      "pod_hidden": 24,
+      "emb": 16,
+      "routing_acc": 0.9771,
+      "system_acc": 0.9771,
+      "oracle_acc": 1.0,
+      "mac": 105872
+    },
+    {
+      "config": "shared 256->24 ep50",
+      "backbone_hidden": 256,
+      "pod_hidden": 24,
+      "emb": 32,
+      "routing_acc": 0.9819,
+      "system_acc": 0.9819,
+      "oracle_acc": 1.0,
+      "mac": 215600
+    }
+  ],
+  "Fashion-MNIST": [
+    {
+      "config": "shared 256->16->10",
+      "backbone_hidden": 256,
+      "pod_hidden": 16,
+      "emb": 32,
+      "routing_acc": 0.8911,
+      "system_acc": 0.8911,
+      "oracle_acc": 1.0,
+      "mac": 213472
+    },
+    {
+      "config": "shared 256->24->10",
+      "backbone_hidden": 256,
+      "pod_hidden": 24,
+      "emb": 32,
+      "routing_acc": 0.8911,
+      "system_acc": 0.8911,
+      "oracle_acc": 1.0,
+      "mac": 215600
+    },
+    {
+      "config": "shared 256->32->10",
+      "backbone_hidden": 256,
+      "pod_hidden": 32,
+      "emb": 32,
+      "routing_acc": 0.8911,
+      "system_acc": 0.8911,
+      "oracle_acc": 1.0,
+      "mac": 217728
+    },
+    {
+      "config": "shared 128->24->10",
+      "backbone_hidden": 128,
+      "pod_hidden": 24,
+      "emb": 16,
+      "routing_acc": 0.8901,
+      "system_acc": 0.8901,
+      "oracle_acc": 1.0,
+      "mac": 105872
+    },
+    {
+      "config": "shared 256->24 ep50",
+      "backbone_hidden": 256,
+      "pod_hidden": 24,
+      "emb": 32,
+      "routing_acc": 0.89,
+      "system_acc": 0.89,
+      "oracle_acc": 1.0,
+      "mac": 215600
+    }
+  ]
+}

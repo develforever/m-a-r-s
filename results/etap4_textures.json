@@ -1,0 +1,61 @@
+{
+  "stage": "etap4",
+  "timestamp": "2026-06-15T19:42:24",
+  "description": "Weryfikacja hipotezy: tekstury GPU jako pamięć (bilinear filtering = lerp embeddingów?)",
+  "test_bilinear_vs_lerp": {
+    "test": "bilinear_vs_lerp",
+    "texture_size": 128,
+    "embedding_dim": 8,
+    "mean_mse": 0.49180827,
+    "max_mse": 0.66059196,
+    "threshold": 0.01,
+    "is_equivalent": false,
+    "errors_per_alpha": {
+      "0.0": 0.54174113,
+      "0.25": 0.66059196,
+      "0.5": 0.45611805,
+      "0.75": 0.41668111,
+      "1.0": 0.38390911
+    }
+  },
+  "test_2d_semantics": {
+    "test": "2d_bilinear_semantics",
+    "error_center": 0.45,
+    "error_cat_dog_mid": 0.9,
+    "semantic_ordering_correct": false,
+    "note": "Artefakty wynikają z dyskretyzacji siatki — na wyższej rozdzielczości błąd maleje."
+  },
+  "test_sleep_operations": {
+    "test": "sleep_operations",
+    "occupancy_before_pct": 0.29,
+    "occupancy_after_pct": 2.64,
+    "ordering_preserved": true,
+    "mipmap_levels": [
+      32,
+      16,
+      8
+    ],
+    "plasticity_decay_works": true
+  },
+  "test_benchmark": {
+    "n_lookups": 5000,
+    "texture_size": 64,
+    "time_bilinear_s": 0.041509,
+    "time_matmul_s": 0.000367,
+    "speedup_matmul_over_bilinear": 113.26,
+    "note": "Na GPU bilinear jest sprzętowy (TMU) i ~darmowy. Tu emulacja CPU — porównanie orientacyjne."
+  },
+  "verdict": {
+    "verdict": "NEGATYWNY",
+    "pros": [
+      "Operacje snu zachowują hierarchię ważności wiedzy",
+      "Metaplastyczność działa: kostnienie chroni ważną wiedzę"
+    ],
+    "cons": [
+      "Bilinear ≠ Lerp: artefakty dyskretyzacji (MSE=0.491808)",
+      "Semantyczna kolejność naruszona w interpolacji 2D",
+      "Na CPU bilinear jest 113.26x WOLNIEJSZY niż matmul (ale na GPU TMU jest sprzętowy)"
+    ],
+    "explanation": "Bilinear filtering nie daje przewagi jakościowej nad zwykłym lerp.\n  Artefakty dyskretyzacji siatki mogą zniekształcać interpolację.\n  Jedyna potencjalna przewaga to wydajność (TMU na GPU), ale wymaga\n  specyficznego hardware'u i nie przenosi się na CPU/edge."
+  }
+}

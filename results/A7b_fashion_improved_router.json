@@ -1,0 +1,36 @@
+{
+  "device": "cuda",
+  "oracle_acc": 0.9847,
+  "configs": [
+    {
+      "name": "A7 baseline",
+      "enc_hidden": 32,
+      "emb": 16,
+      "epochs": 15,
+      "lr": 0.003,
+      "routing_acc": 0.8741,
+      "system_acc": 0.8746,
+      "router_mac": 25760
+    },
+    {
+      "name": "A5 sweet-spot",
+      "enc_hidden": 128,
+      "emb": 16,
+      "epochs": 30,
+      "lr": 0.001,
+      "routing_acc": 0.8868,
+      "system_acc": 0.8864,
+      "router_mac": 102560
+    },
+    {
+      "name": "A5 best",
+      "enc_hidden": 256,
+      "emb": 64,
+      "epochs": 50,
+      "lr": 0.001,
+      "routing_acc": 0.8886,
+      "system_acc": 0.8893,
+      "router_mac": 217728
+    }
+  ]
+}

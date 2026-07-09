@@ -1,0 +1,13 @@
+# dane (pobierane automatycznie: torchvision / scripts/download_glove.py)
+data/
+
+# srodowisko i cache
+.venv/
+__pycache__/
+*.pyc
+
+# node (demo webgpu)
+node_modules/
+
+# notatki prywatne (logi rozmow, plan publikacji, przewodnik nauki)
+private/

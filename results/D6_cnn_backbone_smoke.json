@@ -1,0 +1,159 @@
+{
+  "experiment": "D6_cnn_backbone",
+  "device": "cuda",
+  "n_seeds": 1,
+  "epochs": 8,
+  "datasets": {
+    "Fashion-MNIST": {
+      "per_seed": [
+        {
+          "mlp": {
+            "routing": 0.8826999664306641,
+            "system": 0.886199951171875,
+            "oracle": 0.9519000053405762
+          },
+          "cnn": {
+            "routing": 0.9060999751091003,
+            "system": 0.9163999557495117,
+            "oracle": 0.9770999550819397
+          },
+          "mlp_mac": {
+            "backbone": 200704,
+            "routing": 8512,
+            "pod": 6384,
+            "total_top1": 215600
+          },
+          "cnn_mac": {
+            "backbone": 4239872,
+            "routing": 4416,
+            "pod": 3312,
+            "total_top1": 4247600
+          }
+        }
+      ],
+      "agg": {
+        "mlp_routing": {
+          "mean": 0.8827,
+          "std": 0.0,
+          "min": 0.8827,
+          "max": 0.8827
+        },
+        "mlp_system": {
+          "mean": 0.8862,
+          "std": 0.0,
+          "min": 0.8862,
+          "max": 0.8862
+        },
+        "mlp_oracle": {
+          "mean": 0.9519,
+          "std": 0.0,
+          "min": 0.9519,
+          "max": 0.9519
+        },
+        "cnn_routing": {
+          "mean": 0.9061,
+          "std": 0.0,
+          "min": 0.9061,
+          "max": 0.9061
+        },
+        "cnn_system": {
+          "mean": 0.9164,
+          "std": 0.0,
+          "min": 0.9164,
+          "max": 0.9164
+        },
+        "cnn_oracle": {
+          "mean": 0.9771,
+          "std": 0.0,
+          "min": 0.9771,
+          "max": 0.9771
+        },
+        "delta_system_pp": {
+          "mean": 3.02,
+          "std": 0.0,
+          "min": 3.02,
+          "max": 3.02
+        },
+        "mlp_mac_total": 215600,
+        "cnn_mac_total": 4247600,
+        "verdict": "SYGNAL+"
+      }
+    },
+    "MNIST": {
+      "per_seed": [
+        {
+          "mlp": {
+            "routing": 0.9785999655723572,
+            "system": 0.9785999655723572,
+            "oracle": 1.0
+          },
+          "cnn": {
+            "routing": 0.991599977016449,
+            "system": 0.991599977016449,
+            "oracle": 1.0
+          },
+          "mlp_mac": {
+            "backbone": 200704,
+            "routing": 8512,
+            "pod": 6384,
+            "total_top1": 215600
+          },
+          "cnn_mac": {
+            "backbone": 4239872,
+            "routing": 4416,
+            "pod": 3312,
+            "total_top1": 4247600
+          }
+        }
+      ],
+      "agg": {
+        "mlp_routing": {
+          "mean": 0.9786,
+          "std": 0.0,
+          "min": 0.9786,
+          "max": 0.9786
+        },
+        "mlp_system": {
+          "mean": 0.9786,
+          "std": 0.0,
+          "min": 0.9786,
+          "max": 0.9786
+        },
+        "mlp_oracle": {
+          "mean": 1.0,
+          "std": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "cnn_routing": {
+          "mean": 0.9916,
+          "std": 0.0,
+          "min": 0.9916,
+          "max": 0.9916
+        },
+        "cnn_system": {
+          "mean": 0.9916,
+          "std": 0.0,
+          "min": 0.9916,
+          "max": 0.9916
+        },
+        "cnn_oracle": {
+          "mean": 1.0,
+          "std": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "delta_system_pp": {
+          "mean": 1.3,
+          "std": 0.0,
+          "min": 1.3,
+          "max": 1.3
+        },
+        "mlp_mac_total": 215600,
+        "cnn_mac_total": 4247600,
+        "verdict": "SYGNAL+"
+      }
+    }
+  },
+  "elapsed_s": 133.4
+}

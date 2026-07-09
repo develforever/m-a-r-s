@@ -1,0 +1,41 @@
+{
+  "device": "cuda",
+  "by_encoder_hidden": [
+    {
+      "encoder_hidden": 64,
+      "router_mac": 50304,
+      "routing_acc": 0.3811,
+      "system_acc": 0.9591
+    },
+    {
+      "encoder_hidden": 32,
+      "router_mac": 25152,
+      "routing_acc": 0.4052,
+      "system_acc": 0.961
+    },
+    {
+      "encoder_hidden": 16,
+      "router_mac": 12576,
+      "routing_acc": 0.4116,
+      "system_acc": 0.9596
+    },
+    {
+      "encoder_hidden": 8,
+      "router_mac": 6288,
+      "routing_acc": 0.4438,
+      "system_acc": 0.9594
+    },
+    {
+      "encoder_hidden": 4,
+      "router_mac": 3144,
+      "routing_acc": 0.444,
+      "system_acc": 0.9592
+    }
+  ],
+  "recommended": {
+    "encoder_hidden": 4,
+    "router_mac": 3144,
+    "routing_acc": 0.444,
+    "system_acc": 0.9592
+  }
+}

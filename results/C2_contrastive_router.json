@@ -1,0 +1,90 @@
+{
+  "MNIST": [
+    {
+      "config": "CE baseline",
+      "method": "ce",
+      "routing_acc": 0.9841,
+      "system_acc": 0.9805
+    },
+    {
+      "config": "SupCon T=0.07 + CE",
+      "method": "supcon",
+      "routing_acc": 0.9828,
+      "system_acc": 0.9785,
+      "temperature": 0.07,
+      "supcon_epochs": 30,
+      "ce_epochs": 20
+    },
+    {
+      "config": "SupCon T=0.1 + CE",
+      "method": "supcon",
+      "routing_acc": 0.9802,
+      "system_acc": 0.9774,
+      "temperature": 0.1,
+      "supcon_epochs": 30,
+      "ce_epochs": 20
+    },
+    {
+      "config": "SupCon T=0.2 + CE",
+      "method": "supcon",
+      "routing_acc": 0.9811,
+      "system_acc": 0.9773,
+      "temperature": 0.2,
+      "supcon_epochs": 30,
+      "ce_epochs": 20
+    },
+    {
+      "config": "SupCon T=0.1 long",
+      "method": "supcon",
+      "routing_acc": 0.979,
+      "system_acc": 0.9771,
+      "temperature": 0.1,
+      "supcon_epochs": 50,
+      "ce_epochs": 30
+    }
+  ],
+  "Fashion-MNIST": [
+    {
+      "config": "CE baseline",
+      "method": "ce",
+      "routing_acc": 0.8843,
+      "system_acc": 0.885
+    },
+    {
+      "config": "SupCon T=0.07 + CE",
+      "method": "supcon",
+      "routing_acc": 0.8882,
+      "system_acc": 0.8883,
+      "temperature": 0.07,
+      "supcon_epochs": 30,
+      "ce_epochs": 20
+    },
+    {
+      "config": "SupCon T=0.1 + CE",
+      "method": "supcon",
+      "routing_acc": 0.8855,
+      "system_acc": 0.8859,
+      "temperature": 0.1,
+      "supcon_epochs": 30,
+      "ce_epochs": 20
+    },
+    {
+      "config": "SupCon T=0.2 + CE",
+      "method": "supcon",
+      "routing_acc": 0.8878,
+      "system_acc": 0.8872,
+      "temperature": 0.2,
+      "supcon_epochs": 30,
+      "ce_epochs": 20
+    },
+    {
+      "config": "SupCon T=0.1 long",
+      "method": "supcon",
+      "routing_acc": 0.8839,
+      "system_acc": 0.8849,
+      "temperature": 0.1,
+      "supcon_epochs": 50,
+      "ce_epochs": 30
+    }
+  ]
+}

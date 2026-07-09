@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M.A.R.S. — WebGPU SOM-Router</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            background: #0a0a0f;
+            color: #e0e0e0;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+        h1 {
+            color: #00ff88;
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .panel {
+            background: #12121a;
+            border: 1px solid #2a2a3a;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .panel-title {
+            color: #00aaff;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        #log {
+            white-space: pre-wrap;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            color: #b0b0b0;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        #log .highlight { color: #00ff88; }
+        .status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-left: 1rem;
+        }
+        .status-running {
+            background: #1a2a1a;
+            color: #00ff88;
+            border: 1px solid #00ff88;
+            animation: pulse 1s infinite;
+        }
+        .status-done {
+            background: #1a2a3a;
+            color: #00aaff;
+            border: 1px solid #00aaff;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .arch-diagram {
+            background: #0a0a12;
+            border: 1px solid #1a1a2a;
+            border-radius: 4px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-size: 0.75rem;
+            color: #888;
+        }
+        .arch-diagram .green { color: #00ff88; }
+        .arch-diagram .blue { color: #00aaff; }
+        .arch-diagram .yellow { color: #ffaa00; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>M.A.R.S. — WebGPU SOM-Router
+            <span class="status status-running" id="status">RUNNING</span>
+        </h1>
+        <p class="subtitle">Native Texture Fetch as Decision Router | Compute Shader PoC</p>
+
+        <div class="panel">
+            <div class="panel-title">Architektura przepływu</div>
+            <div class="arch-diagram">
+<span class="yellow">Input Vector [N_IN]</span>
+       │
+       ▼
+<span class="blue">┌─────────────────────────────────────────┐</span>
+<span class="blue">│  Krok 1: Linear Projection (2×N_IN MAC) │</span>
+<span class="blue">│  input × proj_matrix → (u, v)           │</span>
+<span class="blue">│  sigmoid → [0,1] × [0,1]                │</span>
+<span class="blue">└─────────────────────┬───────────────────┘</span>
+                      │ UV coords
+                      ▼
+<span class="green">┌─────────────────────────────────────────┐</span>
+<span class="green">│  Krok 2: textureSampleLevel (0 MAC)     │</span>
+<span class="green">│  TMU Hardware Fetch — 1 clock cycle     │</span>
+<span class="green">│  Bilinear interpolation = FREE          │</span>
+<span class="green">└─────────────────────┬───────────────────┘</span>
+                      │ RGBA texel
+                      ▼
+<span class="yellow">┌─────────────────────────────────────────┐</span>
+<span class="yellow">│  Krok 3: Decode → capsule_id            │</span>
+<span class="yellow">│  + confidence score                     │</span>
+<span class="yellow">└─────────────────────────────────────────┘</span>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-title">Console Output</div>
+            <pre id="log"></pre>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+        // Update status when done
+        const observer = new MutationObserver(() => {
+            const log = document.getElementById('log');
+            if (log.textContent.includes('WERDYKT')) {
+                const status = document.getElementById('status');
+                status.className = 'status status-done';
+                status.textContent = 'DONE';
+            }
+        });
+        observer.observe(document.getElementById('log'), { childList: true, characterData: true, subtree: true });
+    </script>
+</body>
+</html>

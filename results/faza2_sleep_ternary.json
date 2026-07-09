@@ -1,0 +1,19 @@
+{
+  "experiment": "M.A.R.S. Faza 2 P4 - Sleep v2 + Ternary",
+  "sleep_v2": {
+    "initial_acc": 0.9292,
+    "final_acc": 0.9284,
+    "acc_drop_pp": 0.08,
+    "stable": true,
+    "n_cycles": 100
+  },
+  "ternary_weights": {
+    "acc_full_precision": 0.9333,
+    "acc_ternary": 0.8925,
+    "acc_drop_pp": 4.08,
+    "sparsity": 0.445,
+    "compression_ratio": 16.0,
+    "memory_savings_pct": 93.7
+  },
+  "verdict": "POZYTYWNY"
+}

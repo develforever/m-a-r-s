@@ -1,0 +1,570 @@
+{
+  "experiment": "D6b_slim_cnn",
+  "device": "cuda",
+  "n_seeds": 5,
+  "epochs": 30,
+  "mac_budget": 2.2,
+  "variants": {
+    "S1_half": {
+      "channels": [
+        16,
+        32
+      ],
+      "downsample": "maxpool",
+      "depthwise": false
+    },
+    "S2_quarter": {
+      "channels": [
+        8,
+        16
+      ],
+      "downsample": "maxpool",
+      "depthwise": false
+    },
+    "S3_stride": {
+      "channels": [
+        16,
+        32
+      ],
+      "downsample": "stride",
+      "depthwise": false
+    },
+    "S4_depthwise": {
+      "channels": [
+        16,
+        32
+      ],
+      "downsample": "maxpool",
+      "depthwise": true
+    }
+  },
+  "datasets": {
+    "Fashion-MNIST": {
+      "per_seed": [
+        {
+          "S1_half": {
+            "routing": 0.9095999598503113,
+            "system": 0.9126999974250793,
+            "oracle": 0.9726999998092651
+          },
+          "S2_quarter": {
+            "routing": 0.9108999967575073,
+            "system": 0.9120000004768372,
+            "oracle": 0.9620999693870544
+          },
+          "S3_stride": {
+            "routing": 0.9070000052452087,
+            "system": 0.9073999524116516,
+            "oracle": 0.9947999715805054
+          },
+          "S4_depthwise": {
+            "routing": 0.9027999639511108,
+            "system": 0.905299961566925,
+            "oracle": 0.9635999798774719
+          }
+        },
+        {
+          "S1_half": {
+            "routing": 0.9144999980926514,
+            "system": 0.9145999550819397,
+            "oracle": 0.9738999605178833
+          },
+          "S2_quarter": {
+            "routing": 0.9080999493598938,
+            "system": 0.9111999869346619,
+            "oracle": 0.9603999853134155
+          },
+          "S3_stride": {
+            "routing": 0.9035999774932861,
+            "system": 0.9035999774932861,
+            "oracle": 0.9976999759674072
+          },
+          "S4_depthwise": {
+            "routing": 0.9059999585151672,
+            "system": 0.9066999554634094,
+            "oracle": 0.9684000015258789
+          }
+        },
+        {
+          "S1_half": {
+            "routing": 0.9182999730110168,
+            "system": 0.9186999797821045,
+            "oracle": 0.968999981880188
+          },
+          "S2_quarter": {
+            "routing": 0.9127999544143677,
+            "system": 0.9126999974250793,
+            "oracle": 0.9566999673843384
+          },
+          "S3_stride": {
+            "routing": 0.9085999727249146,
+            "system": 0.9084999561309814,
+            "oracle": 0.9980999827384949
+          },
+          "S4_depthwise": {
+            "routing": 0.9132999777793884,
+            "system": 0.9147999882698059,
+            "oracle": 0.9714999794960022
+          }
+        },
+        {
+          "S1_half": {
+            "routing": 0.9131999611854553,
+            "system": 0.914199948310852,
+            "oracle": 0.9860999584197998
+          },
+          "S2_quarter": {
+            "routing": 0.9160999655723572,
+            "system": 0.9165999889373779,
+            "oracle": 0.9713999629020691
+          },
+          "S3_stride": {
+            "routing": 0.9052000045776367,
+            "system": 0.9049999713897705,
+            "oracle": 0.9955999851226807
+          },
+          "S4_depthwise": {
+            "routing": 0.9090999960899353,
+            "system": 0.91239994764328,
+            "oracle": 0.9666000008583069
+          }
+        },
+        {
+          "S1_half": {
+            "routing": 0.9149999618530273,
+            "system": 0.9174000024795532,
+            "oracle": 0.9731999635696411
+          },
+          "S2_quarter": {
+            "routing": 0.9116999506950378,
+            "system": 0.9109999537467957,
+            "oracle": 0.9596999883651733
+          },
+          "S3_stride": {
+            "routing": 0.9038999676704407,
+            "system": 0.904699981212616,
+            "oracle": 0.9901999831199646
+          },
+          "S4_depthwise": {
+            "routing": 0.9109999537467957,
+            "system": 0.9110999703407288,
+            "oracle": 0.9697999954223633
+          }
+        }
+      ],
+      "agg": {
+        "S1_half": {
+          "routing": {
+            "mean": 0.9141,
+            "std": 0.0031,
+            "min": 0.9096,
+            "max": 0.9183
+          },
+          "system": {
+            "mean": 0.9155,
+            "std": 0.0025,
+            "min": 0.9127,
+            "max": 0.9187
+          },
+          "oracle": {
+            "mean": 0.975,
+            "std": 0.0065,
+            "min": 0.969,
+            "max": 0.9861
+          },
+          "mac": {
+            "backbone": 1216768,
+            "routing": 4416,
+            "pod": 3312,
+            "total_top1": 1224496
+          },
+          "mac_ratio_vs_mlp": 5.68,
+          "delta_vs_mlp_pp": {
+            "mean": 1.942,
+            "std": 0.3555,
+            "min": 1.52,
+            "max": 2.29
+          },
+          "retention_vs_d6": 0.815
+        },
+        "S2_quarter": {
+          "routing": {
+            "mean": 0.9119,
+            "std": 0.0029,
+            "min": 0.9081,
+            "max": 0.9161
+          },
+          "system": {
+            "mean": 0.9127,
+            "std": 0.0023,
+            "min": 0.911,
+            "max": 0.9166
+          },
+          "oracle": {
+            "mean": 0.9621,
+            "std": 0.0056,
+            "min": 0.9567,
+            "max": 0.9714
+          },
+          "mac": {
+            "backbone": 382592,
+            "routing": 4416,
+            "pod": 3312,
+            "total_top1": 390320
+          },
+          "mac_ratio_vs_mlp": 1.81,
+          "delta_vs_mlp_pp": {
+            "mean": 1.66,
+            "std": 0.392,
+            "min": 1.18,
+            "max": 2.27
+          },
+          "retention_vs_d6": 0.697
+        },
+        "S3_stride": {
+          "routing": {
+            "mean": 0.9057,
+            "std": 0.0021,
+            "min": 0.9036,
+            "max": 0.9086
+          },
+          "system": {
+            "mean": 0.9058,
+            "std": 0.002,
+            "min": 0.9036,
+            "max": 0.9085
+          },
+          "oracle": {
+            "mean": 0.9953,
+            "std": 0.0032,
+            "min": 0.9902,
+            "max": 0.9981
+          },
+          "mac": {
+            "backbone": 454720,
+            "routing": 4416,
+            "pod": 3312,
+            "total_top1": 462448
+          },
+          "mac_ratio_vs_mlp": 2.14,
+          "delta_vs_mlp_pp": {
+            "mean": 0.974,
+            "std": 0.3188,
+            "min": 0.42,
+            "max": 1.23
+          },
+          "retention_vs_d6": 0.409
+        },
+        "S4_depthwise": {
+          "routing": {
+            "mean": 0.9084,
+            "std": 0.0041,
+            "min": 0.9028,
+            "max": 0.9133
+          },
+          "system": {
+            "mean": 0.9101,
+            "std": 0.004,
+            "min": 0.9053,
+            "max": 0.9148
+          },
+          "oracle": {
+            "mean": 0.968,
+            "std": 0.003,
+            "min": 0.9636,
+            "max": 0.9715
+          },
+          "mac": {
+            "backbone": 442176,
+            "routing": 4416,
+            "pod": 3312,
+            "total_top1": 449904
+          },
+          "mac_ratio_vs_mlp": 2.09,
+          "delta_vs_mlp_pp": {
+            "mean": 1.396,
+            "std": 0.5479,
+            "min": 0.73,
+            "max": 1.86
+          },
+          "retention_vs_d6": 0.586
+        }
+      },
+      "verdict": {
+        "best_in_budget": "S2_quarter",
+        "delta_pp": {
+          "mean": 1.66,
+          "std": 0.392,
+          "min": 1.18,
+          "max": 2.27
+        },
+        "noise_pp": 0.6068,
+        "verdict": "SYGNAL+ (efektywnosciowy)"
+      }
+    },
+    "MNIST": {
+      "per_seed": [
+        {
+          "S1_half": {
+            "routing": 0.9785999655723572,
+            "system": 0.9892999529838562,
+            "oracle": 0.9988999962806702
+          },
+          "S2_quarter": {
+            "routing": 0.9904999732971191,
+            "system": 0.9904999732971191,
+            "oracle": 1.0
+          },
+          "S3_stride": {
+            "routing": 0.9898999929428101,
+            "system": 0.9898999929428101,
+            "oracle": 1.0
+          },
+          "S4_depthwise": {
+            "routing": 0.990399956703186,
+            "system": 0.990399956703186,
+            "oracle": 1.0
+          }
+        },
+        {
+          "S1_half": {
+            "routing": 0.9919999837875366,
+            "system": 0.9919999837875366,
+            "oracle": 1.0
+          },
+          "S2_quarter": {
+            "routing": 0.9906999468803406,
+            "system": 0.9906999468803406,
+            "oracle": 1.0
+          },
+          "S3_stride": {
+            "routing": 0.9896999597549438,
+            "system": 0.9896999597549438,
+            "oracle": 1.0
+          },
+          "S4_depthwise": {
+            "routing": 0.9896999597549438,
+            "system": 0.9896999597549438,
+            "oracle": 1.0
+          }
+        },
+        {
+          "S1_half": {
+            "routing": 0.9908999800682068,
+            "system": 0.9908999800682068,
+            "oracle": 1.0
+          },
+          "S2_quarter": {
+            "routing": 0.9901999831199646,
+            "system": 0.9901999831199646,
+            "oracle": 1.0
+          },
+          "S3_stride": {
+            "routing": 0.9907999634742737,
+            "system": 0.9907999634742737,
+            "oracle": 1.0
+          },
+          "S4_depthwise": {
+            "routing": 0.9898999929428101,
+            "system": 0.9898999929428101,
+            "oracle": 1.0
+          }
+        },
+        {
+          "S1_half": {
+            "routing": 0.9914999604225159,
+            "system": 0.9914999604225159,
+            "oracle": 1.0
+          },
+          "S2_quarter": {
+            "routing": 0.9908999800682068,
+            "system": 0.9908999800682068,
+            "oracle": 1.0
+          },
+          "S3_stride": {
+            "routing": 0.9901999831199646,
+            "system": 0.9901999831199646,
+            "oracle": 1.0
+          },
+          "S4_depthwise": {
+            "routing": 0.989799976348877,
+            "system": 0.989799976348877,
+            "oracle": 1.0
+          }
+        },
+        {
+          "S1_half": {
+            "routing": 0.9916999936103821,
+            "system": 0.9916999936103821,
+            "oracle": 1.0
+          },
+          "S2_quarter": {
+            "routing": 0.9910999536514282,
+            "system": 0.9910999536514282,
+            "oracle": 1.0
+          },
+          "S3_stride": {
+            "routing": 0.9914000034332275,
+            "system": 0.9914000034332275,
+            "oracle": 1.0
+          },
+          "S4_depthwise": {
+            "routing": 0.9893999695777893,
+            "system": 0.9893999695777893,
+            "oracle": 1.0
+          }
+        }
+      ],
+      "agg": {
+        "S1_half": {
+          "routing": {
+            "mean": 0.9889,
+            "std": 0.0058,
+            "min": 0.9786,
+            "max": 0.992
+          },
+          "system": {
+            "mean": 0.9911,
+            "std": 0.0011,
+            "min": 0.9893,
+            "max": 0.992
+          },
+          "oracle": {
+            "mean": 0.9998,
+            "std": 0.0005,
+            "min": 0.9989,
+            "max": 1.0
+          },
+          "mac": {
+            "backbone": 1216768,
+            "routing": 4416,
+            "pod": 3312,
+            "total_top1": 1224496
+          },
+          "mac_ratio_vs_mlp": 5.68,
+          "delta_vs_mlp_pp": {
+            "mean": 0.772,
+            "std": 0.1099,
+            "min": 0.64,
+            "max": 0.92
+          },
+          "retention_vs_d6": 0.9
+        },
+        "S2_quarter": {
+          "routing": {
+            "mean": 0.9907,
+            "std": 0.0003,
+            "min": 0.9902,
+            "max": 0.9911
+          },
+          "system": {
+            "mean": 0.9907,
+            "std": 0.0003,
+            "min": 0.9902,
+            "max": 0.9911
+          },
+          "oracle": {
+            "mean": 1.0,
+            "std": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "mac": {
+            "backbone": 382592,
+            "routing": 4416,
+            "pod": 3312,
+            "total_top1": 390320
+          },
+          "mac_ratio_vs_mlp": 1.81,
+          "delta_vs_mlp_pp": {
+            "mean": 0.732,
+            "std": 0.0653,
+            "min": 0.62,
+            "max": 0.79
+          },
+          "retention_vs_d6": 0.853
+        },
+        "S3_stride": {
+          "routing": {
+            "mean": 0.9904,
+            "std": 0.0007,
+            "min": 0.9897,
+            "max": 0.9914
+          },
+          "system": {
+            "mean": 0.9904,
+            "std": 0.0007,
+            "min": 0.9897,
+            "max": 0.9914
+          },
+          "oracle": {
+            "mean": 1.0,
+            "std": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "mac": {
+            "backbone": 454720,
+            "routing": 4416,
+            "pod": 3312,
+            "total_top1": 462448
+          },
+          "mac_ratio_vs_mlp": 2.14,
+          "delta_vs_mlp_pp": {
+            "mean": 0.704,
+            "std": 0.0439,
+            "min": 0.67,
+            "max": 0.78
+          },
+          "retention_vs_d6": 0.821
+        },
+        "S4_depthwise": {
+          "routing": {
+            "mean": 0.9898,
+            "std": 0.0004,
+            "min": 0.9894,
+            "max": 0.9904
+          },
+          "system": {
+            "mean": 0.9898,
+            "std": 0.0004,
+            "min": 0.9894,
+            "max": 0.9904
+          },
+          "oracle": {
+            "mean": 1.0,
+            "std": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          },
+          "mac": {
+            "backbone": 442176,
+            "routing": 4416,
+            "pod": 3312,
+            "total_top1": 449904
+          },
+          "mac_ratio_vs_mlp": 2.09,
+          "delta_vs_mlp_pp": {
+            "mean": 0.648,
+            "std": 0.0716,
+            "min": 0.58,
+            "max": 0.75
+          },
+          "retention_vs_d6": 0.755
+        }
+      },
+      "verdict": {
+        "best_in_budget": "S2_quarter",
+        "delta_pp": {
+          "mean": 0.732,
+          "std": 0.0653,
+          "min": 0.62,
+          "max": 0.79
+        },
+        "noise_pp": 0.1156,
+        "verdict": "SZUM"
+      }
+    }
+  },
+  "elapsed_s": 2503.6
+}

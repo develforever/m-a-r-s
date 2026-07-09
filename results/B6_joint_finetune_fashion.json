@@ -1,0 +1,85 @@
+{
+  "experiment": "B6_joint_finetune_fashion",
+  "dataset": "Fashion-MNIST",
+  "device": "cuda",
+  "before_joint": {
+    "routing_acc": 0.8912,
+    "system_acc": 0.8908
+  },
+  "best_config": "REINFORCE ep=10",
+  "best_system_acc": 0.8953,
+  "delta_pp": 0.45,
+  "configs": [
+    {
+      "config": "Gumbel ep=3 lr=3e-4",
+      "method": "gumbel",
+      "epochs": 3,
+      "lr": 0.0003,
+      "lr_pods": null,
+      "routing_acc": 0.8909,
+      "system_acc": 0.8924,
+      "delta_pp": 0.16
+    },
+    {
+      "config": "Gumbel ep=5 lr=3e-4",
+      "method": "gumbel",
+      "epochs": 5,
+      "lr": 0.0003,
+      "lr_pods": null,
+      "routing_acc": 0.8892,
+      "system_acc": 0.8914,
+      "delta_pp": 0.06
+    },
+    {
+      "config": "Gumbel ep=10 lr=1e-4",
+      "method": "gumbel",
+      "epochs": 10,
+      "lr": 0.0001,
+      "lr_pods": null,
+      "routing_acc": 0.8934,
+      "system_acc": 0.8949,
+      "delta_pp": 0.41
+    },
+    {
+      "config": "Gumbel ep=10 lr=3e-4",
+      "method": "gumbel",
+      "epochs": 10,
+      "lr": 0.0003,
+      "lr_pods": null,
+      "routing_acc": 0.8871,
+      "system_acc": 0.89,
+      "delta_pp": -0.08
+    },
+    {
+      "config": "REINFORCE ep=3",
+      "method": "reinforce",
+      "epochs": 3,
+      "lr": 0.0003,
+      "lr_pods": 0.0001,
+      "routing_acc": 0.8946,
+      "system_acc": 0.8948,
+      "delta_pp": 0.4
+    },
+    {
+      "config": "REINFORCE ep=5",
+      "method": "reinforce",
+      "epochs": 5,
+      "lr": 0.0003,
+      "lr_pods": 0.0001,
+      "routing_acc": 0.8937,
+      "system_acc": 0.8945,
+      "delta_pp": 0.37
+    },
+    {
+      "config": "REINFORCE ep=10",
+      "method": "reinforce",
+      "epochs": 10,
+      "lr": 0.0001,
+      "lr_pods": 5e-05,
+      "routing_acc": 0.8952,
+      "system_acc": 0.8953,
+      "delta_pp": 0.45
+    }
+  ],
+  "elapsed_s": 83.7
+}

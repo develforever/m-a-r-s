@@ -1,0 +1,26 @@
+{
+  "device": "cuda",
+  "scenarios": [
+    {
+      "name": "Router 8D (obecny)",
+      "routing_acc": 0.9544,
+      "system_acc": 0.9541,
+      "router_mac": 12752,
+      "total_mac": 31808
+    },
+    {
+      "name": "Router 16D",
+      "routing_acc": 0.9672,
+      "system_acc": 0.967,
+      "router_mac": 25760,
+      "total_mac": 44816
+    },
+    {
+      "name": "ORACLE (idealny)",
+      "routing_acc": 1.0,
+      "system_acc": 0.9902,
+      "router_mac": 0,
+      "total_mac": 19056
+    }
+  ]
+}

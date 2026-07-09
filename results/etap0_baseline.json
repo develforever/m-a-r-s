@@ -1,0 +1,15 @@
+{
+  "name": "baseline_mlp_xor_backprop",
+  "mac_operations": 560096,
+  "accuracy": 1.0,
+  "wall_time_s": 0.1731285999994725,
+  "cpu_time_s": 0.15625,
+  "psutil_available": true,
+  "note": "cpu_time to PROXY energii, nie dzule. Realny pomiar wymaga RAPL/watomierza.",
+  "task": "XOR",
+  "architecture": "2-4-1 MLP, tanh+sigmoid",
+  "learning": "full backpropagation",
+  "epochs": 5000,
+  "learning_rate": 0.5,
+  "timestamp": "2026-06-15T20:04:05"
+}

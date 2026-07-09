@@ -1,0 +1,295 @@
+{
+  "stage": "etap3ext",
+  "timestamp": "2026-06-15T19:38:41",
+  "description": "Zimny start routera: krzywa błędów, strategia top-2, online adaptation, próg opłacalności",
+  "breakeven_analysis": [
+    {
+      "N": 2,
+      "breakeven_error_rate": -0.3333,
+      "max_saving_at_0_errors_pct": -16.67
+    },
+    {
+      "N": 3,
+      "breakeven_error_rate": 0.3333,
+      "max_saving_at_0_errors_pct": 11.11
+    },
+    {
+      "N": 5,
+      "breakeven_error_rate": 1.0,
+      "max_saving_at_0_errors_pct": 33.33
+    },
+    {
+      "N": 10,
+      "breakeven_error_rate": 1.0,
+      "max_saving_at_0_errors_pct": 50.0
+    },
+    {
+      "N": 20,
+      "breakeven_error_rate": 1.0,
+      "max_saving_at_0_errors_pct": 58.33
+    },
+    {
+      "N": 50,
+      "breakeven_error_rate": 1.0,
+      "max_saving_at_0_errors_pct": 63.33
+    },
+    {
+      "N": 100,
+      "breakeven_error_rate": 1.0,
+      "max_saving_at_0_errors_pct": 65.0
+    }
+  ],
+  "real_router_test": {
+    "real_error_rate": 0.0,
+    "acc_ideal_router": 0.9667,
+    "acc_real_router": 0.9667,
+    "mac_ideal": 2160,
+    "mac_real": 5760,
+    "mac_dense": 6480,
+    "saving_vs_dense_pct": 11.11
+  },
+  "online_adaptation": {
+    "acc_before_new_region": 1.0,
+    "adaptation_curve": [
+      {
+        "epochs_finetune": 100,
+        "acc_all": 1.0,
+        "acc_new_region": 1.0
+      },
+      {
+        "epochs_finetune": 200,
+        "acc_all": 1.0,
+        "acc_new_region": 1.0
+      },
+      {
+        "epochs_finetune": 500,
+        "acc_all": 1.0,
+        "acc_new_region": 1.0
+      },
+      {
+        "epochs_finetune": 1000,
+        "acc_all": 1.0,
+        "acc_new_region": 1.0
+      },
+      {
+        "epochs_finetune": 2000,
+        "acc_all": 1.0,
+        "acc_new_region": 1.0
+      },
+      {
+        "epochs_finetune": 3000,
+        "acc_all": 1.0,
+        "acc_new_region": 1.0
+      }
+    ],
+    "retention_old_regions": 1.0
+  },
+  "top2_vs_retry_sample": [
+    {
+      "N": 5,
+      "error_rate": 0.05,
+      "mac_retry": 81.2,
+      "save_retry_pct": 32.33,
+      "mac_top2": 104,
+      "save_top2_pct": 13.33,
+      "better_strategy": "retry"
+    },
+    {
+      "N": 5,
+      "error_rate": 0.1,
+      "mac_retry": 82.39999999999999,
+      "save_retry_pct": 31.33,
+      "mac_top2": 104,
+      "save_top2_pct": 13.33,
+      "better_strategy": "retry"
+    },
+    {
+      "N": 5,
+      "error_rate": 0.2,
+      "mac_retry": 84.80000000000001,
+      "save_retry_pct": 29.33,
+      "mac_top2": 104,
+      "save_top2_pct": 13.33,
+      "better_strategy": "retry"
+    },
+    {
+      "N": 5,
+      "error_rate": 0.3,
+      "mac_retry": 87.19999999999999,
+      "save_retry_pct": 27.33,
+      "mac_top2": 104,
+      "save_top2_pct": 13.33,
+      "better_strategy": "retry"
+    }
+  ],
+  "error_curve_sample": [
+    {
+      "N": 5,
+      "error_rate": 0.0,
+      "mac_dense": 120,
+      "mac_routed": 80.0,
+      "saving_pct": 33.33,
+      "profitable": true
+    },
+    {
+      "N": 5,
+      "error_rate": 0.05,
+      "mac_dense": 120,
+      "mac_routed": 81.2,
+      "saving_pct": 32.33,
+      "profitable": true
+    },
+    {
+      "N": 5,
+      "error_rate": 0.1,
+      "mac_dense": 120,
+      "mac_routed": 82.39999999999999,
+      "saving_pct": 31.33,
+      "profitable": true
+    },
+    {
+      "N": 5,
+      "error_rate": 0.15,
+      "mac_dense": 120,
+      "mac_routed": 83.60000000000001,
+      "saving_pct": 30.33,
+      "profitable": true
+    },
+    {
+      "N": 5,
+      "error_rate": 0.2,
+      "mac_dense": 120,
+      "mac_routed": 84.80000000000001,
+      "saving_pct": 29.33,
+      "profitable": true
+    },
+    {
+      "N": 5,
+      "error_rate": 0.3,
+      "mac_dense": 120,
+      "mac_routed": 87.19999999999999,
+      "saving_pct": 27.33,
+      "profitable": true
+    },
+    {
+      "N": 5,
+      "error_rate": 0.5,
+      "mac_dense": 120,
+      "mac_routed": 92.0,
+      "saving_pct": 23.33,
+      "profitable": true
+    },
+    {
+      "N": 10,
+      "error_rate": 0.0,
+      "mac_dense": 240,
+      "mac_routed": 120.0,
+      "saving_pct": 50.0,
+      "profitable": true
+    },
+    {
+      "N": 10,
+      "error_rate": 0.05,
+      "mac_dense": 240,
+      "mac_routed": 121.2,
+      "saving_pct": 49.5,
+      "profitable": true
+    },
+    {
+      "N": 10,
+      "error_rate": 0.1,
+      "mac_dense": 240,
+      "mac_routed": 122.39999999999999,
+      "saving_pct": 49.0,
+      "profitable": true
+    },
+    {
+      "N": 10,
+      "error_rate": 0.15,
+      "mac_dense": 240,
+      "mac_routed": 123.60000000000001,
+      "saving_pct": 48.5,
+      "profitable": true
+    },
+    {
+      "N": 10,
+      "error_rate": 0.2,
+      "mac_dense": 240,
+      "mac_routed": 124.80000000000001,
+      "saving_pct": 48.0,
+      "profitable": true
+    },
+    {
+      "N": 10,
+      "error_rate": 0.3,
+      "mac_dense": 240,
+      "mac_routed": 127.19999999999999,
+      "saving_pct": 47.0,
+      "profitable": true
+    },
+    {
+      "N": 10,
+      "error_rate": 0.5,
+      "mac_dense": 240,
+      "mac_routed": 132.0,
+      "saving_pct": 45.0,
+      "profitable": true
+    },
+    {
+      "N": 50,
+      "error_rate": 0.0,
+      "mac_dense": 1200,
+      "mac_routed": 440.0,
+      "saving_pct": 63.33,
+      "profitable": true
+    },
+    {
+      "N": 50,
+      "error_rate": 0.05,
+      "mac_dense": 1200,
+      "mac_routed": 441.2,
+      "saving_pct": 63.23,
+      "profitable": true
+    },
+    {
+      "N": 50,
+      "error_rate": 0.1,
+      "mac_dense": 1200,
+      "mac_routed": 442.40000000000003,
+      "saving_pct": 63.13,
+      "profitable": true
+    },
+    {
+      "N": 50,
+      "error_rate": 0.15,
+      "mac_dense": 1200,
+      "mac_routed": 443.59999999999997,
+      "saving_pct": 63.03,
+      "profitable": true
+    },
+    {
+      "N": 50,
+      "error_rate": 0.2,
+      "mac_dense": 1200,
+      "mac_routed": 444.8,
+      "saving_pct": 62.93,
+      "profitable": true
+    },
+    {
+      "N": 50,
+      "error_rate": 0.3,
+      "mac_dense": 1200,
+      "mac_routed": 447.2,
+      "saving_pct": 62.73,
+      "profitable": true
+    },
+    {
+      "N": 50,
+      "error_rate": 0.5,
+      "mac_dense": 1200,
+      "mac_routed": 452.0,
+      "saving_pct": 62.33,
+      "profitable": true
+    }
+  ]
+}

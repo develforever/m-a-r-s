@@ -1,0 +1,207 @@
+{
+  "experiment": "E2_hierarchical",
+  "device": "cuda",
+  "n_seeds": 1,
+  "epochs": 8,
+  "groups": {
+    "Fashion-MNIST": [
+      [
+        0,
+        2,
+        3,
+        4,
+        6
+      ],
+      [
+        5,
+        7,
+        9
+      ],
+      [
+        1
+      ],
+      [
+        8
+      ]
+    ],
+    "MNIST": [
+      [
+        2,
+        4,
+        7,
+        9
+      ],
+      [
+        3,
+        5
+      ],
+      [
+        0,
+        6
+      ],
+      [
+        1
+      ],
+      [
+        8
+      ]
+    ]
+  },
+  "pod_hiddens": [
+    24,
+    64
+  ],
+  "datasets": {
+    "Fashion-MNIST": {
+      "per_seed": [
+        {
+          "ph24": {
+            "group_routing": 0.995199978351593,
+            "system": 0.9210000038146973,
+            "oracle": 0.9251999855041504
+          },
+          "ph64": {
+            "group_routing": 0.9946999549865723,
+            "system": 0.920699954032898,
+            "oracle": 0.9254999756813049
+          }
+        }
+      ],
+      "agg": {
+        "ph24": {
+          "group_routing": {
+            "mean": 0.9952,
+            "std": 0.0,
+            "min": 0.9952,
+            "max": 0.9952
+          },
+          "system": {
+            "mean": 0.921,
+            "std": 0.0,
+            "min": 0.921,
+            "max": 0.921
+          },
+          "oracle": {
+            "mean": 0.9252,
+            "std": 0.0,
+            "min": 0.9252,
+            "max": 0.9252
+          },
+          "mac_total": 4247408,
+          "mac_ratio_vs_flat": 1.0,
+          "delta_vs_flat_pp": {
+            "mean": 0.18,
+            "std": 0.0,
+            "min": 0.18,
+            "max": 0.18
+          }
+        },
+        "ph64": {
+          "group_routing": {
+            "mean": 0.9947,
+            "std": 0.0,
+            "min": 0.9947,
+            "max": 0.9947
+          },
+          "system": {
+            "mean": 0.9207,
+            "std": 0.0,
+            "min": 0.9207,
+            "max": 0.9207
+          },
+          "oracle": {
+            "mean": 0.9255,
+            "std": 0.0,
+            "min": 0.9255,
+            "max": 0.9255
+          },
+          "mac_total": 4252928,
+          "mac_ratio_vs_flat": 1.001,
+          "delta_vs_flat_pp": {
+            "mean": 0.15,
+            "std": 0.0,
+            "min": 0.15,
+            "max": 0.15
+          }
+        }
+      },
+      "verdict": null
+    },
+    "MNIST": {
+      "per_seed": [
+        {
+          "ph24": {
+            "group_routing": 0.995199978351593,
+            "system": 0.9916999936103821,
+            "oracle": 0.9961999654769897
+          },
+          "ph64": {
+            "group_routing": 0.9958999752998352,
+            "system": 0.991599977016449,
+            "oracle": 0.995199978351593
+          }
+        }
+      ],
+      "agg": {
+        "ph24": {
+          "group_routing": {
+            "mean": 0.9952,
+            "std": 0.0,
+            "min": 0.9952,
+            "max": 0.9952
+          },
+          "system": {
+            "mean": 0.9917,
+            "std": 0.0,
+            "min": 0.9917,
+            "max": 0.9917
+          },
+          "oracle": {
+            "mean": 0.9962,
+            "std": 0.0,
+            "min": 0.9962,
+            "max": 0.9962
+          },
+          "mac_total": 4247440,
+          "mac_ratio_vs_flat": 1.0,
+          "delta_vs_flat_pp": {
+            "mean": -0.02,
+            "std": 0.0,
+            "min": -0.02,
+            "max": -0.02
+          }
+        },
+        "ph64": {
+          "group_routing": {
+            "mean": 0.9959,
+            "std": 0.0,
+            "min": 0.9959,
+            "max": 0.9959
+          },
+          "system": {
+            "mean": 0.9916,
+            "std": 0.0,
+            "min": 0.9916,
+            "max": 0.9916
+          },
+          "oracle": {
+            "mean": 0.9952,
+            "std": 0.0,
+            "min": 0.9952,
+            "max": 0.9952
+          },
+          "mac_total": 4252960,
+          "mac_ratio_vs_flat": 1.001,
+          "delta_vs_flat_pp": {
+            "mean": -0.03,
+            "std": 0.0,
+            "min": -0.03,
+            "max": -0.03
+          }
+        }
+      },
+      "verdict": null
+    }
+  },
+  "elapsed_s": 256.3
+}

@@ -1,0 +1,1118 @@
+{
+  "experiment": "D7_predictive_coding",
+  "backbone": "cnn",
+  "device": "cuda",
+  "n_seeds": 1,
+  "epochs": 8,
+  "epochs_dec": 4,
+  "lambdas": [
+    0.25,
+    0.5,
+    1.0,
+    2.0,
+    4.0
+  ],
+  "ks": [
+    2,
+    3
+  ],
+  "datasets": {
+    "Fashion-MNIST": {
+      "per_seed": [
+        {
+          "baseline": {
+            "routing": 0.9098999500274658,
+            "system": 0.9175999760627747,
+            "oracle": 0.9794999957084656
+          },
+          "pc": {
+            "D7a_hard": {
+              "routing": 0.8964999914169312,
+              "system": 0.9162999987602234,
+              "recon_mse": 0.041547
+            },
+            "D7a_fuse_l0.25": {
+              "routing": 0.9097999930381775,
+              "system": 0.9174999594688416,
+              "recon_mse": 0.04282
+            },
+            "D7a_fuse_l0.5": {
+              "routing": 0.910099983215332,
+              "system": 0.9176999926567078,
+              "recon_mse": 0.042757
+            },
+            "D7a_fuse_l1.0": {
+              "routing": 0.9102999567985535,
+              "system": 0.9179999828338623,
+              "recon_mse": 0.042695
+            },
+            "D7a_fuse_l2.0": {
+              "routing": 0.9103999733924866,
+              "system": 0.9180999994277954,
+              "recon_mse": 0.042571
+            },
+            "D7a_fuse_l4.0": {
+              "routing": 0.9097999930381775,
+              "system": 0.9179999828338623,
+              "recon_mse": 0.042367
+            },
+            "D7a_iter_k2": {
+              "routing": 0.8982999920845032,
+              "system": 0.9164999723434448,
+              "recon_mse": 0.041679
+            },
+            "D7a_iter_k3": {
+              "routing": 0.8970999717712402,
+              "system": 0.9161999821662903,
+              "recon_mse": 0.041594
+            },
+            "D7b_hard": {
+              "routing": 0.7059999704360962,
+              "system": 0.7730000019073486,
+              "recon_mse": 0.357439
+            },
+            "D7b_fuse_l0.25": {
+              "routing": 0.9097999930381775,
+              "system": 0.917199969291687,
+              "recon_mse": 0.392653
+            },
+            "D7b_fuse_l0.5": {
+              "routing": 0.9099999666213989,
+              "system": 0.9170999526977539,
+              "recon_mse": 0.39243
+            },
+            "D7b_fuse_l1.0": {
+              "routing": 0.9099999666213989,
+              "system": 0.916700005531311,
+              "recon_mse": 0.391803
+            },
+            "D7b_fuse_l2.0": {
+              "routing": 0.9103999733924866,
+              "system": 0.9168999791145325,
+              "recon_mse": 0.391316
+            },
+            "D7b_fuse_l4.0": {
+              "routing": 0.9083999991416931,
+              "system": 0.9160999655723572,
+              "recon_mse": 0.389897
+            },
+            "D7b_iter_k2": {
+              "routing": 0.7735999822616577,
+              "system": 0.8361999988555908,
+              "recon_mse": 0.375494
+            },
+            "D7b_iter_k3": {
+              "routing": 0.725600004196167,
+              "system": 0.8016999959945679,
+              "recon_mse": 0.36503
+            }
+          }
+        }
+      ],
+      "agg": {
+        "baseline": {
+          "routing": {
+            "mean": 0.9099,
+            "std": 0.0,
+            "min": 0.9099,
+            "max": 0.9099
+          },
+          "system": {
+            "mean": 0.9176,
+            "std": 0.0,
+            "min": 0.9176,
+            "max": 0.9176
+          },
+          "oracle": {
+            "mean": 0.9795,
+            "std": 0.0,
+            "min": 0.9795,
+            "max": 0.9795
+          }
+        },
+        "D7a_hard": {
+          "routing": {
+            "mean": 0.8965,
+            "std": 0.0,
+            "min": 0.8965,
+            "max": 0.8965
+          },
+          "system": {
+            "mean": 0.9163,
+            "std": 0.0,
+            "min": 0.9163,
+            "max": 0.9163
+          },
+          "recon_mse": {
+            "mean": 0.0415,
+            "std": 0.0,
+            "min": 0.0415,
+            "max": 0.0415
+          },
+          "delta_system_pp": {
+            "mean": -0.13,
+            "std": 0.0,
+            "min": -0.13,
+            "max": -0.13
+          }
+        },
+        "D7a_fuse_l0.25": {
+          "routing": {
+            "mean": 0.9098,
+            "std": 0.0,
+            "min": 0.9098,
+            "max": 0.9098
+          },
+          "system": {
+            "mean": 0.9175,
+            "std": 0.0,
+            "min": 0.9175,
+            "max": 0.9175
+          },
+          "recon_mse": {
+            "mean": 0.0428,
+            "std": 0.0,
+            "min": 0.0428,
+            "max": 0.0428
+          },
+          "delta_system_pp": {
+            "mean": -0.01,
+            "std": 0.0,
+            "min": -0.01,
+            "max": -0.01
+          }
+        },
+        "D7a_fuse_l0.5": {
+          "routing": {
+            "mean": 0.9101,
+            "std": 0.0,
+            "min": 0.9101,
+            "max": 0.9101
+          },
+          "system": {
+            "mean": 0.9177,
+            "std": 0.0,
+            "min": 0.9177,
+            "max": 0.9177
+          },
+          "recon_mse": {
+            "mean": 0.0428,
+            "std": 0.0,
+            "min": 0.0428,
+            "max": 0.0428
+          },
+          "delta_system_pp": {
+            "mean": 0.01,
+            "std": 0.0,
+            "min": 0.01,
+            "max": 0.01
+          }
+        },
+        "D7a_fuse_l1.0": {
+          "routing": {
+            "mean": 0.9103,
+            "std": 0.0,
+            "min": 0.9103,
+            "max": 0.9103
+          },
+          "system": {
+            "mean": 0.918,
+            "std": 0.0,
+            "min": 0.918,
+            "max": 0.918
+          },
+          "recon_mse": {
+            "mean": 0.0427,
+            "std": 0.0,
+            "min": 0.0427,
+            "max": 0.0427
+          },
+          "delta_system_pp": {
+            "mean": 0.04,
+            "std": 0.0,
+            "min": 0.04,
+            "max": 0.04
+          }
+        },
+        "D7a_fuse_l2.0": {
+          "routing": {
+            "mean": 0.9104,
+            "std": 0.0,
+            "min": 0.9104,
+            "max": 0.9104
+          },
+          "system": {
+            "mean": 0.9181,
+            "std": 0.0,
+            "min": 0.9181,
+            "max": 0.9181
+          },
+          "recon_mse": {
+            "mean": 0.0426,
+            "std": 0.0,
+            "min": 0.0426,
+            "max": 0.0426
+          },
+          "delta_system_pp": {
+            "mean": 0.05,
+            "std": 0.0,
+            "min": 0.05,
+            "max": 0.05
+          }
+        },
+        "D7a_fuse_l4.0": {
+          "routing": {
+            "mean": 0.9098,
+            "std": 0.0,
+            "min": 0.9098,
+            "max": 0.9098
+          },
+          "system": {
+            "mean": 0.918,
+            "std": 0.0,
+            "min": 0.918,
+            "max": 0.918
+          },
+          "recon_mse": {
+            "mean": 0.0424,
+            "std": 0.0,
+            "min": 0.0424,
+            "max": 0.0424
+          },
+          "delta_system_pp": {
+            "mean": 0.04,
+            "std": 0.0,
+            "min": 0.04,
+            "max": 0.04
+          }
+        },
+        "D7a_iter_k2": {
+          "routing": {
+            "mean": 0.8983,
+            "std": 0.0,
+            "min": 0.8983,
+            "max": 0.8983
+          },
+          "system": {
+            "mean": 0.9165,
+            "std": 0.0,
+            "min": 0.9165,
+            "max": 0.9165
+          },
+          "recon_mse": {
+            "mean": 0.0417,
+            "std": 0.0,
+            "min": 0.0417,
+            "max": 0.0417
+          },
+          "delta_system_pp": {
+            "mean": -0.11,
+            "std": 0.0,
+            "min": -0.11,
+            "max": -0.11
+          }
+        },
+        "D7a_iter_k3": {
+          "routing": {
+            "mean": 0.8971,
+            "std": 0.0,
+            "min": 0.8971,
+            "max": 0.8971
+          },
+          "system": {
+            "mean": 0.9162,
+            "std": 0.0,
+            "min": 0.9162,
+            "max": 0.9162
+          },
+          "recon_mse": {
+            "mean": 0.0416,
+            "std": 0.0,
+            "min": 0.0416,
+            "max": 0.0416
+          },
+          "delta_system_pp": {
+            "mean": -0.14,
+            "std": 0.0,
+            "min": -0.14,
+            "max": -0.14
+          }
+        },
+        "D7b_hard": {
+          "routing": {
+            "mean": 0.706,
+            "std": 0.0,
+            "min": 0.706,
+            "max": 0.706
+          },
+          "system": {
+            "mean": 0.773,
+            "std": 0.0,
+            "min": 0.773,
+            "max": 0.773
+          },
+          "recon_mse": {
+            "mean": 0.3574,
+            "std": 0.0,
+            "min": 0.3574,
+            "max": 0.3574
+          },
+          "delta_system_pp": {
+            "mean": -14.46,
+            "std": 0.0,
+            "min": -14.46,
+            "max": -14.46
+          }
+        },
+        "D7b_fuse_l0.25": {
+          "routing": {
+            "mean": 0.9098,
+            "std": 0.0,
+            "min": 0.9098,
+            "max": 0.9098
+          },
+          "system": {
+            "mean": 0.9172,
+            "std": 0.0,
+            "min": 0.9172,
+            "max": 0.9172
+          },
+          "recon_mse": {
+            "mean": 0.3927,
+            "std": 0.0,
+            "min": 0.3927,
+            "max": 0.3927
+          },
+          "delta_system_pp": {
+            "mean": -0.04,
+            "std": 0.0,
+            "min": -0.04,
+            "max": -0.04
+          }
+        },
+        "D7b_fuse_l0.5": {
+          "routing": {
+            "mean": 0.91,
+            "std": 0.0,
+            "min": 0.91,
+            "max": 0.91
+          },
+          "system": {
+            "mean": 0.9171,
+            "std": 0.0,
+            "min": 0.9171,
+            "max": 0.9171
+          },
+          "recon_mse": {
+            "mean": 0.3924,
+            "std": 0.0,
+            "min": 0.3924,
+            "max": 0.3924
+          },
+          "delta_system_pp": {
+            "mean": -0.05,
+            "std": 0.0,
+            "min": -0.05,
+            "max": -0.05
+          }
+        },
+        "D7b_fuse_l1.0": {
+          "routing": {
+            "mean": 0.91,
+            "std": 0.0,
+            "min": 0.91,
+            "max": 0.91
+          },
+          "system": {
+            "mean": 0.9167,
+            "std": 0.0,
+            "min": 0.9167,
+            "max": 0.9167
+          },
+          "recon_mse": {
+            "mean": 0.3918,
+            "std": 0.0,
+            "min": 0.3918,
+            "max": 0.3918
+          },
+          "delta_system_pp": {
+            "mean": -0.09,
+            "std": 0.0,
+            "min": -0.09,
+            "max": -0.09
+          }
+        },
+        "D7b_fuse_l2.0": {
+          "routing": {
+            "mean": 0.9104,
+            "std": 0.0,
+            "min": 0.9104,
+            "max": 0.9104
+          },
+          "system": {
+            "mean": 0.9169,
+            "std": 0.0,
+            "min": 0.9169,
+            "max": 0.9169
+          },
+          "recon_mse": {
+            "mean": 0.3913,
+            "std": 0.0,
+            "min": 0.3913,
+            "max": 0.3913
+          },
+          "delta_system_pp": {
+            "mean": -0.07,
+            "std": 0.0,
+            "min": -0.07,
+            "max": -0.07
+          }
+        },
+        "D7b_fuse_l4.0": {
+          "routing": {
+            "mean": 0.9084,
+            "std": 0.0,
+            "min": 0.9084,
+            "max": 0.9084
+          },
+          "system": {
+            "mean": 0.9161,
+            "std": 0.0,
+            "min": 0.9161,
+            "max": 0.9161
+          },
+          "recon_mse": {
+            "mean": 0.3899,
+            "std": 0.0,
+            "min": 0.3899,
+            "max": 0.3899
+          },
+          "delta_system_pp": {
+            "mean": -0.15,
+            "std": 0.0,
+            "min": -0.15,
+            "max": -0.15
+          }
+        },
+        "D7b_iter_k2": {
+          "routing": {
+            "mean": 0.7736,
+            "std": 0.0,
+            "min": 0.7736,
+            "max": 0.7736
+          },
+          "system": {
+            "mean": 0.8362,
+            "std": 0.0,
+            "min": 0.8362,
+            "max": 0.8362
+          },
+          "recon_mse": {
+            "mean": 0.3755,
+            "std": 0.0,
+            "min": 0.3755,
+            "max": 0.3755
+          },
+          "delta_system_pp": {
+            "mean": -8.14,
+            "std": 0.0,
+            "min": -8.14,
+            "max": -8.14
+          }
+        },
+        "D7b_iter_k3": {
+          "routing": {
+            "mean": 0.7256,
+            "std": 0.0,
+            "min": 0.7256,
+            "max": 0.7256
+          },
+          "system": {
+            "mean": 0.8017,
+            "std": 0.0,
+            "min": 0.8017,
+            "max": 0.8017
+          },
+          "recon_mse": {
+            "mean": 0.365,
+            "std": 0.0,
+            "min": 0.365,
+            "max": 0.365
+          },
+          "delta_system_pp": {
+            "mean": -11.59,
+            "std": 0.0,
+            "min": -11.59,
+            "max": -11.59
+          }
+        },
+        "verdict": {
+          "best_variant": "D7a_fuse_l2.0",
+          "delta_pp": {
+            "mean": 0.05,
+            "std": 0.0,
+            "min": 0.05,
+            "max": 0.05
+          },
+          "noise_pp": 0.0,
+          "verdict": "SYGNAL+"
+        }
+      },
+      "mac": {
+        "top1_baseline": 4247600,
+        "pc_all_pods_D7a": 4305968,
+        "pc_all_pods_D7b": 4463408,
+        "pc_iter_k3_D7b": 4310192
+      }
+    },
+    "MNIST": {
+      "per_seed": [
+        {
+          "baseline": {
+            "routing": 0.9914000034332275,
+            "system": 0.9914000034332275,
+            "oracle": 1.0
+          },
+          "pc": {
+            "D7a_hard": {
+              "routing": 0.9896999597549438,
+              "system": 0.9898999929428101,
+              "recon_mse": 0.011727
+            },
+            "D7a_fuse_l0.25": {
+              "routing": 0.9914000034332275,
+              "system": 0.9914000034332275,
+              "recon_mse": 0.011799
+            },
+            "D7a_fuse_l0.5": {
+              "routing": 0.9914999604225159,
+              "system": 0.9914999604225159,
+              "recon_mse": 0.011797
+            },
+            "D7a_fuse_l1.0": {
+              "routing": 0.9914999604225159,
+              "system": 0.9914999604225159,
+              "recon_mse": 0.011797
+            },
+            "D7a_fuse_l2.0": {
+              "routing": 0.991599977016449,
+              "system": 0.991599977016449,
+              "recon_mse": 0.011796
+            },
+            "D7a_fuse_l4.0": {
+              "routing": 0.9914000034332275,
+              "system": 0.9914000034332275,
+              "recon_mse": 0.011783
+            },
+            "D7a_iter_k2": {
+              "routing": 0.9901999831199646,
+              "system": 0.9901999831199646,
+              "recon_mse": 0.011738
+            },
+            "D7a_iter_k3": {
+              "routing": 0.9899999499320984,
+              "system": 0.9899999499320984,
+              "recon_mse": 0.011731
+            },
+            "D7b_hard": {
+              "routing": 0.8779999613761902,
+              "system": 0.8789999485015869,
+              "recon_mse": 0.553465
+            },
+            "D7b_fuse_l0.25": {
+              "routing": 0.9914000034332275,
+              "system": 0.9914000034332275,
+              "recon_mse": 0.562518
+            },
+            "D7b_fuse_l0.5": {
+              "routing": 0.9914999604225159,
+              "system": 0.9914999604225159,
+              "recon_mse": 0.562516
+            },
+            "D7b_fuse_l1.0": {
+              "routing": 0.9914999604225159,
+              "system": 0.9914999604225159,
+              "recon_mse": 0.562486
+            },
+            "D7b_fuse_l2.0": {
+              "routing": 0.9914999604225159,
+              "system": 0.9914999604225159,
+              "recon_mse": 0.562458
+            },
+            "D7b_fuse_l4.0": {
+              "routing": 0.9914999604225159,
+              "system": 0.9914999604225159,
+              "recon_mse": 0.562306
+            },
+            "D7b_iter_k2": {
+              "routing": 0.9398999810218811,
+              "system": 0.9399999976158142,
+              "recon_mse": 0.558534
+            },
+            "D7b_iter_k3": {
+              "routing": 0.9261999726295471,
+              "system": 0.9261999726295471,
+              "recon_mse": 0.557265
+            }
+          }
+        }
+      ],
+      "agg": {
+        "baseline": {
+          "routing": {
+            "mean": 0.9914,
+            "std": 0.0,
+            "min": 0.9914,
+            "max": 0.9914
+          },
+          "system": {
+            "mean": 0.9914,
+            "std": 0.0,
+            "min": 0.9914,
+            "max": 0.9914
+          },
+          "oracle": {
+            "mean": 1.0,
+            "std": 0.0,
+            "min": 1.0,
+            "max": 1.0
+          }
+        },
+        "D7a_hard": {
+          "routing": {
+            "mean": 0.9897,
+            "std": 0.0,
+            "min": 0.9897,
+            "max": 0.9897
+          },
+          "system": {
+            "mean": 0.9899,
+            "std": 0.0,
+            "min": 0.9899,
+            "max": 0.9899
+          },
+          "recon_mse": {
+            "mean": 0.0117,
+            "std": 0.0,
+            "min": 0.0117,
+            "max": 0.0117
+          },
+          "delta_system_pp": {
+            "mean": -0.15,
+            "std": 0.0,
+            "min": -0.15,
+            "max": -0.15
+          }
+        },
+        "D7a_fuse_l0.25": {
+          "routing": {
+            "mean": 0.9914,
+            "std": 0.0,
+            "min": 0.9914,
+            "max": 0.9914
+          },
+          "system": {
+            "mean": 0.9914,
+            "std": 0.0,
+            "min": 0.9914,
+            "max": 0.9914
+          },
+          "recon_mse": {
+            "mean": 0.0118,
+            "std": 0.0,
+            "min": 0.0118,
+            "max": 0.0118
+          },
+          "delta_system_pp": {
+            "mean": 0.0,
+            "std": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "D7a_fuse_l0.5": {
+          "routing": {
+            "mean": 0.9915,
+            "std": 0.0,
+            "min": 0.9915,
+            "max": 0.9915
+          },
+          "system": {
+            "mean": 0.9915,
+            "std": 0.0,
+            "min": 0.9915,
+            "max": 0.9915
+          },
+          "recon_mse": {
+            "mean": 0.0118,
+            "std": 0.0,
+            "min": 0.0118,
+            "max": 0.0118
+          },
+          "delta_system_pp": {
+            "mean": 0.01,
+            "std": 0.0,
+            "min": 0.01,
+            "max": 0.01
+          }
+        },
+        "D7a_fuse_l1.0": {
+          "routing": {
+            "mean": 0.9915,
+            "std": 0.0,
+            "min": 0.9915,
+            "max": 0.9915
+          },
+          "system": {
+            "mean": 0.9915,
+            "std": 0.0,
+            "min": 0.9915,
+            "max": 0.9915
+          },
+          "recon_mse": {
+            "mean": 0.0118,
+            "std": 0.0,
+            "min": 0.0118,
+            "max": 0.0118
+          },
+          "delta_system_pp": {
+            "mean": 0.01,
+            "std": 0.0,
+            "min": 0.01,
+            "max": 0.01
+          }
+        },
+        "D7a_fuse_l2.0": {
+          "routing": {
+            "mean": 0.9916,
+            "std": 0.0,
+            "min": 0.9916,
+            "max": 0.9916
+          },
+          "system": {
+            "mean": 0.9916,
+            "std": 0.0,
+            "min": 0.9916,
+            "max": 0.9916
+          },
+          "recon_mse": {
+            "mean": 0.0118,
+            "std": 0.0,
+            "min": 0.0118,
+            "max": 0.0118
+          },
+          "delta_system_pp": {
+            "mean": 0.02,
+            "std": 0.0,
+            "min": 0.02,
+            "max": 0.02
+          }
+        },
+        "D7a_fuse_l4.0": {
+          "routing": {
+            "mean": 0.9914,
+            "std": 0.0,
+            "min": 0.9914,
+            "max": 0.9914
+          },
+          "system": {
+            "mean": 0.9914,
+            "std": 0.0,
+            "min": 0.9914,
+            "max": 0.9914
+          },
+          "recon_mse": {
+            "mean": 0.0118,
+            "std": 0.0,
+            "min": 0.0118,
+            "max": 0.0118
+          },
+          "delta_system_pp": {
+            "mean": 0.0,
+            "std": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "D7a_iter_k2": {
+          "routing": {
+            "mean": 0.9902,
+            "std": 0.0,
+            "min": 0.9902,
+            "max": 0.9902
+          },
+          "system": {
+            "mean": 0.9902,
+            "std": 0.0,
+            "min": 0.9902,
+            "max": 0.9902
+          },
+          "recon_mse": {
+            "mean": 0.0117,
+            "std": 0.0,
+            "min": 0.0117,
+            "max": 0.0117
+          },
+          "delta_system_pp": {
+            "mean": -0.12,
+            "std": 0.0,
+            "min": -0.12,
+            "max": -0.12
+          }
+        },
+        "D7a_iter_k3": {
+          "routing": {
+            "mean": 0.99,
+            "std": 0.0,
+            "min": 0.99,
+            "max": 0.99
+          },
+          "system": {
+            "mean": 0.99,
+            "std": 0.0,
+            "min": 0.99,
+            "max": 0.99
+          },
+          "recon_mse": {
+            "mean": 0.0117,
+            "std": 0.0,
+            "min": 0.0117,
+            "max": 0.0117
+          },
+          "delta_system_pp": {
+            "mean": -0.14,
+            "std": 0.0,
+            "min": -0.14,
+            "max": -0.14
+          }
+        },
+        "D7b_hard": {
+          "routing": {
+            "mean": 0.878,
+            "std": 0.0,
+            "min": 0.878,
+            "max": 0.878
+          },
+          "system": {
+            "mean": 0.879,
+            "std": 0.0,
+            "min": 0.879,
+            "max": 0.879
+          },
+          "recon_mse": {
+            "mean": 0.5535,
+            "std": 0.0,
+            "min": 0.5535,
+            "max": 0.5535
+          },
+          "delta_system_pp": {
+            "mean": -11.24,
+            "std": 0.0,
+            "min": -11.24,
+            "max": -11.24
+          }
+        },
+        "D7b_fuse_l0.25": {
+          "routing": {
+            "mean": 0.9914,
+            "std": 0.0,
+            "min": 0.9914,
+            "max": 0.9914
+          },
+          "system": {
+            "mean": 0.9914,
+            "std": 0.0,
+            "min": 0.9914,
+            "max": 0.9914
+          },
+          "recon_mse": {
+            "mean": 0.5625,
+            "std": 0.0,
+            "min": 0.5625,
+            "max": 0.5625
+          },
+          "delta_system_pp": {
+            "mean": 0.0,
+            "std": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "D7b_fuse_l0.5": {
+          "routing": {
+            "mean": 0.9915,
+            "std": 0.0,
+            "min": 0.9915,
+            "max": 0.9915
+          },
+          "system": {
+            "mean": 0.9915,
+            "std": 0.0,
+            "min": 0.9915,
+            "max": 0.9915
+          },
+          "recon_mse": {
+            "mean": 0.5625,
+            "std": 0.0,
+            "min": 0.5625,
+            "max": 0.5625
+          },
+          "delta_system_pp": {
+            "mean": 0.01,
+            "std": 0.0,
+            "min": 0.01,
+            "max": 0.01
+          }
+        },
+        "D7b_fuse_l1.0": {
+          "routing": {
+            "mean": 0.9915,
+            "std": 0.0,
+            "min": 0.9915,
+            "max": 0.9915
+          },
+          "system": {
+            "mean": 0.9915,
+            "std": 0.0,
+            "min": 0.9915,
+            "max": 0.9915
+          },
+          "recon_mse": {
+            "mean": 0.5625,
+            "std": 0.0,
+            "min": 0.5625,
+            "max": 0.5625
+          },
+          "delta_system_pp": {
+            "mean": 0.01,
+            "std": 0.0,
+            "min": 0.01,
+            "max": 0.01
+          }
+        },
+        "D7b_fuse_l2.0": {
+          "routing": {
+            "mean": 0.9915,
+            "std": 0.0,
+            "min": 0.9915,
+            "max": 0.9915
+          },
+          "system": {
+            "mean": 0.9915,
+            "std": 0.0,
+            "min": 0.9915,
+            "max": 0.9915
+          },
+          "recon_mse": {
+            "mean": 0.5625,
+            "std": 0.0,
+            "min": 0.5625,
+            "max": 0.5625
+          },
+          "delta_system_pp": {
+            "mean": 0.01,
+            "std": 0.0,
+            "min": 0.01,
+            "max": 0.01
+          }
+        },
+        "D7b_fuse_l4.0": {
+          "routing": {
+            "mean": 0.9915,
+            "std": 0.0,
+            "min": 0.9915,
+            "max": 0.9915
+          },
+          "system": {
+            "mean": 0.9915,
+            "std": 0.0,
+            "min": 0.9915,
+            "max": 0.9915
+          },
+          "recon_mse": {
+            "mean": 0.5623,
+            "std": 0.0,
+            "min": 0.5623,
+            "max": 0.5623
+          },
+          "delta_system_pp": {
+            "mean": 0.01,
+            "std": 0.0,
+            "min": 0.01,
+            "max": 0.01
+          }
+        },
+        "D7b_iter_k2": {
+          "routing": {
+            "mean": 0.9399,
+            "std": 0.0,
+            "min": 0.9399,
+            "max": 0.9399
+          },
+          "system": {
+            "mean": 0.94,
+            "std": 0.0,
+            "min": 0.94,
+            "max": 0.94
+          },
+          "recon_mse": {
+            "mean": 0.5585,
+            "std": 0.0,
+            "min": 0.5585,
+            "max": 0.5585
+          },
+          "delta_system_pp": {
+            "mean": -5.14,
+            "std": 0.0,
+            "min": -5.14,
+            "max": -5.14
+          }
+        },
+        "D7b_iter_k3": {
+          "routing": {
+            "mean": 0.9262,
+            "std": 0.0,
+            "min": 0.9262,
+            "max": 0.9262
+          },
+          "system": {
+            "mean": 0.9262,
+            "std": 0.0,
+            "min": 0.9262,
+            "max": 0.9262
+          },
+          "recon_mse": {
+            "mean": 0.5573,
+            "std": 0.0,
+            "min": 0.5573,
+            "max": 0.5573
+          },
+          "delta_system_pp": {
+            "mean": -6.52,
+            "std": 0.0,
+            "min": -6.52,
+            "max": -6.52
+          }
+        },
+        "verdict": {
+          "best_variant": "D7a_fuse_l2.0",
+          "delta_pp": {
+            "mean": 0.02,
+            "std": 0.0,
+            "min": 0.02,
+            "max": 0.02
+          },
+          "noise_pp": 0.0,
+          "verdict": "SYGNAL+"
+        }
+      },
+      "mac": {
+        "top1_baseline": 4247600,
+        "pc_all_pods_D7a": 4305968,
+        "pc_all_pods_D7b": 4463408,
+        "pc_iter_k3_D7b": 4310192
+      }
+    }
+  },
+  "elapsed_s": 153.3
+}

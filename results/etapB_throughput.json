@@ -1,0 +1,42 @@
+{
+  "device": "cuda",
+  "batch": 4096,
+  "by_n_pods": [
+    {
+      "n_pods": 10,
+      "v0_loop_sps": 1029468,
+      "v2_grouped_sps": 1526770,
+      "v3_loopless_sps": 1890127,
+      "baseline_sps": 2801437,
+      "best_vs_baseline": 0.67,
+      "best_vs_loop": 1.84
+    },
+    {
+      "n_pods": 20,
+      "v0_loop_sps": 507348,
+      "v2_grouped_sps": 880169,
+      "v3_loopless_sps": 1703679,
+      "baseline_sps": 2801437,
+      "best_vs_baseline": 0.61,
+      "best_vs_loop": 3.36
+    },
+    {
+      "n_pods": 50,
+      "v0_loop_sps": 206096,
+      "v2_grouped_sps": 400157,
+      "v3_loopless_sps": 1390569,
+      "baseline_sps": 2801437,
+      "best_vs_baseline": 0.5,
+      "best_vs_loop": 6.75
+    },
+    {
+      "n_pods": 100,
+      "v0_loop_sps": 105588,
+      "v2_grouped_sps": 204060,
+      "v3_loopless_sps": 1070681,
+      "baseline_sps": 2801437,
+      "best_vs_baseline": 0.38,
+      "best_vs_loop": 10.14
+    }
+  ]
+}

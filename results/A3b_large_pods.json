@@ -1,0 +1,62 @@
+{
+  "device": "cuda",
+  "router_mac": 25760,
+  "routing_acc": 0.9666,
+  "measurements": [
+    {
+      "hidden": 64,
+      "monolit_acc": 0.9685,
+      "mars_acc": 0.9667,
+      "monolit_tput": 8348294,
+      "mars_tput": 1941775,
+      "mars_vs_mono": 0.233,
+      "monolit_mac": 50816,
+      "mars_mac": 76576,
+      "mac_saving_pct": -50.7
+    },
+    {
+      "hidden": 256,
+      "monolit_acc": 0.9779,
+      "mars_acc": 0.9684,
+      "monolit_tput": 3646901,
+      "mars_tput": 1433139,
+      "mars_vs_mono": 0.393,
+      "monolit_mac": 203264,
+      "mars_mac": 229024,
+      "mac_saving_pct": -12.7
+    },
+    {
+      "hidden": 512,
+      "monolit_acc": 0.9801,
+      "mars_acc": 0.9684,
+      "monolit_tput": 1485916,
+      "mars_tput": 1074533,
+      "mars_vs_mono": 0.723,
+      "monolit_mac": 406528,
+      "mars_mac": 432288,
+      "mac_saving_pct": -6.3
+    },
+    {
+      "hidden": 1024,
+      "monolit_acc": 0.9838,
+      "mars_acc": 0.9698,
+      "monolit_tput": 606614,
+      "mars_tput": 679232,
+      "mars_vs_mono": 1.12,
+      "monolit_mac": 813056,
+      "mars_mac": 838816,
+      "mac_saving_pct": -3.2
+    },
+    {
+      "hidden": 2048,
+      "monolit_acc": 0.9839,
+      "mars_acc": 0.9694,
+      "monolit_tput": 274411,
+      "mars_tput": 409771,
+      "mars_vs_mono": 1.493,
+      "monolit_mac": 1626112,
+      "mars_mac": 1651872,
+      "mac_saving_pct": -1.6
+    }
+  ]
+}

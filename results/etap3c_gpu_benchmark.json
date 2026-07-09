@@ -1,0 +1,138 @@
+{
+  "stage": "etap3c_gpu",
+  "timestamp": "2026-06-15T20:49:44",
+  "description": "Walidacja sprzętowa SOM-Router na CUDA (TMU vs matmul)",
+  "device": "cuda",
+  "gpu_name": "NVIDIA GeForce GTX 1050 Ti",
+  "benchmark": {
+    "batch_1": {
+      "neural": {
+        "label": "Neural Router (2× matmul)",
+        "mean_us": 156.61,
+        "std_us": 20.4,
+        "throughput_Msamples_s": 0.0064,
+        "batch_size": 1
+      },
+      "som_full": {
+        "label": "SOM-Router (dist + TMU)",
+        "mean_us": 412.67,
+        "std_us": 46.9,
+        "throughput_Msamples_s": 0.0024,
+        "batch_size": 1
+      },
+      "pure_tmu": {
+        "label": "Pure TMU (grid_sample only)",
+        "mean_us": 93.69,
+        "std_us": 21.31,
+        "throughput_Msamples_s": 0.0107,
+        "batch_size": 1
+      },
+      "speedup_tmu_vs_neural": 1.672,
+      "speedup_som_full_vs_neural": 0.38
+    },
+    "batch_32": {
+      "neural": {
+        "label": "Neural Router (2× matmul)",
+        "mean_us": 157.75,
+        "std_us": 26.72,
+        "throughput_Msamples_s": 0.2029,
+        "batch_size": 32
+      },
+      "som_full": {
+        "label": "SOM-Router (dist + TMU)",
+        "mean_us": 408.99,
+        "std_us": 54.64,
+        "throughput_Msamples_s": 0.0782,
+        "batch_size": 32
+      },
+      "pure_tmu": {
+        "label": "Pure TMU (grid_sample only)",
+        "mean_us": 145.58,
+        "std_us": 137.32,
+        "throughput_Msamples_s": 0.2198,
+        "batch_size": 32
+      },
+      "speedup_tmu_vs_neural": 1.084,
+      "speedup_som_full_vs_neural": 0.386
+    },
+    "batch_256": {
+      "neural": {
+        "label": "Neural Router (2× matmul)",
+        "mean_us": 183.77,
+        "std_us": 39.29,
+        "throughput_Msamples_s": 1.3931,
+        "batch_size": 256
+      },
+      "som_full": {
+        "label": "SOM-Router (dist + TMU)",
+        "mean_us": 416.05,
+        "std_us": 52.12,
+        "throughput_Msamples_s": 0.6153,
+        "batch_size": 256
+      },
+      "pure_tmu": {
+        "label": "Pure TMU (grid_sample only)",
+        "mean_us": 93.78,
+        "std_us": 24.24,
+        "throughput_Msamples_s": 2.7299,
+        "batch_size": 256
+      },
+      "speedup_tmu_vs_neural": 1.96,
+      "speedup_som_full_vs_neural": 0.442
+    },
+    "batch_1024": {
+      "neural": {
+        "label": "Neural Router (2× matmul)",
+        "mean_us": 161.79,
+        "std_us": 31.06,
+        "throughput_Msamples_s": 6.3294,
+        "batch_size": 1024
+      },
+      "som_full": {
+        "label": "SOM-Router (dist + TMU)",
+        "mean_us": 412.84,
+        "std_us": 28.85,
+        "throughput_Msamples_s": 2.4804,
+        "batch_size": 1024
+      },
+      "pure_tmu": {
+        "label": "Pure TMU (grid_sample only)",
+        "mean_us": 92.04,
+        "std_us": 14.26,
+        "throughput_Msamples_s": 11.1258,
+        "batch_size": 1024
+      },
+      "speedup_tmu_vs_neural": 1.758,
+      "speedup_som_full_vs_neural": 0.392
+    },
+    "batch_4096": {
+      "neural": {
+        "label": "Neural Router (2× matmul)",
+        "mean_us": 155.98,
+        "std_us": 21.32,
+        "throughput_Msamples_s": 26.2593,
+        "batch_size": 4096
+      },
+      "som_full": {
+        "label": "SOM-Router (dist + TMU)",
+        "mean_us": 664.8,
+        "std_us": 63.95,
+        "throughput_Msamples_s": 6.1613,
+        "batch_size": 4096
+      },
+      "pure_tmu": {
+        "label": "Pure TMU (grid_sample only)",
+        "mean_us": 97.85,
+        "std_us": 19.36,
+        "throughput_Msamples_s": 41.8582,
+        "batch_size": 4096
+      },
+      "speedup_tmu_vs_neural": 1.594,
+      "speedup_som_full_vs_neural": 0.235
+    }
+  },
+  "accuracy_test": {
+    "cpu_gpu_agreement": 1.0
+  },
+  "verdict": "POZYTYWNY"
+}

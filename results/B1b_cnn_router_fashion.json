@@ -1,0 +1,61 @@
+{
+  "experiment": "B1b_cnn_router_fashion",
+  "dataset": "Fashion-MNIST",
+  "device": "cuda",
+  "oracle_acc": 0.9838,
+  "baseline_acc": 0.8903,
+  "best_config": "CNN(32,64) emb32 ep50",
+  "best_system_acc": 0.9255,
+  "delta_vs_baseline_pp": 3.52,
+  "configs": [
+    {
+      "config": "CNN(16,32) emb32 ep30",
+      "routing_acc": 0.923,
+      "system_acc": 0.9183,
+      "router_mac": 1221184
+    },
+    {
+      "config": "CNN(16,32) emb32 ep50",
+      "routing_acc": 0.9221,
+      "system_acc": 0.919,
+      "router_mac": 1221184
+    },
+    {
+      "config": "CNN(16,32) emb64 ep50",
+      "routing_acc": 0.9194,
+      "system_acc": 0.9175,
+      "router_mac": 1225600
+    },
+    {
+      "config": "CNN(16,32) emb32 ls01",
+      "routing_acc": 0.922,
+      "system_acc": 0.9194,
+      "router_mac": 1221184
+    },
+    {
+      "config": "CNN(32,64) emb32 ep50",
+      "routing_acc": 0.9302,
+      "system_acc": 0.9255,
+      "router_mac": 1221184
+    },
+    {
+      "config": "CNN(32,64) emb64 ep50",
+      "routing_acc": 0.9283,
+      "system_acc": 0.9243,
+      "router_mac": 1225600
+    },
+    {
+      "config": "LightCNN(8,16) emb32",
+      "routing_acc": 0.8974,
+      "system_acc": 0.8975,
+      "router_mac": 95968
+    },
+    {
+      "config": "LightCNN(16,32) emb32",
+      "routing_acc": 0.9028,
+      "system_acc": 0.9017,
+      "router_mac": 95968
+    }
+  ],
+  "elapsed_s": 883.8
+}
