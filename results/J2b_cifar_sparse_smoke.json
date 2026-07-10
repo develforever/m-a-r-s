@@ -1,0 +1,172 @@
+{
+  "experiment": "J2b_cifar_sparse",
+  "device": "cuda",
+  "n_seeds": 1,
+  "epochs_per_task": 4,
+  "variants": {
+    "sparse_k8": {
+      "dream_model": "sparse",
+      "stats_k": 8
+    },
+    "sparse_k16": {
+      "dream_model": "sparse",
+      "stats_k": 16
+    }
+  },
+  "common": {
+    "epochs_proj": 15,
+    "l2sp": 0.0,
+    "bn_calib": false,
+    "feat_signorm": false
+  },
+  "memory_kb_per_class": {
+    "sparse_k8": 12.0,
+    "sparse_k16": 24.1
+  },
+  "systems": {
+    "sparse_k8": {
+      "per_seed": [
+        {
+          "R_class_il": [
+            [
+              0.833
+            ],
+            [
+              0.612,
+              0.5685
+            ],
+            [
+              0.6425,
+              0.1435,
+              0.5625
+            ],
+            [
+              0.599,
+              0.167,
+              0.258,
+              0.5695
+            ],
+            [
+              0.309,
+              0.202,
+              0.326,
+              0.3695,
+              0.5965
+            ]
+          ],
+          "class_il": {
+            "ACC": 0.3606,
+            "forgetting": 0.3317,
+            "BWT": -0.3317,
+            "final_per_task": [
+              0.309,
+              0.202,
+              0.326,
+              0.3695,
+              0.5965
+            ]
+          },
+          "task_il": {
+            "ACC": 0.6191,
+            "forgetting": 0.1192,
+            "BWT": -0.1192,
+            "final_per_task": [
+              0.543,
+              0.5755,
+              0.6415,
+              0.625,
+              0.7105
+            ]
+          }
+        }
+      ],
+      "agg": {
+        "class_il_ACC": {
+          "mean": 0.3606,
+          "std": 0.0,
+          "min": 0.3606,
+          "max": 0.3606
+        },
+        "class_il_forgetting": {
+          "mean": 0.3317,
+          "std": 0.0,
+          "min": 0.3317,
+          "max": 0.3317
+        }
+      }
+    },
+    "sparse_k16": {
+      "per_seed": [
+        {
+          "R_class_il": [
+            [
+              0.833
+            ],
+            [
+              0.6105,
+              0.4225
+            ],
+            [
+              0.627,
+              0.0815,
+              0.5895
+            ],
+            [
+              0.584,
+              0.1065,
+              0.263,
+              0.5895
+            ],
+            [
+              0.307,
+              0.1475,
+              0.3185,
+              0.398,
+              0.61
+            ]
+          ],
+          "class_il": {
+            "ACC": 0.3562,
+            "forgetting": 0.3159,
+            "BWT": -0.3159,
+            "final_per_task": [
+              0.307,
+              0.1475,
+              0.3185,
+              0.398,
+              0.61
+            ]
+          },
+          "task_il": {
+            "ACC": 0.6168,
+            "forgetting": 0.0897,
+            "BWT": -0.0874,
+            "final_per_task": [
+              0.6215,
+              0.4925,
+              0.627,
+              0.6245,
+              0.7185
+            ]
+          }
+        }
+      ],
+      "agg": {
+        "class_il_ACC": {
+          "mean": 0.3562,
+          "std": 0.0,
+          "min": 0.3562,
+          "max": 0.3562
+        },
+        "class_il_forgetting": {
+          "mean": 0.3159,
+          "std": 0.0,
+          "min": 0.3159,
+          "max": 0.3159
+        }
+      }
+    }
+  },
+  "verdict": null,
+  "elapsed_s": 13.9
+}
