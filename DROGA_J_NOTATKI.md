@@ -59,3 +59,51 @@ Kryterium uszanowane — NIE ogłaszamy SYGNAL+.
 
 Status: czekamy na pełny J1 (od niego zależy ewentualny run J3
 `--conditioning cond`; smoke J1 sugeruje raczej brak).
+
+## J1 — kondycjonowanie cech (ZAKOŃCZONE, 10.07.2026): SZUM ×2 —
+## hipoteza audytu SFALSYFIKOWANA; seria F/G/H nie wymaga korekty
+
+Pliki: `src/mars_cl_j.py` (calibrate_bn, sigma-norm),
+`src/run_J1_feature_conditioning.py`; wyniki:
+`results/J1_feature_conditioning.json`. Czas: 326 s.
+
+| Wariant (Fashion, class-IL) | ACC | min | F |
+|---|---|---|---|
+| **k16_raw (baza)** | **77.57 ± 1.02%** | 76.59% | 18.8pp |
+| k16_bncal | 76.87 ± 0.42% | 76.36% | 19.4pp |
+| k16_signorm | 76.31 ± 1.57% | 74.52% | 20.7pp |
+| k16_cond | 76.18 ± 0.66% | 75.39% | 20.4pp |
+
+| Wariant (MNIST, class-IL) | ACC | min | F |
+|---|---|---|---|
+| k16_raw (baza) | 70.21 ± 2.80% | 66.64% | 32.0pp |
+| k16_bncal | 70.34 ± 2.58% | 68.12% | 31.1pp |
+| k16_signorm | 70.87 ± 4.56% | 65.37% | 31.0pp |
+| k16_cond | 70.97 ± 3.67% | 67.09% | 30.4pp |
+
+**WERDYKTY (pre-rejestrowane):** Fashion: SZUM (najlepszy kondycjonowany
+= bncal, −0.71pp przy progu 1.44). MNIST: SZUM (+0.76pp przy progu 6.47).
+Sanity: k16_raw = H1b k16 co do 0.00pp na obu zbiorach.
+
+**Ustalenia:**
+1. **Falsyfikacja hipotezy audytu (wynik negatywny = wynik):** martwy
+   BatchNorm w losowym zamrożonym backbone był REALNYM przeoczeniem
+   inżynierskim, ale NIE tłumaczy poziomu wyników — kalibracja nic nie
+   daje (MNIST) lub lekko szkodzi (Fashion). Seria F/G/H nie wymaga
+   korekty; opublikowane liczby stoją na najlepszej znanej konfiguracji.
+   Do papieru: jedno zdanie w appendixie "checked and cleared".
+2. **sigma-norm konsekwentnie szkodzi na Fashion:** pary per-seed 5/5
+   ujemne (−0.65…−2.48, śr. −1.26); k16_cond również 5/5 ujemne.
+   Hipoteza mechanizmu (do ewentualnego sprawdzenia, nie twierdzenie):
+   w losowych cechach ReLU wariancja wymiaru koreluje z jego
+   informatywnością — wyrównanie skal AWANSUJE wymiary szumowe
+   w k-means snu i podach; projekcja i tak uczy się skal dla routingu.
+3. **Obserwacja stabilizacyjna:** bncal zmniejsza rozrzut seedów na
+   Fashion (std 1.02 → 0.42) bez podniesienia średniej — kalibracja
+   ujednolica, nie ulepsza.
+4. **Decyzja sekwencyjna (wg planu):** J1 ≠ SYGNAL+ → run J3
+   `--conditioning cond` ODWOŁANY. J2 biegnie wg planu (pełna siatka —
+   CIFAR to inny reżim: tam wejście było nieznormalizowane, więc
+   kondycjonowanie może działać inaczej; rozstrzygną pary per-seed).
+
+Status: pozostał pełny J2 (CIFAR) i ewentualnie J4 (GloVe 300d).
