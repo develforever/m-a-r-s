@@ -207,3 +207,44 @@ Próg naprawczy z J2 (33.05) przebity o +4.5pp.
 18.90 ± 8.80 (F4). Fashion: 78.49 ± 0.91 nominalnie (formalnie szum
 vs diag). Status serii: J1/J2 audyt zamknięty, J3 szum-spójny,
 J2b SYGNAL+. Pozostaje J4 (opcja) i decyzja o merge do main.
+
+## J4 — GloVe 300d (ZAKOŃCZONE, 10.07.2026): SZUM w seq (czysty null);
+## sufit +0.72pp (5/5 par) — geometria słów NIE jest wąskim gardłem seq
+
+Pliki: `src/run_J4_glove300.py`; wyniki: `results/J4_glove300.json`.
+Czas: 164 s. Run już po merge'u v0.4 — wynik dochodzi na main.
+
+| Wariant (Fashion, class-IL) | ACC | min | F |
+|---|---|---|---|
+| all_50 (sufit, reprodukcja G1) | 80.45 ± 0.86% | 79.20% | 8.7pp |
+| **all_300 (nowy sufit)** | **81.16 ± 0.87%** | 79.94% | 8.7pp |
+| k16_50 (baza seq, = H1b) | 77.57 ± 1.02% | 76.59% | 18.8pp |
+| k16_300 | 77.64 ± 1.08% | 76.74% | 19.3pp |
+
+**WERDYKT (pre-rejestrowany, k16_300 vs k16_50): SZUM** — +0.07pp
+(min −0.26) przy progu 2.10. Diagnostyka: all_300 vs all_50 = +0.72pp,
+pary 5/5 dodatnie (+0.26…+0.89), formalnie pod progiem (1.73).
+
+**Ustalenia:**
+1. **Czwarta czysta reprodukcja serii:** all_50 = G1 g1_all co do
+   0.00pp (80.45 ± 0.86), k16_50 = H1b (77.57 ± 1.02).
+2. **Null jakościowo inny niż J3:** pary seq mieszane (−0.26…+0.32) —
+   to BRAK efektu, nie mały-spójny-efekt-pod-progiem jak w J3
+   (10/10 dodatnich). Rozróżnienie warte zapamiętania przy czytaniu
+   SZUM-ów.
+3. **Interpretacja przyczynowa spójna z H1:** wąskim gardłem seq jest
+   wierność snu, nie geometria kotwic — ulepszanie CELU projekcji nic
+   nie daje, dopóki ogranicza sen. Jednocześnie pre-rejestrowane ryzyko
+   (dryf 6× większej projekcji) NIE zmaterializowało się jako SYGNAL−:
+   sen k16 utrzymał projekcję 128→300 (F 18.8 → 19.3pp, minimalnie).
+   Obie strony ryzyka zważone i zmierzone.
+4. **Sufit drgnął:** bogatsza geometria słów podnosi g1_all do
+   81.16 ± 0.87 (nominalnie; 5/5 par) — luka sparse_k16 (78.49) do
+   sufitu rośnie do ~2.7pp. Kandydat J4b (NIE pre-rejestrowany,
+   decyzja Roberta): sparse_k16 × 300d — złożenie dźwigni wierności
+   z wyższym sufitem; tanie (2 warianty × 5 seedów).
+
+**STATUS KOŃCOWY SERII J: KOMPLET.** J1 SZUM (audyt czysty) · J2
+SYGNAL+ vs replay, naprawa NIE · J3 SZUM-spójny (nominalny best
+Fashion) · J2b SYGNAL+ (best CIFAR 37.51) · J4 SZUM (null seq,
+sufit +0.7). Merge → main 9fba5ae, tag v0.4; J4 dołączony po tagu.
