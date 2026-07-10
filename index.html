@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MARS-CL — continual learning without stored data (live demo)</title>
+<style>
+  :root { --bg:#10141a; --card:#1a2029; --ink:#e8e6e3; --dim:#8b95a3;
+          --acc:#5eb2ff; --ok:#4fc37a; --bad:#e06c60; --warn:#e0b060; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+         font:15px/1.5 system-ui, sans-serif; }
+  main { max-width:980px; margin:0 auto; padding:24px 16px 64px; }
+  h1 { font-size:1.5rem; margin:.2em 0; }
+  h2 { font-size:1.05rem; margin:1.6em 0 .5em; color:var(--acc); }
+  .dim { color:var(--dim); }
+  .card { background:var(--card); border-radius:10px; padding:14px 16px; margin:10px 0; }
+  #status { font-weight:600; }
+  .tasks { display:flex; gap:8px; flex-wrap:wrap; }
+  .tasks button { background:#232b37; color:var(--ink); border:1px solid #333d4d;
+    border-radius:8px; padding:8px 12px; cursor:pointer; font:inherit; }
+  .tasks button.active { border-color:var(--acc); background:#24344a; }
+  .tasks button.future { opacity:.35; }
+  .bars { display:grid; grid-template-columns:auto 1fr auto; gap:4px 10px;
+          align-items:center; margin-top:8px; }
+  .bar { height:12px; background:#2a3442; border-radius:6px; overflow:hidden; }
+  .bar > div { height:100%; background:var(--ok); }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(56px,1fr));
+          gap:6px; margin-top:8px; }
+  .grid canvas { width:100%; image-rendering:pixelated; border-radius:6px;
+    cursor:pointer; border:2px solid transparent; background:#000; }
+  .grid canvas.sel { border-color:var(--acc); }
+  .grid canvas.unseen { opacity:.3; }
+  #verdict { font-size:1.1rem; font-weight:700; }
+  .simrow { display:grid; grid-template-columns:110px 1fr 52px; gap:8px;
+            align-items:center; margin:2px 0; font-size:.85rem; }
+  .simbar { height:9px; background:#2a3442; border-radius:5px; overflow:hidden; }
+  .simbar > div { height:100%; background:var(--acc); }
+  .muted { opacity:.35; }
+  code { background:#242c38; padding:1px 5px; border-radius:4px; }
+  a { color:var(--acc); }
+  #bigimg { width:112px; height:112px; image-rendering:pixelated;
+            border-radius:8px; background:#000; float:right; margin-left:14px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>MARS-CL <span class="dim">— continual learning without stored data</span></h1>
+  <p class="dim">A neural system that learns 10 Fashion-MNIST classes in 5 sequential
+  tasks <b>without storing a single training image</b>. Class prototypes are public
+  GloVe <i>word vectors</i> ("semantic anchors"); the past is retained as tiny
+  per-class feature statistics replayed as "dreams" (parametric sleep) on a frozen
+  random backbone. Everything below runs in your browser, in plain JavaScript —
+  the exact weights trained in PyTorch.
+  <a href="https://github.com/develforever/m-a-r-s">Paper &amp; code</a>.</p>
+
+  <div class="card"><span id="status">Loading weights…</span>
+    <div id="loader" style="display:none; margin-top:8px">
+      Could not fetch <code>mars_demo_weights.json</code> (run
+      <code>python scripts/export_demo_weights.py</code>, then serve this folder:
+      <code>python -m http.server</code>) — or pick the file manually:
+      <input type="file" id="filepick" accept=".json">
+    </div>
+  </div>
+
+  <div id="app" style="display:none">
+    <h2>1 · Learn tasks one by one</h2>
+    <p class="dim">Each task adds two classes. Click through the sequence and watch
+    the accuracy on <b>earlier</b> tasks: it barely moves. There is no replay buffer —
+    old classes survive as word anchors + ~16&nbsp;KB of dreamed statistics.</p>
+    <div class="tasks" id="taskbtns"></div>
+    <div class="bars" id="accbars"></div>
+    <p id="accnote" class="dim"></p>
+
+    <h2>2 · Classify test images</h2>
+    <p class="dim">Click any image (never seen in training). Greyed-out images belong
+    to classes the system has not learned yet at this point of the sequence.</p>
+    <div class="grid" id="imggrid"></div>
+
+    <div class="card" id="result" style="display:none">
+      <canvas id="bigimg" width="28" height="28"></canvas>
+      <div id="verdict"></div>
+      <div class="dim" id="routeinfo" style="margin:4px 0 8px"></div>
+      <div id="sims"></div>
+    </div>
+
+    <h2>3 · What just happened</h2>
+    <p class="dim">The image went through a <b>frozen random CNN</b> (never trained —
+    measured to beat a task-trained one), was projected into GloVe word space, and
+    routed to the <b>nearest word anchor</b>; that class's small "pod" produced the
+    final answer. Nearest-word routing is the whole class-incremental mechanism:
+    new class = new word, old anchors never move.
+    Full study: <a href="https://github.com/develforever/m-a-r-s/blob/main/WHITEPAPER.md">whitepaper</a>
+    (77.6&nbsp;±&nbsp;1.0% class-IL, statistically equivalent to a 200-image replay
+    buffer, ~30% less forgetting, 5 seeds).</p>
+    <p class="dim" id="paritynote"></p>
+  </div>
+</main>
+
+<script src="mars_core.js"></script>
+<script>
+"use strict";
+let model, pixels, D;               // D = weights json
+const $ = id => document.getElementById(id);
+let currentTask = -1, selectedImg = -1;
+
+async function boot() {
+  try {
+    const r = await fetch("mars_demo_weights.json");
+    if (!r.ok) throw new Error(r.status);
+    init(await r.json());
+  } catch (e) {
+    $("status").textContent = "Weights not found.";
+    $("loader").style.display = "block";
+    $("filepick").onchange = ev => {
+      const fr = new FileReader();
+      fr.onload = () => init(JSON.parse(fr.result));
+      fr.readAsText(ev.target.files[0]);
+    };
+  }
+}
+
+function init(data) {
+  D = data;
+  model = new MarsModel(D);
+  const bin = atob(D.test_images.pixels_b64);
+  pixels = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) pixels[i] = bin.charCodeAt(i);
+
+  const p = model.parityCheck(pixels);
+  $("status").innerHTML = p.pass
+    ? `Weights loaded — <span style="color:var(--ok)">parity check vs PyTorch PASSED</span>` +
+      ` <span class="dim">(max diff ${p.maxDiff.toExponential(1)})</span>`
+    : `<span style="color:var(--bad)">PARITY CHECK FAILED (max diff ${p.maxDiff})</span>`;
+  $("paritynote").textContent = "Integrity: on load, this page recomputed the " +
+    "feature vector of image #0 and compared it against the value exported from " +
+    `PyTorch — max difference ${p.maxDiff.toExponential(1)}. Final accuracy of ` +
+    `this very model (full test set, PyTorch): ${(D.meta.final_acc_class_il*100).toFixed(2)}%` +
+    (D.meta.smoke ? " (SMOKE export — retrain with full epochs for real numbers)." : ".");
+
+  const tb = $("taskbtns");
+  D.snapshots.forEach((s, t) => {
+    const b = document.createElement("button");
+    b.textContent = `Task ${t + 1}: ${s.classes.map(c => D.class_names[c]).join(" · ")}`;
+    b.onclick = () => setTask(t);
+    tb.appendChild(b);
+  });
+  buildGrid();
+  setTask(D.snapshots.length - 1);
+  $("app").style.display = "block";
+}
+
+function setTask(t) {
+  currentTask = t;
+  model.setTask(t);
+  [...$("taskbtns").children].forEach((b, i) => {
+    b.classList.toggle("active", i === t);
+    b.classList.toggle("future", i > t);
+  });
+  const bars = $("accbars"); bars.innerHTML = "";
+  const row = D.R_class_il[t];
+  row.forEach((acc, j) => {
+    const lab = document.createElement("div");
+    lab.textContent = `Task ${j + 1}`;
+    const wrap = document.createElement("div"); wrap.className = "bar";
+    const fill = document.createElement("div");
+    fill.style.width = (acc * 100) + "%";
+    if (j < t) fill.style.background = acc > 0.55 ? "var(--ok)" : "var(--warn)";
+    wrap.appendChild(fill);
+    const num = document.createElement("div");
+    num.textContent = (acc * 100).toFixed(1) + "%";
+    bars.append(lab, wrap, num);
+  });
+  const mean = row.reduce((a, b) => a + b, 0) / row.length;
+  $("accnote").textContent = `Class-IL accuracy per task after learning task ${t + 1} ` +
+    `(full 10k test set, precomputed in PyTorch). Average: ${(mean * 100).toFixed(1)}%. ` +
+    (t > 0 ? "Old tasks stay up — no stored images, no replay buffer." : "");
+  [...$("imggrid").children].forEach(cv =>
+    cv.classList.toggle("unseen", !model.seen.includes(+cv.dataset.label)));
+  if (selectedImg >= 0 && model.seen.includes(D.test_images.labels[selectedImg]))
+    classify(selectedImg);
+  else $("result").style.display = "none";
+}
+
+function drawImage(canvas, idx, scalePx) {
+  const ctx = canvas.getContext("2d");
+  const img = ctx.createImageData(28, 28);
+  for (let i = 0; i < 784; i++) {
+    const v = pixels[idx * 784 + i];
+    img.data[4 * i] = img.data[4 * i + 1] = img.data[4 * i + 2] = v;
+    img.data[4 * i + 3] = 255;
+  }
+  ctx.putImageData(img, 0, 0);
+}
+
+function buildGrid() {
+  const g = $("imggrid");
+  for (let i = 0; i < D.test_images.n; i++) {
+    const cv = document.createElement("canvas");
+    cv.width = cv.height = 28;
+    cv.dataset.label = D.test_images.labels[i];
+    cv.title = D.class_names[D.test_images.labels[i]];
+    drawImage(cv, i);
+    cv.onclick = () => { if (!cv.classList.contains("unseen")) classify(i); };
+    g.appendChild(cv);
+  }
+}
+
+function classify(idx) {
+  selectedImg = idx;
+  [...$("imggrid").children].forEach((cv, i) => cv.classList.toggle("sel", i === idx));
+  const px = pixels.subarray(idx * 784, (idx + 1) * 784);
+  const r = model.classify(px);
+  const truth = D.test_images.labels[idx];
+  const ok = r.pred === truth;
+  drawImage($("bigimg"), idx);
+  $("result").style.display = "block";
+  $("verdict").innerHTML = ok
+    ? `<span style="color:var(--ok)">✔ ${D.class_names[r.pred]}</span>`
+    : `<span style="color:var(--bad)">✘ ${D.class_names[r.pred]}</span>` +
+      ` <span class="dim">(truth: ${D.class_names[truth]})</span>`;
+  $("routeinfo").textContent = `Routed to nearest word anchor: "` +
+    `${D.class_names[r.routed]}" — cosine similarity in GloVe space, ` +
+    `then pod refinement. No stored image was consulted.`;
+  const sims = $("sims"); sims.innerHTML = "";
+  const order = Object.keys(r.sims).map(Number)
+    .sort((a, b) => r.sims[b] - r.sims[a]);
+  for (const c of order) {
+    const seen = model.seen.includes(c);
+    const row = document.createElement("div");
+    row.className = "simrow" + (seen ? "" : " muted");
+    const s = Math.max(0, (r.sims[c] + 1) / 2);   // [-1,1] -> [0,1] for width
+    row.innerHTML = `<div>${D.class_names[c]}${seen ? "" : " (not learned)"}</div>` +
+      `<div class="simbar"><div style="width:${(s * 100).toFixed(1)}%` +
+      `${c === r.routed ? ";background:var(--ok)" : ""}"></div></div>` +
+      `<div>${r.sims[c].toFixed(3)}</div>`;
+    sims.appendChild(row);
+  }
+}
+
+boot();
+</script>
+</body>
+</html>
