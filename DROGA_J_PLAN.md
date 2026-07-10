@@ -143,3 +143,26 @@ proj_train="all") oraz seq: k16_50 / k16_300 (uczciwy CL, F3b+H1b).
 
 Wyniki dopisujemy do DROGA_J_NOTATKI.md (powstanie po pierwszym runie);
 merge do main dopiero po komplecie werdyktów i decyzji Roberta.
+
+## J2b (dopisane 10.07.2026, PRZED runem) — sen spike-and-slab na CIFAR
+
+Motywacja: J3 dał spójny kierunkowy zysk rzadkości snu (Fashion 10/10
+par dodatnich, MNIST +3.05pp), a J2 potwierdził, że dźwignia snu
+przenosi się na obrazy naturalne (k4→k16: +1.21/+1.42pp). Pytanie J2b:
+czy rzadkość snu działa też na cechach z losowego backbone'u CIFAR?
+
+Plik: `src/run_J2b_cifar_sparse.py` → `results/J2b_cifar_sparse.json`
+
+Warianty (wejście znormalizowane jak J2, bez kondycjonowania — J1/J2
+wykluczyły cond; epochs_proj=15, l2sp=0):
+  sparse_k8  (~12 KB/klasę), sparse_k16 (~24 KB/klasę)
+Baza porównawcza: mars_k16_raw z J2 (33.03 ± 1.16), TE SAME seedy —
+pary legalne bez re-runu (determinizm ścieżki potwierdzony sanity
+J1/J3: 0.00pp; konstrukcja backbone'u przed init klasy, jak w J2).
+
+Kryteria (Z GÓRY, class-IL):
+- SYGNAL+ : sparse_k16 vs mars_k16_raw (pary per-seed): śr. d > próg
+  szumu (std+std) ORAZ min per-seed > 0; SYGNAL− symetrycznie; inaczej
+  SZUM.
+- Obserwacje: czy średnia przekracza próg naprawczy z J2 (33.05);
+  równopamięciowo sparse_k8 vs diag k16; dystans do joint 70.24.

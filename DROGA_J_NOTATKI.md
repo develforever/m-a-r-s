@@ -107,3 +107,58 @@ Sanity: k16_raw = H1b k16 co do 0.00pp na obu zbiorach.
    kondycjonowanie może działać inaczej; rozstrzygną pary per-seed).
 
 Status: pozostał pełny J2 (CIFAR) i ewentualnie J4 (GloVe 300d).
+
+## J2 — Split-CIFAR-10 znormalizowany (ZAKOŃCZONE, 10.07.2026):
+## SYGNAL+ vs replay; pytanie naprawcze: NIE — sufit losowych cech
+## potwierdzony. AUDYT ZAMKNIĘTY.
+
+Pliki: `src/run_J2_cifar_normalized.py`; wyniki:
+`results/J2_cifar_normalized.json`. Czas: 1401 s.
+
+| System (class-IL) | ACC | min | F |
+|---|---|---|---|
+| finetune | 10.16 ± 0.32% | 10.00% | 66.2pp |
+| replay-200 | 14.03 ± 4.93% | 10.00% | 69.2pp |
+| joint (sufit) | 70.24 ± 0.69% | 69.19% | — |
+| mars_k4_raw | 31.82 ± 1.32% | 30.09% | 43.9pp |
+| mars_k4_cond | 30.89 ± 0.80% | 29.72% | 47.7pp |
+| **mars_k16_raw** | **33.03 ± 1.16%** | **31.35%** | **41.9pp** |
+| mars_k16_cond | 32.31 ± 0.65% | 31.29% | 44.5pp |
+
+Referencje F4 (stare, wejście /255): replay 18.90 ± 8.80 | combo
+32.04 ± 1.01 | joint 68.73 ± 2.32.
+
+**WERDYKTY (pre-rejestrowane):**
+- Główny (mars_k16_cond vs replay): **SYGNAL+** — +18.27pp
+  (min +12.29) przy progu 5.58.
+- Pytanie naprawcze (najlepszy nowy MARS vs stary combo + std):
+  33.03 < 33.05 → **NIE** (chybione o 0.02pp; uczciwie NIE).
+
+**Ustalenia:**
+1. **Inwersja rankingu WZMOCNIONA w uczciwszych warunkach.**
+   Normalizacja pomogła monolitom (joint 68.73 → 70.24, wariancja
+   3× w dół), a replay mimo to SPADŁ: 14.03 ± 4.93, 3/5 seedów na
+   poziomie losowym (10-11%). Najgorszy seed MARS (31.29) leży
+   ~2.5pp NAD replay+3σ (28.8). Przeciwnik dostał lepsze warunki
+   i przegrał wyraźniej niż w F4 — teza stacjonarności w najmocniejszej
+   dotąd formie.
+2. **Audyt zamknięty — obie usterki realne, obie niewinne.**
+   Normalizacja wejścia jest dla losowego zamrożonego backbone'u
+   ~neutralna (k4_raw 31.82 vs stary combo 32.04 przy innych
+   pokrętłach), a kondycjonowanie na CIFAR powtarza podpis z J1:
+   ACC −0.7…−0.9pp, forgetting +2.6…+3.8pp, wariancja seedów ~2× w dół.
+   Niski wynik CIFAR (32-33%) NIE był artefaktem przygotowania danych —
+   to sufit losowych cech (33.0 vs 70.2), dokładnie jak zdiagnozowano
+   w F4. Droga w górę = mocniejszy zamrożony backbone (fork
+   tożsamości), nie mechanizm CL i nie data prep.
+3. **Sen k16 przenosi się na obrazy naturalne:** k4→k16 = +1.21pp
+   (raw) / +1.42pp (cond) — kierunkowo spójne z H1b (Fashion +1.79
+   SYGNAL+) i z J3. Wierność snu to jedyna dźwignia mechanizmowa,
+   która porusza wynik we WSZYSTKICH dotąd zmierzonych kontekstach.
+4. **Nowy nominalny best CIFAR:** 33.03 ± 1.16 (min 31.35) — nominalnie
+   +1.0pp nad stary combo, formalnie w szumie progu naprawczego.
+
+**Wniosek serii J po J1+J2 (audyt):** przeoczenia inżynierskie
+(martwy BN, brak Normalize) istniały, ale nie tłumaczą poziomu wyników;
+opublikowane liczby F/G/H/F4 stoją. Jedyna potwierdzana kierunkowo
+dźwignia to model snu — stąd J2b (pre-rejestracja w planie).
