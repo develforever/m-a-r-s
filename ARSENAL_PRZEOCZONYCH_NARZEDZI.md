@@ -118,3 +118,25 @@ Wątek deployment (drugi filar, po wynikach F):
 
 Zasada bez zmian: każdy pomysł wchodzi przez pre-rejestrowany eksperyment
 z kryterium werdyktu; wynik negatywny = wynik.
+
+---
+
+## Dopisek 2026-07-10: Droga I (kandydat) — kolektywne uczenie przez wymianę snów
+
+Pomysł Roberta ("AI, które będą się uczyć razem"), doprecyzowany w sesji:
+dwa (N) agentów MARS-CL z TYM SAMYM zamrożonym losowym backbone'em (ten sam
+seed — synchronizacja losowości jest darmowa) i tą samą przestrzenią słów
+(GloVe) ma ze sobą ZGODNE pamięci: statystyki cech klasy (~16 KB przy k16)
+policzone u agenta A są bezpośrednio użyteczne u agenta B. A uczy się klasy
+na swoich danych → wysyła B same statystyki + nazwę klasy → B śni cechy,
+doucza projekcję i rozpoznaje klasę, której nigdy nie widział. Zero danych
+w sieci (prywatność jak w federated learning, ale wymieniamy sen, nie
+gradienty/wagi).
+
+Pre-rejestrowane pytania na ewentualny run (Robert, lokalnie, 5 seedów):
+(a) ile traci klasa "przeszczepiona" vs nauczona lokalnie (te same dane)?
+(b) czy fuzja statystyk z dwóch agentów (różne dane tej samej klasy) jest
+lepsza niż każda osobno? (c) skalowanie: N agentów × 2 klasy każdy →
+czy system zbiorczy ≈ g1_all? Werdykt wstępny: REALNE — wyrasta wprost
+z stacjonarności (F1d) i przenośności statystyk (F3b/H1b); wymaga zgody
+Roberta na odmrożenie kodu (nowa seria, po publikacji).

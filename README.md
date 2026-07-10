@@ -98,6 +98,7 @@ alongside means; costs in MAC with the shared backbone counted as always-paid.
 | `WHITEPAPER.md` | Full write-up (EN): PoC, routing ceiling, memory without data |
 | `RELATED_WORK.md` | Verified bibliography and positioning |
 | `src/` | All runners and models (PyTorch) |
+| `demo/mars_cl_demo/` | Interactive browser demo of MARS-CL (pure JS, parity-checked vs PyTorch) |
 | `results/*.json` | Per-seed results for every experiment, including smoke runs |
 | `DROGA_D/E/F/G/H_NOTATKI.md` | Working notes with full result tables (Polish) |
 | `*_PLAN.md` | Pre-registered experiment plans, written before runs (Polish) |

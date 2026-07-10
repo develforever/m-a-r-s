@@ -1,0 +1,6 @@
+{
+  "name": "mars-cl-demo",
+  "private": true,
+  "type": "commonjs",
+  "description": "Static browser demo of MARS-CL (no build step; python -m http.server)"
+}
