@@ -1,7 +1,7 @@
 # M.A.R.S.: Modular Autonomous Refinement System
 ## The Routing Ceiling, the Immutable Representation, and Memory Without Data
 
-**Draft v0.3 — July 2026** (v0.1: June 2026, TMU routing PoC — retained as Part I; v0.2: routing ceiling study — Part II)
+**Draft v0.4 — July 2026** (v0.1: June 2026, TMU routing PoC — retained as Part I; v0.2: routing ceiling study — Part II; v0.3: July 2026 code freeze; v0.4: Series J — audit cleared, sparse dreams)
 
 ---
 
@@ -9,7 +9,7 @@
 
 We present a systematic empirical study of modular neural architectures (router + specialist pods on a shared backbone), conducted with a strict multi-seed methodology in which every experiment has a pre-registered, falsifiable verdict criterion. Part II establishes a **routing ceiling**: on a shared representation, routing accuracy cannot be improved by any modification of the routing *algorithm* — demonstrated on three independent information channels (ensemble: +0.00pp; distillation: −2.5pp; predictive coding: +0.05pp, all within noise). The ceiling is set by the representation: a small CNN backbone raises Fashion-MNIST from 89.61% to 91.99%, with the gain flowing through routing, and a slimmed variant retains 70% of it at 1.81× MLP cost. Hierarchical routing then exposes **oracle inflation**: the standard "router→oracle gap" overstates routing headroom (~0.5pp real vs 6pp apparent), because oracle assignment leaks label information.
 
-Part III applies the design law that recurs throughout the study — *a narrowly-supervised shared representation is worse than none* (four independent instances) — to class-incremental continual learning. Freezing the representation entirely and placing all plasticity in prototypes and pods, we replace the episodic memory buffer with two data-free components: **semantic anchors** (class prototypes from public word embeddings, existing before any data) and **parametric sleep** (per-class k-centroid feature statistics, ~4 KB/class, dreamed as balanced rehearsal). On Split-Fashion (class-IL) this reaches statistical equivalence with experience replay (77.6 ± 1.0% vs 77.0 ± 1.1% — nominally above, within the pre-registered noise threshold) at zero stored samples, constant inference cost, and ~30% less forgetting. On Split-CIFAR-10 the ranking inverts: replay-200 collapses (18.9 ± 8.8%) as its trainable backbone drifts on natural images, while the immutable-representation system remains stable (32.0 ± 1.0%) — the harder the data, the more valuable a representation that cannot drift. Boundary conditions are measured, not hidden: the mechanism requires class names with visual semantics (digit names fail), absolute accuracy is capped by random features, and compositional zero-shot from attribute descriptions fails its pre-registered threshold while confirming a structural reachability rule 3-for-3. We frame the comparison honestly on a **resource axis**: replay consumes stored user pixels; our system consumes public, static word geometry.
+Part III applies the design law that recurs throughout the study — *a narrowly-supervised shared representation is worse than none* (four independent instances) — to class-incremental continual learning. Freezing the representation entirely and placing all plasticity in prototypes and pods, we replace the episodic memory buffer with two data-free components: **semantic anchors** (class prototypes from public word embeddings, existing before any data) and **parametric sleep** (per-class k-centroid feature statistics, ~4 KB/class, dreamed as balanced rehearsal). On Split-Fashion (class-IL) this reaches statistical equivalence with experience replay (77.6 ± 1.0% vs 77.0 ± 1.1% — nominally above, within the pre-registered noise threshold) at zero stored samples, constant inference cost, and ~30% less forgetting. On Split-CIFAR-10 the ranking inverts: replay-200 collapses (18.9 ± 8.8%; 14.0 ± 4.9% even with per-channel input normalization that helps its trainable backbone) while the immutable-representation system remains stable, and a sparsity-aware dream model (spike-and-slab: per-dimension activation probability with moments conditional on activity, so dreamed zeros are exact zeros) lifts it to 37.5 ± 1.4% — a pre-registered SIGNAL+ over diagonal dreams (+4.5pp, all 5 paired seeds) whose effect size grows with data difficulty (Fashion +0.9pp, within noise; CIFAR +4.5pp). The harder the data, the more valuable a representation that cannot drift — and a dream that respects its geometry. Boundary conditions are measured, not hidden: the mechanism requires class names with visual semantics (digit names fail), absolute accuracy is capped by random features, and compositional zero-shot from attribute descriptions fails its pre-registered threshold while confirming a structural reachability rule 3-for-3. We frame the comparison honestly on a **resource axis**: replay consumes stored user pixels; our system consumes public, static word geometry.
 
 ---
 
@@ -187,20 +187,25 @@ The base system (random frozen backbone, nearest-class-mean prototypes, per-clas
 
 Verdict (pre-registered): statistical equivalence with replay — the final k16 variant is nominally *above* replay (+0.60pp) but within the noise threshold, so we do not claim a win — at zero buffer, constant MAC, and 30–40% less forgetting. Two follow-ups sharpened the picture. Orthogonal weight modification (OWM) on the projection, which *guarantees* old feature mappings cannot move, changed nothing on Fashion — a clean elimination showing the residual gap to the 80.45% upper bound is **dream fidelity, not drift** (OWM did add +5.0pp on MNIST, where word anchors are weak; and OWM *alone*, without the dream, collapses to 42.9 ± 9.7% — the projector protects geometry, not decision boundaries). Raising dream resolution then confirmed the diagnosis (1 Gaussian: 70.8 → k4: 75.8 → k16: 77.6), with a design finding: **full-covariance Gaussians are worse than many local diagonal centroids** (73.9% at 4–16× the memory) — post-ReLU features are sparse, non-negative and multimodal, and a global Gaussian samples off the data manifold. **Boundary condition, measured:** on MNIST the mechanism loses decisively (−19pp to replay) — digit names carry no visual semantics, and even the all-classes upper bound sits below replay. Grounding works where language encodes appearance.
 
+**Sparse dreams (Series J, spike-and-slab).** The full-covariance negative pointed at geometry: post-ReLU features are sparse, non-negative, multimodal. The final refinement models the sparsity explicitly — per centroid and per dimension we store P(feature > 0) plus mean and variance conditional on activity, and dream via a Bernoulli mask over a truncated Gaussian, so zeros are exact zeros rather than clamped tails. On Split-Fashion this yields 78.49 ± 0.91% (worst seed 77.72%, above replay's mean) at forgetting 16.0pp — nominally the project's best, but within the pre-registered noise threshold of diagonal k16 (+0.91pp at a 1.93pp bar; all 5 paired seeds positive), so it is reported as an observation, not a win. At equal memory, structure dominates resolution: sparse k=8 (~12 KB/class) matches or beats diagonal k=16 (~16 KB/class) on both datasets. The verdict-grade evidence arrives on CIFAR (Section 12).
+
 **The resource axis.** This is not a *ceteris paribus* victory over replay: the system injects external knowledge. The honest framing is that every CL method consumes a resource — replay consumes *stored user data* (privacy cost, memory growing with data); MARS consumes *public, static word geometry* (free, task-data-independent, requiring only class names). The result defines a solution category: episodic memory replaced by semantic priors plus parametric sleep.
 
 ## 12. Scale test: Split-CIFAR-10 inverts the ranking
 
 On natural images the pre-registered risk was that random features would be too weak. The risk materialized — and the comparison inverted anyway:
 
-| Split-CIFAR-10, class-IL | ACC | Forgetting |
+| Split-CIFAR-10, class-IL (per-channel normalized input, v0.4) | ACC | Forgetting |
 |---|---|---|
-| fine-tune | 10.14 ± 0.32% | 73.0pp |
-| replay-200 | 18.90 ± **8.80**% | 64.8pp |
-| **MARS (combo)** | **32.04 ± 1.01%** | **31.0pp** |
-| joint (ceiling) | 68.73 ± 2.32% | — |
+| fine-tune | 10.16 ± 0.32% | 66.2pp |
+| replay-200 | 14.03 ± **4.93**% | 69.2pp |
+| MARS (diagonal k16 dreams) | 33.03 ± 1.16% | 41.9pp |
+| **MARS (sparse k16 dreams, final)** | **37.51 ± 1.35%** | **32.7pp** |
+| joint (ceiling) | 70.24 ± 0.69% | — |
 
-Replay's trainable backbone drifts on hard data and 200 samples cannot anchor it: it collapses, with 7× the seed variance of MARS. The immutable representation has nothing to drift; MARS' worst seed (30.57%) exceeds replay's mean. **The stationarity advantage grows with data difficulty.** Honest caveats: absolute accuracy is representation-capped (32% vs a 68.7% ceiling — the road up is a stronger *frozen* backbone, not a different CL mechanism); replay's buffer size is an unswept axis (200 was pre-registered; larger buffers would help it).
+*(v0.3 numbers on raw /255 input — fine-tune 10.14 ± 0.32%, replay 18.90 ± 8.80%, MARS combo 32.04 ± 1.01%, joint 68.73 ± 2.32% — remain in `results/F4_split_cifar.json`. Normalization helps the trainable monoliths — joint +1.5pp at 3× lower variance — is ~neutral for the frozen random backbone, and does not rescue replay.)*
+
+Replay's trainable backbone drifts on hard data and 200 samples cannot anchor it: it collapses even under input normalization (3/5 seeds at chance level), while MARS' worst seed (36.20%) exceeds replay's mean by three of replay's standard deviations. **The stationarity advantage grows with data difficulty — and so does the dream-fidelity advantage:** sparse dreams add +4.48pp over diagonal dreams on CIFAR (min per-seed +3.50, 5/5 positive, pre-registered SIGNAL+ at a 2.51pp bar) versus +0.91pp (noise) on Fashion, and memory can simultaneously shrink (sparse k=8, ~12 KB/class: +4.06pp). Honest caveats: absolute accuracy remains representation-capped (37.5% vs a 70.2% ceiling — the road up is a stronger *frozen* backbone, not a different CL mechanism); replay's buffer size is an unswept axis (200 was pre-registered; larger buffers would help it).
 
 ## 13. Compositional zero-shot (G2): a negative result with structure
 
@@ -211,11 +216,12 @@ If routing operates in a space of word-attributes ("has-sleeves", "is-footwear",
 **Honest limitations.**
 1. Part II results (routing ceiling, feature lever) are on MNIST-scale benchmarks; Part III extends the *continual-learning* claims to Split-CIFAR-10, but Part II's ceiling characterization has not been replicated on natural images.
 2. MAC is a proxy that **does not predict GPU wall-time** (E4): a monolithic MLP with 0.6× the MAC of the slim CNN runs 16× faster on CUDA (large matmuls: ~50% of peak; small convolutions: ~3%). Time-per-10k-samples at saturated utilization was used as an energy proxy (the GTX 1050 Ti does not expose power telemetry); absolute joules require instrumented hardware. The efficiency claims of small modular networks belong on hardware that honors MAC (CPU SIMD with in-cache pods, NPUs), not desktop GPUs.
-3. Part III's absolute accuracy is capped by random frozen features (CIFAR: 32% vs a 68.7% joint ceiling). The mechanism is representation-agnostic; stronger frozen backbones (self-supervised or pretrained embeddings) are the measured road up and an explicit fork in the project's identity (from-scratch vs foundation-embedding memory layer).
+3. Part III's absolute accuracy is capped by random frozen features (CIFAR: 37.5% vs a 70.2% joint ceiling). The mechanism is representation-agnostic; stronger frozen backbones (self-supervised or pretrained embeddings) are the measured road up and an explicit fork in the project's identity (from-scratch vs foundation-embedding memory layer).
 4. The replay comparison fixes the buffer at 200 samples (pre-registered); buffer size is an unswept axis and larger buffers would favor replay. The semantic mechanism requires class names with visual semantics (MNIST is the measured counterexample).
 5. Ternary quantization of pods does not transfer to the v2 slim stack (−2.7 ± 2.8pp; architecture-specific, see Section 8) — and the "≤ noise threshold" verdict criterion itself proved gameable by high variance, motivating an added per-seed worst-case condition in later experiment plans.
+6. An engineering-audit pass (Series J, pre-registered) tested two pipeline concerns and cleared both: calibrating the frozen backbone's BatchNorm statistics and per-dimension feature scale normalization are NOISE (the latter negative on all 5 Fashion seeds), and per-channel CIFAR input normalization is ~neutral for the frozen random backbone. The dead-BatchNorm oversight was real but innocent — reported levels are properties of the mechanism, not preprocessing artifacts.
 
-**Roadmap (Droga H and beyond).** Orthogonal weight modification (OWM) on the semantic projection — updates projected into the null space of past-class features, computed from the same statistics the parametric sleep already stores; expected to attack the residual 15.8pp forgetting with an exact guarantee on linear layers. Vector-symbolic binding as a dense-matmul replacement for physical pods (capacity of superposition to be measured, not assumed; requires orthogonalized updates). Attribute vocabularies with error-correcting code distance (G2b). Stronger frozen representations. LSH/Morton/TMU routing retained as a deployment demonstration — routing cost is measured at ~0.1% of inference and is not a bottleneck.
+**Roadmap (Droga H and beyond).** Orthogonal weight modification (OWM) on the semantic projection — updates projected into the null space of past-class features, computed from the same statistics the parametric sleep already stores; expected to attack the residual 15.8pp forgetting with an exact guarantee on linear layers. Vector-symbolic binding as a dense-matmul replacement for physical pods (capacity of superposition to be measured, not assumed; requires orthogonalized updates). Attribute vocabularies with error-correcting code distance (G2b). Stronger frozen representations. LSH/Morton/TMU routing retained as a deployment demonstration — routing cost is measured at ~0.1% of inference and is not a bottleneck. Series J (this revision) closed the dream-fidelity thread opened by H1: sparsity-aware spike-and-slab dreams are the new default sleep model; the remaining headroom on both benchmarks is representational.
 
 ## 15. Conclusion
 
@@ -247,9 +253,14 @@ python src/run_F3_feature_replay.py       # parametric sleep
 python src/run_F3b_drift_control.py       # k-centroid dreams  -> equivalence w/ replay
 python src/run_F4_split_cifar.py          # scale test         -> ranking inversion
 python src/run_G2_compositional.py        # attribute zero-shot -> negative w/ structure
+# Series J -- audit + sparse dreams (v0.4)
+python src/run_J1_feature_conditioning.py # BN-calib / sigma-norm -> NOISE (cleared)
+python src/run_J2_cifar_normalized.py     # normalized-input CIFAR -> SIGNAL+ vs replay
+python src/run_J3_sparse_dreams.py        # spike-and-slab dreams  -> noise-consistent gain
+python src/run_J2b_cifar_sparse.py        # sparse dreams on CIFAR -> SIGNAL+ (+4.5pp)
 ```
 
-Working notes with full result tables: `DROGA_D_NOTATKI.md`, `DROGA_E_NOTATKI.md`, `DROGA_F_NOTATKI.md`, `DROGA_G_NOTATKI.md`. Pre-registered plans: `D6B_PLAN.md`, `D7_PLAN.md`, `DROGA_F_PLAN.md`, `DROGA_G_PLAN.md`, `DROGA_H_PLAN.md`. Glossary: `SLOWNIK_POJEC.md`. Word vectors: GloVe 6B-50d (public).
+Working notes with full result tables: `DROGA_D_NOTATKI.md`, `DROGA_E_NOTATKI.md`, `DROGA_F_NOTATKI.md`, `DROGA_G_NOTATKI.md`, `DROGA_H_NOTATKI.md`, `DROGA_J_NOTATKI.md`. Pre-registered plans: `D6B_PLAN.md`, `D7_PLAN.md`, `DROGA_F_PLAN.md`, `DROGA_G_PLAN.md`, `DROGA_H_PLAN.md`, `DROGA_J_PLAN.md`. Glossary: `SLOWNIK_POJEC.md`. Word vectors: GloVe 6B-50d (public).
 
 ## Appendix B: Key metrics summary
 
@@ -264,7 +275,9 @@ Working notes with full result tables: `DROGA_D_NOTATKI.md`, `DROGA_E_NOTATKI.md
 | TMU routing throughput | 41.9M samples/s | pure texture fetch, GTX 1050 Ti |
 | Split-Fashion class-IL | 77.6% @ 0 stored samples | vs replay-200: 77.0% (equivalence, nominally above) |
 | Forgetting (k16/combo vs replay) | 18.8/15.8 vs 27.0pp | 30–40% reduction, zero buffer |
-| Split-CIFAR class-IL | 32.0 ± 1.0% vs 18.9 ± 8.8% | MARS vs replay-200 (inversion) |
+| Split-CIFAR class-IL | 37.5 ± 1.4% vs 14.0 ± 4.9% | MARS sparse-k16 vs replay-200, normalized input (inversion, J2b) |
+| Dream sparsity effect | +4.48pp CIFAR (SIGNAL+) / +0.91pp Fashion (noise) | spike-and-slab vs diagonal k16 — grows with data difficulty |
+| Split-Fashion sparse dreams | 78.49 ± 0.91% (observation) | within noise of diag k16; forgetting 16.0pp |
 | Inference cost vs task count | ×1.0007 after 5 tasks | constant-MAC thesis |
 | Design-law instances | 4 | D5, E2-v1, F1, F2 (narrow supervision < none) |
 

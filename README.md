@@ -19,17 +19,23 @@ single consumer GPU (GTX 1050 Ti, 4 GB). Code frozen at `v0.3` (July 2026).
 
 Statistical equivalence with replay (nominally above, within the
 pre-registered noise threshold), at zero stored samples, constant inference
-cost (×1.0007 after 5 tasks) and ~30% less forgetting.
+cost (×1.0007 after 5 tasks) and ~30% less forgetting. Series J adds a
+sparsity-aware dream (spike-and-slab): Fashion 78.49 ± 0.91% — nominally the
+best, within the noise threshold of k16 (reported as an observation).
 
-| Split-CIFAR-10 (class-IL) | ACC | Forgetting |
+| Split-CIFAR-10 (class-IL, normalized input) | ACC | Forgetting |
 |---|---|---|
-| experience replay (200) | 18.90 ± **8.80**% | 64.8pp |
-| **MARS-CL (combo)** | **32.04 ± 1.01%** | 31.0pp |
-| joint training (ceiling) | 68.73 ± 2.32% | — |
+| experience replay (200) | 14.03 ± **4.93**% | 69.2pp |
+| MARS-CL (diag k16) | 33.03 ± 1.16% | 41.9pp |
+| **MARS-CL (sparse k16, this work)** | **37.51 ± 1.35%** | **32.7pp** |
+| joint training (ceiling) | 70.24 ± 0.69% | — |
 
 On natural images the ranking inverts: replay's trainable backbone drifts and
-collapses; the immutable representation cannot drift. The stationarity
-advantage grows with data difficulty.
+collapses (even with input normalization that lifts the joint ceiling); the
+immutable representation cannot drift. Sparse spike-and-slab dreams add a
+pre-registered SIGNAL+ (+4.48pp, 5/5 seeds) over diagonal dreams — the
+stationarity advantage *and* the dream-fidelity advantage grow with data
+difficulty. (v0.3 raw-input numbers remain in `results/F4_split_cifar.json`.)
 
 **Measured boundaries (not hidden):** the mechanism requires class names with
 visual semantics — on Split-MNIST it loses to replay by ~19pp (digit names
@@ -49,7 +55,9 @@ replaced by two data-free resources: **semantic anchors** (class prototypes =
 GloVe word vectors, which exist before any data and cannot drift) and
 **parametric sleep** (per-class k-means centroids of features, ~KB/class,
 "dreamed" as balanced rehearsal while a projection learns to align features
-with word geometry). Full story: `WHITEPAPER.md` (Part III; Parts I–II cover
+with word geometry). The final dream model is sparsity-aware (spike-and-slab:
+per-dimension activation probability + conditional moments — dreamed zeros are
+exact zeros; Series J). Full story: `WHITEPAPER.md` (Part III; Parts I–II cover
 the earlier routing-ceiling study).
 
 ## Reproduce
@@ -69,6 +77,12 @@ python src/run_F4_split_cifar.py    # scale test -> ranking inversion
 python src/run_H1_owm.py            # OWM elimination: gap = dream fidelity
 python src/run_H1b_dream_fidelity.py# k16 -> 77.6%; full-covariance negative
 python src/run_G2_compositional.py  # attribute zero-shot -> negative
+
+# Series J — audit + sparse dreams (v0.4)
+python src/run_J1_feature_conditioning.py # audit: BN-calib/σ-norm -> NOISE
+python src/run_J2_cifar_normalized.py     # normalized CIFAR rerun -> SIGNAL+ vs replay
+python src/run_J3_sparse_dreams.py        # spike-and-slab dreams (Fashion/MNIST)
+python src/run_J2b_cifar_sparse.py        # sparse dreams on CIFAR -> SIGNAL+ (+4.5pp)
 
 # Part II — routing ceiling study
 python src/run_D1_mars_v2_baseline.py
@@ -100,7 +114,7 @@ alongside means; costs in MAC with the shared backbone counted as always-paid.
 | `src/` | All runners and models (PyTorch) |
 | `demo/mars_cl_demo/` | Interactive browser demo of MARS-CL (pure JS, parity-checked vs PyTorch) |
 | `results/*.json` | Per-seed results for every experiment, including smoke runs |
-| `DROGA_D/E/F/G/H_NOTATKI.md` | Working notes with full result tables (Polish) |
+| `DROGA_D/E/F/G/H/J_NOTATKI.md` | Working notes with full result tables (Polish) |
 | `*_PLAN.md` | Pre-registered experiment plans, written before runs (Polish) |
 | `SLOWNIK_POJEC.md` | Glossary (Polish) |
 | `RAPORT_FINAL.md`, `STAN_PROJEKTU.md` | Phase-1 PoC tech report (Polish) |
