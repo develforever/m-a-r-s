@@ -162,3 +162,48 @@ Referencje F4 (stare, wejście /255): replay 18.90 ± 8.80 | combo
 (martwy BN, brak Normalize) istniały, ale nie tłumaczą poziomu wyników;
 opublikowane liczby F/G/H/F4 stoją. Jedyna potwierdzana kierunkowo
 dźwignia to model snu — stąd J2b (pre-rejestracja w planie).
+
+## J2b — sen spike-and-slab na CIFAR (ZAKOŃCZONE, 10.07.2026):
+## SYGNAL+ — pierwszy formalny sygnał mechanizmowy serii J;
+## nowy best CIFAR: 37.51 ± 1.35
+
+Pliki: `src/run_J2b_cifar_sparse.py`; wyniki:
+`results/J2b_cifar_sparse.json`. Czas: 80 s. Pary per-seed przeciw
+`mars_k16_raw` z J2 (te same seedy, determinizm potwierdzony).
+
+| Wariant (class-IL) | Pamięć/kl. | ACC | min | F |
+|---|---|---|---|---|
+| [J2] diag_k16_raw (baza) | ~16 KB | 33.03 ± 1.16% | 31.35% | 41.9pp |
+| sparse_k8 | ~12 KB | 37.09 ± 1.32% | 35.90% | 32.7pp |
+| **sparse_k16** | ~24 KB | **37.51 ± 1.35%** | **36.20%** | **32.7pp** |
+
+**WERDYKT (pre-rejestrowany): SYGNAL+** — d = +4.48pp (min +3.50)
+przy progu 2.51; pary 5/5 dodatnie (+3.50/+4.44/+5.04/+4.85/+4.56).
+Próg naprawczy z J2 (33.05) przebity o +4.5pp.
+
+**Ustalenia:**
+1. **Skala efektu rośnie z trudnością danych:** Fashion +0.91 (szum),
+   MNIST +3.05 (szum przy dużej wariancji), CIFAR **+4.48 (SYGNAL+)**.
+   Poszanowanie rzadkości po ReLU jest tym cenniejsze, im słabsze
+   i rzadsze cechy — komplementarne do tezy stacjonarności z F4
+   (im trudniejsze dane, tym bardziej opłaca się nie dryfować ORAZ
+   śnić wiernie). Ładna symetria do papieru.
+2. **Struktura > rozdzielczość, ponownie:** sparse_k8 (12 KB) daje
+   +4.06pp nad diag_k16 (16 KB) przy mniejszej pamięci; k8→k16 dokłada
+   tylko +0.42 — nasycenie k przy zachowanej strukturze rzadkości.
+3. **Forgetting −22%:** 41.9 → 32.7pp.
+4. **Klasyfikacja wyniku (ważne dla narracji):** to zysk NOWEGO
+   MECHANIZMU (sen sparse z J3), nie korekty z audytu — audyt pozostaje
+   zamknięty konkluzją "usterki niewinne" (J1+J2). Odpowiedź na
+   pytanie "co zaniżało wynik" brzmi ostatecznie: wierność snu
+   (mechanizm), reprezentacja (sufit) — nie pipeline danych.
+5. **Sufit reprezentacji nadal dominuje:** 37.5 vs joint 70.24
+   (mechanizm domknął ~12% pozostałej luki). Droga w górę bez zmian:
+   mocniejszy zamrożony backbone (fork tożsamości).
+
+**Stan headline po J2b (branch droga-j):** Split-CIFAR-10 class-IL,
+0 przechowywanych próbek: **37.51 ± 1.35 (min 36.20)**, forgetting
+32.7pp — vs replay-200: 14.03 ± 4.93 (wejście znormalizowane) /
+18.90 ± 8.80 (F4). Fashion: 78.49 ± 0.91 nominalnie (formalnie szum
+vs diag). Status serii: J1/J2 audyt zamknięty, J3 szum-spójny,
+J2b SYGNAL+. Pozostaje J4 (opcja) i decyzja o merge do main.
