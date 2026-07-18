@@ -1,6 +1,6 @@
 # START TUTAJ — stan projektu i wejście do nowej sesji
 
-Aktualizacja: 2026-07-10 (wieczór). Seria J ZAKOŃCZONA na branchu droga-j: audyt zamknięty (usterki niewinne, J1/J2), sen spike-and-slab = SYGNAL+ na CIFAR (J2b, 37.51 ± 1.35). REPO PUBLICZNE: https://github.com/develforever/m-a-r-s (tag v0.3-freeze; po merge droga-j: v0.4). J4 (GloVe 300d) opcjonalny, nieuruchomiony.
+Aktualizacja: 2026-07-17. Serie K (wyżyłowanie mechanizmu, v0.5) i I (kolektywna wymiana snów, v0.6) ZAKOŃCZONE: mechanizm realizuje 94.6–97.6% sufitów zamrożonych cech (K0/K1, best Fashion 79.23 ± 0.73), a kolektyw 5 agentów wymieniających wyłącznie statystyki snu (24 KB/klasę, zero obrazów) jest RÓWNOWAŻNY agentowi sekwencyjnemu (78.87 vs 79.23 — I3). W przygotowaniu: Droga L (jawny fork tożsamości — pretrained backbone, DROGA_L_PLAN.md) i I2b (fuzja low-data). Mapa etapów: PLAN_GENERALNY.md. REPO PUBLICZNE: https://github.com/develforever/m-a-r-s (tagi: v0.3-freeze … v0.6).
 DECYZJE 2026-07-10: (1) treść rozcięta na DWA papery (A: CL; B: routing
 ceiling); (2) submisje (arXiv/TMLR/konferencje) WSTRZYMANE do osobnej
 decyzji Roberta — etap bieżący to WYŁĄCZNIE repo publiczne.
@@ -8,8 +8,9 @@ Related work zweryfikowany → `RELATED_WORK.md`. Plan → `private/PLAN_PUBLIKA
 
 ## Prompt otwierający nową sesję (skopiuj i wklej)
 
-> Kontynuujemy projekt M.A.R.S. Stan: v0.4 po serii J (audyt + sen
-> sparse — DROGA_J_NOTATKI.md); treść
+> Kontynuujemy projekt M.A.R.S. Stan: v0.6 po seriach K i I
+> (DROGA_K_NOTATKI.md, DROGA_I_NOTATKI.md; mapa etapów
+> PLAN_GENERALNY.md; w toku: Droga L — fork tożsamości, i I2b); treść
 > rozcięta na dwa papery (A: CL, B: routing ceiling); submisje
 > WSTRZYMANE — etap bieżący to wyłącznie repo publiczne (checklist
 > w private/PLAN_PUBLIKACJI.md pkt 3). Przeczytaj START_TUTAJ.md,
@@ -27,7 +28,7 @@ osiąga **77.6 ± 1.0% class-IL na Split-Fashion (sparse: 78.5 ± 0.9
 nominalnie, w szumie) — równoważność z replay-200, zero przechowanych
 próbek, stały MAC**; na Split-CIFAR przewaga rośnie: **37.5 ± 1.4 vs
 replay 14.0 ± 4.9** (wejście znormalizowane; SYGNAL+ +4.5pp za sam sen
-sparse — J2b; skala efektu rośnie z trudnością danych).
+sparse — J2b; skala efektu rośnie z trudnością danych). Seria K domknęła mechanizm liczbowo (79.23 = 97.6% sufitu Fashion; 37.5 = 94.6% sufitu losowych cech CIFAR — reszta luki jest reprezentacyjna), a seria I dowiozła kolektyw: 5 agentów × 2 klasy, 8 klas ze snów po 24 KB, wynik równoważny agentowi sekwencyjnemu i nominalnie nad replay-200.
 Granice zmierzone: wymaga semantycznych nazw klas (MNIST poniżej), sufit
 losowych cech (g1_all 80.45 Fashion / joint 70.2 CIFAR), G2 kompozycyjność
 negatywna z regułą strukturalną 3/3. Wisienka metodologiczna z Części II:
@@ -37,8 +38,9 @@ oracle inflation (realna przestrzeń routingu ~0.5pp, nie 6pp).
 
 - `WHITEPAPER.md` — v0.3, pełny draft (Part I PoC, Part II routing ceiling,
   Part III memory without data). Przed submisją: related work + cytowania.
-- `DROGA_D/E/F/G/H/J_NOTATKI.md` — pełne tabele wyników i werdykty.
-- `DROGA_F/G/H/J_PLAN.md`, `D6B/D7_PLAN.md` — pre-rejestrowane plany.
+- `DROGA_D/E/F/G/H/J/K/I_NOTATKI.md` — pełne tabele wyników i werdykty.
+- `DROGA_F/G/H/J/K/I/L_PLAN.md`, `D6B/D7_PLAN.md` — pre-rejestrowane plany;
+  `PLAN_GENERALNY.md` — mapa etapów K→I→L (zasada warstw).
 - `ARSENAL_PRZEOCZONYCH_NARZEDZI.md` — inwentarz pomysłów z ocenami.
 - `SLOWNIK_POJEC.md` — słownik dla czytelnika.
 - `src/` — 20+ runnerów, każdy pisze JSON do `results/`; smoke → full.
@@ -55,8 +57,8 @@ oracle inflation (realna przestrzeń routingu ~0.5pp, nie 6pp).
 3. arXiv: endorsement (maile do autorów cytowanych prac), konto,
    kategoria cs.LG.
 4. Repo publiczne: README naukowe, licencja, seedy reprodukcji.
-5. PO publikacji (nie wcześniej): decyzja o piętrze reprezentacji
-   (mocniejszy zamrożony backbone vs from-scratch H2/H3), G2b (ECOC).
+5. ZREALIZOWANE 2026-07-17: piętro reprezentacji = Droga L (jawny fork
+   tożsamości, pre-rejestrowana, runy w toku); G2b (ECOC) dalej otwarte.
 
 ## Zasady współpracy (obowiązują każdego agenta)
 

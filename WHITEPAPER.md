@@ -221,7 +221,7 @@ If routing operates in a space of word-attributes ("has-sleeves", "is-footwear",
 5. Ternary quantization of pods does not transfer to the v2 slim stack (−2.7 ± 2.8pp; architecture-specific, see Section 8) — and the "≤ noise threshold" verdict criterion itself proved gameable by high variance, motivating an added per-seed worst-case condition in later experiment plans.
 6. An engineering-audit pass (Series J, pre-registered) tested two pipeline concerns and cleared both: calibrating the frozen backbone's BatchNorm statistics and per-dimension feature scale normalization are NOISE (the latter negative on all 5 Fashion seeds), and per-channel CIFAR input normalization is ~neutral for the frozen random backbone. The dead-BatchNorm oversight was real but innocent — reported levels are properties of the mechanism, not preprocessing artifacts.
 
-**Roadmap (Droga H and beyond).** Orthogonal weight modification (OWM) on the semantic projection — updates projected into the null space of past-class features, computed from the same statistics the parametric sleep already stores; expected to attack the residual 15.8pp forgetting with an exact guarantee on linear layers. Vector-symbolic binding as a dense-matmul replacement for physical pods (capacity of superposition to be measured, not assumed; requires orthogonalized updates). Attribute vocabularies with error-correcting code distance (G2b). Stronger frozen representations. LSH/Morton/TMU routing retained as a deployment demonstration — routing cost is measured at ~0.1% of inference and is not a bottleneck. Series J (this revision) closed the dream-fidelity thread opened by H1: sparsity-aware spike-and-slab dreams are the new default sleep model; the remaining headroom on both benchmarks is representational.
+**Roadmap (Droga H and beyond).** Orthogonal weight modification (OWM) on the semantic projection — updates projected into the null space of past-class features, computed from the same statistics the parametric sleep already stores; expected to attack the residual 15.8pp forgetting with an exact guarantee on linear layers. Vector-symbolic binding as a dense-matmul replacement for physical pods (capacity of superposition to be measured, not assumed; requires orthogonalized updates). Attribute vocabularies with error-correcting code distance (G2b). Stronger frozen representations. LSH/Morton/TMU routing retained as a deployment demonstration — routing cost is measured at ~0.1% of inference and is not a bottleneck. Series J (this revision) closed the dream-fidelity thread opened by H1: sparsity-aware spike-and-slab dreams are the new default sleep model; the remaining headroom on both benchmarks is representational. Series K (v0.5) then closed the mechanism thread with measured ceilings: training the projection on all data over the frozen random features tops out at 39.65% on CIFAR (K0) and 81.16% on Fashion (300d anchors, J4) -- the sequential learner reaches 94.6% and 97.6% of those ceilings respectively (sparse dreams x 300d anchors give a paired-signal best of 79.23 +/- 0.73 on Fashion; OWM under the sparse sleep is eliminated: its H1 MNIST gain vanishes and CIFAR shows a paired negative). Series I (v0.6) converts the memory layer into a communication protocol: agents sharing a frozen random backbone (same seed) exchange only per-class spike-and-slab statistics (~24 KB; no images, gradients, or weights). A class learned from a single message loses 1.29pp versus local training on 12,000 images (full-accuracy equivalence), and a five-agent collective -- each agent seeing only 2 of 10 classes -- is statistically equivalent to one agent trained sequentially on all data (78.87 vs 79.23) and nominally above replay-200. A pretrained-backbone fork (Series L, pre-registered) tests the representation-agnostic claim directly.
 
 ## 15. Conclusion
 
@@ -258,9 +258,18 @@ python src/run_J1_feature_conditioning.py # BN-calib / sigma-norm -> NOISE (clea
 python src/run_J2_cifar_normalized.py     # normalized-input CIFAR -> SIGNAL+ vs replay
 python src/run_J3_sparse_dreams.py        # spike-and-slab dreams  -> noise-consistent gain
 python src/run_J2b_cifar_sparse.py        # sparse dreams on CIFAR -> SIGNAL+ (+4.5pp)
+python src/run_J4_glove300.py             # GloVe-300d -> seq null; all-data ceiling 81.16
+# Series K -- ceilings and lever composition (v0.5)
+python src/run_K0_cifar_ceiling.py        # frozen-feature ceiling CIFAR: 39.65 (mechanism at 94.6%)
+python src/run_K1_sparse300.py            # sparse x GloVe-300d -> paired-SIGNAL+ Fashion: 79.23
+python src/run_K2_owm_sparse.py           # OWM x sparse sleep -> eliminated (paired-SIGNAL- CIFAR)
+# Series I -- collective learning by dream exchange (v0.6)
+python src/run_I1_transplant.py           # class from a 24 KB message: -1.29pp vs local training
+python src/run_I2_fusion.py               # payload saturates at half the data -> fusion moot
+python src/run_I3_collective.py           # 5 agents, 0 images exchanged ~ 1 sequential agent
 ```
 
-Working notes with full result tables: `DROGA_D_NOTATKI.md`, `DROGA_E_NOTATKI.md`, `DROGA_F_NOTATKI.md`, `DROGA_G_NOTATKI.md`, `DROGA_H_NOTATKI.md`, `DROGA_J_NOTATKI.md`. Pre-registered plans: `D6B_PLAN.md`, `D7_PLAN.md`, `DROGA_F_PLAN.md`, `DROGA_G_PLAN.md`, `DROGA_H_PLAN.md`, `DROGA_J_PLAN.md`. Glossary: `SLOWNIK_POJEC.md`. Word vectors: GloVe 6B-50d (public).
+Working notes with full result tables: `DROGA_D_NOTATKI.md`, `DROGA_E_NOTATKI.md`, `DROGA_F_NOTATKI.md`, `DROGA_G_NOTATKI.md`, `DROGA_H_NOTATKI.md`, `DROGA_J_NOTATKI.md`, `DROGA_K_NOTATKI.md`, `DROGA_I_NOTATKI.md`. Pre-registered plans: `D6B_PLAN.md`, `D7_PLAN.md`, `DROGA_F_PLAN.md`, `DROGA_G_PLAN.md`, `DROGA_H_PLAN.md`, `DROGA_J_PLAN.md`, `DROGA_K_PLAN.md`, `DROGA_I_PLAN.md`, `DROGA_L_PLAN.md`; stage map: `PLAN_GENERALNY.md`. Glossary: `SLOWNIK_POJEC.md`. Word vectors: GloVe 6B-50d (public).
 
 ## Appendix B: Key metrics summary
 
@@ -278,6 +287,10 @@ Working notes with full result tables: `DROGA_D_NOTATKI.md`, `DROGA_E_NOTATKI.md
 | Split-CIFAR class-IL | 37.5 ± 1.4% vs 14.0 ± 4.9% | MARS sparse-k16 vs replay-200, normalized input (inversion, J2b) |
 | Dream sparsity effect | +4.48pp CIFAR (SIGNAL+) / +0.91pp Fashion (noise) | spike-and-slab vs diagonal k16 — grows with data difficulty |
 | Split-Fashion sparse dreams | 78.49 ± 0.91% (observation) | within noise of diag k16; forgetting 16.0pp |
+| Frozen-feature ceiling (CIFAR) | 39.65 ± 1.21% | K0: sequential mechanism at 94.6% of it |
+| Split-Fashion sparse × 300d | 79.23 ± 0.73% | paired-SIGNAL+; 97.6% of the 81.16 ceiling (K1) |
+| Class transplant (24 KB message) | 94.26% vs 95.55% local | −1.29pp; full-ACC equivalence (I1) |
+| Collective N=5, dream exchange | 78.87 ± 1.01% | ≈ sequential 79.23; 8/10 classes from dreams (I3) |
 | Inference cost vs task count | ×1.0007 after 5 tasks | constant-MAC thesis |
 | Design-law instances | 4 | D5, E2-v1, F1, F2 (narrow supervision < none) |
 

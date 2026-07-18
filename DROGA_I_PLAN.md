@@ -132,3 +132,27 @@ Wymagane: data/glove.6B.300d.txt, results/K1_sparse300.json (baza par),
 results/J4_glove300.json (sufit), results/F0_cl_baselines.json (kontekst).
 
 Wyniki do DROGA_I_NOTATKI.md; merge po komplecie i decyzji Roberta.
+
+## I2b (dopisane 2026-07-17, PRZED runem) — fuzja w reżimie małych próbek
+
+Motywacja: I2 dał SZUM z powodem — payload nasyca się już przy 3000
+obrazów/klasę (half ≈ full), więc fuzja nie miała czego dodać. Uczciwy
+test fuzji wymaga NIEnasyconych payloadów. Pytanie I2b: czy przy małych
+próbach suma dwóch częściowych widoków bije pojedynczy widok?
+
+Plik: `src/run_I2b_fusion_lowdata.py` → `results/I2b_fusion_lowdata.json`
+
+Setup jak I2 (odbiorca C po taskach 0–3, adopcja klas {8,9}), ale
+payloady liczone z n obrazów/klasę na agenta (próby rozłączne,
+generator=seed): n ∈ {100, 500}. Warianty:
+  half_100 / fusion_100 : pojedynczy widok vs fuzja cat przy n=100
+  half_500 / fusion_500 : jw. przy n=500
+Kontekst z I2 (bez re-runu): half3000 94.38, full6000 94.17.
+
+**Kryteria (Z GÓRY, per n, acc task4):**
+- Główne: fusion_cat(n) vs half(n) (pary per-seed): SYGNAL+ / parowy+ /
+  SZUM / SYGNAL−. Hipoteza kierunkowa: zysk fuzji maleje z n.
+- Obserwacja: krzywa nasycenia payloadu half(100/500/3000) — ile
+  obrazów potrzebuje wiadomość 24 KB, by osiągnąć sufit.
+- Ryzyko: przy n=100 k-means k=16 na ~100 wektorach = szumne centroidy
+  (fallbacki FeatureStatsKSparse); wariancja może zalać efekt.
