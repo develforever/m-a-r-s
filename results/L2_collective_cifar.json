@@ -1,0 +1,132 @@
+{
+  "experiment": "L2_collective_cifar",
+  "device": "cuda",
+  "n_seeds": 5,
+  "epochs_per_task": 15,
+  "n_dream": 5000,
+  "common": {
+    "dream_model": "sparse",
+    "stats_k": 16,
+    "epochs_proj": 15,
+    "l2sp": 0.0,
+    "bn_calib": false,
+    "feat_signorm": false
+  },
+  "encoder": "resnet18_IMAGENET1K_V1 -> random frozen 512->128",
+  "systems": {
+    "collective": {
+      "per_seed": [
+        {
+          "acc_curve_after_adoptions": [
+            0.8922,
+            0.7938,
+            0.7432,
+            0.7378
+          ],
+          "final_row_class_il": [
+            0.798,
+            0.618,
+            0.667,
+            0.739,
+            0.867
+          ],
+          "ACC": 0.7378
+        },
+        {
+          "acc_curve_after_adoptions": [
+            0.8778,
+            0.7812,
+            0.754,
+            0.7457
+          ],
+          "final_row_class_il": [
+            0.76,
+            0.6135,
+            0.6935,
+            0.7875,
+            0.874
+          ],
+          "ACC": 0.7457
+        },
+        {
+          "acc_curve_after_adoptions": [
+            0.88,
+            0.7862,
+            0.7485,
+            0.7485
+          ],
+          "final_row_class_il": [
+            0.765,
+            0.6455,
+            0.6805,
+            0.7655,
+            0.886
+          ],
+          "ACC": 0.7484999999999999
+        },
+        {
+          "acc_curve_after_adoptions": [
+            0.889,
+            0.7882,
+            0.746,
+            0.7347
+          ],
+          "final_row_class_il": [
+            0.7455,
+            0.6235,
+            0.6805,
+            0.7615,
+            0.8625
+          ],
+          "ACC": 0.7347
+        },
+        {
+          "acc_curve_after_adoptions": [
+            0.892,
+            0.7833,
+            0.7479,
+            0.7397
+          ],
+          "final_row_class_il": [
+            0.776,
+            0.619,
+            0.672,
+            0.7715,
+            0.86
+          ],
+          "ACC": 0.7397
+        }
+      ],
+      "agg": {
+        "ACC": {
+          "mean": 0.7413,
+          "std": 0.0057,
+          "min": 0.7347,
+          "max": 0.7485
+        }
+      }
+    }
+  },
+  "verdicts": {
+    "collective_vs_seq": {
+      "base": "L1 l1_seq (agent sekwencyjny, pretrained)",
+      "pairs_pp": [
+        -0.33,
+        -0.95,
+        -0.46,
+        -0.52,
+        -0.56
+      ],
+      "delta": {
+        "mean": -0.564,
+        "std": 0.2327,
+        "min": -0.95,
+        "max": -0.33
+      },
+      "noise_pp": 1.2629,
+      "verdict": "SYGNAL-parowy-",
+      "gap_to_l1_all_pp": 3.1
+    }
+  },
+  "elapsed_s": 49.9
+}

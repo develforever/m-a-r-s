@@ -1,0 +1,48 @@
+{
+  "experiment": "L2_collective_cifar",
+  "device": "cuda",
+  "n_seeds": 1,
+  "epochs_per_task": 4,
+  "n_dream": 256,
+  "common": {
+    "dream_model": "sparse",
+    "stats_k": 16,
+    "epochs_proj": 15,
+    "l2sp": 0.0,
+    "bn_calib": false,
+    "feat_signorm": false
+  },
+  "encoder": "resnet18_IMAGENET1K_V1 -> random frozen 512->128",
+  "systems": {
+    "collective": {
+      "per_seed": [
+        {
+          "acc_curve_after_adoptions": [
+            0.654,
+            0.5375,
+            0.4209,
+            0.3823
+          ],
+          "final_row_class_il": [
+            0.5875,
+            0.379,
+            0.2905,
+            0.289,
+            0.3655
+          ],
+          "ACC": 0.3823
+        }
+      ],
+      "agg": {
+        "ACC": {
+          "mean": 0.3823,
+          "std": 0.0,
+          "min": 0.3823,
+          "max": 0.3823
+        }
+      }
+    }
+  },
+  "verdicts": {},
+  "elapsed_s": 4.2
+}

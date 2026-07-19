@@ -58,6 +58,17 @@ one agent trained sequentially on all the data (79.23 ± 0.73%) and nominally
 above replay-200 (76.97%). Eight of the collector's ten classes were learned
 from dreams alone. Details: `DROGA_I_NOTATKI.md`.
 
+## Identity fork: frozen pretrained backbone (Series L, v0.7)
+
+Reported as a separate resource line (from-scratch vs foundation-embedding).
+Swapping the random backbone for a frozen ImageNet ResNet18 — mechanism,
+memory (24 KB/class) and exchange protocol untouched — lifts Split-CIFAR-10
+class-IL from 37.51% to **74.69 ± 0.69%** (SIGNAL+, +37.2pp), with the
+mechanism still realizing 96.7% of its all-data ceiling (77.23%). The
+sequential learner and the five-agent collective (**74.13 ± 0.57%**) both
+beat the trainable joint monolith (70.24%). The collective's cost versus
+sequential is now measured: paired −0.56pp. Details: `DROGA_L_NOTATKI.md`.
+
 ## The mechanism in one paragraph
 
 A design law recurred across four independent experiments in this project:

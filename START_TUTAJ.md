@@ -1,6 +1,6 @@
 # START TUTAJ — stan projektu i wejście do nowej sesji
 
-Aktualizacja: 2026-07-17. Serie K (wyżyłowanie mechanizmu, v0.5) i I (kolektywna wymiana snów, v0.6) ZAKOŃCZONE: mechanizm realizuje 94.6–97.6% sufitów zamrożonych cech (K0/K1, best Fashion 79.23 ± 0.73), a kolektyw 5 agentów wymieniających wyłącznie statystyki snu (24 KB/klasę, zero obrazów) jest RÓWNOWAŻNY agentowi sekwencyjnemu (78.87 vs 79.23 — I3). W przygotowaniu: Droga L (jawny fork tożsamości — pretrained backbone, DROGA_L_PLAN.md) i I2b (fuzja low-data). Mapa etapów: PLAN_GENERALNY.md. REPO PUBLICZNE: https://github.com/develforever/m-a-r-s (tagi: v0.3-freeze … v0.6).
+Aktualizacja: 2026-07-19. Mapa K→I→L DOMKNIĘTA (v0.7): seria L — fork tożsamości: zamrożony resnet18-ImageNet pod niezmienionym mechanizmem daje CIFAR 74.69 ± 0.69 (+37.2pp, SYGNAL+; 96.7% sufitu 77.23; NAD trenowalnym joint 70.24), kolektyw na mocnych cechach 74.13 (koszt protokołu −0.56pp, parowy−); I2b — fuzja działa tylko poniżej nasycenia payloadu (parowy+ przy n=100). Wcześniej: K (v0.5) i I (v0.6): kolektywna wymiana snów, v0.6) ZAKOŃCZONE: mechanizm realizuje 94.6–97.6% sufitów zamrożonych cech (K0/K1, best Fashion 79.23 ± 0.73), a kolektyw 5 agentów wymieniających wyłącznie statystyki snu (24 KB/klasę, zero obrazów) jest RÓWNOWAŻNY agentowi sekwencyjnemu (78.87 vs 79.23 — I3). W przygotowaniu: Droga L (jawny fork tożsamości — pretrained backbone, DROGA_L_PLAN.md) i I2b (fuzja low-data). Mapa etapów: PLAN_GENERALNY.md. REPO PUBLICZNE: https://github.com/develforever/m-a-r-s (tagi: v0.3-freeze … v0.6).
 DECYZJE 2026-07-10: (1) treść rozcięta na DWA papery (A: CL; B: routing
 ceiling); (2) submisje (arXiv/TMLR/konferencje) WSTRZYMANE do osobnej
 decyzji Roberta — etap bieżący to WYŁĄCZNIE repo publiczne.
@@ -10,7 +10,8 @@ Related work zweryfikowany → `RELATED_WORK.md`. Plan → `private/PLAN_PUBLIKA
 
 > Kontynuujemy projekt M.A.R.S. Stan: v0.6 po seriach K i I
 > (DROGA_K_NOTATKI.md, DROGA_I_NOTATKI.md; mapa etapów
-> PLAN_GENERALNY.md; w toku: Droga L — fork tożsamości, i I2b); treść
+> PLAN_GENERALNY.md; L i I2b ZAKOŃCZONE — DROGA_L_NOTATKI.md; kandydaci:
+> seria M długi horyzont, I4 weryfikacja payloadu); treść
 > rozcięta na dwa papery (A: CL, B: routing ceiling); submisje
 > WSTRZYMANE — etap bieżący to wyłącznie repo publiczne (checklist
 > w private/PLAN_PUBLIKACJI.md pkt 3). Przeczytaj START_TUTAJ.md,

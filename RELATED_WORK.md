@@ -226,3 +226,32 @@ do wklejenia do WHITEPAPER.md (lub do papera CL po rozcięciu).
     arXiv:2302.00487 — pojawił się w wynikach, ZWERYFIKOWAĆ przed użyciem).
 - [ ] Part II (routing ceiling): jeśli osobny paper — dodać literaturę
     o task inference w class-IL i o ocenie routerów MoE (osobna runda searchy).
+
+## Część E — Dopisek po serii I/L (2026-07-19): model collapse a wymiana snów
+
+Zarzut, którego należy się spodziewać przy Serii I: „trening na danych
+generowanych = model collapse" (Shumailov et al. 2023/2024, *The Curse
+of Recursion* / Nature 2024; Alemohammad et al. 2023, *Self-Consuming
+Generative Models Go MAD* — ZWERYFIKOWAĆ ID przy submisji). Odpowiedź
+z konstrukcji protokołu, nie z nadziei:
+
+1. **Rekursja ma głębokość 1.** Payload to statystyki policzone
+   jednorazowo na cechach REALNYCH danych (zamrożony backbone); odbiorca
+   zapisuje je dosłownie i nigdy nie re-estymuje ich ze snów. Sny są
+   materiałem treningowym projekcji/podów, ale nie źródłem kolejnych
+   statystyk — pętla sprzężenia, która napędza collapse (generacja →
+   estymacja → generacja), jest przerwana strukturalnie.
+2. **Miniaturowa demonstracja kosztu rekursji jest zmierzona:** jedyny
+   wariant wykonujący JEDEN cykl re-estymacji ze snów (I2 `fusion_red`:
+   sen z payloadu → ponowny k-means) płaci kierunkowo −0.67pp (5/5 par
+   ujemnych). Jeden cykl = mierzalna strata; protokół domyślny nie
+   wykonuje żadnego.
+3. **Kumulacja adopcji ≠ kumulacja rekursji:** I3/L2 (4 kolejne adopcje)
+   nie wykazały narastającego dryfu — każda wiadomość jest pierwszej
+   generacji względem realnych danych.
+4. Kontrast z federated/decentralized learning (Petals, DiLoCo,
+   Bittensor — wymiana aktywacji/gradientów/wag, wąskie gardło sieci,
+   problem zatrutych gradientów): tu wiadomość jest jednorazowa,
+   ~24 KB/klasę, asynchroniczna i weryfikowalna semantycznie (kandydat
+   I4: odbiorca śni z payloadu i sprawdza zgodność z kotwicą
+   deklarowanej klasy — obrona bez kryptoekonomii).
