@@ -33,8 +33,8 @@ import torch
 
 sys.path.insert(0, os.path.dirname(__file__))
 from cl_common import make_task_data, cl_metrics, eval_protocols
-from mars_cl_j import MarsCLSemanticF3J, load_cifar10_norm
-from mars_cl_l import PretrainedBackbone
+from mars_cl_j import MarsCLSemanticF3J
+from mars_cl_l import ReducedBackbone, extract_or_load_cifar_feats
 from mars_cl_semantic import MarsCLSemantic, load_word_vectors
 
 RESULTS_DIR = os.path.join(os.path.dirname(__file__), "..", "results")
@@ -73,9 +73,9 @@ def run_one(mode, wv, task_data, seed, epochs, device):
     torch.manual_seed(seed)
     if mode == "all":
         m = MarsCLSemantic(wv, proj_train="all",
-                           backbone_module=PretrainedBackbone())
+                           backbone_module=ReducedBackbone())
     else:
-        m = MarsCLSemanticF3J(wv, backbone_module=PretrainedBackbone(),
+        m = MarsCLSemanticF3J(wv, backbone_module=ReducedBackbone(),
                               **SEQ_CFG)
     m.to(device)
     m.init_representation(task_data, epochs=epochs, lr=LR, device=device)
@@ -118,8 +118,8 @@ def main():
     print("=" * 72)
 
     wv = load_word_vectors("CIFAR-10", device=device)
-    Xtr, ytr, Xte, yte = load_cifar10_norm(device)
-    task_data = make_task_data(Xtr, ytr, Xte, yte)
+    Ftr, ytr, Fte, yte = extract_or_load_cifar_feats(device)
+    task_data = make_task_data(Ftr, ytr, Fte, yte)
 
     t0 = time.perf_counter()
     out = {"experiment": "L1_pretrained", "device": device,

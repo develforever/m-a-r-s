@@ -16,6 +16,8 @@ Wejscie: denorm CIFAR -> norm ImageNet -> resize 224 (bilinear).
 Forward mikro-batchuje wewnetrznie (chunk=128), zeby feats_batched
 (batch=2048) nie przekroczyl 4 GB VRAM przy 224x224.
 """
+import os
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -72,6 +74,74 @@ class PretrainedBackbone(nn.Module):
         return torch.cat(outs)
 
 
+# ------------------------------------------------------ szybka sciezka
+# ResNet na 1050 Ti jest za wolny, by liczyc cechy w kazdym przebiegu
+# (feats_batched + eval po kazdym tasku = wielokrotne przejscia 60k
+# obrazow @224). Rozwiazanie BEZ zmiany semantyki: czesc pretrained
+# jest deterministyczna i wspolna dla wszystkich seedow/agentow, wiec
+# jej wyjscie [N, 512] liczymy RAZ i cache'ujemy na dysku; per seed
+# zostaje tylko losowa projekcja 512->128 + ReLU (ReducedBackbone).
+# Matematycznie rownowazne PretrainedBackbone (zlozenie tych samych
+# funkcji), pre-rejestracja DROGA_L_PLAN bez zmian.
+
+FEATS_CACHE = os.path.join(os.path.dirname(__file__), "..", "data",
+                           "cifar_resnet18_224_feats.pt")
+
+
+class ReducedBackbone(nn.Module):
+    """Losowa zamrozona projekcja 512->BB_H + ReLU; wejscie = cechy
+    resnet18 z cache (extract_or_load_cifar_feats)."""
+
+    def __init__(self, out_dim=BB_H):
+        super().__init__()
+        self.reduce = nn.Linear(512, out_dim, bias=False)
+        for p in self.reduce.parameters():
+            p.requires_grad = False
+
+    def train(self, mode=True):
+        return self
+
+    def forward(self, x):
+        with torch.no_grad():
+            return torch.relu(self.reduce(x))
+
+
+def extract_or_load_cifar_feats(device, resize=224, chunk=128,
+                                cache=FEATS_CACHE):
+    """Jednorazowa ekstrakcja cech resnet18 (512-d) dla calego
+    CIFAR-10n; wynik cache'owany w data/. Zwraca (Ftr, ytr, Fte, yte)."""
+    if os.path.exists(cache):
+        d = torch.load(cache, map_location="cpu")
+        return (d["Ftr"].to(device), d["ytr"].to(device),
+                d["Fte"].to(device), d["yte"].to(device))
+    from mars_cl_j import load_cifar10_norm
+    print(f"[L] Jednorazowa ekstrakcja cech resnet18@{resize} "
+          f"(pozniejsze runy czytaja cache: {os.path.abspath(cache)})")
+    Xtr, ytr, Xte, yte = load_cifar10_norm(device)
+    torch.manual_seed(0)   # deterministycznie; reduce nieuzywane
+    bb = PretrainedBackbone(resize=resize, chunk=chunk).to(device)
+    outs_all = []
+    for X in (Xtr, Xte):
+        outs = []
+        for s in range(0, len(X), chunk):
+            x = X[s:s + chunk].view(-1, 3, 32, 32)
+            x = x * bb.cifar_std + bb.cifar_mean
+            x = (x - bb.imnet_mean) / bb.imnet_std
+            x = F.interpolate(x, size=resize, mode="bilinear",
+                              align_corners=False)
+            with torch.no_grad():
+                outs.append(bb.features(x).flatten(1))
+            if (s // chunk) % 40 == 0:
+                print(f"    ekstrakcja: {s}/{len(X)}", flush=True)
+        outs_all.append(torch.cat(outs))
+    Ftr, Fte = outs_all
+    os.makedirs(os.path.dirname(cache), exist_ok=True)
+    torch.save({"Ftr": Ftr.cpu(), "ytr": ytr.cpu(),
+                "Fte": Fte.cpu(), "yte": yte.cpu()}, cache)
+    print(f"[L] Cache zapisany ({Ftr.shape[0]}+{Fte.shape[0]} x 512).")
+    return Ftr, ytr, Fte, yte
+
+
 if __name__ == "__main__":
     # Smoke (CPU/GPU, male wejscie): ksztalt, nieujemnosc, determinizm
     # projekcji z seeda, BN w eval mimo .train().
@@ -88,4 +158,13 @@ if __name__ == "__main__":
     assert f.shape == (70, 128) and (f >= 0).all()
     assert (f == 0).float().mean() > 0.0, "brak zer po ReLU?"
     assert not any(p.requires_grad for p in b1.parameters())
-    print(f"Smoke OK. frakcja zer cech: {(f == 0).float().mean():.2f}")
+    # ReducedBackbone: rownowaznik na cechach 512-d
+    torch.manual_seed(0)
+    rb1 = ReducedBackbone()
+    torch.manual_seed(0)
+    rb2 = ReducedBackbone()
+    assert torch.allclose(rb1.reduce.weight, rb2.reduce.weight)
+    fr = rb1(torch.randn(70, 512))
+    assert fr.shape == (70, 128) and (fr >= 0).all()
+    print(f"Smoke OK. frakcja zer cech: {(f == 0).float().mean():.2f}; "
+          f"ReducedBackbone OK.")

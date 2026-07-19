@@ -31,8 +31,7 @@ import torch
 
 sys.path.insert(0, os.path.dirname(__file__))
 from cl_common import make_task_data, eval_protocols
-from mars_cl_j import load_cifar10_norm
-from mars_cl_l import PretrainedBackbone
+from mars_cl_l import ReducedBackbone, extract_or_load_cifar_feats
 from mars_collective import MarsCollective
 from mars_cl_semantic import load_word_vectors
 
@@ -68,7 +67,7 @@ def verdict_paired(deltas_pp, noise_pp):
 
 def build_agent(wv, seed, device):
     torch.manual_seed(seed)
-    m = MarsCollective(wv, backbone_module=PretrainedBackbone(), **COMMON)
+    m = MarsCollective(wv, backbone_module=ReducedBackbone(), **COMMON)
     m.to(device)
     return m
 
@@ -122,8 +121,8 @@ def main():
     print("=" * 72)
 
     wv = load_word_vectors("CIFAR-10", device=device)
-    Xtr, ytr, Xte, yte = load_cifar10_norm(device)
-    task_data = make_task_data(Xtr, ytr, Xte, yte)
+    Ftr, ytr, Fte, yte = extract_or_load_cifar_feats(device)
+    task_data = make_task_data(Ftr, ytr, Fte, yte)
 
     t0 = time.perf_counter()
     out = {"experiment": "L2_collective_cifar", "device": device,

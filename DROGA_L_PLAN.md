@@ -77,3 +77,14 @@ Setup = run_I3 przeniesiony na CIFAR-n z PretrainedBackbone:
    (wymaga results/L1_pretrained.json jako bazy par)
 
 Wyniki do DROGA_L_NOTATKI.md; merge po komplecie i decyzji Roberta.
+
+## Dopisek implementacyjny (2026-07-19, przed FULL — bez zmiany semantyki)
+
+Pierwsze podejście liczyło cechy resnet18@224 w każdym przebiegu
+(feats_batched + eval po każdym tasku) — na GTX 1050 Ti nieakceptowalnie
+wolno. Ponieważ część pretrained jest deterministyczna i WSPÓLNA dla
+wszystkich seedów/agentów, jej wyjście [N, 512] liczone jest RAZ
+i cache'owane (`data/cifar_resnet18_224_feats.pt`,
+`extract_or_load_cifar_feats`); per seed pozostaje losowa projekcja
+512→128 + ReLU (`ReducedBackbone`). Złożenie identyczne
+z `PretrainedBackbone` — kryteria i warianty planu bez zmian.
