@@ -1,0 +1,54 @@
+{
+  "experiment": "I3_collective",
+  "device": "cuda",
+  "n_seeds": 1,
+  "epochs_per_task": 4,
+  "n_dream": 256,
+  "common": {
+    "dream_model": "sparse",
+    "stats_k": 16,
+    "epochs_proj": 15,
+    "l2sp": 0.0,
+    "bn_calib": false,
+    "feat_signorm": false
+  },
+  "systems": {
+    "collective": {
+      "per_seed": [
+        {
+          "acc_curve_after_adoptions": [
+            0.6665,
+            0.5382,
+            0.4374,
+            0.3503
+          ],
+          "final_row_class_il": [
+            0.919,
+            0.2265,
+            0.485,
+            0.078,
+            0.043
+          ],
+          "acc_task0_final": 0.919,
+          "ACC": 0.3503
+        }
+      ],
+      "agg": {
+        "ACC": {
+          "mean": 0.3503,
+          "std": 0.0,
+          "min": 0.3503,
+          "max": 0.3503
+        },
+        "acc_task0_final": {
+          "mean": 0.919,
+          "std": 0.0,
+          "min": 0.919,
+          "max": 0.919
+        }
+      }
+    }
+  },
+  "verdicts": {},
+  "elapsed_s": 4.4
+}

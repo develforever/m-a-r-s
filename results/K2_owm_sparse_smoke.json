@@ -1,0 +1,434 @@
+{
+  "experiment": "K2_owm_sparse",
+  "device": "cuda",
+  "n_seeds": 1,
+  "epochs_per_task": 4,
+  "common": {
+    "stats_k": 16,
+    "epochs_proj": 15,
+    "l2sp": 0.0,
+    "use_dream": true,
+    "owm_samples": 2000
+  },
+  "variants": {
+    "mnist_owm_a10": {
+      "dataset": "MNIST",
+      "owm_alpha": 10.0,
+      "ranga": "GLOWNY"
+    },
+    "mnist_owm_a1": {
+      "dataset": "MNIST",
+      "owm_alpha": 1.0,
+      "ranga": "obserwacja"
+    },
+    "cifar_owm_a10": {
+      "dataset": "CIFAR-10",
+      "owm_alpha": 10.0,
+      "ranga": "GLOWNY"
+    },
+    "cifar_owm_a1": {
+      "dataset": "CIFAR-10",
+      "owm_alpha": 1.0,
+      "ranga": "obserwacja"
+    },
+    "fashion_owm_a1": {
+      "dataset": "Fashion-MNIST",
+      "owm_alpha": 1.0,
+      "ranga": "kontrola"
+    }
+  },
+  "systems": {
+    "mnist_owm_a10": {
+      "per_seed": [
+        {
+          "R_class_il": [
+            [
+              0.9986
+            ],
+            [
+              0.9749,
+              0.9579
+            ],
+            [
+              0.9702,
+              0.6268,
+              0.9541
+            ],
+            [
+              0.9688,
+              0.6592,
+              0.5998,
+              0.9225
+            ],
+            [
+              0.9697,
+              0.6028,
+              0.4642,
+              0.5705,
+              0.9032
+            ]
+          ],
+          "class_il": {
+            "ACC": 0.7021,
+            "forgetting": 0.3065,
+            "BWT": -0.3065,
+            "final_per_task": [
+              0.9697,
+              0.6028,
+              0.4642,
+              0.5705,
+              0.9032
+            ]
+          },
+          "task_il": {
+            "ACC": 0.8091,
+            "forgetting": 0.2019,
+            "BWT": -0.2019,
+            "final_per_task": [
+              0.9872,
+              0.7184,
+              0.7124,
+              0.6858,
+              0.9415
+            ]
+          },
+          "plasticity_Rtt": 0.9473
+        }
+      ],
+      "agg": {
+        "class_il_ACC": {
+          "mean": 0.7021,
+          "std": 0.0,
+          "min": 0.7021,
+          "max": 0.7021
+        },
+        "class_il_forgetting": {
+          "mean": 0.3065,
+          "std": 0.0,
+          "min": 0.3065,
+          "max": 0.3065
+        },
+        "plasticity_Rtt": {
+          "mean": 0.9473,
+          "std": 0.0,
+          "min": 0.9473,
+          "max": 0.9473
+        }
+      }
+    },
+    "mnist_owm_a1": {
+      "per_seed": [
+        {
+          "R_class_il": [
+            [
+              0.9986
+            ],
+            [
+              0.9792,
+              0.9535
+            ],
+            [
+              0.9674,
+              0.4819,
+              0.9525
+            ],
+            [
+              0.9749,
+              0.6719,
+              0.6286,
+              0.9104
+            ],
+            [
+              0.9707,
+              0.6166,
+              0.4258,
+              0.5519,
+              0.8931
+            ]
+          ],
+          "class_il": {
+            "ACC": 0.6916,
+            "forgetting": 0.3125,
+            "BWT": -0.3125,
+            "final_per_task": [
+              0.9707,
+              0.6166,
+              0.4258,
+              0.5519,
+              0.8931
+            ]
+          },
+          "task_il": {
+            "ACC": 0.7955,
+            "forgetting": 0.2096,
+            "BWT": -0.2096,
+            "final_per_task": [
+              0.9877,
+              0.6885,
+              0.6953,
+              0.6707,
+              0.9355
+            ]
+          },
+          "plasticity_Rtt": 0.9416
+        }
+      ],
+      "agg": {
+        "class_il_ACC": {
+          "mean": 0.6916,
+          "std": 0.0,
+          "min": 0.6916,
+          "max": 0.6916
+        },
+        "class_il_forgetting": {
+          "mean": 0.3125,
+          "std": 0.0,
+          "min": 0.3125,
+          "max": 0.3125
+        },
+        "plasticity_Rtt": {
+          "mean": 0.9416,
+          "std": 0.0,
+          "min": 0.9416,
+          "max": 0.9416
+        }
+      }
+    },
+    "cifar_owm_a10": {
+      "per_seed": [
+        {
+          "R_class_il": [
+            [
+              0.833
+            ],
+            [
+              0.5915,
+              0.5875
+            ],
+            [
+              0.6025,
+              0.136,
+              0.577
+            ],
+            [
+              0.566,
+              0.174,
+              0.2295,
+              0.605
+            ],
+            [
+              0.294,
+              0.216,
+              0.2745,
+              0.3785,
+              0.6285
+            ]
+          ],
+          "class_il": {
+            "ACC": 0.3583,
+            "forgetting": 0.3599,
+            "BWT": -0.3599,
+            "final_per_task": [
+              0.294,
+              0.216,
+              0.2745,
+              0.3785,
+              0.6285
+            ]
+          },
+          "task_il": {
+            "ACC": 0.6372,
+            "forgetting": 0.1099,
+            "BWT": -0.1099,
+            "final_per_task": [
+              0.5245,
+              0.5975,
+              0.6395,
+              0.6915,
+              0.733
+            ]
+          },
+          "plasticity_Rtt": 0.6462
+        }
+      ],
+      "agg": {
+        "class_il_ACC": {
+          "mean": 0.3583,
+          "std": 0.0,
+          "min": 0.3583,
+          "max": 0.3583
+        },
+        "class_il_forgetting": {
+          "mean": 0.3599,
+          "std": 0.0,
+          "min": 0.3599,
+          "max": 0.3599
+        },
+        "plasticity_Rtt": {
+          "mean": 0.6462,
+          "std": 0.0,
+          "min": 0.6462,
+          "max": 0.6462
+        }
+      }
+    },
+    "cifar_owm_a1": {
+      "per_seed": [
+        {
+          "R_class_il": [
+            [
+              0.833
+            ],
+            [
+              0.5895,
+              0.5905
+            ],
+            [
+              0.5955,
+              0.133,
+              0.574
+            ],
+            [
+              0.5605,
+              0.1585,
+              0.2365,
+              0.611
+            ],
+            [
+              0.287,
+              0.2085,
+              0.2755,
+              0.388,
+              0.6325
+            ]
+          ],
+          "class_il": {
+            "ACC": 0.3583,
+            "forgetting": 0.3624,
+            "BWT": -0.3624,
+            "final_per_task": [
+              0.287,
+              0.2085,
+              0.2755,
+              0.388,
+              0.6325
+            ]
+          },
+          "task_il": {
+            "ACC": 0.6514,
+            "forgetting": 0.0911,
+            "BWT": -0.0911,
+            "final_per_task": [
+              0.746,
+              0.543,
+              0.5465,
+              0.6815,
+              0.74
+            ]
+          },
+          "plasticity_Rtt": 0.6482
+        }
+      ],
+      "agg": {
+        "class_il_ACC": {
+          "mean": 0.3583,
+          "std": 0.0,
+          "min": 0.3583,
+          "max": 0.3583
+        },
+        "class_il_forgetting": {
+          "mean": 0.3624,
+          "std": 0.0,
+          "min": 0.3624,
+          "max": 0.3624
+        },
+        "plasticity_Rtt": {
+          "mean": 0.6482,
+          "std": 0.0,
+          "min": 0.6482,
+          "max": 0.6482
+        }
+      }
+    },
+    "fashion_owm_a1": {
+      "per_seed": [
+        {
+          "R_class_il": [
+            [
+              0.9855
+            ],
+            [
+              0.868,
+              0.94
+            ],
+            [
+              0.8885,
+              0.712,
+              0.935
+            ],
+            [
+              0.81,
+              0.716,
+              0.7795,
+              0.76
+            ],
+            [
+              0.8455,
+              0.7735,
+              0.71,
+              0.657,
+              0.9375
+            ]
+          ],
+          "class_il": {
+            "ACC": 0.7847,
+            "forgetting": 0.1586,
+            "BWT": -0.1586,
+            "final_per_task": [
+              0.8455,
+              0.7735,
+              0.71,
+              0.657,
+              0.9375
+            ]
+          },
+          "task_il": {
+            "ACC": 0.9213,
+            "forgetting": 0.0674,
+            "BWT": -0.0674,
+            "final_per_task": [
+              0.9315,
+              0.8775,
+              0.8615,
+              0.982,
+              0.954
+            ]
+          },
+          "plasticity_Rtt": 0.9116
+        }
+      ],
+      "agg": {
+        "class_il_ACC": {
+          "mean": 0.7847,
+          "std": 0.0,
+          "min": 0.7847,
+          "max": 0.7847
+        },
+        "class_il_forgetting": {
+          "mean": 0.1586,
+          "std": 0.0,
+          "min": 0.1586,
+          "max": 0.1586
+        },
+        "plasticity_Rtt": {
+          "mean": 0.9116,
+          "std": 0.0,
+          "min": 0.9116,
+          "max": 0.9116
+        }
+      }
+    }
+  },
+  "verdicts": {},
+  "elapsed_s": 80.2
+}

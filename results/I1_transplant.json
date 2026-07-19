@@ -1,0 +1,238 @@
+{
+  "experiment": "I1_transplant",
+  "device": "cuda",
+  "n_seeds": 5,
+  "epochs_per_task": 15,
+  "n_dream": 6000,
+  "common": {
+    "dream_model": "sparse",
+    "stats_k": 16,
+    "epochs_proj": 15,
+    "l2sp": 0.0,
+    "bn_calib": false,
+    "feat_signorm": false
+  },
+  "systems": {
+    "transplant_end": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.834,
+            0.7305,
+            0.781,
+            0.662,
+            0.9485
+          ],
+          "acc_task4": 0.9485,
+          "acc_old_mean": 0.7518750000000001,
+          "ACC": 0.7912
+        },
+        {
+          "final_row_class_il": [
+            0.8615,
+            0.7305,
+            0.7845,
+            0.629,
+            0.9335
+          ],
+          "acc_task4": 0.9335,
+          "acc_old_mean": 0.751375,
+          "ACC": 0.7878000000000001
+        },
+        {
+          "final_row_class_il": [
+            0.841,
+            0.7495,
+            0.753,
+            0.6275,
+            0.942
+          ],
+          "acc_task4": 0.942,
+          "acc_old_mean": 0.74275,
+          "ACC": 0.7826
+        },
+        {
+          "final_row_class_il": [
+            0.876,
+            0.7565,
+            0.8135,
+            0.6325,
+            0.948
+          ],
+          "acc_task4": 0.948,
+          "acc_old_mean": 0.769625,
+          "ACC": 0.8052999999999999
+        },
+        {
+          "final_row_class_il": [
+            0.846,
+            0.735,
+            0.7985,
+            0.601,
+            0.941
+          ],
+          "acc_task4": 0.941,
+          "acc_old_mean": 0.745125,
+          "ACC": 0.7843
+        }
+      ],
+      "agg": {
+        "ACC": {
+          "mean": 0.7902,
+          "std": 0.009,
+          "min": 0.7826,
+          "max": 0.8053
+        },
+        "acc_task4": {
+          "mean": 0.9426,
+          "std": 0.0061,
+          "min": 0.9335,
+          "max": 0.9485
+        },
+        "acc_old_mean": {
+          "mean": 0.7522,
+          "std": 0.0105,
+          "min": 0.7428,
+          "max": 0.7696
+        }
+      }
+    },
+    "transplant_mid": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.8345,
+            0.7105,
+            0.7535,
+            0.7595,
+            0.924
+          ],
+          "acc_task4": 0.924,
+          "acc_old_mean": 0.7645,
+          "ACC": 0.7964
+        },
+        {
+          "final_row_class_il": [
+            0.8315,
+            0.716,
+            0.7595,
+            0.758,
+            0.9025
+          ],
+          "acc_task4": 0.9025,
+          "acc_old_mean": 0.76625,
+          "ACC": 0.7935
+        },
+        {
+          "final_row_class_il": [
+            0.8285,
+            0.695,
+            0.7215,
+            0.7435,
+            0.908
+          ],
+          "acc_task4": 0.908,
+          "acc_old_mean": 0.747125,
+          "ACC": 0.7793
+        },
+        {
+          "final_row_class_il": [
+            0.8315,
+            0.706,
+            0.7975,
+            0.774,
+            0.9255
+          ],
+          "acc_task4": 0.9255,
+          "acc_old_mean": 0.77725,
+          "ACC": 0.8069
+        },
+        {
+          "final_row_class_il": [
+            0.824,
+            0.701,
+            0.7635,
+            0.757,
+            0.911
+          ],
+          "acc_task4": 0.911,
+          "acc_old_mean": 0.7613749999999999,
+          "ACC": 0.7913
+        }
+      ],
+      "agg": {
+        "ACC": {
+          "mean": 0.7935,
+          "std": 0.0099,
+          "min": 0.7793,
+          "max": 0.8069
+        },
+        "acc_task4": {
+          "mean": 0.9142,
+          "std": 0.0101,
+          "min": 0.9025,
+          "max": 0.9255
+        },
+        "acc_old_mean": {
+          "mean": 0.7633,
+          "std": 0.0108,
+          "min": 0.7471,
+          "max": 0.7772
+        }
+      }
+    }
+  },
+  "verdicts": {
+    "strata_przeszczepu": {
+      "pairs_pp": [
+        0.9,
+        1.35,
+        1.5,
+        1.05,
+        1.65
+      ],
+      "delta": {
+        "mean": 1.29,
+        "std": 0.311,
+        "min": 0.9,
+        "max": 1.65
+      },
+      "noise_pp": 1.0901,
+      "verdict": "SUKCES SLABY (strata < 3pp)"
+    },
+    "ACC_end_vs_local": {
+      "pairs_pp": [
+        -0.12,
+        -0.34,
+        -0.12,
+        0.14,
+        -0.57
+      ],
+      "delta": {
+        "mean": -0.202,
+        "std": 0.2669,
+        "min": -0.57,
+        "max": 0.14
+      },
+      "noise_pp": 1.6349,
+      "verdict": "SZUM"
+    },
+    "I1b_mid_vs_end": {
+      "pairs_pp_end_minus_mid": [
+        2.45,
+        3.1,
+        3.4,
+        2.25,
+        3.0
+      ],
+      "delta": {
+        "mean": 2.84,
+        "std": 0.4762,
+        "min": 2.25,
+        "max": 3.4
+      },
+      "ranga": "obserwacja"
+    }
+  },
+  "elapsed_s": 87.6
+}

@@ -1,0 +1,91 @@
+{
+  "experiment": "I1_transplant",
+  "device": "cuda",
+  "n_seeds": 1,
+  "epochs_per_task": 4,
+  "n_dream": 256,
+  "common": {
+    "dream_model": "sparse",
+    "stats_k": 16,
+    "epochs_proj": 15,
+    "l2sp": 0.0,
+    "bn_calib": false,
+    "feat_signorm": false
+  },
+  "systems": {
+    "transplant_end": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.862,
+            0.6885,
+            0.826,
+            0.683,
+            0.075
+          ],
+          "acc_task4": 0.075,
+          "acc_old_mean": 0.764875,
+          "ACC": 0.6269
+        }
+      ],
+      "agg": {
+        "ACC": {
+          "mean": 0.6269,
+          "std": 0.0,
+          "min": 0.6269,
+          "max": 0.6269
+        },
+        "acc_task4": {
+          "mean": 0.075,
+          "std": 0.0,
+          "min": 0.075,
+          "max": 0.075
+        },
+        "acc_old_mean": {
+          "mean": 0.7649,
+          "std": 0.0,
+          "min": 0.7649,
+          "max": 0.7649
+        }
+      }
+    },
+    "transplant_mid": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.8445,
+            0.696,
+            0.76,
+            0.7535,
+            0.003
+          ],
+          "acc_task4": 0.003,
+          "acc_old_mean": 0.7635,
+          "ACC": 0.6113999999999999
+        }
+      ],
+      "agg": {
+        "ACC": {
+          "mean": 0.6114,
+          "std": 0.0,
+          "min": 0.6114,
+          "max": 0.6114
+        },
+        "acc_task4": {
+          "mean": 0.003,
+          "std": 0.0,
+          "min": 0.003,
+          "max": 0.003
+        },
+        "acc_old_mean": {
+          "mean": 0.7635,
+          "std": 0.0,
+          "min": 0.7635,
+          "max": 0.7635
+        }
+      }
+    }
+  },
+  "verdicts": {},
+  "elapsed_s": 11.6
+}

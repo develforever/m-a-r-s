@@ -1,0 +1,142 @@
+{
+  "experiment": "I3_collective",
+  "device": "cuda",
+  "n_seeds": 5,
+  "epochs_per_task": 15,
+  "n_dream": 6000,
+  "common": {
+    "dream_model": "sparse",
+    "stats_k": 16,
+    "epochs_proj": 15,
+    "l2sp": 0.0,
+    "bn_calib": false,
+    "feat_signorm": false
+  },
+  "systems": {
+    "collective": {
+      "per_seed": [
+        {
+          "acc_curve_after_adoptions": [
+            0.9067,
+            0.8497,
+            0.7679,
+            0.7928
+          ],
+          "final_row_class_il": [
+            0.843,
+            0.7335,
+            0.7945,
+            0.644,
+            0.949
+          ],
+          "acc_task0_final": 0.843,
+          "ACC": 0.7928
+        },
+        {
+          "acc_curve_after_adoptions": [
+            0.9067,
+            0.853,
+            0.7658,
+            0.7823
+          ],
+          "final_row_class_il": [
+            0.8655,
+            0.703,
+            0.7765,
+            0.634,
+            0.9325
+          ],
+          "acc_task0_final": 0.8655,
+          "ACC": 0.7823
+        },
+        {
+          "acc_curve_after_adoptions": [
+            0.8955,
+            0.8498,
+            0.7539,
+            0.7822
+          ],
+          "final_row_class_il": [
+            0.837,
+            0.748,
+            0.762,
+            0.6215,
+            0.9425
+          ],
+          "acc_task0_final": 0.837,
+          "ACC": 0.7822
+        },
+        {
+          "acc_curve_after_adoptions": [
+            0.918,
+            0.8718,
+            0.7897,
+            0.8047
+          ],
+          "final_row_class_il": [
+            0.87,
+            0.762,
+            0.8115,
+            0.6345,
+            0.9455
+          ],
+          "acc_task0_final": 0.87,
+          "ACC": 0.8047000000000001
+        },
+        {
+          "acc_curve_after_adoptions": [
+            0.8985,
+            0.8487,
+            0.7585,
+            0.7813
+          ],
+          "final_row_class_il": [
+            0.8445,
+            0.7295,
+            0.7725,
+            0.625,
+            0.935
+          ],
+          "acc_task0_final": 0.8445,
+          "ACC": 0.7813000000000001
+        }
+      ],
+      "agg": {
+        "ACC": {
+          "mean": 0.7887,
+          "std": 0.0101,
+          "min": 0.7813,
+          "max": 0.8047
+        },
+        "acc_task0_final": {
+          "mean": 0.852,
+          "std": 0.0147,
+          "min": 0.837,
+          "max": 0.87
+        }
+      }
+    }
+  },
+  "verdicts": {
+    "collective_vs_seq": {
+      "base": "K1 fashion_sp16_300 (agent sekwencyjny)",
+      "pairs_pp": [
+        0.04,
+        -0.89,
+        -0.16,
+        0.08,
+        -0.87
+      ],
+      "delta": {
+        "mean": -0.36,
+        "std": 0.4834,
+        "min": -0.89,
+        "max": 0.08
+      },
+      "noise_pp": 1.7437,
+      "verdict": "SZUM",
+      "gap_to_g1_all_300_pp": 2.29
+    }
+  },
+  "elapsed_s": 56.0
+}
