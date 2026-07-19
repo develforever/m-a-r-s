@@ -1,0 +1,139 @@
+{
+  "experiment": "I2b_fusion_lowdata",
+  "device": "cuda",
+  "n_seeds": 1,
+  "epochs_per_task": 4,
+  "n_dream": 256,
+  "common": {
+    "dream_model": "sparse",
+    "stats_k": 16,
+    "epochs_proj": 15,
+    "l2sp": 0.0,
+    "bn_calib": false,
+    "feat_signorm": false
+  },
+  "ns": [
+    100,
+    500
+  ],
+  "systems": {
+    "half_100": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.8705,
+            0.6795,
+            0.8205,
+            0.6655,
+            0.2985
+          ],
+          "acc_task4": 0.2985,
+          "ACC": 0.6669
+        }
+      ],
+      "agg": {
+        "ACC": {
+          "mean": 0.6669,
+          "std": 0.0,
+          "min": 0.6669,
+          "max": 0.6669
+        },
+        "acc_task4": {
+          "mean": 0.2985,
+          "std": 0.0,
+          "min": 0.2985,
+          "max": 0.2985
+        }
+      }
+    },
+    "fusion_100": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.871,
+            0.679,
+            0.8205,
+            0.6795,
+            0.2995
+          ],
+          "acc_task4": 0.2995,
+          "ACC": 0.6698999999999999
+        }
+      ],
+      "agg": {
+        "ACC": {
+          "mean": 0.6699,
+          "std": 0.0,
+          "min": 0.6699,
+          "max": 0.6699
+        },
+        "acc_task4": {
+          "mean": 0.2995,
+          "std": 0.0,
+          "min": 0.2995,
+          "max": 0.2995
+        }
+      }
+    },
+    "half_500": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.8665,
+            0.679,
+            0.821,
+            0.672,
+            0.3225
+          ],
+          "acc_task4": 0.3225,
+          "ACC": 0.6722
+        }
+      ],
+      "agg": {
+        "ACC": {
+          "mean": 0.6722,
+          "std": 0.0,
+          "min": 0.6722,
+          "max": 0.6722
+        },
+        "acc_task4": {
+          "mean": 0.3225,
+          "std": 0.0,
+          "min": 0.3225,
+          "max": 0.3225
+        }
+      }
+    },
+    "fusion_500": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.8665,
+            0.682,
+            0.823,
+            0.6735,
+            0.296
+          ],
+          "acc_task4": 0.296,
+          "ACC": 0.6682
+        }
+      ],
+      "agg": {
+        "ACC": {
+          "mean": 0.6682,
+          "std": 0.0,
+          "min": 0.6682,
+          "max": 0.6682
+        },
+        "acc_task4": {
+          "mean": 0.296,
+          "std": 0.0,
+          "min": 0.296,
+          "max": 0.296
+        }
+      }
+    }
+  },
+  "verdicts": {},
+  "elapsed_s": 20.1
+}

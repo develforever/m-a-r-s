@@ -5,7 +5,7 @@ on a frozen random representation.**
 
 Independent research project. Every experiment: 5 seeds, pre-registered
 verdict criteria, negative results reported with equal weight. All runs on a
-single consumer GPU (GTX 1050 Ti, 4 GB). Code frozen at `v0.3` (July 2026).
+single consumer GPU (GTX 1050 Ti, 4 GB). Code at `v0.6` (July 2026); the `v0.3` freeze is preserved as a tag.
 
 ## Headline results (class-incremental learning, 5 tasks × 2 classes)
 
@@ -21,7 +21,7 @@ Statistical equivalence with replay (nominally above, within the
 pre-registered noise threshold), at zero stored samples, constant inference
 cost (×1.0007 after 5 tasks) and ~30% less forgetting. Series J adds a
 sparsity-aware dream (spike-and-slab): Fashion 78.49 ± 0.91% — nominally the
-best, within the noise threshold of k16 (reported as an observation).
+best, within the noise threshold of k16 (reported as an observation). Series K composes the levers: sparse dreams × GloVe-300d reach **79.23 ± 0.73%** (paired-SIGNAL+), 97.6% of the 81.16 frozen-feature ceiling.
 
 | Split-CIFAR-10 (class-IL, normalized input) | ACC | Forgetting |
 |---|---|---|
@@ -40,9 +40,34 @@ difficulty. (v0.3 raw-input numbers remain in `results/F4_split_cifar.json`.)
 **Measured boundaries (not hidden):** the mechanism requires class names with
 visual semantics — on Split-MNIST it loses to replay by ~19pp (digit names
 carry no visual meaning); absolute accuracy is capped by random frozen
-features (CIFAR: 32% vs 68.7% ceiling); compositional zero-shot from
+features (CIFAR: 37.5% vs a 39.65% frozen-feature ceiling — the mechanism
+realizes 94.6% of it; the remaining gap to the 70.2% joint ceiling is
+representational — K0); compositional zero-shot from
 attribute descriptions failed its pre-registered threshold (with failures
 predicted 3-for-3 by a structural reachability rule).
+
+## Collective learning by dream exchange (Series I, v0.6)
+
+Five agents share a frozen random backbone (same seed) and the same word
+space, and exchange only per-class sleep statistics (~24 KB per class; no
+images, no gradients, no weights). A class learned from a single 24 KB
+message reaches 94.26% where local training on 12,000 images reaches 95.55%
+(full-accuracy equivalence). A collective of five agents — each having seen
+only 2 of 10 classes — scores **78.87 ± 1.01%**, statistically equivalent to
+one agent trained sequentially on all the data (79.23 ± 0.73%) and nominally
+above replay-200 (76.97%). Eight of the collector's ten classes were learned
+from dreams alone. Details: `DROGA_I_NOTATKI.md`.
+
+## Identity fork: frozen pretrained backbone (Series L, v0.7)
+
+Reported as a separate resource line (from-scratch vs foundation-embedding).
+Swapping the random backbone for a frozen ImageNet ResNet18 — mechanism,
+memory (24 KB/class) and exchange protocol untouched — lifts Split-CIFAR-10
+class-IL from 37.51% to **74.69 ± 0.69%** (SIGNAL+, +37.2pp), with the
+mechanism still realizing 96.7% of its all-data ceiling (77.23%). The
+sequential learner and the five-agent collective (**74.13 ± 0.57%**) both
+beat the trainable joint monolith (70.24%). The collective's cost versus
+sequential is now measured: paired −0.56pp. Details: `DROGA_L_NOTATKI.md`.
 
 ## The mechanism in one paragraph
 
@@ -83,6 +108,15 @@ python src/run_J1_feature_conditioning.py # audit: BN-calib/σ-norm -> NOISE
 python src/run_J2_cifar_normalized.py     # normalized CIFAR rerun -> SIGNAL+ vs replay
 python src/run_J3_sparse_dreams.py        # spike-and-slab dreams (Fashion/MNIST)
 python src/run_J2b_cifar_sparse.py        # sparse dreams on CIFAR -> SIGNAL+ (+4.5pp)
+python src/run_J4_glove300.py             # GloVe-300d -> seq null; ceiling 81.16
+# Series K (v0.5) -- ceilings and lever composition
+python src/run_K0_cifar_ceiling.py        # frozen-feature ceiling CIFAR 39.65
+python src/run_K1_sparse300.py            # sparse x 300d -> paired-SIGNAL+ 79.23
+python src/run_K2_owm_sparse.py           # OWM x sparse -> eliminated
+# Series I (v0.6) -- collective learning by dream exchange
+python src/run_I1_transplant.py           # class from a 24 KB message
+python src/run_I2_fusion.py               # payload saturation
+python src/run_I3_collective.py           # 5 agents ~ 1 sequential agent
 
 # Part II — routing ceiling study
 python src/run_D1_mars_v2_baseline.py

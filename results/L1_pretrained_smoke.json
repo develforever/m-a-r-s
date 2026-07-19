@@ -1,0 +1,161 @@
+{
+  "experiment": "L1_pretrained",
+  "device": "cuda",
+  "n_seeds": 1,
+  "epochs_per_task": 4,
+  "encoder": "resnet18_IMAGENET1K_V1 -> random frozen 512->128",
+  "seq_cfg": {
+    "dream_model": "sparse",
+    "stats_k": 16,
+    "epochs_proj": 15,
+    "l2sp": 0.0,
+    "bn_calib": false,
+    "feat_signorm": false
+  },
+  "systems": {
+    "l1_all": {
+      "per_seed": [
+        {
+          "R_class_il": [
+            [
+              0.9755
+            ],
+            [
+              0.941,
+              0.8605
+            ],
+            [
+              0.934,
+              0.7,
+              0.791
+            ],
+            [
+              0.9265,
+              0.64,
+              0.718,
+              0.7845
+            ],
+            [
+              0.836,
+              0.632,
+              0.7165,
+              0.7795,
+              0.847
+            ]
+          ],
+          "class_il": {
+            "ACC": 0.7622,
+            "forgetting": 0.1119,
+            "BWT": -0.1119,
+            "final_per_task": [
+              0.836,
+              0.632,
+              0.7165,
+              0.7795,
+              0.847
+            ]
+          },
+          "task_il": {
+            "ACC": 0.8803,
+            "forgetting": 0.0421,
+            "BWT": -0.0421,
+            "final_per_task": [
+              0.921,
+              0.7985,
+              0.815,
+              0.9215,
+              0.9455
+            ]
+          }
+        }
+      ],
+      "agg": {
+        "class_il_ACC": {
+          "mean": 0.7622,
+          "std": 0.0,
+          "min": 0.7622,
+          "max": 0.7622
+        },
+        "class_il_forgetting": {
+          "mean": 0.1119,
+          "std": 0.0,
+          "min": 0.1119,
+          "max": 0.1119
+        }
+      }
+    },
+    "l1_seq": {
+      "per_seed": [
+        {
+          "R_class_il": [
+            [
+              0.975
+            ],
+            [
+              0.905,
+              0.8875
+            ],
+            [
+              0.9275,
+              0.6185,
+              0.8505
+            ],
+            [
+              0.905,
+              0.603,
+              0.6405,
+              0.8575
+            ],
+            [
+              0.771,
+              0.609,
+              0.6685,
+              0.7505,
+              0.894
+            ]
+          ],
+          "class_il": {
+            "ACC": 0.7386,
+            "forgetting": 0.1929,
+            "BWT": -0.1929,
+            "final_per_task": [
+              0.771,
+              0.609,
+              0.6685,
+              0.7505,
+              0.894
+            ]
+          },
+          "task_il": {
+            "ACC": 0.827,
+            "forgetting": 0.1154,
+            "BWT": -0.1154,
+            "final_per_task": [
+              0.851,
+              0.7215,
+              0.763,
+              0.867,
+              0.9325
+            ]
+          }
+        }
+      ],
+      "agg": {
+        "class_il_ACC": {
+          "mean": 0.7386,
+          "std": 0.0,
+          "min": 0.7386,
+          "max": 0.7386
+        },
+        "class_il_forgetting": {
+          "mean": 0.1929,
+          "std": 0.0,
+          "min": 0.1929,
+          "max": 0.1929
+        }
+      }
+    }
+  },
+  "verdicts": {},
+  "elapsed_s": 6.6
+}
