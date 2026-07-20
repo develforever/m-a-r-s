@@ -41,6 +41,28 @@ def unlearn_class(m, c, scrub=False, epochs=15, lr=0.001, device="cpu",
     return list(m.seen_classes)
 
 
+def unlearn_reinit(m, c, epochs=15, lr=0.001, device="cpu",
+                   n_dream_scrub=2000, seed=0):
+    """N1c: light + REINICJALIZACJA projekcji (deterministycznie
+    z seeda) + nauka od zera na snach pozostalych klas. Informacja
+    o klasie c nie moze przetrwac (nowe wagi)."""
+    import torch.nn as nn
+    unlearn_class(m, c, scrub=False, device=device)
+    torch.manual_seed(seed)
+    mods = m.proj.modules() if hasattr(m.proj, "modules") else [m.proj]
+    for mod in mods:
+        if isinstance(mod, nn.Linear):
+            mod.reset_parameters()
+    rest = list(m.seen_classes)
+    if rest:
+        feats = torch.cat([m.stats.sample(r, n_dream_scrub, device)
+                           for r in rest])
+        y = torch.cat([torch.full((n_dream_scrub,), r, dtype=torch.long,
+                                  device=device) for r in rest])
+        m._fit_proj_feats(feats, y, [], rest, epochs, lr, device)
+    return rest
+
+
 def relearn_small(m, c, X, y, epochs=15, lr=0.001, device="cpu",
                   balanced_negatives=False):
     """Ponowna nauka klasy c z malej probki; projekcja ZAMROZONA.

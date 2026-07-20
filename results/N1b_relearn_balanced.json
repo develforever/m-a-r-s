@@ -1,0 +1,100 @@
+{
+  "experiment": "N1b_relearn_balanced",
+  "device": "cuda",
+  "n_seeds": 5,
+  "epochs_per_task": 15,
+  "cfg": {
+    "dream_model": "sparse",
+    "stats_k": 16,
+    "epochs_proj": 15,
+    "l2sp": 0.0,
+    "bn_calib": false,
+    "feat_signorm": false
+  },
+  "c_star": 4,
+  "n_relearn": 100,
+  "per_seed": [
+    {
+      "acc_cstar_full": 0.68,
+      "acc_relearn_light": 0.68,
+      "acc_relearn_scrub": 0.086,
+      "acc_relearn_never": 0.0
+    },
+    {
+      "acc_cstar_full": 0.679,
+      "acc_relearn_light": 0.679,
+      "acc_relearn_scrub": 0.143,
+      "acc_relearn_never": 0.0
+    },
+    {
+      "acc_cstar_full": 0.657,
+      "acc_relearn_light": 0.657,
+      "acc_relearn_scrub": 0.077,
+      "acc_relearn_never": 0.0
+    },
+    {
+      "acc_cstar_full": 0.724,
+      "acc_relearn_light": 0.724,
+      "acc_relearn_scrub": 0.101,
+      "acc_relearn_never": 0.0
+    },
+    {
+      "acc_cstar_full": 0.735,
+      "acc_relearn_light": 0.735,
+      "acc_relearn_scrub": 0.154,
+      "acc_relearn_never": 0.0
+    }
+  ],
+  "verdicts": {
+    "poziom2_light_vs_never": {
+      "pairs_pp": [
+        68.0,
+        67.9,
+        65.7,
+        72.4,
+        73.5
+      ],
+      "delta": {
+        "mean": 69.5,
+        "std": 3.3038,
+        "min": 65.7,
+        "max": 73.5
+      },
+      "noise_pp": 3.3038,
+      "verdict": "SYGNAL+"
+    },
+    "poziom2_scrub_vs_never": {
+      "pairs_pp": [
+        8.6,
+        14.3,
+        7.7,
+        10.1,
+        15.4
+      ],
+      "delta": {
+        "mean": 11.22,
+        "std": 3.4449,
+        "min": 7.7,
+        "max": 15.4
+      },
+      "noise_pp": 3.4449,
+      "verdict": "SYGNAL+"
+    },
+    "obs_scrub_vs_light": {
+      "pairs_pp": [
+        -59.4,
+        -53.6,
+        -58.0,
+        -62.3,
+        -58.1
+      ],
+      "delta": {
+        "mean": -58.28,
+        "std": 3.1396,
+        "min": -62.3,
+        "max": -53.6
+      }
+    }
+  },
+  "elapsed_s": 76.2
+}

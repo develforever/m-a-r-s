@@ -38,3 +38,42 @@ informacji, ale nierozstrzygalna przy podłodze.
 
 **Naprawa: N1b (dopisek do planu PRZED runem)** — relearn ze
 zbalansowanym budżetem negatywów (łącznie ≈ liczbie pozytywów).
+
+## N1b — relearn zbalansowany (ZAKOŃCZONE, 20.07.2026): poziom 2
+## ROZSTRZYGNIĘTY — light nie wymazuje NIC, scrub ściera ~84%,
+## klasa nigdy nie widziana jest routingowo nieosiągalna
+
+Plik: `src/run_N1b_relearn_balanced.py`;
+wyniki: `results/N1b_relearn_balanced.json`. Czas: 76 s.
+
+| Ścieżka (acc c*=4 po relearn n=100, maska 9 klas) | ACC |
+|---|---|
+| referencja: pełny system | 69.50 ± 3.30% |
+| **relearn po unlearn_light** | **69.50 ± 3.30% (= full CO DO 4 MIEJSC, 5/5)** |
+| relearn po unlearn_scrub | 11.22 ± 3.44% |
+| relearn po never (kontrola zerowa) | **0.00 ± 0.00% (twarde zero, 5/5)** |
+
+**WERDYKTY (pre-rejestrowane):**
+- GŁÓWNE 2 (light vs never): **SYGNAL+ +69.50pp** — unlearn_light
+  usuwa DOSTĘP, nie INFORMACJĘ: 100 obrazów przywraca klasę do
+  identycznej sprawności (predykcje bitowo równe pełnemu systemowi).
+- GŁÓWNE 3 (scrub vs never): **SYGNAL+ +11.22pp** (pary 5/5
+  [7.7…15.4]) — douczanie na snach pozostałych ściera ~84%
+  odzyskiwalności (69.5 → 11.2), ale ZOSTAWIA zmierzony ślad;
+  ryzyko pre-rejestrowane („scrub douczaniem może nie wymazać")
+  zmaterializowane i skwantyfikowane.
+
+**Ustalenia:**
+1. **Nośnikiem informacji o klasie jest wyłącznie projekcja; pody są
+   konfirmacyjne.** Light (projekcja nietknięta) → pełny powrót ze
+   100 próbek; acc(c) jest limitowane routingiem, świeży pod na 100
+   przykładach wystarcza w 100%.
+2. **Taksonomia zapominania zmierzona:** light = zawieszenie dostępu
+   (odwracalne, natychmiastowe, zero kosztu); scrub = częściowe
+   wymazanie (resztka 11.2pp); pełna gwarancja wymaga N1c.
+3. **Własność bezpieczeństwa przy okazji:** klasa, której projekcja
+   nigdy nie widziała, jest routingowo nieosiągalna (twarde 0.00 mimo
+   dodanej kotwicy i poda) — system nie umie przewidywać klas, których
+   go nie nauczono, nawet mając ich nazwę.
+
+Status: N1c (dopisek PRZED runem) — pełne wymazanie przez reinicjalizację.

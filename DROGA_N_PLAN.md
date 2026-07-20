@@ -101,3 +101,24 @@ maska 9 klas, kryteria — bez zmian względem planu poziomu 2:
   gwarancja wymazania),
 - obserwacja: scrub vs light; referencja górna: pełny system.
 Plik: `src/run_N1b_relearn_balanced.py` → `results/N1b_relearn_balanced.json`
+
+## N1c (dopisane 2026-07-20, PRZED runem) — pełne wymazanie: reinit projekcji
+
+N1b: scrub douczaniem zostawia 11.2pp odzyskiwalności. Kandydat pełnej
+gwarancji: `unlearn_reinit` = light + REINICJALIZACJA projekcji
+(deterministycznie z seeda) + nauka od zera na snach pozostałych 9 klas
+(epochs_proj). Informacja o klasie nie może przetrwać, bo wagi są nowe;
+pytanie brzmi, ILE TO KOSZTUJE pozostałe klasy (projekcja uczona na
+snach zamiast na realnych danych sekwencji).
+
+Plik: `src/run_N1c_reinit.py` → `results/N1c_reinit.json`
+
+**Kryteria (Z GÓRY, pary per-seed):**
+- GŁÓWNE 4: relearn po reinit vs never (never z N1b, TE SAME seedy
+  i próbki): SZUM = PEŁNA empiryczna gwarancja wymazania.
+- GŁÓWNE 5 (koszt): śr. acc pozostałych 9 klas po reinit vs pełny
+  system (pary): SZUM = wymazanie darmowe (mocny wynik — sny
+  wystarczają do odbudowy projekcji); SYGNAL− = zmierzona cena pełnej
+  gwarancji.
+- Obserwacja: relearn(4) po reinit vs scrub — domknięcie taksonomii
+  light/scrub/reinit.

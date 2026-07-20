@@ -1,0 +1,26 @@
+{
+  "experiment": "N1b_relearn_balanced",
+  "device": "cuda",
+  "n_seeds": 1,
+  "epochs_per_task": 4,
+  "cfg": {
+    "dream_model": "sparse",
+    "stats_k": 16,
+    "epochs_proj": 15,
+    "l2sp": 0.0,
+    "bn_calib": false,
+    "feat_signorm": false
+  },
+  "c_star": 4,
+  "n_relearn": 100,
+  "per_seed": [
+    {
+      "acc_cstar_full": 0.711,
+      "acc_relearn_light": 0.711,
+      "acc_relearn_scrub": 0.493,
+      "acc_relearn_never": 0.0
+    }
+  ],
+  "verdicts": {},
+  "elapsed_s": 13.1
+}
