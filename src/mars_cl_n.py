@@ -41,13 +41,21 @@ def unlearn_class(m, c, scrub=False, epochs=15, lr=0.001, device="cpu",
     return list(m.seen_classes)
 
 
-def relearn_small(m, c, X, y, epochs=15, lr=0.001, device="cpu"):
-    """Ponowna nauka klasy c z malej probki; projekcja ZAMROZONA."""
+def relearn_small(m, c, X, y, epochs=15, lr=0.001, device="cpu",
+                  balanced_negatives=False):
+    """Ponowna nauka klasy c z malej probki; projekcja ZAMROZONA.
+    balanced_negatives=True (N1b): negatywy LACZNIE ~= liczbie
+    pozytywow (naprawa podlogi z N1: 2304 negatywy na 100 pozytywow
+    uczyly pod 'nigdy nie przewiduj c')."""
     with torch.no_grad():
         feats = m.feats_batched(X)
     old = list(m.seen_classes)
     m.stats.update(feats, y, [c])
-    neg_f, neg_y = m.stats.replay_batch(old, m.replay_per_class, device)
+    if balanced_negatives and old:
+        neg_per = max(len(X) // len(old), 4)
+    else:
+        neg_per = m.replay_per_class
+    neg_f, neg_y = m.stats.replay_batch(old, neg_per, device)
     m.protos[c] = m.word_vecs[c].to(device)
     m.seen_classes = m.seen_classes + [c]
     with torch.no_grad():

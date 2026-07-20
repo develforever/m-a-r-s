@@ -86,3 +86,18 @@ liczone z maską ograniczoną do WSPÓLNEGO zbioru 9 klas {0,1,2,3,4,
 Wyniki do DROGA_N_NOTATKI.md; merge po komplecie i decyzji Roberta.
 Po N: I4 (weryfikacja payloadu — „wykryj i zapomnij" dostaje tu
 mechanizm naprawczy).
+
+## N1b (dopisane 2026-07-20, PRZED runem) — naprawiony instrument poziomu 2
+
+N1 poziom 2 unieważniony: relearn z negatywami 256/klasę (2304 vs 100
+pozytywów) daje podłogę ~0% we wszystkich ścieżkach — instrument bez
+zakresu dynamicznego. N1b zmienia JEDNO: budżet negatywów w relearn
+ŁĄCZNIE ≈ liczbie pozytywów (neg_per_class = max(n_pozytywów // liczba
+starych klas, 4) ≈ 11/klasę przy n=100). Ścieżki, klasa c*=4, n=100,
+maska 9 klas, kryteria — bez zmian względem planu poziomu 2:
+- GŁÓWNE 2: relearn_light vs relearn_never (SYGNAL+ = resztkowa
+  informacja w projekcji, w pp),
+- GŁÓWNE 3: relearn_scrub vs relearn_never (SZUM = empiryczna
+  gwarancja wymazania),
+- obserwacja: scrub vs light; referencja górna: pełny system.
+Plik: `src/run_N1b_relearn_balanced.py` → `results/N1b_relearn_balanced.json`
