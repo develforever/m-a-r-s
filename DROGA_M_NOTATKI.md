@@ -61,3 +61,35 @@ w 50d kosztuje ~8pp. Wniosek skalowania: wymiar przestrzeni słów musi
 rosnąć z liczbą klas.
 
 Status: M1b (dopisek do planu PRZED runem) — w toku.
+
+## M1b — budżet snów stały łącznie (ZAKOŃCZONE, 20.07.2026):
+## HIPOTEZA SFALSYFIKOWANA — balans per klasę to mechanizm stabilności,
+## nie bug; front stability–plasticity zmierzony z obu końców
+
+Plik: `src/run_M1b_balanced_dreams.py`;
+wyniki: `results/M1b_balanced_dreams.json`. Czas: 203 s.
+
+| Wariant (T=20) | ACC | F | late R[t][t] | sny/klasę (95 starych) |
+|---|---|---|---|---|
+| [M1] seq_300 (per klasę) | 40.70 ± 0.84% | 18.3pp | 42.9% | 51 (~90% batcha) |
+| m1b (budżet łączny) | 24.93 ± 2.48% | 44.9pp | 71.3% | ~5 (~50% batcha) |
+| [M1] all_300 (sufit) | 47.41 ± 0.49% | 13.0pp | 50.7% | — |
+
+**WERDYKTY (pre-rejestrowane):**
+- ACC vs M1: **SYGNAL−** −15.77pp (pary 5/5, próg 3.31) — ryzyko
+  pre-rejestrowane zmaterializowane w pełni.
+- late R[t][t] vs M1: **SYGNAL+** +28.38pp (pary 5/5) — plastyczność
+  przywrócona z nawiązką (71.3% — NAD sufitem all 50.7%, bo projekcja
+  bez kotwicy rehearsalu nadpasowuje się do świeżych zadań).
+
+**Ustalenia:**
+1. **Koszt długiego horyzontu jest STRUKTURALNY, nie implementacyjny:**
+   przy stałym batchu nie da się mieć naraz pełnego rehearsalu
+   i pełnej plastyczności — budżet snów na starą klasę to pokrętło,
+   które je wymienia. Dwa końce zmierzone: 51/klasę → F 18.3,
+   late −7.8 vs sufit; ~5/klasę → late +20.6 vs sufit, F 44.9.
+2. M1 (40.70) ≫ M1b (24.93) na ACC — konfiguracja per klasę pozostaje
+   DOMYŚLNA; deficyt −7.8pp na późnych zadaniach to cena stabilności.
+3. Kandydat M1c (dopisany PRZED runem): jeden punkt pośredni frontu.
+
+## M1c — patrz dopisek w DROGA_M_PLAN.md (pre-rejestracja przed runem).

@@ -98,3 +98,19 @@ odtwarza RNG — klasa nie konsumuje RNG w init poza ścieżką rodzica).
   per klasę → F może wzrosnąć; SYGNAL− na ACC jest realny — wtedy
   balans per klasę był jednak potrzebny i koszt horyzontu jest
   strukturalny, nie implementacyjny).
+
+## M1c (dopisane 2026-07-20, PRZED runem) — punkt pośredni frontu
+
+M1/M1b zmierzyły dwa końce frontu stability–plasticity (51 vs ~5 snów
+na klasę). M1c dodaje JEDEN punkt pośredni, wybrany Z GÓRY jako
+średnie geometryczne (zaokrąglone): sny projekcji 16/klasę, negatywy
+podów 32/klasę (M1: 51/256; M1b: ~5/~5).
+
+Plik: `src/run_M1c_mid_budget.py` → `results/M1c_mid_budget.json`
+(MarsCollectiveMBalanced z jawnymi per-old budżetami).
+
+**Kryteria (Z GÓRY):** główne — ACC vs m1_seq_300 (pary per-seed):
+SYGNAL+ = punkt pośredni bije oba końce (nowa domyślna konfiguracja
+długiego horyzontu); SYGNAL−/SZUM = front jest ostry po stronie
+stabilności i M1 pozostaje domyślne. Obserwacje: F, late R[t][t],
+pozycja na krzywej frontu (wykres 3-punktowy do papieru).

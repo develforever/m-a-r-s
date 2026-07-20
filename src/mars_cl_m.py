@@ -299,6 +299,13 @@ class MarsCollectiveMBalanced(MarsCollectiveM):
     _fit_proj_feats = wierna kopia mars_cl_f3; zmiana: k_per_old.
     """
 
+    def __init__(self, word_vecs, dream_per_old=None, neg_per_old=None,
+                 **kw):
+        super().__init__(word_vecs, **kw)
+        # None = budzet lacznie (M1b); liczby = stale per klase (M1c)
+        self.dream_per_old = dream_per_old
+        self.neg_per_old = neg_per_old
+
     def _fit_proj_feats(self, feats, y, old_classes, all_classes,
                         epochs, lr, device, batch=512):
         import torch.nn.functional as F
@@ -307,9 +314,13 @@ class MarsCollectiveMBalanced(MarsCollectiveM):
                          for c in all_classes])
         c2i = {c: i for i, c in enumerate(all_classes)}
         yi = torch.tensor([c2i[int(v)] for v in y.tolist()], device=device)
-        # M1b: budzet lacznie = batch, dzielony po starych klasach
-        k_per_old = (max(batch // len(old_classes), 4)
-                     if old_classes else 0)
+        # M1b: budzet lacznie = batch; M1c: jawny per klase
+        if not old_classes:
+            k_per_old = 0
+        elif self.dream_per_old is not None:
+            k_per_old = self.dream_per_old
+        else:
+            k_per_old = max(batch // len(old_classes), 4)
         crit = nn.CrossEntropyLoss()
         prev = ({n: p.detach().clone() for n, p
                  in self.proj.named_parameters()}
@@ -340,7 +351,11 @@ class MarsCollectiveMBalanced(MarsCollectiveM):
             p.requires_grad = False
 
     def _neg_budget(self, old):
-        return max(512 // len(old), 4) if old else self.replay_per_class
+        if not old:
+            return self.replay_per_class
+        if self.neg_per_old is not None:
+            return self.neg_per_old
+        return max(512 // len(old), 4)
 
     def learn_task(self, td, epochs, lr, device):
         classes = td["classes"]
