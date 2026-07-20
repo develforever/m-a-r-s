@@ -93,3 +93,46 @@ wyniki: `results/M1b_balanced_dreams.json`. Czas: 203 s.
 3. Kandydat M1c (dopisany PRZED runem): jeden punkt pośredni frontu.
 
 ## M1c — patrz dopisek w DROGA_M_PLAN.md (pre-rejestracja przed runem).
+
+## M1c — punkt pośredni frontu (ZAKOŃCZONE, 20.07.2026): SYGNAL− na ACC
+## — front ostry, M1 zostaje domyślne; M1b ZDOMINOWANE przez M1c
+
+Plik: `src/run_M1c_mid_budget.py`; wyniki: `results/M1c_mid_budget.json`.
+Czas: 231 s.
+
+| Punkt frontu (T=20) | sny/neg na klasę | ACC | F | late R[t][t] |
+|---|---|---|---|---|
+| **M1 (domyślny)** | 51 / 256 | **40.70 ± 0.84%** | 18.3pp | 42.9% |
+| M1c | 16 / 32 | 37.65 ± 1.35% | 43.0pp | 81.9% |
+| M1b | ~5 / ~5 | 24.93 ± 2.48% | 44.9pp | 71.3% |
+| [sufit all] | — | 47.41 ± 0.49% | 13.0pp | 50.7% |
+
+**WERDYKT (pre-rejestrowany): SYGNAL−** — ACC −3.04pp (pary 5/5
+ujemne [−1.41…−4.63], próg 2.19) → front jest ostry po stronie
+stabilności; M1 (bogaty rehearsal) pozostaje konfiguracją domyślną.
+
+**Ustalenia:**
+1. **M1b nie leży na froncie Pareto:** M1c bije je na OBU osiach
+   (ACC +12.7pp ORAZ late R[t][t] +10.6pp) — skrajne odcięcie snów
+   szkodzi nawet plastyczności (projekcja bez kotwicy rehearsalu
+   dryfuje chaotycznie). Front realny rozpina się między M1 a M1c.
+2. Pokrętło budżetu snów przesuwa system po froncie w sposób
+   przewidywalny: 51/klasę → ACC-optimum, stare klasy chronione;
+   16/klasę → −3pp ACC, ale późne zadania uczone na 81.9% (NAD
+   sufitem all) — konfiguracja dla aplikacji, gdzie świeże klasy
+   ważniejsze niż archiwum. Wybór jest teraz świadomy i zmierzony.
+3. Wysokie F przy M1c/M1b to artefakt wyższych szczytów (więcej jest
+   do zapomnienia), nie niższych finałów — ACC końcowe różni się
+   o 3pp, forgetting o 25pp.
+
+## STATUS KOŃCOWY SERII M: KOMPLET
+
+M1: formalnie LOSS-OF-PLASTICITY; dekompozycja — 79% spadku to
+twardnienie protokołu, realny deficyt późny −7.8pp vs sufit; mech%
+85.8% @T=20 · kotwice: SYGNAL+ 300d vs 50d (+7.71, 5/5) — wymiar słów
+musi rosnąć z liczbą klas · M1b: falsyfikacja hipotezy implementacyjnej
+— koszt strukturalny · M1c: front ostry, M1 domyślne; trójpunktowa
+krzywa frontu stability–plasticity zmierzona (wykres do papieru).
+
+Dalej: merge `droga-m` → main (v0.8, decyzja Roberta) → seria N
+(unlearning, dwupoziomowe kryterium) → I4.
