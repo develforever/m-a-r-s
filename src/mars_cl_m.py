@@ -287,3 +287,101 @@ if __name__ == "__main__":
     ma.learn_task(tds[0], epochs=1, lr=1e-3, device="cpu")
     assert ma.forward(X[:16]).shape == (16, 100)
     print("Smoke OK: N=100 forward/learn/adopt/sufit dzialaja.")
+
+
+# ---------------------------------------- M1b: budzet snow staly lacznie
+class MarsCollectiveMBalanced(MarsCollectiveM):
+    """
+    M1b: jedyna zmiana vs MarsCollectiveM -- budzet snow/negatywow
+    STALY LACZNIE (dzielony po starych klasach), nie staly per klase.
+    Naprawia zalew batcha snami przy dlugim horyzoncie (M1: ~90% snow
+    przy 95 starych klasach). Przy T=5 zachowanie ~rownowazne.
+    _fit_proj_feats = wierna kopia mars_cl_f3; zmiana: k_per_old.
+    """
+
+    def _fit_proj_feats(self, feats, y, old_classes, all_classes,
+                        epochs, lr, device, batch=512):
+        import torch.nn.functional as F
+        from mars_cl_semantic import TEMP
+        W = torch.stack([self.word_vecs[c].to(device)
+                         for c in all_classes])
+        c2i = {c: i for i, c in enumerate(all_classes)}
+        yi = torch.tensor([c2i[int(v)] for v in y.tolist()], device=device)
+        # M1b: budzet lacznie = batch, dzielony po starych klasach
+        k_per_old = (max(batch // len(old_classes), 4)
+                     if old_classes else 0)
+        crit = nn.CrossEntropyLoss()
+        prev = ({n: p.detach().clone() for n, p
+                 in self.proj.named_parameters()}
+                if (self.l2sp > 0 and old_classes) else None)
+        n_epochs = self.epochs_proj if self.epochs_proj else epochs
+        for p in self.proj.parameters():
+            p.requires_grad = True
+        opt = torch.optim.Adam(self.proj.parameters(), lr=lr)
+        for _ in range(n_epochs):
+            perm = torch.randperm(len(feats), device=device)
+            for s in range(0, len(feats), batch):
+                idx = perm[s:s + batch]
+                xb, yb = feats[idx], yi[idx]
+                if old_classes:
+                    df, dy = self.stats.replay_batch(old_classes,
+                                                     k_per_old, device)
+                    dyi = torch.tensor([c2i[int(v)] for v in dy.tolist()],
+                                       device=device)
+                    xb = torch.cat([xb, df])
+                    yb = torch.cat([yb, dyi])
+                emb = F.normalize(self.proj(xb), dim=1)
+                loss = crit(emb @ W.T / TEMP, yb)
+                if prev is not None:
+                    for n, p in self.proj.named_parameters():
+                        loss = loss + self.l2sp * ((p - prev[n]) ** 2).sum()
+                opt.zero_grad(); loss.backward(); opt.step()
+        for p in self.proj.parameters():
+            p.requires_grad = False
+
+    def _neg_budget(self, old):
+        return max(512 // len(old), 4) if old else self.replay_per_class
+
+    def learn_task(self, td, epochs, lr, device):
+        classes = td["classes"]
+        X, y = td["Xtr"], td["ytr"]
+        with torch.no_grad():
+            feats = self.feats_batched(X)
+        old = list(self.seen_classes)
+        self.stats.update(feats, y, classes)
+        self._fit_proj_feats(feats, y, old, old + list(classes),
+                             epochs, lr, device)
+        neg_f, neg_y = self.stats.replay_batch(old, self._neg_budget(old),
+                                               device)
+        for c in classes:
+            self.protos[c] = self.word_vecs[c].to(device)
+        self.seen_classes = self.seen_classes + list(classes)
+        with torch.no_grad():
+            routed = self.route(self.embed_from_feats(feats))
+        _train_pods_negatives_n(self, classes, feats, y, routed,
+                                neg_f, neg_y, epochs, lr, device)
+
+    def adopt_classes(self, classes, payloads, epochs, lr, device,
+                      n_dream=500):
+        for c in classes:
+            pl = payloads[c]
+            self.stats.p[c] = pl["p"].to(device)
+            self.stats.mean[c] = pl["mean"].to(device)
+            self.stats.var[c] = pl["var"].to(device)
+            self.stats.w[c] = pl["w"].to(device)
+        feats = torch.cat([self.stats.sample(c, n_dream, device)
+                           for c in classes])
+        y = torch.cat([torch.full((n_dream,), c, dtype=torch.long,
+                                  device=device) for c in classes])
+        old = list(self.seen_classes)
+        self._fit_proj_feats(feats, y, old, old + list(classes),
+                             epochs, lr, device)
+        neg_f, neg_y = self.stats.replay_batch(old, self._neg_budget(old),
+                                               device)
+        for c in classes:
+            self.protos[c] = self.word_vecs[c].to(device)
+        self.seen_classes = self.seen_classes + list(classes)
+        with torch.no_grad():
+            routed = self.route(self.embed_from_feats(feats))
+        _train_pods_negatives_n(self, classes, feats, y, routed,
+                                neg_f, neg_y, epochs, lr, device)

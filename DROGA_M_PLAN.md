@@ -69,3 +69,32 @@ Kandydat M2 (NIE pre-rejestrowany tutaj): kolektyw 20 agentów × 5 klas
 na CIFAR-100 — decyzja po werdykcie M1.
 
 Wyniki do DROGA_M_NOTATKI.md; merge po komplecie i decyzji Roberta.
+
+## M1b (dopisane 2026-07-20, PRZED runem) — budżet snów stały łącznie
+
+Motywacja: dekompozycja M1 — realna degradacja to późne R[t][t]
+−7.8pp vs sufit (5/5 par), a mechanistyczny podejrzany jest policzalny:
+balansowanie per klasę daje przy 95 starych klasach ~90% snów w batchu
+projekcji (51×95 vs 512 realnych) i ~24k negatywów na ~500 realnych
+w podach. Nowe zadanie tonie. Konwencja z F3b była projektowana na T=5.
+
+Plik: `src/run_M1b_balanced_dreams.py` → `results/M1b_balanced_dreams.json`
+Klasa: `MarsCollectiveMBalanced` (mars_cl_m) — wierna kopia ścieżki,
+jedyna zmiana: budżet snów projekcji = batch (512) ŁĄCZNIE, dzielony
+po starych klasach (min 4/klasę); budżet negatywów podów = 512 ŁĄCZNIE
+(min 4/klasę). Przy T=5 zachowanie ~równoważne dotychczasowemu
+(64/klasę vs 51), przy T=20 sny ≈ realne (1:1).
+
+Wariant: m1b_seq_300 (konfiguracja jak m1_seq_300). Baza par:
+m1_seq_300 z results/M1_long_horizon.json (TE SAME seedy; konstrukcja
+odtwarza RNG — klasa nie konsumuje RNG w init poza ścieżką rodzica).
+
+**Kryteria (Z GÓRY):**
+- Główne: ACC vs m1_seq_300 (pary per-seed): SYGNAL+/−/parowy±/SZUM.
+- Drugie: późne R[t][t] (16–20) vs m1_seq_300 (pary) — czy nadwyżka
+  −7.8pp vs sufit maleje.
+- Obserwacje: mech% sufitu @T=20 (cel kierunkowy: z 85.8% w stronę
+  96.7%); forgetting (ryzyko pre-rejestrowane: mniejsza ochrona
+  per klasę → F może wzrosnąć; SYGNAL− na ACC jest realny — wtedy
+  balans per klasę był jednak potrzebny i koszt horyzontu jest
+  strukturalny, nie implementacyjny).
