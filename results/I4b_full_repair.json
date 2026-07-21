@@ -1,0 +1,131 @@
+{
+  "experiment": "I4b_full_repair",
+  "device": "cuda",
+  "n_seeds": 5,
+  "epochs_per_task": 15,
+  "cfg": {
+    "dream_model": "sparse",
+    "stats_k": 16,
+    "epochs_proj": 15,
+    "l2sp": 0.0,
+    "bn_calib": false,
+    "feat_signorm": false
+  },
+  "per_seed": [
+    {
+      "clean": {
+        "acc8": 0.946,
+        "acc9": 0.951,
+        "acc_own": 0.7519
+      },
+      "repaired": {
+        "acc8": 0.948,
+        "acc9": 0.953,
+        "acc_own": 0.756
+      }
+    },
+    {
+      "clean": {
+        "acc8": 0.927,
+        "acc9": 0.94,
+        "acc_own": 0.7514
+      },
+      "repaired": {
+        "acc8": 0.938,
+        "acc9": 0.937,
+        "acc_own": 0.7471
+      }
+    },
+    {
+      "clean": {
+        "acc8": 0.941,
+        "acc9": 0.943,
+        "acc_own": 0.7428
+      },
+      "repaired": {
+        "acc8": 0.936,
+        "acc9": 0.939,
+        "acc_own": 0.7416
+      }
+    },
+    {
+      "clean": {
+        "acc8": 0.943,
+        "acc9": 0.953,
+        "acc_own": 0.7696
+      },
+      "repaired": {
+        "acc8": 0.945,
+        "acc9": 0.954,
+        "acc_own": 0.7673
+      }
+    },
+    {
+      "clean": {
+        "acc8": 0.939,
+        "acc9": 0.943,
+        "acc_own": 0.7451
+      },
+      "repaired": {
+        "acc8": 0.944,
+        "acc9": 0.931,
+        "acc_own": 0.7489
+      }
+    }
+  ],
+  "verdicts": {
+    "naprawa_acc8": {
+      "pairs_pp": [
+        0.2,
+        1.1,
+        -0.5,
+        0.2,
+        0.5
+      ],
+      "delta": {
+        "mean": 0.3,
+        "std": 0.5788,
+        "min": -0.5,
+        "max": 1.1
+      },
+      "noise_pp": 1.2314,
+      "verdict": "SZUM"
+    },
+    "naprawa_acc9": {
+      "pairs_pp": [
+        0.2,
+        -0.3,
+        -0.4,
+        0.1,
+        -1.2
+      ],
+      "delta": {
+        "mean": -0.32,
+        "std": 0.5541,
+        "min": -1.2,
+        "max": 0.2
+      },
+      "noise_pp": 1.5865,
+      "verdict": "SZUM"
+    },
+    "naprawa_acc_own": {
+      "pairs_pp": [
+        0.41,
+        -0.43,
+        -0.12,
+        -0.23,
+        0.38
+      ],
+      "delta": {
+        "mean": 0.002,
+        "std": 0.3757,
+        "min": -0.43,
+        "max": 0.41
+      },
+      "noise_pp": 2.0411,
+      "verdict": "SZUM"
+    },
+    "PELNA_NAPRAWA_ZASIEGOWA": true
+  },
+  "elapsed_s": 65.4
+}
