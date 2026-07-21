@@ -1,0 +1,93 @@
+{
+  "experiment": "N1c_reinit",
+  "device": "cuda",
+  "n_seeds": 5,
+  "epochs_per_task": 15,
+  "cfg": {
+    "dream_model": "sparse",
+    "stats_k": 16,
+    "epochs_proj": 15,
+    "l2sp": 0.0,
+    "bn_calib": false,
+    "feat_signorm": false
+  },
+  "per_seed": [
+    {
+      "rest_before": 0.8052,
+      "rest_after_reinit": 0.827,
+      "acc_relearn_reinit": 0.002
+    },
+    {
+      "rest_before": 0.8039,
+      "rest_after_reinit": 0.8223,
+      "acc_relearn_reinit": 0.002
+    },
+    {
+      "rest_before": 0.7984,
+      "rest_after_reinit": 0.8139,
+      "acc_relearn_reinit": 0.008
+    },
+    {
+      "rest_before": 0.8129,
+      "rest_after_reinit": 0.8376,
+      "acc_relearn_reinit": 0.001
+    },
+    {
+      "rest_before": 0.7964,
+      "rest_after_reinit": 0.8228,
+      "acc_relearn_reinit": 0.004
+    }
+  ],
+  "verdicts": {
+    "reinit_vs_never": {
+      "pairs_pp": [
+        0.2,
+        0.2,
+        0.8,
+        0.1,
+        0.4
+      ],
+      "delta": {
+        "mean": 0.34,
+        "std": 0.2793,
+        "min": 0.1,
+        "max": 0.8
+      },
+      "noise_pp": 0.5,
+      "verdict": "PELNA GWARANCJA WYMAZANIA"
+    },
+    "koszt_reszty": {
+      "pairs_pp": [
+        2.18,
+        1.84,
+        1.55,
+        2.47,
+        2.64
+      ],
+      "delta": {
+        "mean": 2.136,
+        "std": 0.4468,
+        "min": 1.55,
+        "max": 2.64
+      },
+      "noise_pp": 1.5103,
+      "verdict": "SYGNAL+"
+    },
+    "obs_reinit_vs_scrub": {
+      "pairs_pp": [
+        -8.4,
+        -14.1,
+        -6.9,
+        -10.0,
+        -15.0
+      ],
+      "delta": {
+        "mean": -10.88,
+        "std": 3.5394,
+        "min": -15.0,
+        "max": -6.9
+      }
+    }
+  },
+  "elapsed_s": 43.1
+}

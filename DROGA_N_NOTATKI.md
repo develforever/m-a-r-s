@@ -77,3 +77,53 @@ wyniki: `results/N1b_relearn_balanced.json`. Czas: 76 s.
    go nie nauczono, nawet mając ich nazwę.
 
 Status: N1c (dopisek PRZED runem) — pełne wymazanie przez reinicjalizację.
+
+## N1c — reinit projekcji (ZAKOŃCZONE, 20.07.2026): PEŁNA GWARANCJA
+## WYMAZANIA, koszt ujemny (wymazanie wręcz pomaga) — taksonomia kompletna
+
+Plik: `src/run_N1c_reinit.py`; wyniki: `results/N1c_reinit.json`. Czas: 43 s.
+
+| Pomiar | Wartość |
+|---|---|
+| relearn(4) po reinit | 0.34 ± 0.28% (never: 0.00) |
+| acc pozostałych 9 klas | 80.34 → **82.47** (+2.14, pary 5/5) |
+| relearn po reinit vs scrub | −10.88pp (5/5) |
+
+**WERDYKTY (pre-rejestrowane):**
+- GŁÓWNE 4 (reinit vs never): **PEŁNA GWARANCJA WYMAZANIA** —
+  +0.34pp przy progu 0.50; klasa po reinicie jest odzyskiwalna
+  dokładnie tak słabo, jak klasa nigdy nie widziana.
+- GŁÓWNE 5 (koszt reszty): formalnie **SYGNAL+ +2.14pp** — wymazanie
+  nie kosztuje, pomaga. KOREKTA UCZCIWOŚCI: ~1.41pp z tego to
+  mechanika maski 9 vs 10 (zmierzona w N1 poziom 1 przy NIETKNIĘTEJ
+  projekcji); czysty efekt odbudowy projekcji ze snów ≈ **+0.7pp
+  kierunkowo** (reinit +2.14 vs light +1.41, ta sama maska).
+  Wniosek ostrożny: pełne wymazanie jest CO NAJMNIEJ darmowe.
+
+**Ustalenie uboczne — potencjalnie nowa dźwignia (kandydat O1, NIE
+pre-rejestrowany):** odbudowa projekcji od zera na snach wszystkich
+pozostałych klas dała projekcję LEPSZĄ niż sekwencyjna — bo uczy się
+na wszystkich klasach naraz (bez dryfu kolejności), czyli jest
+"jointem na snach". Jeśli efekt ~+0.7pp przenosi się na pełne 10 klas
+bez confoundu maski, to "głęboka konsolidacja snem" po sekwencji może
+dać nowy best (K1 79.23, sufit 81.16). Pomiar czysty: odbudowa
+projekcji ze snów 10 klas vs K1 (ta sama maska) + analog na CIFAR
+(vs L1 74.69, sufit 77.23). Czwarta funkcja snu: ochrona · transfer ·
+odbudowa · KONSOLIDACJA.
+
+## STATUS KOŃCOWY SERII N: KOMPLET — taksonomia zapominania zmierzona
+
+| Operacja | Informacja usunięta | Koszt dla reszty | Odwracalność (100 obr.) |
+|---|---|---|---|
+| light | NIE (0%) | brak (+mech. maski) | pełna (bitowo = full) |
+| scrub | ~84% | brak | 11.2% |
+| **reinit** | **100% (= never)** | **brak/ujemny** | 0.34% (= never) |
+
+Trójca protokołu domknięta z werdyktami: nauczyć się ze snów (I1:
+−1.29pp) · podzielić się (I3: równoważność) · zapomnieć na żądanie
+(N1c: gwarancja = never, koszt ≤ 0). Do tego własność bezpieczeństwa:
+klasa nieznana projekcji jest routingowo nieosiągalna.
+
+Dalej: merge `droga-n` → main (v0.9, decyzja Roberta); kandydaci:
+O1 (konsolidacja snem — czysty pomiar bez maski), I4 (wykryj-i-zapomnij
+— ma teraz komplet narzędzi: weryfikację przez kotwicę + reinit).

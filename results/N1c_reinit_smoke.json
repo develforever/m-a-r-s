@@ -1,0 +1,23 @@
+{
+  "experiment": "N1c_reinit",
+  "device": "cuda",
+  "n_seeds": 1,
+  "epochs_per_task": 4,
+  "cfg": {
+    "dream_model": "sparse",
+    "stats_k": 16,
+    "epochs_proj": 15,
+    "l2sp": 0.0,
+    "bn_calib": false,
+    "feat_signorm": false
+  },
+  "per_seed": [
+    {
+      "rest_before": 0.8033,
+      "rest_after_reinit": 0.7941,
+      "acc_relearn_reinit": 0.0
+    }
+  ],
+  "verdicts": {},
+  "elapsed_s": 7.1
+}
