@@ -1,0 +1,40 @@
+{
+  "experiment": "O1_consolidation",
+  "device": "cuda",
+  "n_seeds": 1,
+  "epochs_per_task": 4,
+  "n_dream": 256,
+  "cfg": {
+    "dream_model": "sparse",
+    "stats_k": 16,
+    "epochs_proj": 15,
+    "l2sp": 0.0,
+    "bn_calib": false,
+    "feat_signorm": false
+  },
+  "datasets": {
+    "Fashion-MNIST": {
+      "per_seed": [
+        {
+          "base_ACC": 0.7941,
+          "reinit_ACC": 0.7559,
+          "finetune_ACC": 0.7943
+        }
+      ],
+      "sanity_max_diff_pp": 0.0,
+      "verdicts": {}
+    },
+    "CIFAR-10": {
+      "per_seed": [
+        {
+          "base_ACC": 0.7386,
+          "reinit_ACC": 0.6648,
+          "finetune_ACC": 0.7397
+        }
+      ],
+      "sanity_max_diff_pp": 0.0,
+      "verdicts": {}
+    }
+  },
+  "elapsed_s": 30.8
+}

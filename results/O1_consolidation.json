@@ -1,0 +1,188 @@
+{
+  "experiment": "O1_consolidation",
+  "device": "cuda",
+  "n_seeds": 5,
+  "epochs_per_task": 15,
+  "n_dream": 2000,
+  "cfg": {
+    "dream_model": "sparse",
+    "stats_k": 16,
+    "epochs_proj": 15,
+    "l2sp": 0.0,
+    "bn_calib": false,
+    "feat_signorm": false
+  },
+  "datasets": {
+    "Fashion-MNIST": {
+      "per_seed": [
+        {
+          "base_ACC": 0.7924,
+          "reinit_ACC": 0.7877,
+          "finetune_ACC": 0.7959
+        },
+        {
+          "base_ACC": 0.7912,
+          "reinit_ACC": 0.7807,
+          "finetune_ACC": 0.788
+        },
+        {
+          "base_ACC": 0.7838,
+          "reinit_ACC": 0.7778,
+          "finetune_ACC": 0.7783
+        },
+        {
+          "base_ACC": 0.8039,
+          "reinit_ACC": 0.8007,
+          "finetune_ACC": 0.8074
+        },
+        {
+          "base_ACC": 0.79,
+          "reinit_ACC": 0.7835,
+          "finetune_ACC": 0.7811
+        }
+      ],
+      "sanity_max_diff_pp": 0.0,
+      "verdicts": {
+        "reinit": {
+          "pairs_pp": [
+            -0.47,
+            -1.05,
+            -0.6,
+            -0.32,
+            -0.65
+          ],
+          "delta": {
+            "mean": -0.618,
+            "std": 0.2733,
+            "min": -1.05,
+            "max": -0.32
+          },
+          "noise_pp": 1.6255,
+          "verdict": "SYGNAL-parowy-",
+          "mean_ACC": 78.608,
+          "gap_to_ceiling_pp": 2.55
+        },
+        "finetune": {
+          "pairs_pp": [
+            0.35,
+            -0.32,
+            -0.55,
+            0.35,
+            -0.89
+          ],
+          "delta": {
+            "mean": -0.212,
+            "std": 0.5517,
+            "min": -0.89,
+            "max": 0.35
+          },
+          "noise_pp": 1.9109,
+          "verdict": "SZUM",
+          "mean_ACC": 79.014,
+          "gap_to_ceiling_pp": 2.15
+        },
+        "obs_reinit_vs_finetune": {
+          "pairs_pp": [
+            -0.82,
+            -0.73,
+            -0.05,
+            -0.67,
+            0.24
+          ],
+          "delta": {
+            "mean": -0.406,
+            "std": 0.4717,
+            "min": -0.82,
+            "max": 0.24
+          }
+        }
+      }
+    },
+    "CIFAR-10": {
+      "per_seed": [
+        {
+          "base_ACC": 0.7411,
+          "reinit_ACC": 0.7369,
+          "finetune_ACC": 0.7376
+        },
+        {
+          "base_ACC": 0.7552,
+          "reinit_ACC": 0.7457,
+          "finetune_ACC": 0.745
+        },
+        {
+          "base_ACC": 0.7531,
+          "reinit_ACC": 0.7415,
+          "finetune_ACC": 0.7422
+        },
+        {
+          "base_ACC": 0.7399,
+          "reinit_ACC": 0.7306,
+          "finetune_ACC": 0.7342
+        },
+        {
+          "base_ACC": 0.7453,
+          "reinit_ACC": 0.7398,
+          "finetune_ACC": 0.7424
+        }
+      ],
+      "sanity_max_diff_pp": 0.0,
+      "verdicts": {
+        "reinit": {
+          "pairs_pp": [
+            -0.42,
+            -0.95,
+            -1.16,
+            -0.93,
+            -0.55
+          ],
+          "delta": {
+            "mean": -0.802,
+            "std": 0.3065,
+            "min": -1.16,
+            "max": -0.42
+          },
+          "noise_pp": 1.2566,
+          "verdict": "SYGNAL-parowy-",
+          "mean_ACC": 73.89,
+          "gap_to_ceiling_pp": 3.34
+        },
+        "finetune": {
+          "pairs_pp": [
+            -0.35,
+            -1.02,
+            -1.09,
+            -0.57,
+            -0.29
+          ],
+          "delta": {
+            "mean": -0.664,
+            "std": 0.3727,
+            "min": -1.09,
+            "max": -0.29
+          },
+          "noise_pp": 1.1257,
+          "verdict": "SZUM",
+          "mean_ACC": 74.028,
+          "gap_to_ceiling_pp": 3.2
+        },
+        "obs_reinit_vs_finetune": {
+          "pairs_pp": [
+            -0.07,
+            0.07,
+            -0.07,
+            -0.36,
+            -0.26
+          ],
+          "delta": {
+            "mean": -0.138,
+            "std": 0.1708,
+            "min": -0.36,
+            "max": 0.07
+          }
+        }
+      }
+    }
+  },
+  "elapsed_s": 106.4
+}
