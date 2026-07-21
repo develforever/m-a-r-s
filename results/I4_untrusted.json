@@ -1,0 +1,360 @@
+{
+  "experiment": "I4_untrusted",
+  "device": "cuda",
+  "n_seeds": 5,
+  "epochs_per_task": 15,
+  "cfg": {
+    "dream_model": "sparse",
+    "stats_k": 16,
+    "epochs_proj": 15,
+    "l2sp": 0.0,
+    "bn_calib": false,
+    "feat_signorm": false
+  },
+  "per_seed": [
+    {
+      "clean": {
+        "D1_rank": 0.0714,
+        "D2_canary_pp": 1.275,
+        "acc8": 0.946,
+        "acc9": 0.955,
+        "acc_own": 0.7546
+      },
+      "swap": {
+        "D1_rank": 0.119,
+        "D2_canary_pp": 0.5625,
+        "acc8": 0.082,
+        "acc9": 0.0,
+        "acc_own": 0.7581
+      },
+      "repair": {
+        "acc8": 0.951,
+        "acc9": 0.0,
+        "acc_own": 0.7573
+      },
+      "noise": {
+        "D1_rank": 0.4286,
+        "D2_canary_pp": 1.6125,
+        "acc8": 0.853,
+        "acc9": 0.938,
+        "acc_own": 0.749
+      }
+    },
+    {
+      "clean": {
+        "D1_rank": 0.1429,
+        "D2_canary_pp": 2.5375,
+        "acc8": 0.929,
+        "acc9": 0.936,
+        "acc_own": 0.7499
+      },
+      "swap": {
+        "D1_rank": -0.0952,
+        "D2_canary_pp": 0.625,
+        "acc8": 0.221,
+        "acc9": 0.0,
+        "acc_own": 0.7594
+      },
+      "repair": {
+        "acc8": 0.932,
+        "acc9": 0.0,
+        "acc_own": 0.7544
+      },
+      "noise": {
+        "D1_rank": 0.2143,
+        "D2_canary_pp": 2.675,
+        "acc8": 0.824,
+        "acc9": 0.929,
+        "acc_own": 0.7398
+      }
+    },
+    {
+      "clean": {
+        "D1_rank": 0.0476,
+        "D2_canary_pp": 0.275,
+        "acc8": 0.932,
+        "acc9": 0.944,
+        "acc_own": 0.7451
+      },
+      "swap": {
+        "D1_rank": 0.2143,
+        "D2_canary_pp": -0.95,
+        "acc8": 0.179,
+        "acc9": 0.0,
+        "acc_own": 0.7505
+      },
+      "repair": {
+        "acc8": 0.925,
+        "acc9": 0.0,
+        "acc_own": 0.7471
+      },
+      "noise": {
+        "D1_rank": 0.2381,
+        "D2_canary_pp": 0.3625,
+        "acc8": 0.808,
+        "acc9": 0.936,
+        "acc_own": 0.7295
+      }
+    },
+    {
+      "clean": {
+        "D1_rank": 0.0476,
+        "D2_canary_pp": 2.125,
+        "acc8": 0.944,
+        "acc9": 0.948,
+        "acc_own": 0.7699
+      },
+      "swap": {
+        "D1_rank": -0.2381,
+        "D2_canary_pp": 1.7125,
+        "acc8": 0.161,
+        "acc9": 0.0,
+        "acc_own": 0.7751
+      },
+      "repair": {
+        "acc8": 0.944,
+        "acc9": 0.0,
+        "acc_own": 0.7724
+      },
+      "noise": {
+        "D1_rank": 0.5476,
+        "D2_canary_pp": 3.1,
+        "acc8": 0.844,
+        "acc9": 0.951,
+        "acc_own": 0.7618
+      }
+    },
+    {
+      "clean": {
+        "D1_rank": -0.0952,
+        "D2_canary_pp": 1.1,
+        "acc8": 0.94,
+        "acc9": 0.936,
+        "acc_own": 0.7461
+      },
+      "swap": {
+        "D1_rank": -0.2857,
+        "D2_canary_pp": 1.025,
+        "acc8": 0.169,
+        "acc9": 0.0,
+        "acc_own": 0.7515
+      },
+      "repair": {
+        "acc8": 0.937,
+        "acc9": 0.0,
+        "acc_own": 0.7508
+      },
+      "noise": {
+        "D1_rank": 0.1905,
+        "D2_canary_pp": 3.0375,
+        "acc8": 0.815,
+        "acc9": 0.932,
+        "acc_own": 0.739
+      }
+    }
+  ],
+  "verdicts": {
+    "szkoda_swap_acc8": {
+      "pairs_pp": [
+        -86.4,
+        -70.8,
+        -75.3,
+        -78.3,
+        -77.1
+      ],
+      "delta": {
+        "mean": -77.58,
+        "std": 5.6945,
+        "min": -86.4,
+        "max": -70.8
+      },
+      "noise_pp": 5.7975,
+      "verdict": "SYGNAL-"
+    },
+    "szkoda_noise_acc8": {
+      "pairs_pp": [
+        -9.3,
+        -10.5,
+        -12.4,
+        -10.0,
+        -12.5
+      ],
+      "delta": {
+        "mean": -10.94,
+        "std": 1.4433,
+        "min": -12.5,
+        "max": -9.3
+      },
+      "noise_pp": 2.6553,
+      "verdict": "SYGNAL-"
+    },
+    "szkoda_swap_acc9": {
+      "pairs_pp": [
+        -95.5,
+        -93.6,
+        -94.4,
+        -94.8,
+        -93.6
+      ],
+      "delta": {
+        "mean": -94.38,
+        "std": 0.8136,
+        "min": -95.5,
+        "max": -93.6
+      },
+      "noise_pp": 0.8136,
+      "verdict": "SYGNAL-"
+    },
+    "szkoda_noise_acc9": {
+      "pairs_pp": [
+        -1.7,
+        -0.7,
+        -0.8,
+        0.3,
+        -0.4
+      ],
+      "delta": {
+        "mean": -0.66,
+        "std": 0.7232,
+        "min": -1.7,
+        "max": 0.3
+      },
+      "noise_pp": 1.6604,
+      "verdict": "SZUM"
+    },
+    "szkoda_swap_acc_own": {
+      "pairs_pp": [
+        0.35,
+        0.95,
+        0.54,
+        0.52,
+        0.54
+      ],
+      "delta": {
+        "mean": 0.58,
+        "std": 0.2217,
+        "min": 0.35,
+        "max": 0.95
+      },
+      "noise_pp": 1.9953,
+      "verdict": "SYGNAL-parowy+"
+    },
+    "szkoda_noise_acc_own": {
+      "pairs_pp": [
+        -0.56,
+        -1.01,
+        -1.56,
+        -0.81,
+        -0.71
+      ],
+      "delta": {
+        "mean": -0.93,
+        "std": 0.3883,
+        "min": -1.56,
+        "max": -0.56
+      },
+      "noise_pp": 2.2288,
+      "verdict": "SYGNAL-parowy-"
+    },
+    "detekcja_D1_rank": {
+      "clean": [
+        0.071,
+        0.143,
+        0.048,
+        0.048,
+        -0.095
+      ],
+      "swap": [
+        0.119,
+        -0.095,
+        0.214,
+        -0.238,
+        -0.286
+      ],
+      "noise": [
+        0.429,
+        0.214,
+        0.238,
+        0.548,
+        0.191
+      ],
+      "pelna_separacja": false
+    },
+    "detekcja_D2_canary_pp": {
+      "clean": [
+        1.275,
+        2.538,
+        0.275,
+        2.125,
+        1.1
+      ],
+      "swap": [
+        0.562,
+        0.625,
+        -0.95,
+        1.712,
+        1.025
+      ],
+      "noise": [
+        1.613,
+        2.675,
+        0.362,
+        3.1,
+        3.038
+      ],
+      "pelna_separacja": false
+    },
+    "naprawa_acc8": {
+      "pairs_pp": [
+        0.5,
+        0.3,
+        -0.7,
+        0.0,
+        -0.3
+      ],
+      "delta": {
+        "mean": -0.04,
+        "std": 0.4775,
+        "min": -0.7,
+        "max": 0.5
+      },
+      "noise_pp": 1.7564,
+      "verdict": "PELNA NAPRAWA"
+    },
+    "naprawa_acc9": {
+      "pairs_pp": [
+        -95.5,
+        -93.6,
+        -94.4,
+        -94.8,
+        -93.6
+      ],
+      "delta": {
+        "mean": -94.38,
+        "std": 0.8136,
+        "min": -95.5,
+        "max": -93.6
+      },
+      "noise_pp": 0.8136,
+      "verdict": "SYGNAL-"
+    },
+    "naprawa_acc_own": {
+      "pairs_pp": [
+        0.27,
+        0.45,
+        0.2,
+        0.25,
+        0.47
+      ],
+      "delta": {
+        "mean": 0.328,
+        "std": 0.1234,
+        "min": 0.2,
+        "max": 0.47
+      },
+      "noise_pp": 1.9826,
+      "verdict": "SYGNAL-parowy+"
+    }
+  },
+  "elapsed_s": 83.8
+}

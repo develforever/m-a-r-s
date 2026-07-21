@@ -1,0 +1,46 @@
+{
+  "experiment": "I4_untrusted",
+  "device": "cuda",
+  "n_seeds": 1,
+  "epochs_per_task": 4,
+  "cfg": {
+    "dream_model": "sparse",
+    "stats_k": 16,
+    "epochs_proj": 15,
+    "l2sp": 0.0,
+    "bn_calib": false,
+    "feat_signorm": false
+  },
+  "per_seed": [
+    {
+      "clean": {
+        "D1_rank": 0.0714,
+        "D2_canary_pp": 0.475,
+        "acc8": 0.248,
+        "acc9": 0.135,
+        "acc_own": 0.7624
+      },
+      "swap": {
+        "D1_rank": 0.119,
+        "D2_canary_pp": 0.3,
+        "acc8": 0.279,
+        "acc9": 0.0,
+        "acc_own": 0.7674
+      },
+      "repair": {
+        "acc8": 0.251,
+        "acc9": 0.0,
+        "acc_own": 0.7639
+      },
+      "noise": {
+        "D1_rank": 0.4286,
+        "D2_canary_pp": 0.325,
+        "acc8": 0.0,
+        "acc9": 0.234,
+        "acc_own": 0.7513
+      }
+    }
+  ],
+  "verdicts": {},
+  "elapsed_s": 7.1
+}

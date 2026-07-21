@@ -60,3 +60,18 @@ przed re-adopcją jako kandydat (NIE pre-rejestrowany tu).
 
 Wyniki do DROGA_I4_NOTATKI.md; merge po komplecie i decyzji Roberta.
 Po I4: przegląd całości pod v1.0.
+
+## I4b (dopisane 2026-07-20, PRZED runem) — naprawa pełnej paczki
+
+I4-P1: swap niszczy obie adoptowane klasy; I4-P3: naprawa samej ofiary
+przywraca ją w 100%, ale sąsiad zostaje zniszczony. I4b domyka:
+po ataku swap naprawa CAŁEJ paczki adopcyjnej — unlearn_light(8) +
+unlearn_light(9) → ponowna adopcja {8: clean, 9: clean} razem.
+
+Plik: `src/run_I4b_full_repair.py` → `results/I4b_full_repair.json`
+
+**Kryteria (Z GÓRY, pary per-seed vs ścieżka clean):** acc(8), acc(9),
+śr. acc 0–7 — SZUM na WSZYSTKICH trzech = PEŁNA NAPRAWA ZASIĘGOWA
+(twierdzenie końcowe I4: atak w kolektywie zaufanym-inaczej jest
+w pełni odwracalny operacją zapomnij-i-adoptuj-ponownie); SYGNAL−
+na którejkolwiek = trwała blizna (kwantyfikowana).
