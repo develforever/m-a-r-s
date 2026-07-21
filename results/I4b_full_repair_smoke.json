@@ -1,0 +1,30 @@
+{
+  "experiment": "I4b_full_repair",
+  "device": "cuda",
+  "n_seeds": 1,
+  "epochs_per_task": 4,
+  "cfg": {
+    "dream_model": "sparse",
+    "stats_k": 16,
+    "epochs_proj": 15,
+    "l2sp": 0.0,
+    "bn_calib": false,
+    "feat_signorm": false
+  },
+  "per_seed": [
+    {
+      "clean": {
+        "acc8": 0.149,
+        "acc9": 0.001,
+        "acc_own": 0.7649
+      },
+      "repaired": {
+        "acc8": 0.185,
+        "acc9": 0.017,
+        "acc_own": 0.7654
+      }
+    }
+  ],
+  "verdicts": {},
+  "elapsed_s": 5.9
+}

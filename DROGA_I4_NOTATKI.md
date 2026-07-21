@@ -46,3 +46,35 @@ przywraca ofiarę w 100% (projekcja zniosła zatrute sny). ALE acc(9)
 pozostaje zniszczone (−94.38) — naprawa nie objęła klasy zatrutej
 POŚREDNIO. **Zasada: zasięg naprawy musi pokrywać zasięg szkody** —
 stąd I4b (dopisek PRZED runem): naprawa pełnej paczki adopcyjnej.
+
+## I4b — naprawa pełnej paczki (ZAKOŃCZONE, 20.07.2026):
+## PEŁNA NAPRAWA ZASIĘGOWA — atak swap w 100% odwracalny
+
+Plik: `src/run_I4b_full_repair.py`;
+wyniki: `results/I4b_full_repair.json`. Czas: 65 s.
+
+| Metryka (repaired vs clean, pary) | d | Werdykt |
+|---|---|---|
+| acc(8) | +0.30pp | SZUM |
+| acc(9) | −0.32pp | SZUM |
+| własne 0–7 | +0.00pp | SZUM |
+
+**WERDYKT: PEŁNA NAPRAWA ZASIĘGOWA = True.** Po ataku swap operacja
+unlearn_light(8,9) + ponowna adopcja czystej paczki przywraca system
+do ścieżki clean w granicach szumu na wszystkich metrykach —
+projekcja bez śladu znosi epizod zatrucia (spójne z N1b: light
+usuwa dostęp, a ponowna adopcja nadpisuje mapowanie).
+
+## STATUS KOŃCOWY I4: KOMPLET — twierdzenie o kolektywie niezaufanym
+
+Atak na payload w protokole wymiany snów: (1) szkodzi tylko paczce
+adopcyjnej (klasy własne odporne — sen broni), (2) NIE jest dziś
+wykrywalny na losowym backbone (oba detektory bez separacji — wynik
+negatywny; kandydat: detekcja na pretrained), (3) jest W PEŁNI
+ODWRACALNY tanią operacją zapomnij-i-adoptuj-ponownie, o ile zasięg
+naprawy pokrywa zasięg szkody (= paczkę). Praktyczna polityka
+protokołu: adopcje paczkami + możliwość odwołania paczki źródłowej.
+
+MAPA PROJEKTU WYCZERPANA: K (sufity) · I (kolektyw) · L (fork) ·
+M (horyzont) · N (zapominanie) · O (falsyfikacja konsolidacji) ·
+I4 (niezaufani). Następny krok: przegląd całości pod v1.0.
