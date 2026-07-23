@@ -1,0 +1,73 @@
+{
+  "experiment": "P1_detect_pretrained",
+  "device": "cuda",
+  "n_seeds": 1,
+  "epochs_per_task": 4,
+  "n_dream": 256,
+  "cfg": {
+    "dream_model": "sparse",
+    "stats_k": 16,
+    "epochs_proj": 15,
+    "l2sp": 0.0,
+    "bn_calib": false,
+    "feat_signorm": false
+  },
+  "encoders": {
+    "pretrained": "resnet18_IMAGENET1K_V1 -> random frozen 512->128 (ReducedBackbone, jak L1/L2)",
+    "random": "CifarBackbone na pikselach (jak J2b)"
+  },
+  "per_seed": {
+    "pretrained": [
+      {
+        "clean": {
+          "D1_rank": 0.8095,
+          "D2_canary_pp": 1.775,
+          "acc8": 0.686,
+          "acc9": 0.53,
+          "acc_own": 0.6724
+        },
+        "swap": {
+          "D1_rank": 0.881,
+          "D2_canary_pp": 0.4625,
+          "acc8": 0.005,
+          "acc9": 0.452,
+          "acc_own": 0.6836
+        },
+        "noise": {
+          "D1_rank": -0.119,
+          "D2_canary_pp": 1.525,
+          "acc8": 0.0,
+          "acc9": 0.497,
+          "acc_own": 0.7009
+        }
+      }
+    ],
+    "random": [
+      {
+        "clean": {
+          "D1_rank": 0.9524,
+          "D2_canary_pp": 2.175,
+          "acc8": 0.0,
+          "acc9": 0.158,
+          "acc_own": 0.3288
+        },
+        "swap": {
+          "D1_rank": 0.881,
+          "D2_canary_pp": 1.025,
+          "acc8": 0.174,
+          "acc9": 0.321,
+          "acc_own": 0.2556
+        },
+        "noise": {
+          "D1_rank": 0.4524,
+          "D2_canary_pp": 2.95,
+          "acc8": 0.0,
+          "acc9": 0.597,
+          "acc_own": 0.258
+        }
+      }
+    ]
+  },
+  "verdicts": {},
+  "elapsed_s": 14.8
+}

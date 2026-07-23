@@ -1,0 +1,131 @@
+{
+  "experiment": "P1c_gate_distance",
+  "device": "cuda",
+  "seeds": [
+    5
+  ],
+  "epochs_per_task": 4,
+  "cfg": {
+    "dream_model": "sparse",
+    "stats_k": 16,
+    "epochs_proj": 15,
+    "l2sp": 0.0,
+    "bn_calib": false,
+    "feat_signorm": false
+  },
+  "gate_theta": 0.45,
+  "donors": {
+    "swap_close": 0,
+    "swap_mid": 7,
+    "swap_far": 4
+  },
+  "anchor_cos": {
+    "swap_close": 0.775,
+    "swap_mid": 0.487,
+    "swap_far": 0.139
+  },
+  "per_cell": {
+    "pretrained": {
+      "swap_close": [
+        {
+          "clean": {
+            "D1": 0.7619,
+            "D2_pp": 0.5
+          },
+          "swap": {
+            "D1": 0.4762,
+            "D2_pp": 1.1125
+          },
+          "noise": {
+            "D1": 0.0,
+            "D2_pp": 1.75
+          }
+        }
+      ],
+      "swap_mid": [
+        {
+          "clean": {
+            "D1": 0.881,
+            "D2_pp": 2.4125
+          },
+          "swap": {
+            "D1": -0.6429,
+            "D2_pp": 2.325
+          },
+          "noise": {
+            "D1": -0.3571,
+            "D2_pp": 2.25
+          }
+        }
+      ],
+      "swap_far": [
+        {
+          "clean": {
+            "D1": 0.7857,
+            "D2_pp": 2.3125
+          },
+          "swap": {
+            "D1": -0.6667,
+            "D2_pp": 0.925
+          },
+          "noise": {
+            "D1": -0.4048,
+            "D2_pp": 3.2875
+          }
+        }
+      ]
+    },
+    "random": {
+      "swap_close": [
+        {
+          "clean": {
+            "D1": 0.8571,
+            "D2_pp": 2.225
+          },
+          "swap": {
+            "D1": 0.8333,
+            "D2_pp": 1.3625
+          },
+          "noise": {
+            "D1": 0.0,
+            "D2_pp": 1.15
+          }
+        }
+      ],
+      "swap_mid": [
+        {
+          "clean": {
+            "D1": 0.9048,
+            "D2_pp": 1.2
+          },
+          "swap": {
+            "D1": -0.7143,
+            "D2_pp": -0.1
+          },
+          "noise": {
+            "D1": -0.4048,
+            "D2_pp": -0.3125
+          }
+        }
+      ],
+      "swap_far": [
+        {
+          "clean": {
+            "D1": 0.881,
+            "D2_pp": 2.6125
+          },
+          "swap": {
+            "D1": -0.6667,
+            "D2_pp": 1.0875
+          },
+          "noise": {
+            "D1": -0.4762,
+            "D2_pp": 1.8
+          }
+        }
+      ]
+    }
+  },
+  "verdicts": {},
+  "elapsed_s": 36.5
+}

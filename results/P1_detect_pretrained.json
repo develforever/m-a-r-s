@@ -1,0 +1,576 @@
+{
+  "experiment": "P1_detect_pretrained",
+  "device": "cuda",
+  "n_seeds": 5,
+  "epochs_per_task": 15,
+  "n_dream": 5000,
+  "cfg": {
+    "dream_model": "sparse",
+    "stats_k": 16,
+    "epochs_proj": 15,
+    "l2sp": 0.0,
+    "bn_calib": false,
+    "feat_signorm": false
+  },
+  "encoders": {
+    "pretrained": "resnet18_IMAGENET1K_V1 -> random frozen 512->128 (ReducedBackbone, jak L1/L2)",
+    "random": "CifarBackbone na pikselach (jak J2b)"
+  },
+  "per_seed": {
+    "pretrained": [
+      {
+        "clean": {
+          "D1_rank": 0.8095,
+          "D2_canary_pp": 0.925,
+          "acc8": 0.873,
+          "acc9": 0.871,
+          "acc_own": 0.7045
+        },
+        "swap": {
+          "D1_rank": 0.881,
+          "D2_canary_pp": 0.2875,
+          "acc8": 0.133,
+          "acc9": 0.0,
+          "acc_own": 0.7243
+        },
+        "noise": {
+          "D1_rank": -0.119,
+          "D2_canary_pp": 1.8,
+          "acc8": 0.549,
+          "acc9": 0.89,
+          "acc_own": 0.7061
+        }
+      },
+      {
+        "clean": {
+          "D1_rank": 0.7619,
+          "D2_canary_pp": 2.0875,
+          "acc8": 0.855,
+          "acc9": 0.894,
+          "acc_own": 0.7166
+        },
+        "swap": {
+          "D1_rank": 0.8333,
+          "D2_canary_pp": 0.475,
+          "acc8": 0.224,
+          "acc9": 0.0,
+          "acc_own": 0.7365
+        },
+        "noise": {
+          "D1_rank": 0.0952,
+          "D2_canary_pp": 2.775,
+          "acc8": 0.622,
+          "acc9": 0.892,
+          "acc_own": 0.7149
+        }
+      },
+      {
+        "clean": {
+          "D1_rank": 0.7619,
+          "D2_canary_pp": 1.6,
+          "acc8": 0.886,
+          "acc9": 0.888,
+          "acc_own": 0.7124
+        },
+        "swap": {
+          "D1_rank": 0.8095,
+          "D2_canary_pp": 0.5375,
+          "acc8": 0.152,
+          "acc9": 0.0,
+          "acc_own": 0.7303
+        },
+        "noise": {
+          "D1_rank": 0.2143,
+          "D2_canary_pp": 2.4375,
+          "acc8": 0.638,
+          "acc9": 0.892,
+          "acc_own": 0.7113
+        }
+      },
+      {
+        "clean": {
+          "D1_rank": 0.8571,
+          "D2_canary_pp": 2.9,
+          "acc8": 0.862,
+          "acc9": 0.852,
+          "acc_own": 0.7044
+        },
+        "swap": {
+          "D1_rank": 0.7857,
+          "D2_canary_pp": 1.125,
+          "acc8": 0.224,
+          "acc9": 0.0,
+          "acc_own": 0.7255
+        },
+        "noise": {
+          "D1_rank": 0.1905,
+          "D2_canary_pp": 2.5,
+          "acc8": 0.472,
+          "acc9": 0.882,
+          "acc_own": 0.7065
+        }
+      },
+      {
+        "clean": {
+          "D1_rank": 0.7619,
+          "D2_canary_pp": 1.4,
+          "acc8": 0.844,
+          "acc9": 0.876,
+          "acc_own": 0.711
+        },
+        "swap": {
+          "D1_rank": 0.8095,
+          "D2_canary_pp": 0.775,
+          "acc8": 0.149,
+          "acc9": 0.0,
+          "acc_own": 0.7308
+        },
+        "noise": {
+          "D1_rank": -0.0238,
+          "D2_canary_pp": 2.175,
+          "acc8": 0.565,
+          "acc9": 0.872,
+          "acc_own": 0.7098
+        }
+      }
+    ],
+    "random": [
+      {
+        "clean": {
+          "D1_rank": 0.9524,
+          "D2_canary_pp": 4.4,
+          "acc8": 0.586,
+          "acc9": 0.571,
+          "acc_own": 0.3
+        },
+        "swap": {
+          "D1_rank": 0.881,
+          "D2_canary_pp": 2.4625,
+          "acc8": 0.262,
+          "acc9": 0.0,
+          "acc_own": 0.3344
+        },
+        "noise": {
+          "D1_rank": 0.2857,
+          "D2_canary_pp": 4.475,
+          "acc8": 0.115,
+          "acc9": 0.621,
+          "acc_own": 0.3264
+        }
+      },
+      {
+        "clean": {
+          "D1_rank": 0.8571,
+          "D2_canary_pp": 4.175,
+          "acc8": 0.659,
+          "acc9": 0.537,
+          "acc_own": 0.317
+        },
+        "swap": {
+          "D1_rank": 0.5476,
+          "D2_canary_pp": 2.225,
+          "acc8": 0.229,
+          "acc9": 0.0,
+          "acc_own": 0.3539
+        },
+        "noise": {
+          "D1_rank": 0.2381,
+          "D2_canary_pp": 1.7,
+          "acc8": 0.089,
+          "acc9": 0.645,
+          "acc_own": 0.339
+        }
+      },
+      {
+        "clean": {
+          "D1_rank": 0.7619,
+          "D2_canary_pp": 4.3375,
+          "acc8": 0.627,
+          "acc9": 0.55,
+          "acc_own": 0.342
+        },
+        "swap": {
+          "D1_rank": 0.4524,
+          "D2_canary_pp": 1.775,
+          "acc8": 0.286,
+          "acc9": 0.0,
+          "acc_own": 0.3681
+        },
+        "noise": {
+          "D1_rank": -0.0952,
+          "D2_canary_pp": 2.325,
+          "acc8": 0.122,
+          "acc9": 0.643,
+          "acc_own": 0.3604
+        }
+      },
+      {
+        "clean": {
+          "D1_rank": 0.6667,
+          "D2_canary_pp": 4.2875,
+          "acc8": 0.528,
+          "acc9": 0.538,
+          "acc_own": 0.3103
+        },
+        "swap": {
+          "D1_rank": 0.619,
+          "D2_canary_pp": 1.325,
+          "acc8": 0.241,
+          "acc9": 0.0,
+          "acc_own": 0.3379
+        },
+        "noise": {
+          "D1_rank": -0.2619,
+          "D2_canary_pp": 2.3,
+          "acc8": 0.074,
+          "acc9": 0.546,
+          "acc_own": 0.3313
+        }
+      },
+      {
+        "clean": {
+          "D1_rank": 0.881,
+          "D2_canary_pp": 5.1875,
+          "acc8": 0.646,
+          "acc9": 0.521,
+          "acc_own": 0.3145
+        },
+        "swap": {
+          "D1_rank": 0.8095,
+          "D2_canary_pp": 1.7625,
+          "acc8": 0.199,
+          "acc9": 0.0,
+          "acc_own": 0.3581
+        },
+        "noise": {
+          "D1_rank": 0.1667,
+          "D2_canary_pp": 1.5875,
+          "acc8": 0.102,
+          "acc9": 0.54,
+          "acc_own": 0.3443
+        }
+      }
+    ]
+  },
+  "verdicts": {
+    "pretrained_szkoda_swap_acc8": {
+      "pairs_pp": [
+        -74.0,
+        -63.1,
+        -73.4,
+        -63.8,
+        -69.5
+      ],
+      "delta": {
+        "mean": -68.76,
+        "std": 5.152,
+        "min": -74.0,
+        "max": -63.1
+      },
+      "noise_pp": 6.0251,
+      "verdict": "SYGNAL-",
+      "ranga": "obserwacja"
+    },
+    "pretrained_szkoda_noise_acc8": {
+      "pairs_pp": [
+        -32.4,
+        -23.3,
+        -24.8,
+        -39.0,
+        -27.9
+      ],
+      "delta": {
+        "mean": -29.48,
+        "std": 6.359,
+        "min": -39.0,
+        "max": -23.3
+      },
+      "noise_pp": 8.2147,
+      "verdict": "SYGNAL-",
+      "ranga": "obserwacja"
+    },
+    "pretrained_szkoda_swap_acc9": {
+      "pairs_pp": [
+        -87.1,
+        -89.4,
+        -88.8,
+        -85.2,
+        -87.6
+      ],
+      "delta": {
+        "mean": -87.62,
+        "std": 1.6346,
+        "min": -89.4,
+        "max": -85.2
+      },
+      "noise_pp": 1.6346,
+      "verdict": "SYGNAL-",
+      "ranga": "obserwacja"
+    },
+    "pretrained_szkoda_noise_acc9": {
+      "pairs_pp": [
+        1.9,
+        -0.2,
+        0.4,
+        3.0,
+        -0.4
+      ],
+      "delta": {
+        "mean": 0.94,
+        "std": 1.4622,
+        "min": -0.4,
+        "max": 3.0
+      },
+      "noise_pp": 2.4995,
+      "verdict": "SZUM",
+      "ranga": "obserwacja"
+    },
+    "pretrained_szkoda_swap_acc_own": {
+      "pairs_pp": [
+        1.98,
+        1.99,
+        1.79,
+        2.11,
+        1.98
+      ],
+      "delta": {
+        "mean": 1.97,
+        "std": 0.1147,
+        "min": 1.79,
+        "max": 2.11
+      },
+      "noise_pp": 1.0141,
+      "verdict": "SYGNAL+",
+      "ranga": "obserwacja"
+    },
+    "pretrained_szkoda_noise_acc_own": {
+      "pairs_pp": [
+        0.16,
+        -0.17,
+        -0.11,
+        0.21,
+        -0.12
+      ],
+      "delta": {
+        "mean": -0.006,
+        "std": 0.1767,
+        "min": -0.17,
+        "max": 0.21
+      },
+      "noise_pp": 0.8917,
+      "verdict": "SZUM",
+      "ranga": "obserwacja"
+    },
+    "pretrained_detekcja_D1_rank": {
+      "clean": [
+        0.809,
+        0.762,
+        0.762,
+        0.857,
+        0.762
+      ],
+      "swap": [
+        0.881,
+        0.833,
+        0.809,
+        0.786,
+        0.809
+      ],
+      "noise": [
+        -0.119,
+        0.095,
+        0.214,
+        0.191,
+        -0.024
+      ],
+      "pelna_separacja": false,
+      "separacja_clean_vs_swap": false
+    },
+    "pretrained_detekcja_D2_canary_pp": {
+      "clean": [
+        0.925,
+        2.087,
+        1.6,
+        2.9,
+        1.4
+      ],
+      "swap": [
+        0.287,
+        0.475,
+        0.537,
+        1.125,
+        0.775
+      ],
+      "noise": [
+        1.8,
+        2.775,
+        2.438,
+        2.5,
+        2.175
+      ],
+      "pelna_separacja": false,
+      "separacja_clean_vs_swap": false
+    },
+    "random_szkoda_swap_acc8": {
+      "pairs_pp": [
+        -32.4,
+        -43.0,
+        -34.1,
+        -28.7,
+        -44.7
+      ],
+      "delta": {
+        "mean": -36.58,
+        "std": 6.9438,
+        "min": -44.7,
+        "max": -28.7
+      },
+      "noise_pp": 8.6069,
+      "verdict": "SYGNAL-",
+      "ranga": "obserwacja"
+    },
+    "random_szkoda_noise_acc8": {
+      "pairs_pp": [
+        -47.1,
+        -57.0,
+        -50.5,
+        -45.4,
+        -54.4
+      ],
+      "delta": {
+        "mean": -50.88,
+        "std": 4.8556,
+        "min": -57.0,
+        "max": -45.4
+      },
+      "noise_pp": 7.2534,
+      "verdict": "SYGNAL-",
+      "ranga": "obserwacja"
+    },
+    "random_szkoda_swap_acc9": {
+      "pairs_pp": [
+        -57.1,
+        -53.7,
+        -55.0,
+        -53.8,
+        -52.1
+      ],
+      "delta": {
+        "mean": -54.34,
+        "std": 1.8555,
+        "min": -57.1,
+        "max": -52.1
+      },
+      "noise_pp": 1.8555,
+      "verdict": "SYGNAL-",
+      "ranga": "obserwacja"
+    },
+    "random_szkoda_noise_acc9": {
+      "pairs_pp": [
+        5.0,
+        10.8,
+        9.3,
+        0.8,
+        1.9
+      ],
+      "delta": {
+        "mean": 5.56,
+        "std": 4.4106,
+        "min": 0.8,
+        "max": 10.8
+      },
+      "noise_pp": 7.0579,
+      "verdict": "SZUM",
+      "ranga": "obserwacja"
+    },
+    "random_szkoda_swap_acc_own": {
+      "pairs_pp": [
+        3.44,
+        3.69,
+        2.61,
+        2.76,
+        4.36
+      ],
+      "delta": {
+        "mean": 3.372,
+        "std": 0.7136,
+        "min": 2.61,
+        "max": 4.36
+      },
+      "noise_pp": 2.9647,
+      "verdict": "SYGNAL+",
+      "ranga": "obserwacja"
+    },
+    "random_szkoda_noise_acc_own": {
+      "pairs_pp": [
+        2.64,
+        2.2,
+        1.84,
+        2.1,
+        2.98
+      ],
+      "delta": {
+        "mean": 2.352,
+        "std": 0.4544,
+        "min": 1.84,
+        "max": 2.98
+      },
+      "noise_pp": 2.8721,
+      "verdict": "SYGNAL-parowy+",
+      "ranga": "obserwacja"
+    },
+    "random_detekcja_D1_rank": {
+      "clean": [
+        0.952,
+        0.857,
+        0.762,
+        0.667,
+        0.881
+      ],
+      "swap": [
+        0.881,
+        0.548,
+        0.452,
+        0.619,
+        0.809
+      ],
+      "noise": [
+        0.286,
+        0.238,
+        -0.095,
+        -0.262,
+        0.167
+      ],
+      "pelna_separacja": false,
+      "separacja_clean_vs_swap": false
+    },
+    "random_detekcja_D2_canary_pp": {
+      "clean": [
+        4.4,
+        4.175,
+        4.338,
+        4.287,
+        5.188
+      ],
+      "swap": [
+        2.462,
+        2.225,
+        1.775,
+        1.325,
+        1.762
+      ],
+      "noise": [
+        4.475,
+        1.7,
+        2.325,
+        2.3,
+        1.587
+      ],
+      "pelna_separacja": false,
+      "separacja_clean_vs_swap": false
+    },
+    "WERDYKT_D1_rank": "NEGATYW (semantyka cech nie wystarcza)",
+    "WERDYKT_D2_canary_pp": "NEGATYW (semantyka cech nie wystarcza)"
+  },
+  "elapsed_s": 146.0
+}
