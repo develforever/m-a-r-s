@@ -102,6 +102,33 @@ attack is fully reversible by forget-and-readopt of the adoption batch (noise
 on all metrics vs the clean path). Protocol policy: adopt in batches, repair
 at batch scope. Details: `DROGA_I4_NOTATKI.md`.
 
+## Payload detection: gate and distance law (Series P, v1.1)
+
+Semantic (pretrained) features alone do **not** rescue payload-attack
+detection (double negative, with a paired random-backbone control). Two
+pre-registered results on fresh seeds then convert the negative: a
+**structural gate** (rank-consistency > 0.45) classifies 60/60
+clean/structureless payloads correctly on both backbones — and also catches
+mid/far-distance swaps; and a **distance law**: swap detectability grows with
+the semantic distance of the forged pair (full separation at anchor-cos
+0.487/0.139, none at 0.775/0.615) — close-pair swaps are undetectable *by
+construction*, which retroactively explains the I4/P1 negatives. Protocol
+policy, fully measured: batch adoption + entry gate + repair covers the
+invisible close swaps. Details: `DROGA_P_NOTATKI.md`.
+
+## Collective at long horizon (Series Q, v1.2)
+
+At the default dream budget the 20-agent collective (95 of 100 CIFAR-100
+classes from 24 KB messages) pays a **scale barrier**: −6.67 ± 0.88pp vs the
+sequential agent — front-loaded in early adoptions, repairable by
+forget-and-readopt (61%) and fully compensated by raising the adoption dream
+budget to 2500/class (154%; payload unchanged). A pre-registered fairness
+control cut both ways: **self-dream augmentation lifts any agent** (+4.66pp;
+best single agent 45.35 ± 0.49 = 95.7% of the all-data ceiling), and at
+symmetric budgets the collective is **equivalent** to the sequential agent
+(44.29 vs 45.35, within noise) — the equivalence claim of Series I/L extends
+10× in scale. Details: `DROGA_Q_NOTATKI.md`.
+
 ## The mechanism in one paragraph
 
 A design law recurred across four independent experiments in this project:
@@ -167,6 +194,13 @@ python src/run_O1_consolidation.py        # deep-sleep rebuild -> paired-SIGNAL-
 # Series I4 (v0.11) -- untrusted collective
 python src/run_I4_untrusted.py            # damage map; detection negative
 python src/run_I4b_full_repair.py         # forget-and-readopt: full recovery
+# Series P (v1.1) -- payload detection
+python src/run_P1_detect_pretrained.py    # pretrained: double negative
+python src/run_P1c_gate_distance.py       # gate 60/60; distance law
+# Series Q (v1.2) -- collective at long horizon
+python src/run_Q1_collective_horizon.py   # scale barrier -6.67pp
+python src/run_Q2_early_repair.py         # readopt 61% / budget 154%
+python src/run_Q2c_seq_selfdream.py       # self-dream lever; equivalence
 
 # Part II — routing ceiling study
 python src/run_D1_mars_v2_baseline.py
