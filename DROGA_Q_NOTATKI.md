@@ -160,3 +160,33 @@ Q2b SYGNAL+ · Q2c SYGNAL+/SZUM-rozstrzygnięcie). Merge `droga-q` →
 tag v1.2. Kandydat dalszy (osobna decyzja): kombinacja q2a+q2b
 (re-adopcja przy budżecie 2500 — czy domyka lukę 1.07 do selfdream
 i 3.1 do sufitu); nie blokuje merge'a.
+
+---
+
+# Q2d — WYNIKI (run FULL 2026-07-23, 1345 s, seedy 0–4)
+
+Plan: `DROGA_Q2D_PLAN.md`. Plik: `results/Q2d_combo.json`.
+
+## WERDYKT: SZUM — budżet subsumuje naprawę (anty-hipoteza potwierdzona)
+
+combo 44.60 ± 0.60 vs q2b 44.29 ± 0.66: pary [+0.09, +0.41, +0.19,
+−0.04, +0.07], d = +0.14 ± 0.17pp, próg 1.23 → **SZUM**. Dźwignie NIE
+są addytywne. Mechanizm widoczny wprost w danych: przy budżecie 2500
+wczesne zadania 1–5 osiągają ~49.5% JUŻ PRZED naprawą (przy budżecie
+500 było 26.4% — wczesny deficyt Q1b był w całości deficytem budżetu);
+re-adopcja dodaje na nich +1.56…+1.88pp (5/5, lokalnie spójne), co
+w ACC całości rozpływa się w szumie.
+
+Obserwacja domykająca: combo vs seq_selfdream2500 = pary −0.92 ± 0.61,
+próg 1.07 → **SZUM** — luka do najlepszego pojedynczego agenta
+formalnie domknięta (potwierdzenie równoważności z Q2c na trzecim
+systemie). Luka do sufitu all-data: 2.98pp.
+
+## OSTATECZNY STAN SERII Q (v1.2)
+
+Trzy systemy w równoważności przy symetrycznych budżetach:
+kolektyw-2500 44.29 ≈ kolektyw-combo 44.60 ≈ seq-selfdream 45.35
+(wszystkie pary SZUM), na tle sufitu 47.41. Rekomendowana konfiguracja
+protokołu: **sam budżet 2500** (najprostsza; re-adopcja zbędna poza
+scenariuszem naprawy po ataku — I4b). Seria Q zamknięta bez wątków
+wiszących.
