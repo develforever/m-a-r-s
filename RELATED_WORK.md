@@ -1,6 +1,8 @@
 # Related Work — zweryfikowana bibliografia i szkic sekcji
 
-Status: 2026-07-10. KAŻDA pozycja poniżej zweryfikowana web searchem (tytuł,
+Status: 2026-07-10; aktualizacja 2026-07-23 — Części F (unlearning, seria N)
+i G (poisoning/kolektyw niezaufany, seria I4), 11 nowych pozycji
+zweryfikowanych. KAŻDA pozycja poniżej zweryfikowana web searchem (tytuł,
 autorzy, wenue, link). Zero cytowań z pamięci. Szkic sekcji po angielsku —
 do wklejenia do WHITEPAPER.md (lub do papera CL po rozcięciu).
 
@@ -218,6 +220,103 @@ do wklejenia do WHITEPAPER.md (lub do papera CL po rozcięciu).
 4. Sprawdzić przy submisji: dokładna lista autorów RanPAC (McDonnell et al.)
    i Continual-CLIP (Thengane et al.) bezpośrednio na arXiv.
 
+## Część F — Machine unlearning (seria N; zweryfikowane 2026-07-23)
+
+### F1. Bibliografia
+
+F1. **[Cao-Yang]** Cao & Yang, *Towards Making Systems Forget with Machine
+   Unlearning*, IEEE S&P 2015, s. 463–480.
+   https://dblp.org/rec/conf/sp/CaoY15.html
+   — praca definiująca pole; unlearning przez formę sumacyjną algorytmu.
+   My: nasza "forma sumacyjna" to statystyki snu — odbudowa bez danych.
+F2. **[SISA]** Bourtoule et al., *Machine Unlearning*, IEEE S&P 2021,
+   arXiv:1912.03817. https://arxiv.org/abs/1912.03817
+   — gwarancja przez retrenowanie shardu; koszt ograniczony strukturą
+   treningu. Nasz reinit (N1c) = ta sama filozofia gwarancji
+   ("wytrenuj od nowa bez celu"), ale odbudowa idzie ZE SNÓW pozostałych
+   klas — zero przechowanych danych, koszt sekund, nie godzin.
+F3. **[Certified-removal]** Guo, Goldstein, Hannun, van der Maaten,
+   *Certified Data Removal from Machine Learning Models*, ICML 2020,
+   arXiv:1911.03030. https://arxiv.org/abs/1911.03030
+   — definicja certyfikowanego usunięcia (nieodróżnialność od modelu,
+   który danych nie widział) dla modeli liniowych. Nasza projekcja JEST
+   liniowa; nasze kryterium N1c (re-learning ≈ never-seen, +0.34pp < próg
+   0.50) to operacyjny, mierzony odpowiednik tej definicji.
+F4. **[Scrubbing]** Golatkar, Achille, Soatto, *Eternal Sunshine of the
+   Spotless Net: Selective Forgetting in Deep Networks*, CVPR 2020.
+   https://openaccess.thecvf.com/content_CVPR_2020/html/Golatkar_Eternal_Sunshine_of_the_Spotless_Net_Selective_Forgetting_in_Deep_CVPR_2020_paper.html
+   — przybliżone "szorowanie" wag z górnym ograniczeniem pozostałej
+   informacji. Nasz wariant scrub (N1b, ~84% wymazania) to ta kategoria;
+   nasza taksonomia pokazuje, że przybliżenie jest zbędne, gdy nośnik
+   informacji jest znany i tani w odbudowie.
+F5. **[Unlearning-survey]** Nguyen et al., *A Survey of Machine Unlearning*,
+   arXiv:2209.02299. https://arxiv.org/abs/2209.02299
+   — mapa pola (exact vs approximate, metryki weryfikacji). Nasza metryka
+   "koszt ponownego nauczenia ze 100 obrazów" = relearn-based verification.
+
+### F2. Pozycjonowanie serii N (do wklejenia w EN)
+
+Trzy różnice strukturalne wobec pola: (1) **znany nośnik informacji** —
+N1b dowodzi pomiarem, że projekcja jest JEDYNYM nośnikiem (pody
+konfirmacyjne); literatura unlearningu zwykle traktuje sieć jako
+monolit o nieznanej lokalizacji śladu. (2) **Gwarancja przez odbudowę
+ze snów**: reinit + rebuild z pamięci parametrycznej pozostałych klas —
+odpowiednik retreningu SISA, ale bez dostępu do jakichkolwiek danych
+i przy koszcie ≤0 dla pozostałych klas (N1c). (3) **Weryfikacja
+relearn-based z progiem pre-rejestrowanym** (≈ never-seen). Wynik
+uboczny o wadze protokołowej: klasa nieobecna w projekcji jest
+routingowo nieosiągalna nawet przy obecnej kotwicy i podzie.
+
+## Część G — Poisoning i kolektyw niezaufany (seria I4; zweryfikowane 2026-07-23)
+
+### G1. Bibliografia
+
+G1. **[Biggio-SVM]** Biggio, Nelson, Laskov, *Poisoning Attacks against
+   Support Vector Machines*, ICML 2012, arXiv:1206.6389.
+   https://arxiv.org/abs/1206.6389 — kanoniczny atak na zbiór treningowy.
+G2. **[BadNets]** Gu, Dolan-Gavitt, Garg, *BadNets: Identifying
+   Vulnerabilities in the Machine Learning Model Supply Chain*, 2017,
+   arXiv:1708.06733. — backdoor przez łańcuch dostaw modelu. Nasz payload
+   24 KB to analogiczny "łańcuch dostaw", ale statystyk, nie wag.
+G3. **[Krum]** Blanchard, El Mhamdi, Guerraoui, Stainer, *Machine Learning
+   with Adversaries: Byzantine Tolerant Gradient Descent*, NeurIPS 2017.
+   https://dblp.org/rec/conf/nips/BlanchardMGS17.html
+   — odporna agregacja gradientów (odrzucanie odstających). U nas nie ma
+   agregacji: wiadomość jest atomowa (adopcja paczki), więc obrona
+   przesuwa się z agregacji na detekcję i odwołanie paczki.
+G4. **[FL-backdoor]** Bagdasaryan, Veit, Hua, Estrin, Shmatikov, *How To
+   Backdoor Federated Learning*, AISTATS 2020, arXiv:1807.00459.
+   https://proceedings.mlr.press/v108/bagdasaryan20a.html
+   — model replacement w FL; agregator ślepy na pochodzenie update'u.
+   Kontrast: nasz odbiorca widzi CAŁY payload i może go w całości cofnąć.
+G5. **[BrainWash]** Abbasi, Nooralinejad, Pirsiavash, Kolouri, *BrainWash:
+   A Poisoning Attack to Forget in Continual Learning*, CVPR 2024,
+   arXiv:2311.11995. https://arxiv.org/abs/2311.11995
+   — zatruwanie danych, by wymusić zapominanie w CL. Komplementarne:
+   oni atakują dane treningowe uczącego się; my payload protokołu wymiany
+   — i mierzymy blast radius + pełną naprawę.
+G6. **[FedEraser]** Liu, Ma, Yang, Wang, Liu, *FedEraser: Enabling
+   Efficient Client-Level Data Removal from Federated Learning Models*,
+   IEEE/ACM IWQoS 2021.
+   — usuwanie wkładu klienta z modelu FL wymaga historii update'ów na
+   serwerze. U nas naprawa nie wymaga żadnej historii: zapomnij-i-adoptuj
+   -ponownie (I4b) korzysta z maszynerii serii N i payloadu źródła.
+
+### G2. Pozycjonowanie serii I4 (do wklejenia w EN)
+
+Model zagrożenia inny niż w FL: wymieniamy JEDNORAZOWE statystyki, nie
+iterowane gradienty/wagi — nie ma pętli agregacji, którą atakuje
+literatura byzantine. Trzy zmierzone twierdzenia: (1) **blast radius =
+paczka adopcyjna** (klasy własne odporne ±1pp — sen ich broni; swap
+niszczy obie współadoptowane klasy przez sprzeczne cele kotwic);
+(2) **detekcja na losowych cechach niemożliwa** (oba pre-rejestrowane
+detektory bez separacji — uczciwy negatyw; kandydat: cechy semantyczne,
+seria P); (3) **pełna odwracalność bez historii** — unlearn paczki +
+ponowna adopcja wraca do ścieżki clean w szumie na wszystkich metrykach
+(I4b), czyli odpowiednik federated unlearning bez przechowywania
+czegokolwiek poza samym payloadem. Polityka: adopcje paczkami, zasięg
+naprawy = zasięg szkody.
+
 ## Część D — Braki do domknięcia przed submisją
 
 - [ ] Finalny BibTeX każdej pozycji ze strony arXiv/DOI (nie z tego pliku).
@@ -226,6 +325,8 @@ do wklejenia do WHITEPAPER.md (lub do papera CL po rozcięciu).
     arXiv:2302.00487 — pojawił się w wynikach, ZWERYFIKOWAĆ przed użyciem).
 - [ ] Part II (routing ceiling): jeśli osobny paper — dodać literaturę
     o task inference w class-IL i o ocenie routerów MoE (osobna runda searchy).
+- [x] 2026-07-23: rundy dla serii N (unlearning, Część F) i I4
+    (poisoning/kolektyw, Część G) — wykonane, 11 pozycji zweryfikowanych.
 
 ## Część E — Dopisek po serii I/L (2026-07-19): model collapse a wymiana snów
 
@@ -255,3 +356,6 @@ z konstrukcji protokołu, nie z nadziei:
    ~24 KB/klasę, asynchroniczna i weryfikowalna semantycznie (kandydat
    I4: odbiorca śni z payloadu i sprawdza zgodność z kotwicą
    deklarowanej klasy — obrona bez kryptoekonomii).
+   [AKTUALIZACJA 2026-07-23: I4 wykonane — detekcja na losowym backbone
+   NEGATYWNA (oba detektory), naprawa przez unlearn+readopt PEŁNA;
+   detekcja semantyczna = kandydat serii P. Literatura: Część G.]
