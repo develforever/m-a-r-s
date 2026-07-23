@@ -1,0 +1,16 @@
+# Normalizacja koncow linii: kanonicznie LF w repo (rozstrzygniecie A3, PLAN_V1.md).
+# Po dodaniu tego pliku: `git add --renormalize .` LUB `git checkout -- .`
+# usuwa 161-plikowy szum CRLF z working tree bez zmiany tresci.
+* text=auto
+
+*.py text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.txt text eol=lf
+*.js text eol=lf
+*.html text eol=lf
+
+*.png binary
+*.npz binary
+*.pt binary

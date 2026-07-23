@@ -1,6 +1,8 @@
 # START TUTAJ — stan projektu i wejście do nowej sesji
 
-Aktualizacja: 2026-07-20 (noc, finał). I4 (kolektyw niezaufany, v0.11) ZAKOŃCZONE: atak razi tylko paczkę adopcyjną (własne klasy odporne), detekcja na losowym backbone negatywna (uczciwie), naprawa zapomnij-i-adoptuj-ponownie PEŁNA (SZUM ×3). MAPA PROJEKTU WYCZERPANA (K·I·L·M·N·O·I4) — następny krok: przegląd całości pod v1.0. Wcześniej — seria O (v0.10) FALSYFIKACJĄ: odbudowa projekcji ze snów po sekwencji = parowy− na obu benchmarkach — sen chroni/przenosi/odbudowuje, ale nie ulepsza ponad realne dane; funkcje snu domknięte. Został I4, potem przegląd pod v1.0. Wcześniej — seria N (v0.9) ZAKOŃCZONA: taksonomia light/scrub/reinit zmierzona (0%/~84%/100% wymazania; reinit = pełna gwarancja przy koszcie ≤0; klasa nieznana projekcji routingowo nieosiągalna). Trójca protokołu domknięta: sen uczy · dzieli · zapomina. Kandydaci: O1 (konsolidacja snem — możliwy nowy best), I4. Wcześniej — seria M (długi horyzont, v0.8): CIFAR-100 × 20 zadań na pretrained — 40.70 ± 0.84 (85.8% sufitu; deficyt późny −7.8pp vs sufit, strukturalny — front stability–plasticity zmierzony w 3 punktach, rehearsal per klasę zostaje domyślny); kotwice: SYGNAL+ 300d vs 50d (+7.7) przy 100 klasach. Następne: seria N (unlearning), I4. Wcześniej — mapa K→I→L (v0.7): seria L — fork tożsamości: zamrożony resnet18-ImageNet pod niezmienionym mechanizmem daje CIFAR 74.69 ± 0.69 (+37.2pp, SYGNAL+; 96.7% sufitu 77.23; NAD trenowalnym joint 70.24), kolektyw na mocnych cechach 74.13 (koszt protokołu −0.56pp, parowy−); I2b — fuzja działa tylko poniżej nasycenia payloadu (parowy+ przy n=100). Wcześniej: K (v0.5) i I (v0.6): kolektywna wymiana snów, v0.6) ZAKOŃCZONE: mechanizm realizuje 94.6–97.6% sufitów zamrożonych cech (K0/K1, best Fashion 79.23 ± 0.73), a kolektyw 5 agentów wymieniających wyłącznie statystyki snu (24 KB/klasę, zero obrazów) jest RÓWNOWAŻNY agentowi sekwencyjnemu (78.87 vs 79.23 — I3). W przygotowaniu: Droga L (jawny fork tożsamości — pretrained backbone, DROGA_L_PLAN.md) i I2b (fuzja low-data). Mapa etapów: PLAN_GENERALNY.md. REPO PUBLICZNE: https://github.com/develforever/m-a-r-s (tagi: v0.3-freeze … v0.6).
+Aktualizacja: 2026-07-23. PRZEGLĄD POD v1.0 W TOKU (plan: PLAN_V1.md). Wykonane: audyt liczb headline vs results/*.json — ZERO rozbieżności (skrypt: scripts/audit_headline_numbers.py); WHITEPAPER v1.0 (serie K–I4 rozbite na sekcje 14–20, nowy abstrakt); README v1.0 (sekcje M/N/O/I4, komplet komend reprodukcji); .gitattributes (working tree = 100% szum CRLF); brak tagu v0.6 (kandydat: `git tag v0.6 aab3f2c`). Do zrobienia: related work dla N/I4, tag v1.0. Po v1.0 kandydaci (PLAN_V1.md część B): P (detekcja zatrucia na pretrained), Q (kolektyw × długi horyzont), G2b (ECOC), R (kolektyw heterogeniczny).
+
+Poprzednia aktualizacja: 2026-07-20 (noc, finał). I4 (kolektyw niezaufany, v0.11) ZAKOŃCZONE: atak razi tylko paczkę adopcyjną (własne klasy odporne), detekcja na losowym backbone negatywna (uczciwie), naprawa zapomnij-i-adoptuj-ponownie PEŁNA (SZUM ×3). MAPA PROJEKTU WYCZERPANA (K·I·L·M·N·O·I4) — następny krok: przegląd całości pod v1.0. Wcześniej — seria O (v0.10) FALSYFIKACJĄ: odbudowa projekcji ze snów po sekwencji = parowy− na obu benchmarkach — sen chroni/przenosi/odbudowuje, ale nie ulepsza ponad realne dane; funkcje snu domknięte. Został I4, potem przegląd pod v1.0. Wcześniej — seria N (v0.9) ZAKOŃCZONA: taksonomia light/scrub/reinit zmierzona (0%/~84%/100% wymazania; reinit = pełna gwarancja przy koszcie ≤0; klasa nieznana projekcji routingowo nieosiągalna). Trójca protokołu domknięta: sen uczy · dzieli · zapomina. Kandydaci: O1 (konsolidacja snem — możliwy nowy best), I4. Wcześniej — seria M (długi horyzont, v0.8): CIFAR-100 × 20 zadań na pretrained — 40.70 ± 0.84 (85.8% sufitu; deficyt późny −7.8pp vs sufit, strukturalny — front stability–plasticity zmierzony w 3 punktach, rehearsal per klasę zostaje domyślny); kotwice: SYGNAL+ 300d vs 50d (+7.7) przy 100 klasach. Następne: seria N (unlearning), I4. Wcześniej — mapa K→I→L (v0.7): seria L — fork tożsamości: zamrożony resnet18-ImageNet pod niezmienionym mechanizmem daje CIFAR 74.69 ± 0.69 (+37.2pp, SYGNAL+; 96.7% sufitu 77.23; NAD trenowalnym joint 70.24), kolektyw na mocnych cechach 74.13 (koszt protokołu −0.56pp, parowy−); I2b — fuzja działa tylko poniżej nasycenia payloadu (parowy+ przy n=100). Wcześniej: K (v0.5) i I (v0.6): kolektywna wymiana snów, v0.6) ZAKOŃCZONE: mechanizm realizuje 94.6–97.6% sufitów zamrożonych cech (K0/K1, best Fashion 79.23 ± 0.73), a kolektyw 5 agentów wymieniających wyłącznie statystyki snu (24 KB/klasę, zero obrazów) jest RÓWNOWAŻNY agentowi sekwencyjnemu (78.87 vs 79.23 — I3). W przygotowaniu: Droga L (jawny fork tożsamości — pretrained backbone, DROGA_L_PLAN.md) i I2b (fuzja low-data). Mapa etapów: PLAN_GENERALNY.md. REPO PUBLICZNE: https://github.com/develforever/m-a-r-s (tagi: v0.3-freeze … v0.6).
 DECYZJE 2026-07-10: (1) treść rozcięta na DWA papery (A: CL; B: routing
 ceiling); (2) submisje (arXiv/TMLR/konferencje) WSTRZYMANE do osobnej
 decyzji Roberta — etap bieżący to WYŁĄCZNIE repo publiczne.
@@ -8,15 +10,17 @@ Related work zweryfikowany → `RELATED_WORK.md`. Plan → `private/PLAN_PUBLIKA
 
 ## Prompt otwierający nową sesję (skopiuj i wklej)
 
-> Kontynuujemy projekt M.A.R.S. Stan: v0.6 po seriach K i I
-> (DROGA_K_NOTATKI.md, DROGA_I_NOTATKI.md; mapa etapów
-> PLAN_GENERALNY.md; L i I2b ZAKOŃCZONE — DROGA_L_NOTATKI.md; kandydaci:
-> seria M długi horyzont, I4 weryfikacja payloadu); treść
-> rozcięta na dwa papery (A: CL, B: routing ceiling); submisje
+> Kontynuujemy projekt M.A.R.S. Stan: mapa K·I·L·M·N·O·I4 WYCZERPANA
+> (tag v0.11); trwa przegląd pod v1.0 wg PLAN_V1.md (część A —
+> konsolidacja; stan odhaczony w nagłówku START_TUTAJ.md). Po v1.0
+> kandydaci na serie: P (detekcja zatrucia na pretrained), Q (kolektyw
+> × długi horyzont), G2b (ECOC), R (heterogeniczny) — PLAN_V1.md część
+> B; każda wymaga pre-rejestrowanego DROGA_*_PLAN.md PRZED runami.
+> Treść rozcięta na dwa papery (A: CL, B: routing ceiling); submisje
 > WSTRZYMANE — etap bieżący to wyłącznie repo publiczne (checklist
 > w private/PLAN_PUBLIKACJI.md pkt 3). Przeczytaj START_TUTAJ.md,
-> private/PLAN_PUBLIKACJI.md, RELATED_WORK.md i WHITEPAPER.md (w razie potrzeby
-> DROGA_F/G/H_NOTATKI.md). Nie proponuj submisji, dopóki sam nie wrócę
+> PLAN_V1.md, CLAIMS.md i WHITEPAPER.md (w razie potrzeby
+> DROGA_*_NOTATKI.md). Nie proponuj submisji, dopóki sam nie wrócę
 > do tematu. Zasady: eksperymenty uruchamiam tylko ja lokalnie; 5 seedów;
 > kryteria werdyktów z góry; wynik negatywny = wynik; cytowania tylko
 > zweryfikowane web searchem.
@@ -47,19 +51,16 @@ oracle inflation (realna przestrzeń routingu ~0.5pp, nie 6pp).
 - `src/` — 20+ runnerów, każdy pisze JSON do `results/`; smoke → full.
 - `results/*.json` — wszystkie wyniki (per-seed).
 
-## Następne kroki (kolejność uzgodniona)
+## Następne kroki (mapa: PLAN_V1.md)
 
-1. Related work: zweryfikować i wpleść cytowania — OWM (Zeng et al. 2019),
-   DAP (Lampert), iCaRL, GDumb (krytyka replay), Expert Gate, ECOC,
-   generative/feature replay, NCM/prototypy w CL. KAŻDE źródło sprawdzone
-   web searchem, zero cytowań z pamięci.
-2. Decyzja: jeden paper czy dwa (metodologiczny: oracle inflation +
-   routing ceiling → TMLR/workshop; główny CL → CoLLAs).
-3. arXiv: endorsement (maile do autorów cytowanych prac), konto,
-   kategoria cs.LG.
-4. Repo publiczne: README naukowe, licencja, seedy reprodukcji.
-5. ZREALIZOWANE 2026-07-17: piętro reprezentacji = Droga L (jawny fork
-   tożsamości, pre-rejestrowana, runy w toku); G2b (ECOC) dalej otwarte.
+1. Dokończyć część A przeglądu v1.0: related work N/I4 (machine
+   unlearning; data poisoning/byzantine FL — każde źródło zweryfikowane
+   webem), decyzje Roberta: renormalizacja CRLF, tag v0.6, tag v1.0.
+2. Po v1.0 — wybór serii (część B): P (detekcja na pretrained, tanio,
+   domyka negatyw I4) → Q (kolektyw × długi horyzont, kandydat na
+   headline) → G2b (ECOC); R (heterogeniczny) tylko za osobną zgodą.
+3. Submisje pozostają WSTRZYMANE (private/PLAN_PUBLIKACJI.md) —
+   historyczna lista kroków publikacyjnych tamże, pkt 4.
 
 ## Zasady współpracy (obowiązują każdego agenta)
 

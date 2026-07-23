@@ -1,5 +1,9 @@
 # M.A.R.S. — Plan generalny po v0.4: K → I → L
 
+**STATUS 2026-07-23: ZREALIZOWANY W CAŁOŚCI (i przekroczony: K·I·L·M·N·O·I4,
+tag v0.11). Dokument historyczny — dowód pre-rejestracji etapów.
+Aktualna mapa: `PLAN_V1.md` (przegląd pod v1.0 + kandydaci P/Q/G2b/R).**
+
 Data: 2026-07-11. Status: PROPOZYCJA (do zatwierdzenia przez Roberta;
 pre-rejestracje szczegółowe powstają per droga, PRZED runami).
 Zastępuje PLAN_DALSZYCH_PRAC.md (2026-06-15, historyczny — sprzed serii D–J).

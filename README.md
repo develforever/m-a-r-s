@@ -5,7 +5,7 @@ on a frozen random representation.**
 
 Independent research project. Every experiment: 5 seeds, pre-registered
 verdict criteria, negative results reported with equal weight. All runs on a
-single consumer GPU (GTX 1050 Ti, 4 GB). Code at `v0.6` (July 2026); the `v0.3` freeze is preserved as a tag.
+single consumer GPU (GTX 1050 Ti, 4 GB). Code at `v1.0` (July 2026); every series is preserved as a tag (`v0.3-freeze` … `v0.11`).
 
 ## Headline results (class-incremental learning, 5 tasks × 2 classes)
 
@@ -69,6 +69,39 @@ sequential learner and the five-agent collective (**74.13 ± 0.57%**) both
 beat the trainable joint monolith (70.24%). The collective's cost versus
 sequential is now measured: paired −0.56pp. Details: `DROGA_L_NOTATKI.md`.
 
+## Long horizon: CIFAR-100, 20 tasks (Series M, v0.8)
+
+Over 20 tasks / 100 classes (pretrained backbone) the mechanism holds
+**40.70 ± 0.84%** — 85.8% of its frozen-feature ceiling (47.41%), down from
+96.7% at T=5. ~79% of the raw per-task drop is the growing label space (the
+ceiling drops identically); the remaining −7.8pp late-task deficit is
+structural: the per-old-class dream budget is a measured stability–plasticity
+knob, and per-class rehearsal stays ACC-optimal. At 100 classes, 300d word
+anchors beat 50d by +7.7pp (SIGNAL+, 5/5 seeds) — anchor dimension must scale
+with class count. Details: `DROGA_M_NOTATKI.md`.
+
+## Selective forgetting with a guarantee (Series N, v0.9) — and a falsification (Series O, v0.10)
+
+Deleting a class's entries removes access but not information (100 images
+restore it near-bit-identically — the projection is the sole information
+carrier). Fine-tuning the projection on remaining-class dreams erases ~84% of
+recoverability; **re-initializing it and rebuilding from dreams erases 100%**
+(re-learning matches a never-seen class) at ≤ zero cost to remaining classes.
+Series O then falsified the tempting corollary: rebuilding the projection from
+dreams of *all* classes after the sequence is paired-negative on both
+benchmarks — dreams protect, transfer, and rebuild, but do not improve on real
+data. Details: `DROGA_N_NOTATKI.md`, `DROGA_O_NOTATKI.md`.
+
+## Untrusted collective (Series I4, v0.11)
+
+A label-swap poisoned payload destroys both co-adopted classes but leaves the
+recipient's own classes robust (±1pp); neither pre-registered detector
+separates attacks from honest payloads on the random backbone (honest
+negative — semantic detection likely needs pretrained features); and the
+attack is fully reversible by forget-and-readopt of the adoption batch (noise
+on all metrics vs the clean path). Protocol policy: adopt in batches, repair
+at batch scope. Details: `DROGA_I4_NOTATKI.md`.
+
 ## The mechanism in one paragraph
 
 A design law recurred across four independent experiments in this project:
@@ -117,6 +150,23 @@ python src/run_K2_owm_sparse.py           # OWM x sparse -> eliminated
 python src/run_I1_transplant.py           # class from a 24 KB message
 python src/run_I2_fusion.py               # payload saturation
 python src/run_I3_collective.py           # 5 agents ~ 1 sequential agent
+python src/run_I2b_fusion_lowdata.py      # fusion helps iff payload unsaturated
+# Series L (v0.7) -- identity fork: pretrained frozen backbone
+python src/run_L1_pretrained.py           # CIFAR 74.69 (+37.2pp); beats trainable joint
+python src/run_L2_collective_cifar.py     # collective on strong features: 74.13
+# Series M (v0.8) -- long horizon: CIFAR-100, 20 tasks
+python src/run_M1_long_horizon.py         # 40.70 @T=20; anchors 300d SIGNAL+ (+7.7pp)
+python src/run_M1b_balanced_dreams.py     # dream-budget knob, low end
+python src/run_M1c_mid_budget.py          # mid point -> the front is sharp
+# Series N (v0.9) -- selective forgetting with a guarantee
+python src/run_N1_unlearning.py           # functional level: no collateral damage
+python src/run_N1b_relearn_balanced.py    # information level: light 100% / scrub ~84%
+python src/run_N1c_reinit.py              # re-init: full erasure guarantee
+# Series O (v0.10) -- dream consolidation: FALSIFIED
+python src/run_O1_consolidation.py        # deep-sleep rebuild -> paired-SIGNAL- (both)
+# Series I4 (v0.11) -- untrusted collective
+python src/run_I4_untrusted.py            # damage map; detection negative
+python src/run_I4b_full_repair.py         # forget-and-readopt: full recovery
 
 # Part II — routing ceiling study
 python src/run_D1_mars_v2_baseline.py
@@ -148,7 +198,9 @@ alongside means; costs in MAC with the shared backbone counted as always-paid.
 | `src/` | All runners and models (PyTorch) |
 | `demo/mars_cl_demo/` | Interactive browser demo of MARS-CL (pure JS, parity-checked vs PyTorch) |
 | `results/*.json` | Per-seed results for every experiment, including smoke runs |
-| `DROGA_D/E/F/G/H/J_NOTATKI.md` | Working notes with full result tables (Polish) |
+| `DROGA_*_NOTATKI.md` (D/E/F/G/H/J/K/I/L/M/N/O/I4) | Working notes with full result tables (Polish) |
+| `CLAIMS.md` | Every claim of the project: series → verdict → results file (EN) |
+| `PLAN_GENERALNY.md`, `PLAN_V1.md` | Stage maps: executed (K→I4) and current (v1.0 review + candidates) |
 | `*_PLAN.md` | Pre-registered experiment plans, written before runs (Polish) |
 | `SLOWNIK_POJEC.md` | Glossary (Polish) |
 | `RAPORT_FINAL.md`, `STAN_PROJEKTU.md` | Phase-1 PoC tech report (Polish) |
