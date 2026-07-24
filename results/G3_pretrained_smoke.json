@@ -1,0 +1,75 @@
+{
+  "experiment": "G3_pretrained",
+  "device": "cuda",
+  "n_seeds": 1,
+  "epochs": 4,
+  "gate_pp": 30.0,
+  "min_hamming": {
+    "attrs11": 1,
+    "attrs21": 4
+  },
+  "attr21_names": [
+    "zakrywa_tulow",
+    "zakrywa_nogi",
+    "ma_rekawy",
+    "dlugi_rekaw",
+    "jest_obuwiem",
+    "siega_kostki",
+    "odkryta_gora",
+    "ma_klamre_lub_zapiecie",
+    "pelna_dlugosc",
+    "rozpinane_z_przodu",
+    "nakladane_przez_glowe",
+    "sznurowane",
+    "z_dzianiny",
+    "warstwa_wierzchnia",
+    "na_zime",
+    "na_lato",
+    "dolna_czesc_ciala",
+    "miekki_material",
+    "sztywne_elementy",
+    "przechowuje",
+    "ze_skory"
+  ],
+  "encoder_pretrained": "resnet18_IMAGENET1K_V1 penultimate 512-d (Fashion 28->224, deterministyczne)",
+  "variants": {
+    "random": {
+      "attrs11": {
+        "mean": 0.0969,
+        "std": 0.0,
+        "min": 0.0969,
+        "max": 0.0969
+      },
+      "attrs21": {
+        "mean": 0.0043,
+        "std": 0.0,
+        "min": 0.0043,
+        "max": 0.0043
+      }
+    },
+    "pretrained": {
+      "attrs11": {
+        "mean": 0.04,
+        "std": 0.0,
+        "min": 0.04,
+        "max": 0.04
+      },
+      "attrs21": {
+        "mean": 0.0006,
+        "std": 0.0,
+        "min": 0.0006,
+        "max": 0.0006
+      }
+    }
+  },
+  "verdicts": {
+    "G3_binary": {
+      "zs_pretrained_best_pp": 4.0,
+      "slownik_najlepszy": "attrs11",
+      "prog_pp": 30.0,
+      "werdykt": "G3-",
+      "opis": "G3- : granica PODEJSCIA (reczny slownik + liniowe detektory), nie reprezentacji -- seria G domknieta"
+    }
+  },
+  "elapsed_s": 14.7
+}

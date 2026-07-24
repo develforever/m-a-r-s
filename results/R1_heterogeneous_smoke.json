@@ -1,0 +1,134 @@
+{
+  "experiment": "R1_heterogeneous",
+  "level": "R-mild",
+  "device": "cuda",
+  "n_seeds": 1,
+  "epochs_per_task": 4,
+  "n_dream": 256,
+  "common": {
+    "dream_model": "sparse",
+    "stats_k": 16,
+    "epochs_proj": 15,
+    "l2sp": 0.0,
+    "bn_calib": false,
+    "feat_signorm": false
+  },
+  "teacher_offset": 1000,
+  "encoder": "resnet18_IMAGENET1K_V1 -> random frozen 512->128 (rozny seed nadawca vs odbiorca w R0/R1)",
+  "systems": {
+    "CEILING": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.5875,
+            0.379,
+            0.2905,
+            0.289,
+            0.3655
+          ],
+          "overall_ACC": 0.3823,
+          "adopted_ACC": 0.331,
+          "dec_mse": null
+        }
+      ],
+      "agg_overall": {
+        "mean": 0.3823,
+        "std": 0.0,
+        "min": 0.3823,
+        "max": 0.3823
+      },
+      "agg_adopted": {
+        "mean": 0.331,
+        "std": 0.0,
+        "min": 0.331,
+        "max": 0.331
+      }
+    },
+    "R0": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.8365,
+            0.1105,
+            0.033,
+            0.0365,
+            0.038
+          ],
+          "overall_ACC": 0.2109,
+          "adopted_ACC": 0.0545,
+          "dec_mse": null
+        }
+      ],
+      "agg_overall": {
+        "mean": 0.2109,
+        "std": 0.0,
+        "min": 0.2109,
+        "max": 0.2109
+      },
+      "agg_adopted": {
+        "mean": 0.0545,
+        "std": 0.0,
+        "min": 0.0545,
+        "max": 0.0545
+      }
+    },
+    "R1": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.9765,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "overall_ACC": 0.1953,
+          "adopted_ACC": 0.0,
+          "dec_mse": 0.231563
+        }
+      ],
+      "agg_overall": {
+        "mean": 0.1953,
+        "std": 0.0,
+        "min": 0.1953,
+        "max": 0.1953
+      },
+      "agg_adopted": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    },
+    "SANITY": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.9755,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "overall_ACC": 0.1951,
+          "adopted_ACC": 0.0,
+          "dec_mse": 0.231563
+        }
+      ],
+      "agg_overall": {
+        "mean": 0.1951,
+        "std": 0.0,
+        "min": 0.1951,
+        "max": 0.1951
+      },
+      "agg_adopted": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    }
+  },
+  "verdicts": {},
+  "elapsed_s": 14.7
+}

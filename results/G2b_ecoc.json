@@ -1,0 +1,865 @@
+{
+  "experiment": "G2b_ecoc",
+  "device": "cuda",
+  "n_seeds": 5,
+  "epochs": 15,
+  "attr21_names": [
+    "zakrywa_tulow",
+    "zakrywa_nogi",
+    "ma_rekawy",
+    "dlugi_rekaw",
+    "jest_obuwiem",
+    "siega_kostki",
+    "odkryta_gora",
+    "ma_klamre_lub_zapiecie",
+    "pelna_dlugosc",
+    "rozpinane_z_przodu",
+    "nakladane_przez_glowe",
+    "sznurowane",
+    "z_dzianiny",
+    "warstwa_wierzchnia",
+    "na_zime",
+    "na_lato",
+    "dolna_czesc_ciala",
+    "miekki_material",
+    "sztywne_elementy",
+    "przechowuje",
+    "ze_skory"
+  ],
+  "attrs21": [
+    [
+      1.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      1.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      1.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      1.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      1.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      1.0,
+      0.0,
+      1.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "min_hamming": {
+    "attrs11": 1,
+    "attrs21": 4
+  },
+  "variants": {
+    "attrs11": {
+      "T-shirt": [
+        {
+          "seed": 0,
+          "zs_acc": 0.203,
+          "seen_acc": 0.6674
+        },
+        {
+          "seed": 1,
+          "zs_acc": 0.138,
+          "seen_acc": 0.6709
+        },
+        {
+          "seed": 2,
+          "zs_acc": 0.052,
+          "seen_acc": 0.6771
+        },
+        {
+          "seed": 3,
+          "zs_acc": 0.086,
+          "seen_acc": 0.6791
+        },
+        {
+          "seed": 4,
+          "zs_acc": 0.033,
+          "seen_acc": 0.6916
+        }
+      ],
+      "Trouser": [
+        {
+          "seed": 0,
+          "zs_acc": 0.004,
+          "seen_acc": 0.6578
+        },
+        {
+          "seed": 1,
+          "zs_acc": 0.002,
+          "seen_acc": 0.6673
+        },
+        {
+          "seed": 2,
+          "zs_acc": 0.002,
+          "seen_acc": 0.651
+        },
+        {
+          "seed": 3,
+          "zs_acc": 0.002,
+          "seen_acc": 0.6633
+        },
+        {
+          "seed": 4,
+          "zs_acc": 0.003,
+          "seen_acc": 0.6766
+        }
+      ],
+      "Pullover": [
+        {
+          "seed": 0,
+          "zs_acc": 0.002,
+          "seen_acc": 0.7213
+        },
+        {
+          "seed": 1,
+          "zs_acc": 0.007,
+          "seen_acc": 0.7204
+        },
+        {
+          "seed": 2,
+          "zs_acc": 0.006,
+          "seen_acc": 0.7084
+        },
+        {
+          "seed": 3,
+          "zs_acc": 0.003,
+          "seen_acc": 0.7213
+        },
+        {
+          "seed": 4,
+          "zs_acc": 0.011,
+          "seen_acc": 0.7256
+        }
+      ],
+      "Dress": [
+        {
+          "seed": 0,
+          "zs_acc": 0.0,
+          "seen_acc": 0.6887
+        },
+        {
+          "seed": 1,
+          "zs_acc": 0.0,
+          "seen_acc": 0.6907
+        },
+        {
+          "seed": 2,
+          "zs_acc": 0.0,
+          "seen_acc": 0.6752
+        },
+        {
+          "seed": 3,
+          "zs_acc": 0.0,
+          "seen_acc": 0.6826
+        },
+        {
+          "seed": 4,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7017
+        }
+      ],
+      "Coat": [
+        {
+          "seed": 0,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7194
+        },
+        {
+          "seed": 1,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7139
+        },
+        {
+          "seed": 2,
+          "zs_acc": 0.001,
+          "seen_acc": 0.7097
+        },
+        {
+          "seed": 3,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7233
+        },
+        {
+          "seed": 4,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7312
+        }
+      ],
+      "Sandal": [
+        {
+          "seed": 0,
+          "zs_acc": 0.0,
+          "seen_acc": 0.6801
+        },
+        {
+          "seed": 1,
+          "zs_acc": 0.0,
+          "seen_acc": 0.6887
+        },
+        {
+          "seed": 2,
+          "zs_acc": 0.0,
+          "seen_acc": 0.6691
+        },
+        {
+          "seed": 3,
+          "zs_acc": 0.0,
+          "seen_acc": 0.6878
+        },
+        {
+          "seed": 4,
+          "zs_acc": 0.0,
+          "seen_acc": 0.6972
+        }
+      ],
+      "Shirt": [
+        {
+          "seed": 0,
+          "zs_acc": 0.016,
+          "seen_acc": 0.7424
+        },
+        {
+          "seed": 1,
+          "zs_acc": 0.024,
+          "seen_acc": 0.743
+        },
+        {
+          "seed": 2,
+          "zs_acc": 0.035,
+          "seen_acc": 0.7406
+        },
+        {
+          "seed": 3,
+          "zs_acc": 0.014,
+          "seen_acc": 0.7457
+        },
+        {
+          "seed": 4,
+          "zs_acc": 0.028,
+          "seen_acc": 0.7602
+        }
+      ],
+      "Sneaker": [
+        {
+          "seed": 0,
+          "zs_acc": 0.134,
+          "seen_acc": 0.671
+        },
+        {
+          "seed": 1,
+          "zs_acc": 0.269,
+          "seen_acc": 0.6753
+        },
+        {
+          "seed": 2,
+          "zs_acc": 0.226,
+          "seen_acc": 0.6607
+        },
+        {
+          "seed": 3,
+          "zs_acc": 0.146,
+          "seen_acc": 0.6761
+        },
+        {
+          "seed": 4,
+          "zs_acc": 0.136,
+          "seen_acc": 0.6814
+        }
+      ],
+      "Bag": [
+        {
+          "seed": 0,
+          "zs_acc": 0.0,
+          "seen_acc": 0.6722
+        },
+        {
+          "seed": 1,
+          "zs_acc": 0.0,
+          "seen_acc": 0.6692
+        },
+        {
+          "seed": 2,
+          "zs_acc": 0.0,
+          "seen_acc": 0.6611
+        },
+        {
+          "seed": 3,
+          "zs_acc": 0.0,
+          "seen_acc": 0.6787
+        },
+        {
+          "seed": 4,
+          "zs_acc": 0.0,
+          "seen_acc": 0.6854
+        }
+      ],
+      "AnkleBoot": [
+        {
+          "seed": 0,
+          "zs_acc": 0.0,
+          "seen_acc": 0.6574
+        },
+        {
+          "seed": 1,
+          "zs_acc": 0.0,
+          "seen_acc": 0.6731
+        },
+        {
+          "seed": 2,
+          "zs_acc": 0.0,
+          "seen_acc": 0.6492
+        },
+        {
+          "seed": 3,
+          "zs_acc": 0.0,
+          "seen_acc": 0.6702
+        },
+        {
+          "seed": 4,
+          "zs_acc": 0.0,
+          "seen_acc": 0.6787
+        }
+      ]
+    },
+    "attrs21": {
+      "T-shirt": [
+        {
+          "seed": 0,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7537
+        },
+        {
+          "seed": 1,
+          "zs_acc": 0.001,
+          "seen_acc": 0.748
+        },
+        {
+          "seed": 2,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7507
+        },
+        {
+          "seed": 3,
+          "zs_acc": 0.002,
+          "seen_acc": 0.753
+        },
+        {
+          "seed": 4,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7573
+        }
+      ],
+      "Trouser": [
+        {
+          "seed": 0,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7323
+        },
+        {
+          "seed": 1,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7273
+        },
+        {
+          "seed": 2,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7284
+        },
+        {
+          "seed": 3,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7287
+        },
+        {
+          "seed": 4,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7432
+        }
+      ],
+      "Pullover": [
+        {
+          "seed": 0,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7759
+        },
+        {
+          "seed": 1,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7698
+        },
+        {
+          "seed": 2,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7638
+        },
+        {
+          "seed": 3,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7712
+        },
+        {
+          "seed": 4,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7712
+        }
+      ],
+      "Dress": [
+        {
+          "seed": 0,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7582
+        },
+        {
+          "seed": 1,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7466
+        },
+        {
+          "seed": 2,
+          "zs_acc": 0.001,
+          "seen_acc": 0.7488
+        },
+        {
+          "seed": 3,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7496
+        },
+        {
+          "seed": 4,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7536
+        }
+      ],
+      "Coat": [
+        {
+          "seed": 0,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7761
+        },
+        {
+          "seed": 1,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7706
+        },
+        {
+          "seed": 2,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7681
+        },
+        {
+          "seed": 3,
+          "zs_acc": 0.0,
+          "seen_acc": 0.779
+        },
+        {
+          "seed": 4,
+          "zs_acc": 0.0,
+          "seen_acc": 0.778
+        }
+      ],
+      "Sandal": [
+        {
+          "seed": 0,
+          "zs_acc": 0.0,
+          "seen_acc": 0.743
+        },
+        {
+          "seed": 1,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7407
+        },
+        {
+          "seed": 2,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7331
+        },
+        {
+          "seed": 3,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7417
+        },
+        {
+          "seed": 4,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7412
+        }
+      ],
+      "Shirt": [
+        {
+          "seed": 0,
+          "zs_acc": 0.012,
+          "seen_acc": 0.8019
+        },
+        {
+          "seed": 1,
+          "zs_acc": 0.027,
+          "seen_acc": 0.7927
+        },
+        {
+          "seed": 2,
+          "zs_acc": 0.019,
+          "seen_acc": 0.7953
+        },
+        {
+          "seed": 3,
+          "zs_acc": 0.021,
+          "seen_acc": 0.8067
+        },
+        {
+          "seed": 4,
+          "zs_acc": 0.008,
+          "seen_acc": 0.806
+        }
+      ],
+      "Sneaker": [
+        {
+          "seed": 0,
+          "zs_acc": 0.001,
+          "seen_acc": 0.7532
+        },
+        {
+          "seed": 1,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7409
+        },
+        {
+          "seed": 2,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7376
+        },
+        {
+          "seed": 3,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7448
+        },
+        {
+          "seed": 4,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7456
+        }
+      ],
+      "Bag": [
+        {
+          "seed": 0,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7341
+        },
+        {
+          "seed": 1,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7292
+        },
+        {
+          "seed": 2,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7247
+        },
+        {
+          "seed": 3,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7333
+        },
+        {
+          "seed": 4,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7287
+        }
+      ],
+      "AnkleBoot": [
+        {
+          "seed": 0,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7309
+        },
+        {
+          "seed": 1,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7293
+        },
+        {
+          "seed": 2,
+          "zs_acc": 0.0,
+          "seen_acc": 0.72
+        },
+        {
+          "seed": 3,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7284
+        },
+        {
+          "seed": 4,
+          "zs_acc": 0.0,
+          "seen_acc": 0.7306
+        }
+      ]
+    }
+  },
+  "verdicts": {
+    "glowny": {
+      "zs_attrs11": {
+        "mean": 0.0317,
+        "std": 0.009,
+        "min": 0.0211,
+        "max": 0.044
+      },
+      "zs_attrs21": {
+        "mean": 0.0018,
+        "std": 0.0008,
+        "min": 0.0008,
+        "max": 0.0028
+      },
+      "pairs_pp": [
+        -3.46,
+        -4.12,
+        -3.02,
+        -2.28,
+        -2.03
+      ],
+      "noise_pp": 0.9811,
+      "werdykt": "NEGATYW (dystans kodowy nie jest dzwignia)"
+    },
+    "regula_osiagalnosci": {
+      "zs_per_klasa": {
+        "T-shirt": 0.0006,
+        "Trouser": 0.0,
+        "Pullover": 0.0,
+        "Dress": 0.0002,
+        "Coat": 0.0,
+        "Sandal": 0.0,
+        "Shirt": 0.0174,
+        "Sneaker": 0.0002,
+        "Bag": 0.0,
+        "AnkleBoot": 0.0
+      },
+      "dawne_porazki": {
+        "Bag": 0.0,
+        "AnkleBoot": 0.0,
+        "Sandal": 0.0
+      },
+      "klasy_zerowe": [
+        "Trouser",
+        "Pullover",
+        "Coat",
+        "Sandal",
+        "Bag",
+        "AnkleBoot"
+      ],
+      "przewidywanie_10_z_10": false
+    }
+  },
+  "elapsed_s": 131.7
+}

@@ -1,0 +1,172 @@
+{
+  "experiment": "G3_pretrained",
+  "device": "cuda",
+  "n_seeds": 5,
+  "epochs": 15,
+  "gate_pp": 30.0,
+  "min_hamming": {
+    "attrs11": 1,
+    "attrs21": 4
+  },
+  "attr21_names": [
+    "zakrywa_tulow",
+    "zakrywa_nogi",
+    "ma_rekawy",
+    "dlugi_rekaw",
+    "jest_obuwiem",
+    "siega_kostki",
+    "odkryta_gora",
+    "ma_klamre_lub_zapiecie",
+    "pelna_dlugosc",
+    "rozpinane_z_przodu",
+    "nakladane_przez_glowe",
+    "sznurowane",
+    "z_dzianiny",
+    "warstwa_wierzchnia",
+    "na_zime",
+    "na_lato",
+    "dolna_czesc_ciala",
+    "miekki_material",
+    "sztywne_elementy",
+    "przechowuje",
+    "ze_skory"
+  ],
+  "encoder_pretrained": "resnet18_IMAGENET1K_V1 penultimate 512-d (Fashion 28->224, deterministyczne)",
+  "variants": {
+    "random": {
+      "attrs11": {
+        "mean": 0.0317,
+        "std": 0.009,
+        "min": 0.0211,
+        "max": 0.044
+      },
+      "attrs21": {
+        "mean": 0.0018,
+        "std": 0.0008,
+        "min": 0.0008,
+        "max": 0.0028
+      }
+    },
+    "pretrained": {
+      "attrs11": {
+        "mean": 0.0277,
+        "std": 0.0015,
+        "min": 0.0259,
+        "max": 0.0299
+      },
+      "attrs21": {
+        "mean": 0.0008,
+        "std": 0.0002,
+        "min": 0.0005,
+        "max": 0.001
+      }
+    }
+  },
+  "verdicts": {
+    "G3_binary": {
+      "zs_pretrained_best_pp": 2.77,
+      "slownik_najlepszy": "attrs11",
+      "prog_pp": 30.0,
+      "werdykt": "G3-",
+      "opis": "G3- : granica PODEJSCIA (reczny slownik + liniowe detektory), nie reprezentacji -- seria G domknieta"
+    },
+    "T1_pretrained_vs_random": {
+      "pairs_pp": [
+        -1.0,
+        -1.57,
+        -0.23,
+        0.25,
+        0.57
+      ],
+      "delta": {
+        "mean": -0.396,
+        "std": 0.8833,
+        "min": -1.57,
+        "max": 0.57
+      },
+      "noise_pp": 1.0537,
+      "verdict": "SZUM",
+      "ratio_pre_over_rand": 0.87,
+      "dzwignia_cech": false
+    },
+    "T2_osiagalnosc_pretrained": {
+      "attrs11": {
+        "zs_per_klasa": {
+          "T-shirt": 0.077,
+          "Trouser": 0.001,
+          "Pullover": 0.0104,
+          "Dress": 0.0,
+          "Coat": 0.0214,
+          "Sandal": 0.0,
+          "Shirt": 0.0414,
+          "Sneaker": 0.1258,
+          "Bag": 0.0,
+          "AnkleBoot": 0.0
+        },
+        "klasy_zerowe": [
+          "Dress",
+          "Sandal",
+          "Bag",
+          "AnkleBoot"
+        ],
+        "dawne_porazki": {
+          "Bag": 0.0,
+          "AnkleBoot": 0.0,
+          "Sandal": 0.0
+        },
+        "wszystkie_osiagalne": false
+      },
+      "attrs21": {
+        "zs_per_klasa": {
+          "T-shirt": 0.002,
+          "Trouser": 0.0,
+          "Pullover": 0.0012,
+          "Dress": 0.0006,
+          "Coat": 0.0,
+          "Sandal": 0.0,
+          "Shirt": 0.0038,
+          "Sneaker": 0.0,
+          "Bag": 0.0002,
+          "AnkleBoot": 0.0
+        },
+        "klasy_zerowe": [
+          "Trouser",
+          "Coat",
+          "Sandal",
+          "Sneaker",
+          "AnkleBoot"
+        ],
+        "dawne_porazki": {
+          "Bag": 0.0002,
+          "AnkleBoot": 0.0,
+          "Sandal": 0.0
+        },
+        "wszystkie_osiagalne": false
+      }
+    },
+    "T3_ecoc_na_pretrained": {
+      "pairs_pp": [
+        -2.52,
+        -2.73,
+        -2.9,
+        -2.68,
+        -2.63
+      ],
+      "delta": {
+        "mean": -2.692,
+        "std": 0.1399,
+        "min": -2.9,
+        "max": -2.52
+      },
+      "noise_pp": 0.1714,
+      "verdict": "SYGNAL-",
+      "opis": "ECOC pomaga na mocnych cechach?"
+    },
+    "T4_sanity_random_repro": {
+      "attrs11_pp": 3.17,
+      "attrs21_pp": 0.18,
+      "oczekiwane_G2b": "attrs11 ~3.2%, attrs21 ~0.18%"
+    }
+  },
+  "elapsed_s": 266.1
+}

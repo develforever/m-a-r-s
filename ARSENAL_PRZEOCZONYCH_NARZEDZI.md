@@ -140,3 +140,87 @@ lepsza niż każda osobno? (c) skalowanie: N agentów × 2 klasy każdy →
 czy system zbiorczy ≈ g1_all? Werdykt wstępny: REALNE — wyrasta wprost
 z stacjonarności (F1d) i przenośności statystyk (F3b/H1b); wymaga zgody
 Roberta na odmrożenie kodu (nowa seria, po publikacji).
+
+---
+
+## Dopisek 2026-07-23: Droga R — kolektyw HETEROGENICZNY (szkic mechanizmu translacji)
+
+Kontekst: seria I dowiozła kolektyw HOMOGENICZNY (wspólny backbone),
+seria Q rozszerzyła go na 100 klas / 20 agentów przy równoważności.
+Wspólny backbone to jednak twarde założenie: „synchronizacja jest
+darmowa, bo wszyscy dzielą tę samą przestrzeń cech". R zdejmuje to
+założenie — agenci o RÓŻNYCH backbone'ach wymieniają wiedzę. To jest
+oś rewolucji: protokół w pełni **representation-agnostic**. Jeśli
+przejdzie, „AI uczące się razem" przestaje wymagać wspólnej wagi
+startowej — dowolne dwa modele mogą dzielić klasy przez sam wspólny
+język semantyczny.
+
+### Dlaczego to jest trudne (dokładna diagnoza z kodu)
+
+Payload klasy c to statystyki spike-and-slab w PRZESTRZENI CECH nadawcy
+(`export_class_stats`: p/mean/var/w w wymiarze D backbone'u A). Adopcja
+(`adopt_classes`) ŚNI cechy z tych statystyk i wpuszcza je w projekcję
+odbiorcy `proj_B: feature_B → anchor`. W kolektywie homogenicznym
+feature_A = feature_B (ten sam seed/backbone) → sen A jest poprawnym
+materiałem treningowym dla B. Heterogenicznie feature_A ≠ feature_B →
+wyśniony wektor A jest dla proj_B szumem. **Statystyki cech nie są
+przenośne między backbone'ami.**
+
+Jedyny układ odniesienia dzielony PRZEZ KONSTRUKCJĘ to przestrzeń
+kotwic słownych (GloVe): niezmienna, a priori, wspólny cel obu
+projekcji (obie routują do tych samych wektorów słów). Kotwica to
+interlingua.
+
+### Mechanizm (kandydat R1: kotwica-interlingua + dekoder per-agent)
+
+1. **Nadawca liczy statystyki w przestrzeni KOTWIC, nie cech.** A rzutuje
+   swoje cechy klasy c przez proj_A i liczy spike-and-slab w wymiarze
+   emb (50/300), nie D. Payload = rozkład klasy c w przestrzeni słów —
+   z definicji wspólnej. (Koszt payloadu podobny; zmienia się tylko
+   wymiar.)
+2. **Odbiorca uczy dekodera `dec_B: anchor → feature_B` na WŁASNYCH
+   widzianych klasach.** B ma pary (feature_B, proj_B(feature_B)) dla
+   każdej klasy, którą sam widział — to darmowy zbiór treningowy do
+   przybliżonej inwersji własnej projekcji. Dekoder nie przekracza
+   sieci — trenowany wyłącznie na prywatnych danych B.
+3. **Re-materializacja.** B próbkuje rozkład anchorowy z payloadu →
+   dekoduje `dec_B` do pseudo-cech feature_B → dalej DOKŁADNIE istniejąca
+   `adopt_classes` (sen, projekcja, pody). Zero zmian w rdzeniu.
+
+Nic nie przekracza sieci poza statystykami w przestrzeni słów. Każdy
+agent obsługuje swoją przestrzeń cech prywatnie. To jest sens
+„representation-agnostic".
+
+### Etapowanie heterogeniczności (obserwacja z kodu L)
+
+W L cechy resnet18 (512) przechodzą przez LOSOWĄ zamrożoną projekcję
+512→128 per seed. Więc dwaj agenci z TYM SAMYM resnet18, ale różnym
+seedem, MAJĄ JUŻ różne przestrzenie feature_B (dwa różne losowe rzuty
+tego samego 512). To daje kontrolowaną drabinę:
+- **R-mild:** ten sam resnet18, różny seed reduce → feature_A, feature_B
+  to dwa liniowe obrazy tej samej 512. Translacja liniowa istnieje
+  z konstrukcji → test, czy dekoder w ogóle działa (sanity mechanizmu).
+- **R-hard:** backbone losowy-od-zera ↔ pretrained resnet18 → różna
+  TREŚĆ informacyjna. Test, czy kotwica jest wystarczającą interlingua,
+  gdy nie ma wspólnej bazy cech.
+
+### Uczciwe ryzyka i baseline (do pre-rejestracji)
+
+- **R0 (podłoga):** adopcja samą kotwicą (proto_c = word_vec_c, bez
+  re-materializacji) — G1 zmierzył, że projekcja bez douczenia AKTYWNIE
+  przyciąga klasy niewidziane do znanych słów (ZS 5.9% < 10% losowe).
+  R0 ma niemal na pewno zawieść → to jest kontrola „czy sama kotwica
+  wystarczy". R1 musi pobić R0, żeby dekoder cokolwiek wnosił.
+- **Ryzyko główne:** dekoder anchor→feature_B jest wiele-do-jednego
+  (projekcja gubi wymiary) — inwersja jest przybliżona, może nie oddać
+  struktury WEWNĄTRZklasowej odróżniającej c od sąsiadów kotwicowych.
+  Wtedy R-hard = negatyw z twierdzeniem „kotwica przenosi tożsamość
+  klasy, nie jej geometrię — wspólna baza cech konieczna".
+- **Reżimy zasobów rozdzielone (zasada bez zmian):** metryka to ACC klas
+  ADOPTOWANYCH u ODBIORCY względem LOKALNEGO sufitu odbiorcy — nigdy
+  liczba from-scratch vs liczba foundation w tym samym porównaniu.
+
+Werdykt wstępny: **REALNE, wysoki zysk koncepcyjny, wysokie ryzyko.**
+Mechanizm jest wierny istniejącemu kodowi (jedna nowa klasa: dekoder;
+`adopt_classes` nietknięte). Wchodzi przez `DROGA_R_PLAN.md`
+(pre-rejestracja, progi z góry) i osobną zgodę Roberta PRZED runnerem.

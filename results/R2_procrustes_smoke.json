@@ -1,0 +1,179 @@
+{
+  "experiment": "R2_procrustes",
+  "level": "R-mild",
+  "device": "cuda",
+  "n_seeds": 1,
+  "epochs_per_task": 4,
+  "n_dream": 256,
+  "common": {
+    "dream_model": "sparse",
+    "stats_k": 16,
+    "epochs_proj": 15,
+    "l2sp": 0.0,
+    "bn_calib": false,
+    "feat_signorm": false
+  },
+  "gate_pp": 65.0,
+  "cal_classes": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "own_task": [
+    4,
+    5
+  ],
+  "adopt_tasks": [
+    [
+      6,
+      7
+    ],
+    [
+      8,
+      9
+    ]
+  ],
+  "encoder": "resnet18_IMAGENET1K_V1 -> random frozen 512->128 (rozny seed nadawca vs odbiorca w R0/R2_HET/RIDGE_HET)",
+  "systems": {
+    "CEILING": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.6865,
+            0.282,
+            0.383
+          ],
+          "overall_ACC": 0.4505,
+          "adopted_ACC": 0.3325,
+          "disparity": null
+        }
+      ],
+      "agg_adopted": {
+        "mean": 0.3325,
+        "std": 0.0,
+        "min": 0.3325,
+        "max": 0.3325
+      },
+      "agg_overall": {
+        "mean": 0.4505,
+        "std": 0.0,
+        "min": 0.4505,
+        "max": 0.4505
+      }
+    },
+    "R0": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.8345,
+            0.1335,
+            0.0495
+          ],
+          "overall_ACC": 0.3392,
+          "adopted_ACC": 0.0915,
+          "disparity": null
+        }
+      ],
+      "agg_adopted": {
+        "mean": 0.0915,
+        "std": 0.0,
+        "min": 0.0915,
+        "max": 0.0915
+      },
+      "agg_overall": {
+        "mean": 0.3392,
+        "std": 0.0,
+        "min": 0.3392,
+        "max": 0.3392
+      }
+    },
+    "R2_SANITY": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.7195,
+            0.236,
+            0.3565
+          ],
+          "overall_ACC": 0.4373,
+          "adopted_ACC": 0.2963,
+          "disparity": 0.0
+        }
+      ],
+      "agg_adopted": {
+        "mean": 0.2963,
+        "std": 0.0,
+        "min": 0.2963,
+        "max": 0.2963
+      },
+      "agg_overall": {
+        "mean": 0.4373,
+        "std": 0.0,
+        "min": 0.4373,
+        "max": 0.4373
+      }
+    },
+    "R2_HET": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.8035,
+            0.098,
+            0.2695
+          ],
+          "overall_ACC": 0.3903,
+          "adopted_ACC": 0.1838,
+          "disparity": 0.056229
+        }
+      ],
+      "agg_adopted": {
+        "mean": 0.1838,
+        "std": 0.0,
+        "min": 0.1838,
+        "max": 0.1838
+      },
+      "agg_overall": {
+        "mean": 0.3903,
+        "std": 0.0,
+        "min": 0.3903,
+        "max": 0.3903
+      }
+    },
+    "RIDGE_HET": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.784,
+            0.1525,
+            0.0675
+          ],
+          "overall_ACC": 0.3347,
+          "adopted_ACC": 0.11,
+          "disparity": 0.027698
+        }
+      ],
+      "agg_adopted": {
+        "mean": 0.11,
+        "std": 0.0,
+        "min": 0.11,
+        "max": 0.11
+      },
+      "agg_overall": {
+        "mean": 0.3347,
+        "std": 0.0,
+        "min": 0.3347,
+        "max": 0.3347
+      }
+    }
+  },
+  "verdicts": {
+    "GATE_R2_SANITY": {
+      "adopted_mean_pp": 29.63,
+      "prog_pp": 65.0,
+      "zdana": false,
+      "opis": "BRAMKA NIEZDANA -- R2 sfalsyfikowane; poza CLAIMS"
+    }
+  },
+  "elapsed_s": 20.2
+}

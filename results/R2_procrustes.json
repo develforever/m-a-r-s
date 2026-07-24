@@ -1,0 +1,430 @@
+{
+  "experiment": "R2_procrustes",
+  "level": "R-mild",
+  "device": "cuda",
+  "n_seeds": 5,
+  "epochs_per_task": 15,
+  "n_dream": 5000,
+  "common": {
+    "dream_model": "sparse",
+    "stats_k": 16,
+    "epochs_proj": 15,
+    "l2sp": 0.0,
+    "bn_calib": false,
+    "feat_signorm": false
+  },
+  "gate_pp": 65.0,
+  "cal_classes": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "own_task": [
+    4,
+    5
+  ],
+  "adopt_tasks": [
+    [
+      6,
+      7
+    ],
+    [
+      8,
+      9
+    ]
+  ],
+  "encoder": "resnet18_IMAGENET1K_V1 -> random frozen 512->128 (rozny seed nadawca vs odbiorca w R0/R2_HET/RIDGE_HET)",
+  "systems": {
+    "CEILING": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.6655,
+            0.7395,
+            0.8655
+          ],
+          "overall_ACC": 0.7568,
+          "adopted_ACC": 0.8025,
+          "disparity": null
+        },
+        {
+          "final_row_class_il": [
+            0.6885,
+            0.7865,
+            0.876
+          ],
+          "overall_ACC": 0.7837,
+          "adopted_ACC": 0.8313,
+          "disparity": null
+        },
+        {
+          "final_row_class_il": [
+            0.684,
+            0.759,
+            0.8845
+          ],
+          "overall_ACC": 0.7758,
+          "adopted_ACC": 0.8217,
+          "disparity": null
+        },
+        {
+          "final_row_class_il": [
+            0.672,
+            0.7625,
+            0.859
+          ],
+          "overall_ACC": 0.7645,
+          "adopted_ACC": 0.8107,
+          "disparity": null
+        },
+        {
+          "final_row_class_il": [
+            0.689,
+            0.77,
+            0.86
+          ],
+          "overall_ACC": 0.773,
+          "adopted_ACC": 0.815,
+          "disparity": null
+        }
+      ],
+      "agg_adopted": {
+        "mean": 0.8162,
+        "std": 0.0109,
+        "min": 0.8025,
+        "max": 0.8313
+      },
+      "agg_overall": {
+        "mean": 0.7708,
+        "std": 0.0104,
+        "min": 0.7568,
+        "max": 0.7837
+      }
+    },
+    "R0": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.826,
+            0.127,
+            0.0525
+          ],
+          "overall_ACC": 0.3352,
+          "adopted_ACC": 0.0897,
+          "disparity": null
+        },
+        {
+          "final_row_class_il": [
+            0.8385,
+            0.238,
+            0.077
+          ],
+          "overall_ACC": 0.3845,
+          "adopted_ACC": 0.1575,
+          "disparity": null
+        },
+        {
+          "final_row_class_il": [
+            0.829,
+            0.131,
+            0.0535
+          ],
+          "overall_ACC": 0.3378,
+          "adopted_ACC": 0.0922,
+          "disparity": null
+        },
+        {
+          "final_row_class_il": [
+            0.844,
+            0.081,
+            0.036
+          ],
+          "overall_ACC": 0.3203,
+          "adopted_ACC": 0.0585,
+          "disparity": null
+        },
+        {
+          "final_row_class_il": [
+            0.8465,
+            0.1195,
+            0.065
+          ],
+          "overall_ACC": 0.3437,
+          "adopted_ACC": 0.0922,
+          "disparity": null
+        }
+      ],
+      "agg_adopted": {
+        "mean": 0.098,
+        "std": 0.0362,
+        "min": 0.0585,
+        "max": 0.1575
+      },
+      "agg_overall": {
+        "mean": 0.3443,
+        "std": 0.0241,
+        "min": 0.3203,
+        "max": 0.3845
+      }
+    },
+    "R2_SANITY": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.6775,
+            0.7295,
+            0.8645
+          ],
+          "overall_ACC": 0.7572,
+          "adopted_ACC": 0.797,
+          "disparity": 0.0
+        },
+        {
+          "final_row_class_il": [
+            0.7255,
+            0.7535,
+            0.862
+          ],
+          "overall_ACC": 0.7803,
+          "adopted_ACC": 0.8077,
+          "disparity": 0.0
+        },
+        {
+          "final_row_class_il": [
+            0.6885,
+            0.747,
+            0.8895
+          ],
+          "overall_ACC": 0.775,
+          "adopted_ACC": 0.8182,
+          "disparity": 0.0
+        },
+        {
+          "final_row_class_il": [
+            0.6795,
+            0.724,
+            0.8415
+          ],
+          "overall_ACC": 0.7483,
+          "adopted_ACC": 0.7828,
+          "disparity": 0.0
+        },
+        {
+          "final_row_class_il": [
+            0.7035,
+            0.7665,
+            0.8375
+          ],
+          "overall_ACC": 0.7692,
+          "adopted_ACC": 0.802,
+          "disparity": 0.0
+        }
+      ],
+      "agg_adopted": {
+        "mean": 0.8015,
+        "std": 0.0131,
+        "min": 0.7828,
+        "max": 0.8182
+      },
+      "agg_overall": {
+        "mean": 0.766,
+        "std": 0.0131,
+        "min": 0.7483,
+        "max": 0.7803
+      }
+    },
+    "R2_HET": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.7375,
+            0.172,
+            0.4905
+          ],
+          "overall_ACC": 0.4667,
+          "adopted_ACC": 0.3312,
+          "disparity": 0.060273
+        },
+        {
+          "final_row_class_il": [
+            0.7575,
+            0.2805,
+            0.4985
+          ],
+          "overall_ACC": 0.5122,
+          "adopted_ACC": 0.3895,
+          "disparity": 0.058865
+        },
+        {
+          "final_row_class_il": [
+            0.751,
+            0.142,
+            0.508
+          ],
+          "overall_ACC": 0.467,
+          "adopted_ACC": 0.325,
+          "disparity": 0.054922
+        },
+        {
+          "final_row_class_il": [
+            0.731,
+            0.1205,
+            0.222
+          ],
+          "overall_ACC": 0.3578,
+          "adopted_ACC": 0.1713,
+          "disparity": 0.052251
+        },
+        {
+          "final_row_class_il": [
+            0.741,
+            0.257,
+            0.438
+          ],
+          "overall_ACC": 0.4787,
+          "adopted_ACC": 0.3475,
+          "disparity": 0.056364
+        }
+      ],
+      "agg_adopted": {
+        "mean": 0.3129,
+        "std": 0.0831,
+        "min": 0.1713,
+        "max": 0.3895
+      },
+      "agg_overall": {
+        "mean": 0.4565,
+        "std": 0.0582,
+        "min": 0.3578,
+        "max": 0.5122
+      }
+    },
+    "RIDGE_HET": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.7115,
+            0.441,
+            0.805
+          ],
+          "overall_ACC": 0.6525,
+          "adopted_ACC": 0.623,
+          "disparity": 0.0316
+        },
+        {
+          "final_row_class_il": [
+            0.731,
+            0.5825,
+            0.7905
+          ],
+          "overall_ACC": 0.7013,
+          "adopted_ACC": 0.6865,
+          "disparity": 0.035367
+        },
+        {
+          "final_row_class_il": [
+            0.7435,
+            0.5385,
+            0.803
+          ],
+          "overall_ACC": 0.695,
+          "adopted_ACC": 0.6707,
+          "disparity": 0.031593
+        },
+        {
+          "final_row_class_il": [
+            0.715,
+            0.4865,
+            0.732
+          ],
+          "overall_ACC": 0.6445,
+          "adopted_ACC": 0.6092,
+          "disparity": 0.028647
+        },
+        {
+          "final_row_class_il": [
+            0.7325,
+            0.536,
+            0.79
+          ],
+          "overall_ACC": 0.6862,
+          "adopted_ACC": 0.663,
+          "disparity": 0.031154
+        }
+      ],
+      "agg_adopted": {
+        "mean": 0.6505,
+        "std": 0.0329,
+        "min": 0.6092,
+        "max": 0.6865
+      },
+      "agg_overall": {
+        "mean": 0.6759,
+        "std": 0.0257,
+        "min": 0.6445,
+        "max": 0.7013
+      }
+    }
+  },
+  "verdicts": {
+    "GATE_R2_SANITY": {
+      "adopted_mean_pp": 80.15,
+      "prog_pp": 65.0,
+      "zdana": true,
+      "opis": "bramka zdana -- interpretacja heterogenicznosci odblokowana"
+    },
+    "R2_HET_vs_CEILING": {
+      "pairs_pp": [
+        -47.13,
+        -44.18,
+        -49.67,
+        -63.94,
+        -46.75
+      ],
+      "delta": {
+        "mean": -50.334,
+        "std": 7.8509,
+        "min": -63.94,
+        "max": -44.18
+      },
+      "noise_pp": 9.3988,
+      "verdict": "SYGNAL-"
+    },
+    "R2_HET_vs_R0": {
+      "pairs_pp": [
+        24.15,
+        23.2,
+        23.28,
+        11.28,
+        25.53
+      ],
+      "delta": {
+        "mean": 21.488,
+        "std": 5.7829,
+        "min": 11.28,
+        "max": 25.53
+      },
+      "noise_pp": 11.9243,
+      "verdict": "SYGNAL+"
+    },
+    "R2_HET_vs_RIDGE": {
+      "pairs_pp": [
+        -29.18,
+        -29.7,
+        -34.57,
+        -43.79,
+        -31.55
+      ],
+      "delta": {
+        "mean": -33.758,
+        "std": 5.9917,
+        "min": -43.79,
+        "max": -29.18
+      },
+      "noise_pp": 11.5933,
+      "verdict": "SYGNAL-"
+    }
+  },
+  "elapsed_s": 182.4
+}

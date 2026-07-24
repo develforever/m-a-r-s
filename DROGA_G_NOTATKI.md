@@ -72,3 +72,64 @@ uczenie pojęć (BCE per atrybut, styl DAP) na losowym zamrożonym backbone.
 i ręcznym słowniku NIE przechodzi progu — ale mechanizm daje mierzalny
 sygnał tam, gdzie kod jest odległy, a porażki są przewidywalne z czystej
 struktury słownika. Do v0.3 jako negatyw z wyznaczoną drogą.
+
+## G3 — kompozycyjność na cechach pretrained (ZAKOŃCZONE, 2026-07-23): G3− TWARDY — DŹWIGNIA (c) SFALSYFIKOWANA, SERIA G DOMKNIĘTA
+
+Plan: `DROGA_G3_PLAN.md`. Run u Roberta, `results/G3_pretrained.json`.
+Runner: `src/run_G3_pretrained_compositional.py` (`run_holdout` z G2
+werbatim; cechy Fashion→ResNet18-ImageNet 512-d). 2×2 na tych samych
+5 seedach.
+
+| Backbone / słownik | średni ZS |
+|---|---|
+| random / attrs11 | 3.17 ± 0.90% |
+| random / attrs21 | 0.18 ± 0.08% |
+| **pretrained / attrs11** | **2.77 ± 0.15%** |
+| pretrained / attrs21 | 0.08 ± 0.02% |
+
+**WERDYKT BINARNY: G3−** (`zs_pretrained_best` = 2.77% ≪ linia 30%).
+
+### Rozstrzygnięcie: cechy NIE są dźwignią (przewidywanie obalone)
+
+Wchodziliśmy z mocnym priorem „cechy są wąskim gardłem" (L +37pp, K).
+**Obalone.** T1 (pretrained vs random, attrs11): **SZUM**, pary
+−0.40 ± 0.88pp, **ratio 0.87** — cechy ImageNet są statystycznie
+równoważne losowym, nominalnie odrobinę GORSZE. Silna reprezentacja nie
+przesuwa kompozycyjnego zero-shot ani o krok. To domyka trójdzielną
+diagnozę G2 „(a) dystans, (b) dekorelacja, (c) cechy": (a) backfire
+(G2b), **(c) bez efektu (G3)** — obie zewnętrzne dźwignie wyczerpane.
+
+### Wąskim gardłem jest PODEJŚCIE, nie reprezentacja
+
+Wniosek serii: kompozycyjny zero-shot z RĘCZNEGO słownika atrybutów +
+LINIOWYCH detektorów pojęć + routingu po kodzie atrybutów jest
+ograniczony przez sam paradygmat, niezależnie od jakości cech i dystansu
+kodowego. Detektory per-atrybut pozostają zawodne nawet na cechach
+ImageNet — prawdopodobnie bo (i) ręczne atrybuty („ma_rekawy",
+„jest_obuwiem") nie są liniowo kodowane w przestrzeni ResNet dla
+Fashion (domena szara 28→224 daleka od ImageNet), (ii) trade-off
+bias-to-seen jest własnością mechanizmu routingu po kodzie, nie cech.
+
+Potwierdzenia spójności:
+- **T4 (sanity):** random odtwarza G2b co do liczby (attrs11 3.17%,
+  attrs21 0.18%) — harness ważny, porównanie uczciwe.
+- **T3 (interakcja a×c):** ECOC na pretrained nadal szkodzi
+  (attrs21 vs attrs11: −2.69 ± 0.14pp, **SYGNAL−**). Mechanizm z G2b
+  potwierdzony od drugiej strony: skoro cechy nie obniżyły błędu per-bit
+  detektorów, kod korekcyjny dalej nie ma czego korygować i backfire
+  zostaje. „ECOC pomaga, gdy błąd per-bit niski" — na tym zadaniu błąd
+  NIGDY nie jest niski, więc ECOC nigdy nie pomaga.
+- **T2 (osiągalność):** per-klasa na pretrained bez zmian — sygnał tylko
+  na dawnych łatwych (T-shirt ~8, Sneaker ~12), dawne porażki
+  strukturalne {Sandal, Bag, AnkleBoot}=5/8/9 nadal 0.0%. Mocne cechy
+  nie otwierają klas zamkniętych strukturą słownika.
+
+### Domknięcie serii G
+
+Trzy wyniki układają się w spójną granicę: **G2** (negatyw, reguła
+strukturalna), **G2b** (dystans kodowy backfire — nie słownik), **G3**
+(cechy bez efektu — nie reprezentacja). Kompozycyjny zero-shot z ręcznego
+słownika jest sfalsyfikowany na wszystkich trzech dźwigniach zewnętrznych;
+dalsza droga (gdyby ktoś chciał) to INNY paradygmat — atrybuty UCZONE
+end-to-end / nieliniowe detektory — nie ten. Seria G ZAMKNIĘTA jako
+granica podejścia. CLAIMS 15c; WHITEPAPER sekcja 13.

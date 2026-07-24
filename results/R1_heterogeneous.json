@@ -1,0 +1,381 @@
+{
+  "experiment": "R1_heterogeneous",
+  "level": "R-mild",
+  "device": "cuda",
+  "n_seeds": 5,
+  "epochs_per_task": 15,
+  "n_dream": 5000,
+  "common": {
+    "dream_model": "sparse",
+    "stats_k": 16,
+    "epochs_proj": 15,
+    "l2sp": 0.0,
+    "bn_calib": false,
+    "feat_signorm": false
+  },
+  "teacher_offset": 1000,
+  "encoder": "resnet18_IMAGENET1K_V1 -> random frozen 512->128 (rozny seed nadawca vs odbiorca w R0/R1)",
+  "systems": {
+    "CEILING": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.798,
+            0.618,
+            0.667,
+            0.739,
+            0.867
+          ],
+          "overall_ACC": 0.7378,
+          "adopted_ACC": 0.7228,
+          "dec_mse": null
+        },
+        {
+          "final_row_class_il": [
+            0.76,
+            0.6135,
+            0.6935,
+            0.7875,
+            0.874
+          ],
+          "overall_ACC": 0.7457,
+          "adopted_ACC": 0.7421,
+          "dec_mse": null
+        },
+        {
+          "final_row_class_il": [
+            0.765,
+            0.6455,
+            0.6805,
+            0.7655,
+            0.886
+          ],
+          "overall_ACC": 0.7485,
+          "adopted_ACC": 0.7444,
+          "dec_mse": null
+        },
+        {
+          "final_row_class_il": [
+            0.7455,
+            0.6235,
+            0.6805,
+            0.7615,
+            0.8625
+          ],
+          "overall_ACC": 0.7347,
+          "adopted_ACC": 0.732,
+          "dec_mse": null
+        },
+        {
+          "final_row_class_il": [
+            0.776,
+            0.619,
+            0.672,
+            0.7715,
+            0.86
+          ],
+          "overall_ACC": 0.7397,
+          "adopted_ACC": 0.7306,
+          "dec_mse": null
+        }
+      ],
+      "agg_overall": {
+        "mean": 0.7413,
+        "std": 0.0057,
+        "min": 0.7347,
+        "max": 0.7485
+      },
+      "agg_adopted": {
+        "mean": 0.7344,
+        "std": 0.0089,
+        "min": 0.7228,
+        "max": 0.7444
+      }
+    },
+    "R0": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.8365,
+            0.1105,
+            0.033,
+            0.0365,
+            0.038
+          ],
+          "overall_ACC": 0.2109,
+          "adopted_ACC": 0.0545,
+          "dec_mse": null
+        },
+        {
+          "final_row_class_il": [
+            0.721,
+            0.1925,
+            0.061,
+            0.0365,
+            0.0935
+          ],
+          "overall_ACC": 0.2209,
+          "adopted_ACC": 0.0959,
+          "dec_mse": null
+        },
+        {
+          "final_row_class_il": [
+            0.707,
+            0.1195,
+            0.021,
+            0.104,
+            0.134
+          ],
+          "overall_ACC": 0.2171,
+          "adopted_ACC": 0.0946,
+          "dec_mse": null
+        },
+        {
+          "final_row_class_il": [
+            0.764,
+            0.053,
+            0.02,
+            0.049,
+            0.1195
+          ],
+          "overall_ACC": 0.2011,
+          "adopted_ACC": 0.0604,
+          "dec_mse": null
+        },
+        {
+          "final_row_class_il": [
+            0.7705,
+            0.178,
+            0.0665,
+            0.05,
+            0.0905
+          ],
+          "overall_ACC": 0.2311,
+          "adopted_ACC": 0.0963,
+          "dec_mse": null
+        }
+      ],
+      "agg_overall": {
+        "mean": 0.2162,
+        "std": 0.0112,
+        "min": 0.2011,
+        "max": 0.2311
+      },
+      "agg_adopted": {
+        "mean": 0.0803,
+        "std": 0.021,
+        "min": 0.0545,
+        "max": 0.0963
+      }
+    },
+    "R1": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.965,
+            0.0,
+            0.003,
+            0.001,
+            0.0005
+          ],
+          "overall_ACC": 0.1939,
+          "adopted_ACC": 0.0011,
+          "dec_mse": 0.03401
+        },
+        {
+          "final_row_class_il": [
+            0.944,
+            0.011,
+            0.0015,
+            0.002,
+            0.006
+          ],
+          "overall_ACC": 0.1929,
+          "adopted_ACC": 0.0051,
+          "dec_mse": 0.037409
+        },
+        {
+          "final_row_class_il": [
+            0.9435,
+            0.009,
+            0.0015,
+            0.0045,
+            0.0195
+          ],
+          "overall_ACC": 0.1956,
+          "adopted_ACC": 0.0086,
+          "dec_mse": 0.032262
+        },
+        {
+          "final_row_class_il": [
+            0.9395,
+            0.0,
+            0.0,
+            0.0005,
+            0.0215
+          ],
+          "overall_ACC": 0.1923,
+          "adopted_ACC": 0.0055,
+          "dec_mse": 0.027843
+        },
+        {
+          "final_row_class_il": [
+            0.9665,
+            0.001,
+            0.0015,
+            0.0,
+            0.0
+          ],
+          "overall_ACC": 0.1938,
+          "adopted_ACC": 0.0006,
+          "dec_mse": 0.045235
+        }
+      ],
+      "agg_overall": {
+        "mean": 0.1937,
+        "std": 0.0013,
+        "min": 0.1923,
+        "max": 0.1956
+      },
+      "agg_adopted": {
+        "mean": 0.0042,
+        "std": 0.0033,
+        "min": 0.0006,
+        "max": 0.0086
+      }
+    },
+    "SANITY": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.9645,
+            0.0015,
+            0.0,
+            0.0,
+            0.0085
+          ],
+          "overall_ACC": 0.1949,
+          "adopted_ACC": 0.0025,
+          "dec_mse": 0.03401
+        },
+        {
+          "final_row_class_il": [
+            0.9455,
+            0.0045,
+            0.0005,
+            0.001,
+            0.0085
+          ],
+          "overall_ACC": 0.192,
+          "adopted_ACC": 0.0036,
+          "dec_mse": 0.037409
+        },
+        {
+          "final_row_class_il": [
+            0.9435,
+            0.013,
+            0.015,
+            0.003,
+            0.034
+          ],
+          "overall_ACC": 0.2017,
+          "adopted_ACC": 0.0163,
+          "dec_mse": 0.032262
+        },
+        {
+          "final_row_class_il": [
+            0.935,
+            0.002,
+            0.0035,
+            0.001,
+            0.016
+          ],
+          "overall_ACC": 0.1915,
+          "adopted_ACC": 0.0056,
+          "dec_mse": 0.027843
+        },
+        {
+          "final_row_class_il": [
+            0.963,
+            0.0,
+            0.0005,
+            0.001,
+            0.0
+          ],
+          "overall_ACC": 0.1929,
+          "adopted_ACC": 0.0004,
+          "dec_mse": 0.045235
+        }
+      ],
+      "agg_overall": {
+        "mean": 0.1946,
+        "std": 0.0042,
+        "min": 0.1915,
+        "max": 0.2017
+      },
+      "agg_adopted": {
+        "mean": 0.0057,
+        "std": 0.0062,
+        "min": 0.0004,
+        "max": 0.0163
+      }
+    }
+  },
+  "verdicts": {
+    "R1_vs_R0": {
+      "opis": "czy dekoder wnosi ponad sama kotwice",
+      "pairs_pp": [
+        -5.34,
+        -9.08,
+        -8.6,
+        -5.49,
+        -9.57
+      ],
+      "delta": {
+        "mean": -7.616,
+        "std": 2.039,
+        "min": -9.57,
+        "max": -5.34
+      },
+      "noise_pp": 2.4342,
+      "verdict": "SYGNAL-"
+    },
+    "R1_vs_CEILING": {
+      "opis": "cena heterogenicznosci (SZUM=darmowa, SYGNAL-=cena)",
+      "pairs_pp": [
+        -72.17,
+        -73.7,
+        -73.58,
+        -72.65,
+        -73.0
+      ],
+      "delta": {
+        "mean": -73.02,
+        "std": 0.6395,
+        "min": -73.7,
+        "max": -72.17
+      },
+      "noise_pp": 1.2194,
+      "verdict": "SYGNAL-"
+    },
+    "SANITY_vs_CEILING": {
+      "opis": "sciezka dekodera przy zerowej heterogenicznosci ~= 0",
+      "pairs_pp": [
+        -72.03,
+        -73.85,
+        -72.81,
+        -72.64,
+        -73.02
+      ],
+      "delta": {
+        "mean": -72.87,
+        "std": 0.6605,
+        "min": -73.85,
+        "max": -72.03
+      },
+      "noise_pp": 1.5088,
+      "verdict": "SYGNAL-"
+    }
+  },
+  "elapsed_s": 192.8
+}

@@ -1,0 +1,242 @@
+{
+  "experiment": "R1b_translate",
+  "level": "R-mild",
+  "device": "cuda",
+  "n_seeds": 1,
+  "epochs_per_task": 4,
+  "n_dream": 256,
+  "common": {
+    "dream_model": "sparse",
+    "stats_k": 16,
+    "epochs_proj": 15,
+    "l2sp": 0.0,
+    "bn_calib": false,
+    "feat_signorm": false
+  },
+  "gate_pp": 65.0,
+  "lambda_grid": [
+    0.01,
+    0.1,
+    1.0
+  ],
+  "cal_classes": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "own_task": [
+    4,
+    5
+  ],
+  "adopt_tasks": [
+    [
+      6,
+      7
+    ],
+    [
+      8,
+      9
+    ]
+  ],
+  "systems": {
+    "CEILING": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.6865,
+            0.282,
+            0.383
+          ],
+          "overall_ACC": 0.4505,
+          "adopted_ACC": 0.3325,
+          "lambda": null,
+          "train_mse": null
+        }
+      ],
+      "agg_adopted": {
+        "mean": 0.3325,
+        "std": 0.0,
+        "min": 0.3325,
+        "max": 0.3325
+      },
+      "agg_overall": {
+        "mean": 0.4505,
+        "std": 0.0,
+        "min": 0.4505,
+        "max": 0.4505
+      }
+    },
+    "R0": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.8345,
+            0.1335,
+            0.0495
+          ],
+          "overall_ACC": 0.3392,
+          "adopted_ACC": 0.0915,
+          "lambda": null,
+          "train_mse": null
+        }
+      ],
+      "agg_adopted": {
+        "mean": 0.0915,
+        "std": 0.0,
+        "min": 0.0915,
+        "max": 0.0915
+      },
+      "agg_overall": {
+        "mean": 0.3392,
+        "std": 0.0,
+        "min": 0.3392,
+        "max": 0.3392
+      }
+    },
+    "ORACLE_SANITY": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.804,
+            0.0,
+            0.0
+          ],
+          "overall_ACC": 0.268,
+          "adopted_ACC": 0.0,
+          "lambda": null,
+          "train_mse": 0.130749
+        }
+      ],
+      "agg_adopted": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "agg_overall": {
+        "mean": 0.268,
+        "std": 0.0,
+        "min": 0.268,
+        "max": 0.268
+      }
+    },
+    "ORACLE_HET": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.807,
+            0.0,
+            0.0
+          ],
+          "overall_ACC": 0.269,
+          "adopted_ACC": 0.0,
+          "lambda": null,
+          "train_mse": 0.130749
+        }
+      ],
+      "agg_adopted": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "agg_overall": {
+        "mean": 0.269,
+        "std": 0.0,
+        "min": 0.269,
+        "max": 0.269
+      }
+    },
+    "RBF_SANITY": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.8185,
+            0.016,
+            0.0
+          ],
+          "overall_ACC": 0.2782,
+          "adopted_ACC": 0.008,
+          "lambda": 0.1,
+          "train_mse": 0.029754
+        }
+      ],
+      "agg_adopted": {
+        "mean": 0.008,
+        "std": 0.0,
+        "min": 0.008,
+        "max": 0.008
+      },
+      "agg_overall": {
+        "mean": 0.2782,
+        "std": 0.0,
+        "min": 0.2782,
+        "max": 0.2782
+      }
+    },
+    "RBF_HET": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.8225,
+            0.024,
+            0.132
+          ],
+          "overall_ACC": 0.3262,
+          "adopted_ACC": 0.078,
+          "lambda": 0.1,
+          "train_mse": 0.029754
+        }
+      ],
+      "agg_adopted": {
+        "mean": 0.078,
+        "std": 0.0,
+        "min": 0.078,
+        "max": 0.078
+      },
+      "agg_overall": {
+        "mean": 0.3262,
+        "std": 0.0,
+        "min": 0.3262,
+        "max": 0.3262
+      }
+    },
+    "RIDGE_HET": {
+      "per_seed": [
+        {
+          "final_row_class_il": [
+            0.829,
+            0.022,
+            0.19
+          ],
+          "overall_ACC": 0.347,
+          "adopted_ACC": 0.106,
+          "lambda": 0.01,
+          "train_mse": 0.026894
+        }
+      ],
+      "agg_adopted": {
+        "mean": 0.106,
+        "std": 0.0,
+        "min": 0.106,
+        "max": 0.106
+      },
+      "agg_overall": {
+        "mean": 0.347,
+        "std": 0.0,
+        "min": 0.347,
+        "max": 0.347
+      }
+    }
+  },
+  "verdicts": {
+    "GATE_RBF_SANITY": {
+      "adopted_mean_pp": 0.8,
+      "prog_pp": 65.0,
+      "zdana": false,
+      "opis": "BRAMKA NIEZDANA -- seria R sfalsyfikowana na poziomie kotwica-interlingua; NIE wchodzi do CLAIMS"
+    }
+  },
+  "elapsed_s": 26.4
+}
